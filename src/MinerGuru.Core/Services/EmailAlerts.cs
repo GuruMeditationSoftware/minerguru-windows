@@ -98,7 +98,7 @@ public sealed class EmailAlerts
             }
             catch (Exception e) when (e is IOException or System.Net.Sockets.SocketException or OperationCanceledException or System.Security.Authentication.AuthenticationException)
             {
-                Trace.WriteLine($"Warn-Mail nicht versendet: {e.Message}");
+                Trace.WriteLine($"Alert mail not sent: {e.Message}");
             }
         }
     }

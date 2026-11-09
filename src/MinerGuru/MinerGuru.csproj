@@ -18,7 +18,7 @@
     <Nullable>enable</Nullable>
     <Product>MinerGuru</Product>
     <Company>MinerGuru</Company>
-    <Version>0.4.2</Version>
+    <Version>0.4.3</Version>
     <!-- Program.Main: the same exe is the app and, started with -widgetprovider, the widget service. -->
     <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
   </PropertyGroup>

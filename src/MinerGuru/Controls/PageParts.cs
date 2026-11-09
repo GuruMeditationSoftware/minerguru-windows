@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.Storage.Pickers;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -77,7 +76,7 @@ internal sealed partial class MinerScopePicker : StackPanel
 {
     private readonly HashSet<Guid> _ids;
     private readonly IReadOnlyList<Core.Models.MinerDevice> _miners;
-    private readonly CheckBox _all = new() { Content = L("Alle Miner", "All miners") };
+    private readonly CheckBox _all = new() { Content = Strings.AllMiners };
     private readonly StackPanel _checks = new();
 
     public MinerScopePicker(HashSet<Guid> ids, IReadOnlyList<Core.Models.MinerDevice> miners)

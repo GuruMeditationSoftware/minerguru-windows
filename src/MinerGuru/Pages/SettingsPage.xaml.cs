@@ -12,7 +12,7 @@ namespace MinerGuru.Pages;
 
 public sealed partial class SettingsPage : Page, IHeaderPage
 {
-    public (string Title, string Subtitle) Header => (Core.Lang.L("Einstellungen", "Settings"), Core.Lang.L("Abfrage, Warnungen, Infobereich, Daten", "Polling, warnings, notification area, data"));
+    public (string Title, string Subtitle) Header => (Strings.Settings, Strings.PollingWarningsNotificationAreaData);
 
     private readonly bool _ready;
 
@@ -20,7 +20,7 @@ public sealed partial class SettingsPage : Page, IHeaderPage
     {
         InitializeComponent();
         var store = App.Store;
-        LanguageBox.Items.Add(L("Wie Windows", "Same as Windows"));
+        LanguageBox.Items.Add(Strings.SameAsWindows);
         LanguageBox.Items.Add("Deutsch");
         LanguageBox.Items.Add("English");
         LanguageBox.SelectedIndex = store.Language switch { "de" => 1, "en" => 2, _ => 0 };
@@ -74,7 +74,7 @@ public sealed partial class SettingsPage : Page, IHeaderPage
         SyncAlertCards();
         DataFolderText.Text = store.DataDirectory;
         var version = Assembly.GetExecutingAssembly().GetName().Version;
-        VersionText.Text = L($"Version {version?.ToString(3)} · Windows-Vorschau", $"Version {version?.ToString(3)} · Windows preview");
+        VersionText.Text = string.Format(Strings.VersionWindowsPreview, version?.ToString(3));
         _ready = true;
     }
 
@@ -128,11 +128,11 @@ public sealed partial class SettingsPage : Page, IHeaderPage
         var available = updates.AvailableVersion;
         UpdateStatusText.Text = updates.Status switch
         {
-            UpdateStatus.Checking => L("Suche läuft …", "Checking …"),
-            UpdateStatus.Failed => L("GitHub ist gerade nicht erreichbar.", "GitHub cannot be reached right now."),
-            _ when available != null => L($"MinerGuru {available} ist verfügbar", $"MinerGuru {available} is available"),
-            UpdateStatus.UpToDate => L("MinerGuru ist aktuell.", "MinerGuru is up to date."),
-            _ => L("Noch nicht gesucht", "Not checked yet"),
+            UpdateStatus.Checking => Strings.UpdateSearching,
+            UpdateStatus.Failed => Strings.GitHubCannotBeReachedRight,
+            _ when available != null => string.Format(Strings.MinerGuruIsAvailable, available),
+            UpdateStatus.UpToDate => Strings.MinerGuruIsUpToDate,
+            _ => Strings.NotCheckedYet,
         };
         UpdateDownloadLink.Visibility = available != null ? Visibility.Visible : Visibility.Collapsed;
         UpdateCheckButton.IsEnabled = updates.Status != UpdateStatus.Checking;
@@ -220,7 +220,7 @@ public sealed partial class SettingsPage : Page, IHeaderPage
     private void ShowEmailStatus()
     {
         var email = App.Store.Email.Settings;
-        EmailStatusText.Text = email.IsEnabled && email.IsComplete ? email.Recipients : L("Aus", "Off");
+        EmailStatusText.Text = email.IsEnabled && email.IsComplete ? email.Recipients : Strings.Off;
     }
 
     private void KeepRunningSwitch_Toggled(object sender, RoutedEventArgs e)
@@ -256,14 +256,10 @@ public sealed partial class SettingsPage : Page, IHeaderPage
         DeveloperSettingsLink.Visibility = developer ? Visibility.Collapsed : Visibility.Visible;
         WidgetsHint.Text = error ?? (developer, registered) switch
         {
-            (true, true) => L("Flotte und Solo-Chance im Widget-Board (Windows-Taste + W, dann „+“).",
-                "Fleet and solo chance on the widget board (Windows key + W, then “+”)."),
-            (true, false) => L("Zeigt Flotte und Solo-Chance im Widget-Board von Windows.",
-                "Shows fleet and solo chance on the Windows widget board."),
-            (false, true) => L("Der Entwicklermodus ist aus: Windows zeigt die Widgets erst wieder, wenn er an ist. Ausschalten geht trotzdem.",
-                "Developer Mode is off: Windows shows the widgets again once it is on. Switching them off still works."),
-            _ => L("Nur mit dem Entwicklermodus von Windows möglich: MinerGuru ist nicht signiert, und nur so lässt Windows Widgets einer solchen App zu. Er wird unter System › Für Entwickler eingeschaltet.",
-                "Only possible with Windows Developer Mode: MinerGuru is not signed, and only then does Windows allow widgets from such an app. Turn it on under System › For developers."),
+            (true, true) => Strings.FleetAndSoloChanceOn,
+            (true, false) => Strings.ShowsFleetAndSoloChance,
+            (false, true) => Strings.DeveloperModeIsOffWindows,
+            _ => Strings.OnlyPossibleWithWindowsDeveloper,
         };
     }
 
@@ -273,7 +269,7 @@ public sealed partial class SettingsPage : Page, IHeaderPage
         var on = WidgetsSwitch.IsOn;
         _widgetsBusy = true;
         WidgetsSwitch.IsEnabled = false;
-        WidgetsHint.Text = on ? L("Wird eingerichtet …", "Setting up …") : L("Wird entfernt …", "Removing …");
+        WidgetsHint.Text = on ? Strings.SettingUp : Strings.Removing;
         string? error = null;
         try
         {
@@ -284,7 +280,7 @@ public sealed partial class SettingsPage : Page, IHeaderPage
         }
         catch (Exception ex)
         {
-            error = L("Windows hat abgelehnt: ", "Windows refused: ") + ex.Message;
+            error = Strings.WindowsRefused + ex.Message;
             DiagnosticLog.Shared.Write("widgets", (on ? "register" : "remove") + " failed: " + ex.Message);
         }
         _widgetsBusy = false;
@@ -297,7 +293,7 @@ public sealed partial class SettingsPage : Page, IHeaderPage
     private void SyncAlertCards() => OfflineAlertCard.Visibility = AlertsSwitch.IsOn ? Visibility.Visible : Visibility.Collapsed;
 
     private async void ExportLog_Click(object sender, RoutedEventArgs e) =>
-        await Controls.PageParts.SaveFileAsync("minerguru-log.txt", L("Textdatei", "Text file"), ".txt", System.Text.Encoding.UTF8.GetBytes(DiagnosticLog.Shared.ExportText()));
+        await Controls.PageParts.SaveFileAsync("minerguru-log.txt", Strings.TextFile, ".txt", System.Text.Encoding.UTF8.GetBytes(DiagnosticLog.Shared.ExportText()));
 
     private void OpenFolder_Click(object sender, RoutedEventArgs e) =>
         Process.Start(new ProcessStartInfo("explorer.exe", $"\"{App.Store.DataDirectory}\"") { UseShellExecute = true });

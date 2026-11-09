@@ -1,6 +1,5 @@
 using System.Globalization;
 using System.Text.Json.Nodes;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Models;
 
@@ -191,10 +190,10 @@ public sealed class MinerSystemInfo
     public StratumPoolStatus? SecondaryPoolStatus => StratumDetail?.Pools.Count > 1 ? StratumDetail.Pools[1] : null;
 
     public string PrimaryPoolEndpoint =>
-        StratumUrl.Length == 0 ? L("Nicht konfiguriert", "Not configured") : $"{StratumHost.Clean(StratumUrl, true)}:{StratumPort}";
+        StratumUrl.Length == 0 ? Strings.NotConfigured : $"{StratumHost.Clean(StratumUrl, true)}:{StratumPort}";
 
     public string FallbackPoolEndpoint =>
-        FallbackStratumUrl.Length == 0 ? L("Nicht konfiguriert", "Not configured") : $"{StratumHost.Clean(FallbackStratumUrl, true)}:{FallbackStratumPort}";
+        FallbackStratumUrl.Length == 0 ? Strings.NotConfigured : $"{StratumHost.Clean(FallbackStratumUrl, true)}:{FallbackStratumPort}";
 
     /// <summary>The pool being mined on; both with their share in dual pool mode.</summary>
     public string ActivePoolEndpoint

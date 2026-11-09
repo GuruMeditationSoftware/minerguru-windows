@@ -5,7 +5,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MinerGuru"
-    CloseButtonText="{local:T De=Abbrechen, En=Cancel}"
+    CloseButtonText="{local:T Key=Cancel}"
     DefaultButton="Primary"
     PrimaryButtonClick="Dialog_PrimaryButtonClick"
     Style="{StaticResource DefaultContentDialogStyle}">
@@ -32,7 +32,7 @@
                 Foreground="{ThemeResource TextPrimaryBrush}" />
             <DropDownButton
                 HorizontalAlignment="Right"
-                Content="{local:T De='Vorlage…', En='Template…'}"
+                Content="{local:T Key=TemplateMenu}"
                 Style="{StaticResource DefaultButtonStyle}">
                 <DropDownButton.Flyout>
                     <MenuFlyout x:Name="TemplateMenu" Placement="BottomEdgeAlignedRight" />
@@ -43,7 +43,7 @@
         <TextBox
             x:Name="NameBox"
             Header="Name"
-            PlaceholderText="{local:T De='z. B. CKPool EU · rig1', En='e.g. CKPool EU · rig1'}" />
+            PlaceholderText="{local:T Key=ExampleCKPoolRig}" />
 
         <Grid ColumnSpacing="12">
             <Grid.ColumnDefinitions>
@@ -55,7 +55,7 @@
                 x:Name="HostBox"
                 HeaderTemplate="{StaticResource FieldHeader}"
                 FontFamily="{StaticResource MonoFont}"
-                Header="{local:T De='Stratum Host / URL (ohne stratum+tcp://)', En='Stratum host / URL (without stratum+tcp://)'}"
+                Header="{local:T Key=StratumHostURLWithoutStratum}"
                 PlaceholderText="public-pool.io"
                 TextChanged="Field_Changed" />
             <NumberBox
@@ -71,7 +71,7 @@
                 HeaderTemplate="{StaticResource FieldHeader}"
                 Grid.Column="2"
                 FontFamily="{StaticResource MonoFont}"
-                Header="{local:T De=Passwort, En=Password}"
+                Header="{local:T Key=Password}"
                 PlaceholderText="x" />
         </Grid>
 
@@ -79,7 +79,7 @@
             x:Name="UserBox"
                 HeaderTemplate="{StaticResource FieldHeader}"
             FontFamily="{StaticResource MonoFont}"
-            Header="{local:T De='Wallet-Adresse.Worker (Stratum User)', En='Wallet address.worker (stratum user)'}"
+            Header="{local:T Key=WalletAddressWorkerStratumUser}"
             PlaceholderText="bc1q...wallet.bitaxe"
             TextChanged="Field_Changed" />
 
@@ -95,7 +95,7 @@
                 VerticalAlignment="Center"
                 Orientation="Horizontal"
                 Spacing="12" />
-            <Button AutomationProperties.Name="{local:T De='Latenz testen', En='Test latency'}"
+            <Button AutomationProperties.Name="{local:T Key=TestLatency}"
                 x:Name="TestButton"
                 HorizontalAlignment="Right"
                 Click="Test_Click"
@@ -108,7 +108,7 @@
                         IsActive="False"
                         Visibility="Collapsed" />
                     <FontIcon FontSize="12" Glyph="&#xE9D9;" />
-                    <TextBlock Text="{local:T De='Latenz testen', En='Test latency'}" />
+                    <TextBlock Text="{local:T Key=TestLatency}" />
                 </StackPanel>
             </Button>
         </Grid>

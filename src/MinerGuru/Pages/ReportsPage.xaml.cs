@@ -32,7 +32,7 @@ public sealed partial class ReportsPage : Page, IHeaderPage
     public ReportsPage()
     {
         InitializeComponent();
-        AutomationProperties.SetName(_periodBox, L("Zeitraum", "Period"));
+        AutomationProperties.SetName(_periodBox, Strings.Period);
         foreach (var period in Periods) _periodBox.Items.Add(period.Title());
         _periodBox.SelectedIndex = 1;
         _periodBox.SelectionChanged += (_, _) => _ = LoadAsync();
@@ -47,13 +47,13 @@ public sealed partial class ReportsPage : Page, IHeaderPage
         toolbar.Children.Add(_pdf.At(3));
 
         var chart = new StackPanel { Spacing = 10 };
-        chart.Children.Add(PageParts.Title(L("Hashrate der Flotte pro Tag", "Fleet hashrate per day")));
+        chart.Children.Add(PageParts.Title(Strings.FleetHashratePerDay));
         chart.Children.Add(_chart);
         var table = new StackPanel { Spacing = 8 };
         table.Children.Add(PageParts.Title("Miner"));
         table.Children.Add(_rows);
         var maintenance = new StackPanel { Spacing = 8 };
-        maintenance.Children.Add(PageParts.Title(L("Erledigte Wartung", "Maintenance done")));
+        maintenance.Children.Add(PageParts.Title(Strings.MaintenanceDone));
         maintenance.Children.Add(_maintenance);
         _maintenanceCard = PageParts.Card(maintenance);
 
@@ -73,7 +73,7 @@ public sealed partial class ReportsPage : Page, IHeaderPage
         ActualThemeChanged += (_, _) => Render();
     }
 
-    public (string Title, string Subtitle) Header => (L("Berichte", "Reports"), L("Betrieb, Energie und Kosten der Flotte", "Uptime, energy and cost of the fleet"));
+    public (string Title, string Subtitle) Header => (Strings.Reports, Strings.UptimeEnergyAndCostOf);
 
     private static PowerTariff Tariff => App.Store.Power.Tariff;
     private ReportPeriod Period => Periods[Math.Max(0, _periodBox.SelectedIndex)];
@@ -96,7 +96,7 @@ public sealed partial class ReportsPage : Page, IHeaderPage
         _csv.IsEnabled = _pdf.IsEnabled = hasData;
         _content.Visibility = hasData ? Visibility.Visible : Visibility.Collapsed;
         _status.Foreground = _dates.Foreground = Palette.TextSecondary;
-        _status.Text = hasData || report == null ? "" : L("Keine Daten in diesem Zeitraum. Berichte entstehen aus dem Langzeit-Verlauf.", "No data for this period. Reports are built from the long-term history.");
+        _status.Text = hasData || report == null ? "" : Strings.NoDataForThisPeriod;
         _status.Visibility = _status.Text.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
         if (report == null) return;
         _dates.Text = string.Create(Culture, $"{report.Start:d} – {report.End.AddSeconds(-1):d}");
@@ -113,7 +113,7 @@ public sealed partial class ReportsPage : Page, IHeaderPage
         _chart.SetPoints(report.Daily.Select(d => (d.Day, d.HashRateGhs)));
 
         _rows.Children.Clear();
-        _rows.Children.Add(TableRow([L("Miner", "Miner"), L("Betrieb", "Uptime"), "Hashrate", L("Energie", "Energy"), L("Kosten", "Cost"), "J/TH", "Ø °C", "Max °C"], header: true));
+        _rows.Children.Add(TableRow([Strings.Miner, Strings.Uptime, "Hashrate", Strings.Energy, Strings.Cost, "J/TH", "Ø °C", "Max °C"], header: true));
         foreach (var r in report.Rows)
         {
             _rows.Children.Add(new Rectangle { Height = 1, Fill = Palette.Hairline });
@@ -154,7 +154,7 @@ public sealed partial class ReportsPage : Page, IHeaderPage
 
     private static string Number(double? value, string format, string unit = "") => value is { } number ? number.ToString(format, Culture) + unit : "—";
 
-    private string FileName => $"MinerGuru-{L("Bericht", "Report")}-{_report!.Start:yyyy-MM-dd}";
+    private string FileName => $"MinerGuru-{Strings.Report}-{_report!.Start:yyyy-MM-dd}";
 
     private async Task ExportCsvAsync()
     {

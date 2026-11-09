@@ -3,7 +3,6 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
@@ -21,9 +20,9 @@ public class MinerApiException(string message, int? status = null, string detail
     public static MinerApiException FromResponse(int status, string body)
     {
         var plain = new MinerApiException("", status, body);
-        var message = plain.IsOtpBlocked ? L("Zu viele falsche Einmalcodes: Der Miner sperrt Änderungen für 5 Minuten.", "Too many wrong one-time codes: the miner blocks changes for 5 minutes.")
-            : plain.IsOtpRefused ? L("Der Miner verlangt einen gültigen Einmalcode.", "The miner demands a valid one-time code.")
-            : L($"HTTP-Fehler {status}", $"HTTP error {status}") + (string.IsNullOrWhiteSpace(body) ? "" : $": {body.Trim()}");
+        var message = plain.IsOtpBlocked ? Strings.TooManyWrongOneTime
+            : plain.IsOtpRefused ? Strings.TheMinerDemandsAValid
+            : string.Format(Strings.HTTPError, status) + (string.IsNullOrWhiteSpace(body) ? "" : $": {body.Trim()}");
         return new MinerApiException(message, status, body);
     }
 }
@@ -58,7 +57,7 @@ public sealed class MinerSystemUpdatePayload
 
 /// <summary>HTTP API of AxeOS and NerdOS. Hosts may carry a port (<c>192.168.1.20</c>, <c>127.0.0.1:48001</c>).</summary>
 /// <summary>The user declined a write: nothing happened.</summary>
-public sealed class WriteDeclinedException() : MinerApiException(L("Abgebrochen.", "Cancelled."));
+public sealed class WriteDeclinedException() : MinerApiException(Strings.Cancelled);
 
 public sealed class MinerApiClient
 {
@@ -90,7 +89,7 @@ public sealed class MinerApiClient
     {
         var normalized = NormalizeHost(host);
         if (normalized.Length == 0 || !Uri.TryCreate($"http://{normalized}{path}", UriKind.Absolute, out var uri))
-            throw new MinerApiException(L($"Ungültige Adresse: {host}", $"Invalid address: {host}"));
+            throw new MinerApiException(string.Format(Strings.InvalidAddress, host));
         return uri;
     }
 
@@ -108,7 +107,7 @@ public sealed class MinerApiClient
         }
         catch (OperationCanceledException) when (!ct.IsCancellationRequested)
         {
-            throw new MinerApiException(L("Zeitüberschreitung", "Timed out"));
+            throw new MinerApiException(Strings.TimedOut);
         }
         catch (HttpRequestException e)
         {
@@ -117,18 +116,18 @@ public sealed class MinerApiClient
 
         try
         {
-            var node = JsonNode.Parse(body) as JsonObject ?? throw new JsonException(L("Kein JSON-Objekt", "Not a JSON object"));
+            var node = JsonNode.Parse(body) as JsonObject ?? throw new JsonException(Strings.NotAJSONObject);
             return (MinerSystemInfo.Parse(node), node.ToJsonString(PrettyOptions));
         }
         catch (JsonException e)
         {
-            throw new MinerApiException(L($"Ungültige Antwort vom Miner: {e.Message}", $"Invalid reply from the miner: {e.Message}"));
+            throw new MinerApiException(string.Format(Strings.InvalidReplyFromTheMiner, e.Message));
         }
     }
 
     /// <summary><c>PATCH /api/system</c>. AxeOS uses clock changes only after a restart, NerdOS at once.</summary>
     public static MinerApiException ReadOnlyError() =>
-        new(L("„Nur lesen“ ist an: MinerGuru ändert nichts am Miner.", "Read-only mode is on: MinerGuru changes nothing on the miner."));
+        new(Strings.ReadOnlyModeIsOn);
 
     public static string PayloadJson(MinerSystemUpdatePayload payload) => JsonSerializer.Serialize(payload, PayloadOptions);
 
@@ -176,7 +175,7 @@ public sealed class MinerApiClient
         }
         catch (Exception e) when (e is JsonException or FormatException or InvalidOperationException)
         {
-            throw new MinerApiException(L($"Ungültige Antwort vom Miner: {e.Message}", $"Invalid reply from the miner: {e.Message}"));
+            throw new MinerApiException(string.Format(Strings.InvalidReplyFromTheMiner, e.Message));
         }
     }
 
@@ -231,8 +230,8 @@ public sealed class MinerApiClient
         catch (TaskCanceledException) when (!ct.IsCancellationRequested)
         {
             DiagnosticLog.Shared.Write("write", $"{target} timed out");
-            ChangeLog.Shared.RecordWrite(host, method, path, sent, L("Zeitüberschreitung", "Timed out"));
-            throw new MinerApiException(L("Zeitüberschreitung", "Timed out"));
+            ChangeLog.Shared.RecordWrite(host, method, path, sent, Strings.TimedOut);
+            throw new MinerApiException(Strings.TimedOut);
         }
     }
 }

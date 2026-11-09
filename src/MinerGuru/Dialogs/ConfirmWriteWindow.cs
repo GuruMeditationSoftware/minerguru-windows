@@ -7,7 +7,6 @@ using Windows.Graphics;
 using MinerGuru.Controls;
 using MinerGuru.Core;
 using MinerGuru.Core.Services;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Dialogs;
 
@@ -25,17 +24,17 @@ public sealed partial class ConfirmWriteWindow : Window
         SystemBackdrop = new MicaBackdrop();
         var title = new TextBlock
         {
-            Text = L($"An {minerName} übertragen?", $"Send to {minerName}?"),
+            Text = string.Format(Strings.SendTo, minerName),
             FontSize = 18, FontWeight = Microsoft.UI.Text.FontWeights.SemiBold, TextWrapping = TextWrapping.Wrap,
         };
         var lines = new StackPanel { Spacing = 4 };
-        if (fields.Count == 0) lines.Children.Add(new TextBlock { Text = L("Es ändert sich kein Wert.", "No value changes.") });
+        if (fields.Count == 0) lines.Children.Add(new TextBlock { Text = Strings.NoValueChanges });
         foreach (var field in fields)
             lines.Children.Add(new TextBlock { Text = Privacy.FreeText(field.Summary), TextWrapping = TextWrapping.Wrap });
-        if (restarts) lines.Children.Add(new TextBlock { Text = L("Danach startet der Miner neu.", "The miner restarts afterwards.") });
+        if (restarts) lines.Children.Add(new TextBlock { Text = Strings.TheMinerRestartsAfterwards });
         var scroller = new ScrollViewer { Content = lines };
-        var cancel = PageParts.TextButton("", L("Abbrechen", "Cancel"), () => Finish(false));
-        var confirm = PageParts.TextButton("", L("Übertragen", "Send"), () => Finish(true), accent: true);
+        var cancel = PageParts.TextButton("", Strings.Cancel, () => Finish(false));
+        var confirm = PageParts.TextButton("", Strings.Send, () => Finish(true), accent: true);
         var buttons = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8, HorizontalAlignment = HorizontalAlignment.Right };
         buttons.Children.Add(cancel);
         buttons.Children.Add(confirm);

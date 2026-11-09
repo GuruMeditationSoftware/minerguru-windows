@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Controls;
 using MinerGuru.Controls;
 using MinerGuru.Core.Models;
 using MinerGuru.Core.Services;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Dialogs;
 
@@ -23,10 +22,8 @@ public sealed partial class ScheduleRuleDialog : ContentDialog
     private readonly ComboBox _actionBox = new() { MinWidth = 200 };
     private readonly UIElement _zoneFields;
     private readonly UIElement _windowFields;
-    private readonly TextBlock _normalNote = PowerForm.Note(L(
-        "„Normal“ hält Miner bei ihren eigenen Einstellungen, auch wenn ein Zeitplan weiter unten etwas anderes will.",
-        "\"Normal\" keeps miners on their own settings, even if a schedule further down wants something else."));
-    private readonly CheckBox _allMiners = new() { Content = L("Alle Miner", "All miners") };
+    private readonly TextBlock _normalNote = PowerForm.Note(Strings.NormalKeepsMinersOnTheir);
+    private readonly CheckBox _allMiners = new() { Content = Strings.AllMiners };
     private readonly StackPanel _minerChecks = new();
 
     /// <summary>The saved schedule once the dialog was confirmed.</summary>
@@ -41,23 +38,23 @@ public sealed partial class ScheduleRuleDialog : ContentDialog
         _window = rule.Trigger.Window?.Copy() ?? new WeeklyWindow(WeekdayOrder.All, 22 * 60, 6 * 60);
         Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"];
         Resources["ContentDialogMaxWidth"] = 600.0;
-        PrimaryButtonText = L("Sichern", "Save");
-        CloseButtonText = L("Abbrechen", "Cancel");
+        PrimaryButtonText = Strings.SaveEntry;
+        CloseButtonText = Strings.Cancel;
         DefaultButton = ContentDialogButton.Primary;
 
-        _zoneOption = new RadioButton { Content = L("Während einer Tarifzone", "During a tariff zone"), GroupName = "when", IsEnabled = zones.Count > 0 };
-        var windowOption = new RadioButton { Content = L("Zu festen Uhrzeiten", "At fixed times"), GroupName = "when" };
+        _zoneOption = new RadioButton { Content = Strings.DuringATariffZone, GroupName = "when", IsEnabled = zones.Count > 0 };
+        var windowOption = new RadioButton { Content = Strings.AtFixedTimes, GroupName = "when" };
         var options = new StackPanel();
         options.Children.Add(_zoneOption);
         options.Children.Add(windowOption);
 
-        AutomationProperties.SetName(_zoneBox, L("Tarifzone", "Tariff zone"));
-        AutomationProperties.SetName(_actionBox, L("Aktion", "Action"));
+        AutomationProperties.SetName(_zoneBox, Strings.TariffZone);
+        AutomationProperties.SetName(_actionBox, Strings.Action);
         foreach (var zone in zones) _zoneBox.Items.Add($"{zone.Name} ({WeekdayOrder.Summary(zone.Window.Weekdays)} {zone.Window.TimeRangeText})");
         _zoneBox.SelectedIndex = Math.Max(0, zones.ToList().FindIndex(z => z.Id == rule.Trigger.ZoneId));
         var zoneFields = new StackPanel { Spacing = 14 };
         zoneFields.Children.Add(PowerForm.Row("Zone", _zoneBox));
-        var zoneNote = PowerForm.Note(L("Ändert sich die Zone, zieht der Zeitplan mit.", "If the zone changes, the schedule follows."));
+        var zoneNote = PowerForm.Note(Strings.IfTheZoneChangesThe);
         zoneNote.Margin = new Thickness(108, -8, 0, 0);
         zoneFields.Children.Add(zoneNote);
         _zoneFields = zoneFields;
@@ -65,8 +62,8 @@ public sealed partial class ScheduleRuleDialog : ContentDialog
         var days = new WeekdayPicker(_window.Weekdays);
         days.Changed += Validate;
         var windowFields = new StackPanel { Spacing = 14 };
-        windowFields.Children.Add(PowerForm.Row(L("Tage", "Days"), days));
-        windowFields.Children.Add(PowerForm.Row(L("Uhrzeit", "Time"), new TimeWindowFields(_window)));
+        windowFields.Children.Add(PowerForm.Row(Strings.Days, days));
+        windowFields.Children.Add(PowerForm.Row(Strings.Time, new TimeWindowFields(_window)));
         _windowFields = windowFields;
 
         foreach (var action in Actions) _actionBox.Items.Add(action.Title());
@@ -88,13 +85,13 @@ public sealed partial class ScheduleRuleDialog : ContentDialog
         minerPanel.Children.Add(new ScrollViewer { Content = _minerChecks, MaxHeight = 170 });
 
         var form = new StackPanel { Width = 520, Spacing = 14 };
-        var title = Palette.UiText(isNew ? L("Neuer Zeitplan", "New schedule") : L("Zeitplan bearbeiten", "Edit schedule"), 15, Palette.TextPrimary);
+        var title = Palette.UiText(isNew ? Strings.NewSchedule : Strings.EditSchedule, 15, Palette.TextPrimary);
         title.FontWeight = FontWeights.Medium;
         form.Children.Add(title);
-        form.Children.Add(PowerForm.Row(L("Wann", "When"), options));
+        form.Children.Add(PowerForm.Row(Strings.When, options));
         form.Children.Add(_zoneFields);
         form.Children.Add(_windowFields);
-        form.Children.Add(PowerForm.Row(L("Aktion", "Action"), _actionBox));
+        form.Children.Add(PowerForm.Row(Strings.Action, _actionBox));
         form.Children.Add(_normalNote);
         form.Children.Add(PowerForm.Row("Miner", minerPanel));
         Content = form;
@@ -146,7 +143,7 @@ public sealed partial class ScheduleRuleDialog : ContentDialog
 
     private string MinerLabel(MinerDevice miner) =>
         _rule.Action == PowerAction.Pause && PowerStore.Effective(PowerAction.Pause, miner) != PowerAction.Pause
-            ? L($"{miner.DisplayName} (kann nicht pausieren, Nachtmodus)", $"{miner.DisplayName} (cannot pause, night mode)")
+            ? string.Format(Strings.CannotPauseNightMode, miner.DisplayName)
             : miner.DisplayName;
 
     private void Validate() => IsPrimaryButtonEnabled = _zoneOption.IsChecked == true ? _zones.Count > 0 : _window.Weekdays.Count > 0;

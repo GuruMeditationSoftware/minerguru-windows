@@ -5,7 +5,6 @@ using System.Net.Sockets;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
@@ -166,7 +165,7 @@ public sealed class NetworkScanStore(MinerStore store, MinerApiClient api)
     public void AddAllDiscovered()
     {
         var added = AddNew();
-        if (added > 0) store.ShowBanner(L($"{added} Miner zum Dashboard hinzugefügt.", $"{added} miners added to the dashboard."), false);
+        if (added > 0) store.ShowBanner(string.Format(Strings.MinersAddedToTheDashboard, added), false);
         Changed?.Invoke();
     }
 
@@ -185,7 +184,7 @@ public sealed class NetworkScanStore(MinerStore store, MinerApiClient api)
         if (store.Miners.Count == 0 && Discovered.Count > 0)
         {
             var added = AddNew();
-            store.ShowBanner(L($"{added} Miner im lokalen Netzwerk gefunden und hinzugefügt.", $"{added} miners found on the local network and added."), false);
+            store.ShowBanner(string.Format(Strings.MinersFoundOnTheLocal, added), false);
         }
         Changed?.Invoke();
     }

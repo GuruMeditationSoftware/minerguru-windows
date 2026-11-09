@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml.Markup;
 using Microsoft.UI.Xaml.Media;
 using MinerGuru.Core;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -31,8 +30,8 @@ public sealed partial class PoolOverviewTable : Grid
         _header.Padding = new Thickness(12, 0, 12, 0);
         string[] titles =
         [
-            "Miner", L("Aktiver Pool-Server", "Active Pool Server"), "Worker / Wallet",
-            "Best Diff (Session)", L("Modus", "Mode"), L("Pool-Latenz", "Pool Latency"),
+            "Miner", Strings.ActivePoolServer, "Worker / Wallet",
+            "Best Diff (Session)", Strings.Mode, Strings.PoolLatency,
         ];
         for (var i = 0; i < titles.Length; i++)
         {

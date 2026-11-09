@@ -1,0 +1,2269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ABlockFoundWouldNot" xml:space="preserve">
+    <value>{0}: {1}. A block found would not go to you.</value>
+    <comment>{0} = slot.Title, {1} = address</comment>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AcceptedShares" xml:space="preserve">
+    <value>Accepted shares</value>
+  </data>
+  <data name="AccountPool" xml:space="preserve">
+    <value>Account pool</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="ActiveInText" xml:space="preserve">
+    <value>active</value>
+  </data>
+  <data name="ActivePoolServer" xml:space="preserve">
+    <value>Active Pool Server</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddAllNew" xml:space="preserve">
+    <value>Add all new</value>
+  </data>
+  <data name="AddAllPoolsConfiguredOn" xml:space="preserve">
+    <value>Add all pools configured on the miners to the library</value>
+  </data>
+  <data name="AddAMinerByIP" xml:space="preserve">
+    <value>Add a miner by IP address</value>
+  </data>
+  <data name="AddAnyway" xml:space="preserve">
+    <value>Add anyway</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>{0} added.</value>
+    <comment>{0} = miner.DisplayName</comment>
+  </data>
+  <data name="AddedPoolSToThe" xml:space="preserve">
+    <value>Added {0} pool(s) to the library.</value>
+    <comment>{0} = added</comment>
+  </data>
+  <data name="AddIP" xml:space="preserve">
+    <value>Add IP</value>
+  </data>
+  <data name="AddMaintenanceTask" xml:space="preserve">
+    <value>Add maintenance task</value>
+  </data>
+  <data name="AddMiner" xml:space="preserve">
+    <value>Add miner</value>
+  </data>
+  <data name="AddressNotSetYet" xml:space="preserve">
+    <value>Address not set yet.</value>
+  </data>
+  <data name="AddressOfWasChanged" xml:space="preserve">
+    <value>Address of {0} was changed</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="AddSchedule" xml:space="preserve">
+    <value>Add schedule</value>
+  </data>
+  <data name="AddTask" xml:space="preserve">
+    <value>Add task</value>
+  </data>
+  <data name="AddThemInMinerGuru" xml:space="preserve">
+    <value>Add them in MinerGuru</value>
+  </data>
+  <data name="AddThisPoolToThe" xml:space="preserve">
+    <value>Add this pool to the library</value>
+  </data>
+  <data name="AddZone" xml:space="preserve">
+    <value>Add zone</value>
+  </data>
+  <data name="AFixedPriceAppliesAround" xml:space="preserve">
+    <value>A fixed price applies around the clock. With zones, nights, weekends or peak hours get their own prices, and schedules can follow them.</value>
+  </data>
+  <data name="AlarmsOnlyNoAdvertisingKeeps" xml:space="preserve">
+    <value>Alarms only, no advertising. Keeps running while MinerGuru is in the notification area.</value>
+  </data>
+  <data name="AllDay" xml:space="preserve">
+    <value>all day</value>
+  </data>
+  <data name="AllMiners" xml:space="preserve">
+    <value>All miners</value>
+  </data>
+  <data name="AllTime" xml:space="preserve">
+    <value>All-time {0}</value>
+    <comment>{0} = store.BestDiffInfo?.BestDiffFormatted ?? "—"</comment>
+  </data>
+  <data name="AllTimeBest" xml:space="preserve">
+    <value>All-time best: {0}</value>
+    <comment>{0} = info.BestDiffFormatted</comment>
+  </data>
+  <data name="AlreadyAdded" xml:space="preserve">
+    <value>Already added</value>
+  </data>
+  <data name="AnAutomaticRestartWasDue" xml:space="preserve">
+    <value>An automatic restart was due, but read-only mode is on.</value>
+  </data>
+  <data name="AndOverlapAppliesThereBecause" xml:space="preserve">
+    <value>"{0}" and "{1}" overlap. "{0}" applies there because it is higher up.</value>
+    <comment>{0} = first.Name, {1} = second.Name</comment>
+  </data>
+  <data name="ApplyAll" xml:space="preserve">
+    <value>Apply all ({0})</value>
+    <comment>{0} = dirty.Count</comment>
+  </data>
+  <data name="ApplyClockFanToThe" xml:space="preserve">
+    <value>Apply clock &amp; fan to the miner</value>
+  </data>
+  <data name="ApplyRestart" xml:space="preserve">
+    <value>Apply &amp; restart</value>
+  </data>
+  <data name="ArePoolAndAddressStill" xml:space="preserve">
+    <value>Are pool and address still right? Compare them with the block view.</value>
+  </data>
+  <data name="AsFallbackPool2On" xml:space="preserve">
+    <value>As fallback / pool 2 on all miners</value>
+  </data>
+  <data name="ASICClockVCore" xml:space="preserve">
+    <value>ASIC Clock &amp; VCore</value>
+  </data>
+  <data name="ASICCVoltageRegulatorC" xml:space="preserve">
+    <value>ASIC {0} °C, voltage regulator {1} °C, limit {2} °C. Check the cooling.</value>
+    <comment>{0} = temp, {1} = vr, {2} = limit</comment>
+  </data>
+  <data name="ASICTemperature" xml:space="preserve">
+    <value>ASIC Temperature</value>
+  </data>
+  <data name="ASICVRTemperatureC" xml:space="preserve">
+    <value>ASIC &amp; VR temperature (°C)</value>
+  </data>
+  <data name="AskAgain" xml:space="preserve">
+    <value>Ask again</value>
+  </data>
+  <data name="AskedThePoolFromThis" xml:space="preserve">
+    <value>Asked the pool from this PC, {0}</value>
+    <comment>{0} = time</comment>
+  </data>
+  <data name="AskThePoolForThe" xml:space="preserve">
+    <value>Ask the pool for the block template</value>
+  </data>
+  <data name="AsOf" xml:space="preserve">
+    <value>As of </value>
+  </data>
+  <data name="AsPrimaryPoolOnAll" xml:space="preserve">
+    <value>As primary pool on all miners</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>Assign</value>
+  </data>
+  <data name="AssignmentToMiners" xml:space="preserve">
+    <value>Assignment to miners</value>
+  </data>
+  <data name="AssignName" xml:space="preserve">
+    <value>Assign {0}</value>
+    <comment>{0} = pool.Name</comment>
+  </data>
+  <data name="AsSoonAsAMiner" xml:space="preserve">
+    <value>As soon as a miner reports telemetry, you can fill its pool slots here.</value>
+  </data>
+  <data name="AtCurrentPower" xml:space="preserve">
+    <value>at current power</value>
+  </data>
+  <data name="AtFixedTimes" xml:space="preserve">
+    <value>At fixed times</value>
+  </data>
+  <data name="AtMostOnceAnHour" xml:space="preserve">
+    <value>At most once an hour per miner, never when overheating</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="AutomaticFan" xml:space="preserve">
+    <value>Automatic fan</value>
+  </data>
+  <data name="AutomaticTemperatureControlAutoFan" xml:space="preserve">
+    <value>Automatic temperature control (auto fan)</value>
+  </data>
+  <data name="AutoMode" xml:space="preserve">
+    <value>Auto mode</value>
+  </data>
+  <data name="Average1BlockEvery" xml:space="preserve">
+    <value>Ø 1 block every {0}</value>
+    <comment>{0} = summary.ExpectedTimePerBlockFormatted</comment>
+  </data>
+  <data name="AveragePing" xml:space="preserve">
+    <value>Ø Ping</value>
+  </data>
+  <data name="AveragePoolLatency" xml:space="preserve">
+    <value>Ø Pool latency</value>
+  </data>
+  <data name="Avg1BlockEvery" xml:space="preserve">
+    <value>Avg. 1 block every </value>
+  </data>
+  <data name="AvgC" xml:space="preserve">
+    <value>Avg °C</value>
+  </data>
+  <data name="AvgEfficiency" xml:space="preserve">
+    <value>Avg efficiency</value>
+  </data>
+  <data name="AvgHashrate" xml:space="preserve">
+    <value>Avg hashrate</value>
+  </data>
+  <data name="BackUpSettings" xml:space="preserve">
+    <value>Back up settings</value>
+  </data>
+  <data name="BasePrice" xml:space="preserve">
+    <value>Base price</value>
+  </data>
+  <data name="BasePricePerKWh" xml:space="preserve">
+    <value>Base price per kWh</value>
+  </data>
+  <data name="BearingsWearOutReplaceLoud" xml:space="preserve">
+    <value>Bearings wear out. Replace loud or slow fans in good time.</value>
+  </data>
+  <data name="Best" xml:space="preserve">
+    <value>Best: </value>
+  </data>
+  <data name="BestDiffHighestDifficultySince" xml:space="preserve">
+    <value>Best diff: highest difficulty since the miners last restarted</value>
+  </data>
+  <data name="BestDiffSinceRestart" xml:space="preserve">
+    <value>Best diff since restart</value>
+  </data>
+  <data name="BestDiffSinceRestartTitle" xml:space="preserve">
+    <value>Best Diff (since restart)</value>
+  </data>
+  <data name="BillionShort" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="BIP110ReducedDataThe" xml:space="preserve">
+    <value>BIP-110 (Reduced Data): the pool shows support for this soft fork.</value>
+  </data>
+  <data name="BIP54ConsensusCleanupThe" xml:space="preserve">
+    <value>BIP-54 (Consensus Cleanup): the pool shows support for this soft fork.</value>
+  </data>
+  <data name="BitaxeAndNerdQAxeMinersThat" xml:space="preserve">
+    <value>Bitaxe and NerdQAxe++ miners that answer appear here right away.</value>
+  </data>
+  <data name="BlockDoesNotPay" xml:space="preserve">
+    <value>Block does not pay {0}</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="BlockHeight" xml:space="preserve">
+    <value>Block height</value>
+  </data>
+  <data name="BlockReward" xml:space="preserve">
+    <value>Block reward</value>
+  </data>
+  <data name="BlockView" xml:space="preserve">
+    <value>Block view</value>
+  </data>
+  <data name="BringBackToPrimaryPool" xml:space="preserve">
+    <value>Bring back to primary pool</value>
+  </data>
+  <data name="ByHand" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="ByIP" xml:space="preserve">
+    <value>By IP</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Cancelled.</value>
+  </data>
+  <data name="CannotPauseNightMode" xml:space="preserve">
+    <value>{0} (cannot pause, night mode)</value>
+    <comment>{0} = miner.DisplayName</comment>
+  </data>
+  <data name="ChangeLog" xml:space="preserve">
+    <value>Change log</value>
+  </data>
+  <data name="ChangeNothingOnMiners" xml:space="preserve">
+    <value>Change nothing on miners</value>
+  </data>
+  <data name="CheaperWeekend" xml:space="preserve">
+    <value>Cheaper weekend</value>
+  </data>
+  <data name="CheckAirflowRoomTemperatureAnd" xml:space="preserve">
+    <value>Check airflow, room temperature and Wi-Fi reception.</value>
+  </data>
+  <data name="CheckForFirmwareUpdate" xml:space="preserve">
+    <value>Check for firmware update</value>
+  </data>
+  <data name="CheckForNewVersionsDaily" xml:space="preserve">
+    <value>Check for new versions daily</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>Checking …</value>
+  </data>
+  <data name="CheckingTheConnection" xml:space="preserve">
+    <value>Checking the connection</value>
+  </data>
+  <data name="CheckLocationAndWiFi" xml:space="preserve">
+    <value>Check location and Wi-Fi</value>
+  </data>
+  <data name="CheckNow" xml:space="preserve">
+    <value>Check now</value>
+  </data>
+  <data name="CheckPoolAndPayoutAddress" xml:space="preserve">
+    <value>Check pool and payout address</value>
+  </data>
+  <data name="CheckPowerSupplyAndPlugs" xml:space="preserve">
+    <value>Check power supply and plugs</value>
+  </data>
+  <data name="CleanTheFan" xml:space="preserve">
+    <value>Clean the fan</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="Cleared" xml:space="preserve">
+    <value>(cleared)</value>
+  </data>
+  <data name="ClickStartScanToSearch" xml:space="preserve">
+    <value>Click "Start scan" to search the subnet {0}.1–254.</value>
+    <comment>{0} = prefix</comment>
+  </data>
+  <data name="Clock" xml:space="preserve">
+    <value>Clock</value>
+  </data>
+  <data name="ClockFan" xml:space="preserve">
+    <value>Clock &amp; fan</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CoinbaseDecodingIsOffFor" xml:space="preserve">
+    <value>Coinbase decoding is off for the active pool.</value>
+  </data>
+  <data name="CoinbaseDecodingIsOffThe" xml:space="preserve">
+    <value>Coinbase decoding is off, the miner does not check the payout.</value>
+  </data>
+  <data name="CollectingShares" xml:space="preserve">
+    <value>Collecting shares …</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+  <data name="ConnectingTo" xml:space="preserve">
+    <value>Connecting to {0}…</value>
+    <comment>{0} = miner.IpAddress</comment>
+  </data>
+  <data name="ConnectionToTheMinerLost" xml:space="preserve">
+    <value>Connection to the miner lost. Trying again …</value>
+  </data>
+  <data name="CoolingElevated" xml:space="preserve">
+    <value>Cooling: elevated</value>
+  </data>
+  <data name="CoolingFan" xml:space="preserve">
+    <value>Cooling &amp; Fan</value>
+  </data>
+  <data name="CoolingOptimal" xml:space="preserve">
+    <value>Cooling: optimal</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>Copied</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value> Copy</value>
+  </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>Copy address</value>
+  </data>
+  <data name="CopyJSON" xml:space="preserve">
+    <value>Copy JSON</value>
+  </data>
+  <data name="CoreVoltage" xml:space="preserve">
+    <value>Core voltage</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="CostPerHour" xml:space="preserve">
+    <value>Cost per hour</value>
+  </data>
+  <data name="CostPerMiner" xml:space="preserve">
+    <value>Cost per miner</value>
+  </data>
+  <data name="CouldNotBeRestarted" xml:space="preserve">
+    <value>{0} could not be restarted</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="CouldNotSaveThePower" xml:space="preserve">
+    <value>Could not save the power settings.</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="CreateANewPoolConfiguration" xml:space="preserve">
+    <value>Create a new pool configuration</value>
+  </data>
+  <data name="CreateATimeZoneWith" xml:space="preserve">
+    <value>Create a time zone with its own price, e.g. night rate</value>
+  </data>
+  <data name="CreateTypicalZonesThenAdjust" xml:space="preserve">
+    <value>Create typical zones, then adjust the prices</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="CurrentBlock" xml:space="preserve">
+    <value>Current block</value>
+  </data>
+  <data name="CustomClockValues" xml:space="preserve">
+    <value>Custom clock values</value>
+  </data>
+  <data name="CustomTask" xml:space="preserve">
+    <value>Custom task</value>
+  </data>
+  <data name="Daily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="DailyInText" xml:space="preserve">
+    <value>daily</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="DataFolder" xml:space="preserve">
+    <value>Data folder</value>
+  </data>
+  <data name="DataNoPayout" xml:space="preserve">
+    <value>Data, no payout</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="Days30" xml:space="preserve">
+    <value>30 days</value>
+  </data>
+  <data name="Days30PerTHs" xml:space="preserve">
+    <value>30 days per TH/s</value>
+  </data>
+  <data name="Days7" xml:space="preserve">
+    <value>7 days</value>
+  </data>
+  <data name="Days90" xml:space="preserve">
+    <value>90 days</value>
+  </data>
+  <data name="DaysInText" xml:space="preserve">
+    <value>days</value>
+  </data>
+  <data name="DecodeCoinbase" xml:space="preserve">
+    <value>Decode coinbase</value>
+  </data>
+  <data name="DefaultSubnet24" xml:space="preserve">
+    <value>Default subnet (/24)</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteEntry" xml:space="preserve">
+    <value>Delete entry</value>
+  </data>
+  <data name="DeleteFromLibrary" xml:space="preserve">
+    <value>Delete from library</value>
+  </data>
+  <data name="DeletePoolConfiguration" xml:space="preserve">
+    <value>Delete pool configuration?</value>
+  </data>
+  <data name="DeleteSchedule" xml:space="preserve">
+    <value>Delete schedule</value>
+  </data>
+  <data name="DeleteSwitch" xml:space="preserve">
+    <value>Delete switch</value>
+  </data>
+  <data name="DeleteTask" xml:space="preserve">
+    <value>Delete task</value>
+  </data>
+  <data name="DeleteZoneSchedulesForThis" xml:space="preserve">
+    <value>Delete zone; schedules for this zone are removed with it</value>
+  </data>
+  <data name="DeveloperModeIsOffWindows" xml:space="preserve">
+    <value>Developer Mode is off: Windows shows the widgets again once it is on. Switching them off still works.</value>
+  </data>
+  <data name="DiagnosticLog" xml:space="preserve">
+    <value>Diagnostic log</value>
+  </data>
+  <data name="DiffersFromYourExpectedAddress" xml:space="preserve">
+    <value>Differs from your expected address</value>
+  </data>
+  <data name="DifficultyPerShare" xml:space="preserve">
+    <value>Difficulty per share</value>
+  </data>
+  <data name="DisplayNameInMinerGuru" xml:space="preserve">
+    <value>Display name in MinerGuru</value>
+  </data>
+  <data name="DisplayNameSaved" xml:space="preserve">
+    <value>Display name saved.</value>
+  </data>
+  <data name="DoesNotSwitchBack" xml:space="preserve">
+    <value>{0} does not switch back</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="DueOn" xml:space="preserve">
+    <value>Due on</value>
+  </data>
+  <data name="DueToday" xml:space="preserve">
+    <value>due today</value>
+  </data>
+  <data name="DuplicateEGForAnother" xml:space="preserve">
+    <value>Duplicate (e.g. for another worker)</value>
+  </data>
+  <data name="During" xml:space="preserve">
+    <value>during "{0}"</value>
+    <comment>{0} = zone.Name</comment>
+  </data>
+  <data name="DuringATariffZone" xml:space="preserve">
+    <value>During a tariff zone</value>
+  </data>
+  <data name="DustOnTheFanCosts" xml:space="preserve">
+    <value>Dust on the fan costs speed and drives up the temperature. Clean it only when it has stopped.</value>
+  </data>
+  <data name="DustTheHeatsink" xml:space="preserve">
+    <value>Dust the heatsink</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditMaintenanceTask" xml:space="preserve">
+    <value>Edit maintenance task</value>
+  </data>
+  <data name="EditPoolConfiguration" xml:space="preserve">
+    <value>Edit pool configuration</value>
+  </data>
+  <data name="EditPoolSwitch" xml:space="preserve">
+    <value>Edit pool switch</value>
+  </data>
+  <data name="EditSchedule" xml:space="preserve">
+    <value>Edit schedule</value>
+  </data>
+  <data name="EditTariffZone" xml:space="preserve">
+    <value>Edit tariff zone</value>
+  </data>
+  <data name="Efficiency" xml:space="preserve">
+    <value>Efficiency</value>
+  </data>
+  <data name="EGNight" xml:space="preserve">
+    <value>e.g. Night</value>
+  </data>
+  <data name="EmailAlerts" xml:space="preserve">
+    <value>Email alerts</value>
+  </data>
+  <data name="Empty" xml:space="preserve">
+    <value>— empty —</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Encryption</value>
+  </data>
+  <data name="Energy" xml:space="preserve">
+    <value>Energy</value>
+  </data>
+  <data name="EnergyCost" xml:space="preserve">
+    <value>Energy cost</value>
+  </data>
+  <data name="EnergyPerTerahash" xml:space="preserve">
+    <value>Energy per terahash</value>
+  </data>
+  <data name="EnterCode" xml:space="preserve">
+    <value>Enter code</value>
+  </data>
+  <data name="EnterExpectedAddress" xml:space="preserve">
+    <value>Enter expected address</value>
+  </data>
+  <data name="ErrorRate" xml:space="preserve">
+    <value>Error rate</value>
+  </data>
+  <data name="EstimateUntilThePoolReports" xml:space="preserve">
+    <value>Estimate until the pool reports the network difficulty</value>
+  </data>
+  <data name="EveryDays" xml:space="preserve">
+    <value>Every … days</value>
+  </data>
+  <data name="EveryIntervalDaysDays" xml:space="preserve">
+    <value>every {0} days</value>
+    <comment>{0} = task.IntervalDays</comment>
+  </data>
+  <data name="ExampleCKPoolRig" xml:space="preserve">
+    <value>e.g. CKPool EU · rig1</value>
+  </data>
+  <data name="Excellent" xml:space="preserve">
+    <value>Excellent</value>
+  </data>
+  <data name="ExcludingTransactionFees" xml:space="preserve">
+    <value>excluding transaction fees</value>
+  </data>
+  <data name="ExpectedAddresses" xml:space="preserve">
+    <value>Expected addresses</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export …</value>
+  </data>
+  <data name="FailoverOrDualPool" xml:space="preserve">
+    <value>Failover or dual pool</value>
+  </data>
+  <data name="Fair" xml:space="preserve">
+    <value>Fair</value>
+  </data>
+  <data name="FallbackAddress" xml:space="preserve">
+    <value>Fallback address</value>
+  </data>
+  <data name="FallbackPassword" xml:space="preserve">
+    <value>Fallback password</value>
+  </data>
+  <data name="FallbackPoolActive" xml:space="preserve">
+    <value>Fallback pool active</value>
+  </data>
+  <data name="FallbackSlot" xml:space="preserve">
+    <value>Fallback slot</value>
+  </data>
+  <data name="FallbackUser" xml:space="preserve">
+    <value>Fallback user</value>
+  </data>
+  <data name="Fan" xml:space="preserve">
+    <value>Fan</value>
+  </data>
+  <data name="FanControl" xml:space="preserve">
+    <value>Fan control</value>
+  </data>
+  <data name="FanInNightModePercent" xml:space="preserve">
+    <value>Fan in night mode, percent</value>
+  </data>
+  <data name="FindsBitaxeGamma601Supra" xml:space="preserve">
+    <value>Finds Bitaxe (Gamma 601, Supra, Ultra) &amp; NerdQAxe++ through /api/system/info</value>
+  </data>
+  <data name="FirmwareDefaultABlockFound" xml:space="preserve">
+    <value>Firmware default: a block found would not go to you</value>
+  </data>
+  <data name="FixedPrice" xml:space="preserve">
+    <value>Fixed price</value>
+  </data>
+  <data name="Fleet" xml:space="preserve">
+    <value>Fleet</value>
+  </data>
+  <data name="FleetAndSoloChanceOn" xml:space="preserve">
+    <value>Fleet and solo chance on the widget board (Windows key + W, then “+”).</value>
+  </data>
+  <data name="FleetHashratePerDay" xml:space="preserve">
+    <value>Fleet hashrate per day</value>
+  </data>
+  <data name="ForMinersThatDoNot" xml:space="preserve">
+    <value>For miners that do not report their block themselves (NerdOS, AxeOS before 2.13). MinerGuru briefly connects from this PC to the pool of the miner, logs in with its address and the worker name “minerguru”, reads the first job and disconnects. You then see block height, reward, fees and recipients and whether your address is among them.</value>
+  </data>
+  <data name="FreeHeap" xml:space="preserve">
+    <value>Free heap</value>
+  </data>
+  <data name="Frequency" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+  <data name="FrequencyAndCoreVoltageNeed" xml:space="preserve">
+    <value>Frequency and core voltage need a value.</value>
+  </data>
+  <data name="FrequencyMHz" xml:space="preserve">
+    <value>Frequency (MHz)</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="FromTheDepthOfThe" xml:space="preserve">
+    <value>From the depth of the merkle tree: the pool does not state the exact number, only the order of magnitude.</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="GHSMinersActive" xml:space="preserve">
+    <value>{0:0} GH/s · {1} miners active</value>
+    <comment>{0} = store.TotalHashrateGhs, {1} = store.OnlineCount</comment>
+  </data>
+  <data name="GitHubCannotBeReachedRight" xml:space="preserve">
+    <value>GitHub cannot be reached right now.</value>
+  </data>
+  <data name="Good" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="GoToDownload" xml:space="preserve">
+    <value>Go to download</value>
+  </data>
+  <data name="HardwareSystem" xml:space="preserve">
+    <value>Hardware &amp; system</value>
+  </data>
+  <data name="HasCooledDown" xml:space="preserve">
+    <value>{0} has cooled down</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="HashrateHistory" xml:space="preserve">
+    <value>Hashrate history</value>
+  </data>
+  <data name="HashratePowerAndStateOf" xml:space="preserve">
+    <value>Hashrate, power and state of your miners</value>
+  </data>
+  <data name="HasStoppedDeliveringShares" xml:space="preserve">
+    <value>{0} has stopped delivering shares</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="HideIPWalletAndMAC" xml:space="preserve">
+    <value>Hide IP, wallet and MAC addresses for screenshots (Ctrl+Shift+H)</value>
+  </data>
+  <data name="HidesIPWalletAndMAC" xml:space="preserve">
+    <value>Hides IP, wallet and MAC addresses and the Wi-Fi name, for example for screenshots. Ctrl+Shift+H toggles it.</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="HigherClockAndVoltageProduce" xml:space="preserve">
+    <value>Higher clock and voltage produce more heat and can permanently damage the chip, the voltage regulator and the power supply. The warranty may be void.</value>
+  </data>
+  <data name="HighestTemperature" xml:space="preserve">
+    <value>Highest temperature</value>
+  </data>
+  <data name="HostAndWalletStratumUser" xml:space="preserve">
+    <value>{0}: Host and wallet/stratum user are required.</value>
+    <comment>{0} = SlotTitle(i)</comment>
+  </data>
+  <data name="HostnameSent" xml:space="preserve">
+    <value>Hostname sent.</value>
+  </data>
+  <data name="HostRange1To254" xml:space="preserve">
+    <value>.1 to .254</value>
+  </data>
+  <data name="Hot" xml:space="preserve">
+    <value>{0} hot</value>
+    <comment>{0} = hot.Count</comment>
+  </data>
+  <data name="Hours0To24Projected" xml:space="preserve">
+    <value>0–24 h, projected</value>
+  </data>
+  <data name="Hours24" xml:space="preserve">
+    <value>24 hrs</value>
+  </data>
+  <data name="HoursShort" xml:space="preserve">
+    <value>h</value>
+  </data>
+  <data name="HowOftenMinerGuruAsksEvery" xml:space="preserve">
+    <value>How often MinerGuru asks every miner for its figures</value>
+  </data>
+  <data name="HTTPError" xml:space="preserve">
+    <value>HTTP error {0}</value>
+    <comment>{0} = status</comment>
+  </data>
+  <data name="IfTheTemperatureRisesAt" xml:space="preserve">
+    <value>If the temperature rises at the same frequency, the paste has often dried out.</value>
+  </data>
+  <data name="IfTheZoneChangesThe" xml:space="preserve">
+    <value>If the zone changes, the schedule follows.</value>
+  </data>
+  <data name="InDays" xml:space="preserve">
+    <value>in {0} days</value>
+    <comment>{0} = days</comment>
+  </data>
+  <data name="InterfaceLanguage" xml:space="preserve">
+    <value>Interface language</value>
+  </data>
+  <data name="Interventions" xml:space="preserve">
+    <value>Interventions</value>
+  </data>
+  <data name="InTheNext7Days" xml:space="preserve">
+    <value>In the next 7 days</value>
+  </data>
+  <data name="InThisBlockThePool" xml:space="preserve">
+    <value>In this block the pool shows support for a protocol change.</value>
+  </data>
+  <data name="InvalidAddress" xml:space="preserve">
+    <value>Invalid address: {0}</value>
+    <comment>{0} = host</comment>
+  </data>
+  <data name="InvalidPort" xml:space="preserve">
+    <value>{0}: Invalid port {1}.</value>
+    <comment>{0} = SlotTitle(i), {1} = slot.Port</comment>
+  </data>
+  <data name="InvalidReplyFromTheMiner" xml:space="preserve">
+    <value>Invalid reply from the miner: {0}</value>
+    <comment>{0} = e.Message</comment>
+  </data>
+  <data name="IPAddressOrHostname" xml:space="preserve">
+    <value>IP address or hostname</value>
+  </data>
+  <data name="IsBackOnline" xml:space="preserve">
+    <value>{0} is back online</value>
+    <comment>{0} = miner.DisplayName</comment>
+  </data>
+  <data name="IsBackOnThePrimary" xml:space="preserve">
+    <value>{0} is back on the primary pool</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="IsDeliveringSharesAgain" xml:space="preserve">
+    <value>{0} is delivering shares again</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="IsOffline" xml:space="preserve">
+    <value>{0} is offline</value>
+    <comment>{0} = miner.DisplayName</comment>
+  </data>
+  <data name="IsOnlyRemovedFromThe" xml:space="preserve">
+    <value>“{0}” is only removed from the library. The miners keep their current configuration.</value>
+    <comment>{0} = pool.Name</comment>
+  </data>
+  <data name="IsOnTheFallbackPool" xml:space="preserve">
+    <value>{0} is on the fallback pool</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="IsOverheating" xml:space="preserve">
+    <value>{0} is overheating</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="KeepRunningInTheNotification" xml:space="preserve">
+    <value>Keep running in the notification area when closed</value>
+  </data>
+  <data name="KWhPerDay" xml:space="preserve">
+    <value>{0} kWh per day</value>
+    <comment>{0} = DisplayFormat.Decimal(store.TotalPowerWatts * 24 / 1000, 2)</comment>
+  </data>
+  <data name="Last30Days" xml:space="preserve">
+    <value>Last 30 days</value>
+  </data>
+  <data name="Last7Days" xml:space="preserve">
+    <value>Last 7 days</value>
+  </data>
+  <data name="LastMonth" xml:space="preserve">
+    <value>Last month</value>
+  </data>
+  <data name="LastPoolSwitchFailed" xml:space="preserve">
+    <value>Last switch failed: {0}</value>
+    <comment>{0} = error</comment>
+  </data>
+  <data name="LastSeen" xml:space="preserve">
+    <value>{0} · last seen {1}</value>
+    <comment>{0} = miner.OfflineReason, {1} = DisplayFormat.Time(seen)</comment>
+  </data>
+  <data name="LastSwitchFailed" xml:space="preserve">
+    <value>Last switch failed: {0}</value>
+    <comment>{0} = error</comment>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="LiveComparisonOfAllMiners" xml:space="preserve">
+    <value>Live comparison of all miners</value>
+  </data>
+  <data name="LiveHashrate" xml:space="preserve">
+    <value>Live Hashrate</value>
+  </data>
+  <data name="LiveLogRunning" xml:space="preserve">
+    <value>Live log running</value>
+  </data>
+  <data name="LongTermHistory" xml:space="preserve">
+    <value>Long-term history</value>
+  </data>
+  <data name="MailServer" xml:space="preserve">
+    <value>Mail server: {0}</value>
+    <comment>{0} = text</comment>
+  </data>
+  <data name="MailServerNotReachable" xml:space="preserve">
+    <value>Mail server not reachable.</value>
+  </data>
+  <data name="Maintenance" xml:space="preserve">
+    <value>Maintenance</value>
+  </data>
+  <data name="MaintenanceDone" xml:space="preserve">
+    <value>Maintenance done</value>
+  </data>
+  <data name="MaintenanceDue" xml:space="preserve">
+    <value>Maintenance due</value>
+  </data>
+  <data name="MaintenanceDueTitle" xml:space="preserve">
+    <value>Maintenance due: {0}</value>
+    <comment>{0} = task.Title</comment>
+  </data>
+  <data name="MaintenanceTasksAreDue" xml:space="preserve">
+    <value>{0} maintenance tasks are due</value>
+    <comment>{0} = all.Count</comment>
+  </data>
+  <data name="Manual" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="ManualFanSpeed" xml:space="preserve">
+    <value>Manual fan speed</value>
+  </data>
+  <data name="ManualTuningASICClockCore" xml:space="preserve">
+    <value>Manual tuning (ASIC clock &amp; core voltage)</value>
+  </data>
+  <data name="MarkItAsDoneIn" xml:space="preserve">
+    <value>Mark it as done in MinerGuru.</value>
+  </data>
+  <data name="MatchesYourExpectedAddress" xml:space="preserve">
+    <value>Matches your expected address</value>
+  </data>
+  <data name="MaxC" xml:space="preserve">
+    <value>Max °C</value>
+  </data>
+  <data name="Metric" xml:space="preserve">
+    <value>Metric</value>
+  </data>
+  <data name="MillionShort" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="Miner" xml:space="preserve">
+    <value>Miner</value>
+  </data>
+  <data name="MinerGuruAsksGitHubForThe" xml:space="preserve">
+    <value>MinerGuru asks GitHub for the latest version. GitHub sees your IP address and the app version. Nothing is installed automatically.</value>
+  </data>
+  <data name="MinerGuruDidNotTriggerThis" xml:space="preserve">
+    <value>MinerGuru did not trigger this. {0}</value>
+    <comment>{0} = reason</comment>
+  </data>
+  <data name="MinerGuruIsAskingThePool" xml:space="preserve">
+    <value>MinerGuru is asking the pool for its template …</value>
+  </data>
+  <data name="MinerGuruIsAvailable" xml:space="preserve">
+    <value>MinerGuru {0} is available</value>
+    <comment>{0} = available</comment>
+  </data>
+  <data name="MinerGuruIsFreeAndHas" xml:space="preserve">
+    <value>MinerGuru is free and has no ads. If the app helps you, a small donation towards further development is very welcome.</value>
+  </data>
+  <data name="MinerGuruIsUpToDate" xml:space="preserve">
+    <value>MinerGuru is up to date.</value>
+  </data>
+  <data name="MinerGuruReport" xml:space="preserve">
+    <value>MinerGuru report</value>
+  </data>
+  <data name="MinerGuruTestMail" xml:space="preserve">
+    <value>MinerGuru: test mail</value>
+  </data>
+  <data name="MinerGuruWarnsWhenAMiner" xml:space="preserve">
+    <value>MinerGuru warns when a miner pays to another address and never writes an address to a miner on its own.</value>
+  </data>
+  <data name="MinerHostnameOnTheNetwork" xml:space="preserve">
+    <value>Miner hostname on the network</value>
+  </data>
+  <data name="MinerOfflineBackOnline" xml:space="preserve">
+    <value>Miner offline / back online</value>
+  </data>
+  <data name="MinerRemoved" xml:space="preserve">
+    <value>Miner removed</value>
+  </data>
+  <data name="Miners" xml:space="preserve">
+    <value>Miners</value>
+  </data>
+  <data name="MinersAboveThisASICTemperature" xml:space="preserve">
+    <value>Miners above this ASIC temperature are marked orange</value>
+  </data>
+  <data name="MinersAddedToTheDashboard" xml:space="preserve">
+    <value>{0} miners added to the dashboard.</value>
+    <comment>{0} = added</comment>
+  </data>
+  <data name="MinersAreBackOnline" xml:space="preserve">
+    <value>{0} miners are back online</value>
+    <comment>{0} = all.Count</comment>
+  </data>
+  <data name="MinersAreBackOnThe" xml:space="preserve">
+    <value>{0} miners are back on the primary pool</value>
+    <comment>{0} = all.Count</comment>
+  </data>
+  <data name="MinersAreDeliveringSharesAgain" xml:space="preserve">
+    <value>{0} miners are delivering shares again</value>
+    <comment>{0} = all.Count</comment>
+  </data>
+  <data name="MinersAreOffline" xml:space="preserve">
+    <value>{0} miners are offline</value>
+    <comment>{0} = all.Count</comment>
+  </data>
+  <data name="MinersAreOnTheFallback" xml:space="preserve">
+    <value>{0} miners are on the fallback pool</value>
+    <comment>{0} = all.Count</comment>
+  </data>
+  <data name="MinersAreOverheating" xml:space="preserve">
+    <value>{0} miners are overheating</value>
+    <comment>{0} = all.Count</comment>
+  </data>
+  <data name="MinerSettings" xml:space="preserve">
+    <value>Miner settings: {0}</value>
+    <comment>{0} = miner.DisplayName</comment>
+  </data>
+  <data name="MinersFound" xml:space="preserve">
+    <value>{0} miners found</value>
+    <comment>{0} = found.Count</comment>
+  </data>
+  <data name="MinersFoundOnTheLocal" xml:space="preserve">
+    <value>{0} miners found on the local network and added.</value>
+    <comment>{0} = added</comment>
+  </data>
+  <data name="MinersFoundOnTheNetwork" xml:space="preserve">
+    <value>Miners found on the network ({0})</value>
+    <comment>{0} = found.Count</comment>
+  </data>
+  <data name="MinersHaveCooledDown" xml:space="preserve">
+    <value>{0} miners have cooled down</value>
+    <comment>{0} = all.Count</comment>
+  </data>
+  <data name="MinersHaveStoppedDeliveringShares" xml:space="preserve">
+    <value>{0} miners have stopped delivering shares</value>
+    <comment>{0} = all.Count</comment>
+  </data>
+  <data name="MinersOnline" xml:space="preserve">
+    <value>{0} miners online</value>
+    <comment>{0} = store.OnlineMiners.Count()</comment>
+  </data>
+  <data name="MinersRestarted" xml:space="preserve">
+    <value>{0} miners restarted</value>
+    <comment>{0} = all.Count</comment>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="MonitoringAndSchedulesKeepRunning" xml:space="preserve">
+    <value>Monitoring and schedules keep running. Quit MinerGuru from its icon.</value>
+  </data>
+  <data name="MoreActions" xml:space="preserve">
+    <value>More actions</value>
+  </data>
+  <data name="MoreRecipients" xml:space="preserve">
+    <value>{0} more recipients</value>
+    <comment>{0} = block.OthersCount</comment>
+  </data>
+  <data name="MovesMinersToASaved" xml:space="preserve">
+    <value>Moves miners to a saved pool at set times, for example to a solo pool on nights and weekends. The miner restarts when it switches. Add a second rule for the way back.</value>
+  </data>
+  <data name="MoveUpWinsWhenSeveral" xml:space="preserve">
+    <value>Move up: wins when several schedules apply at once</value>
+  </data>
+  <data name="MoveUpWinsWhereZones" xml:space="preserve">
+    <value>Move up: wins where zones overlap</value>
+  </data>
+  <data name="Mute" xml:space="preserve">
+    <value>Mute</value>
+  </data>
+  <data name="NameInMinerGuruEmptyThe" xml:space="preserve">
+    <value>Name in MinerGuru (empty: the miner's hostname)</value>
+  </data>
+  <data name="NameOptional" xml:space="preserve">
+    <value>Name (optional)</value>
+  </data>
+  <data name="NetworkDiff" xml:space="preserve">
+    <value>Network diff {0}</value>
+    <comment>{0} = MinerFormatting.FormatDifficulty(summary.NetworkDifficulty)</comment>
+  </data>
+  <data name="NetworkDifficulty" xml:space="preserve">
+    <value>Network difficulty</value>
+  </data>
+  <data name="NetworkScan" xml:space="preserve">
+    <value>Network scan</value>
+  </data>
+  <data name="NewFirmwareBringsFixesBack" xml:space="preserve">
+    <value>New firmware brings fixes. Back up your settings before updating.</value>
+  </data>
+  <data name="NewPool" xml:space="preserve">
+    <value>New pool</value>
+  </data>
+  <data name="NewPoolConfiguration" xml:space="preserve">
+    <value>New pool configuration</value>
+  </data>
+  <data name="NewSchedule" xml:space="preserve">
+    <value>New schedule</value>
+  </data>
+  <data name="NewSharesAreArrivingAgain" xml:space="preserve">
+    <value>New shares are arriving again.</value>
+  </data>
+  <data name="NewTariffZone" xml:space="preserve">
+    <value>New tariff zone</value>
+  </data>
+  <data name="Night" xml:space="preserve">
+    <value>Night</value>
+  </data>
+  <data name="NightAndDayPeakOff" xml:space="preserve">
+    <value>Night and day (peak/off-peak)</value>
+  </data>
+  <data name="NightMode" xml:space="preserve">
+    <value>Night mode</value>
+  </data>
+  <data name="NightModeFan" xml:space="preserve">
+    <value>Night mode fan (%)</value>
+  </data>
+  <data name="NightModeLowersTheClock" xml:space="preserve">
+    <value>Night mode lowers the clock to Eco and fixes the fan speed. Pause needs AxeOS 2.15; older AxeOS and NerdOS go to night mode instead.</value>
+  </data>
+  <data name="NoAnswerForMinIt" xml:space="preserve">
+    <value>No answer for {0} min. It may have lost power, be out of Wi-Fi range or in hotspot mode.</value>
+    <comment>{0} = minutes</comment>
+  </data>
+  <data name="NoAnswerFrom" xml:space="preserve">
+    <value>No answer from {0}: {1}</value>
+    <comment>{0} = address, {1} = e.Message</comment>
+  </data>
+  <data name="NoChangesYet" xml:space="preserve">
+    <value>No changes yet.</value>
+  </data>
+  <data name="NoConnectionToThePool" xml:space="preserve">
+    <value>No connection to the pool: {0}</value>
+    <comment>{0} = detail</comment>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>No data</value>
+  </data>
+  <data name="NoDataForThisPeriod" xml:space="preserve">
+    <value>No data for this period. Reports are built from the long-term history.</value>
+  </data>
+  <data name="NoDataYet" xml:space="preserve">
+    <value>No data yet</value>
+  </data>
+  <data name="NoDataYetMinerGuruRecords" xml:space="preserve">
+    <value>No data yet. MinerGuru records while it is running.</value>
+  </data>
+  <data name="NoLinesYetStartThe" xml:space="preserve">
+    <value>No lines yet. Start the live log.</value>
+  </data>
+  <data name="NoMatches" xml:space="preserve">
+    <value>No matches.</value>
+  </data>
+  <data name="NoMinerOnline" xml:space="preserve">
+    <value>No miner online</value>
+  </data>
+  <data name="NoMiners" xml:space="preserve">
+    <value>No miners</value>
+  </data>
+  <data name="NoMinersInTheScan" xml:space="preserve">
+    <value>No miners in the scan result yet</value>
+  </data>
+  <data name="NoMinersOnline" xml:space="preserve">
+    <value>No miners online</value>
+  </data>
+  <data name="NoMinersSetUpYet" xml:space="preserve">
+    <value>No miners set up yet.</value>
+  </data>
+  <data name="NoMinersYet" xml:space="preserve">
+    <value>No miners yet</value>
+  </data>
+  <data name="NoMinersYetAddMiners" xml:space="preserve">
+    <value>No miners yet. Add miners to see their consumption and costs.</value>
+  </data>
+  <data name="NoMoreShares" xml:space="preserve">
+    <value>No more shares.</value>
+  </data>
+  <data name="NoMoreSharesFlatline" xml:space="preserve">
+    <value>No more shares (flatline)</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="NoNewPoolsFound" xml:space="preserve">
+    <value>No new pools found.</value>
+  </data>
+  <data name="NoNewShareForMin" xml:space="preserve">
+    <value>No new share for {0} min although the miner responds. A restart usually helps.</value>
+    <comment>{0} = minutes</comment>
+  </data>
+  <data name="NoOneTimeCodeEntered" xml:space="preserve">
+    <value>No one-time code entered, nothing changed.</value>
+  </data>
+  <data name="NoPoolsSavedYetRead" xml:space="preserve">
+    <value>No pools saved yet. Read the pools from your miners or create a new one.</value>
+  </data>
+  <data name="NoReasonGiven" xml:space="preserve">
+    <value>no reason given</value>
+  </data>
+  <data name="NormalKeepsMinersOnTheir" xml:space="preserve">
+    <value>"Normal" keeps miners on their own settings, even if a schedule further down wants something else.</value>
+  </data>
+  <data name="NoSchedulesYetASchedule" xml:space="preserve">
+    <value>No schedules yet. A schedule sends miners to night mode or pauses them during a tariff zone or at set times; afterwards they return to their own settings.</value>
+  </data>
+  <data name="NoSharesAreSubmittedOn" xml:space="preserve">
+    <value>No shares are submitted; on 17 tested solo pools no extra worker appeared. It only asks while the miner page is open, at most every 5 minutes per pool. The pool sees the IP address of your connection, just as it does for the miner.</value>
+  </data>
+  <data name="NoSharesYet" xml:space="preserve">
+    <value>No shares yet</value>
+  </data>
+  <data name="NoSoloChance" xml:space="preserve">
+    <value>No solo chance</value>
+  </data>
+  <data name="NotAJSONObject" xml:space="preserve">
+    <value>Not a JSON object</value>
+  </data>
+  <data name="NoTasksYetYouWill" xml:space="preserve">
+    <value>No tasks yet. You will find templates under "Add task".</value>
+  </data>
+  <data name="NotChecked" xml:space="preserve">
+    <value>Not checked</value>
+  </data>
+  <data name="NotCheckedYet" xml:space="preserve">
+    <value>Not checked yet</value>
+  </data>
+  <data name="NotConfigured" xml:space="preserve">
+    <value>Not configured</value>
+  </data>
+  <data name="NotConnected" xml:space="preserve">
+    <value>Not connected</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="NoteDownOrExportPools" xml:space="preserve">
+    <value>Note down or export pools and frequency before something goes wrong.</value>
+  </data>
+  <data name="NothingDoneYet" xml:space="preserve">
+    <value>Nothing done yet.</value>
+  </data>
+  <data name="NothingEntered" xml:space="preserve">
+    <value>Nothing entered</value>
+  </data>
+  <data name="NotificationArea" xml:space="preserve">
+    <value>Notification area</value>
+  </data>
+  <data name="NotificationsOn" xml:space="preserve">
+    <value>Notifications on</value>
+  </data>
+  <data name="NotifyAboutProblems" xml:space="preserve">
+    <value>Notify about problems</value>
+  </data>
+  <data name="NotInLibrary" xml:space="preserve">
+    <value>{0}:{1} (not in library)</value>
+    <comment>{0} = StratumHost.Clean(endpoint.Host), {1} = endpoint.Port</comment>
+  </data>
+  <data name="NoValueChanges" xml:space="preserve">
+    <value>No value changes.</value>
+  </data>
+  <data name="Now" xml:space="preserve">
+    <value>now</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="OffInText" xml:space="preserve">
+    <value>off</value>
+  </data>
+  <data name="OfMinersOnline" xml:space="preserve">
+    <value>{0} of {1} miners online</value>
+    <comment>{0} = store.OnlineCount, {1} = store.Miners.Count</comment>
+  </data>
+  <data name="OfOnline" xml:space="preserve">
+    <value>{0} of {1} online</value>
+    <comment>{0} = store.OnlineCount, {1} = store.Miners.Count</comment>
+  </data>
+  <data name="OfWhichFees" xml:space="preserve">
+    <value>of which fees</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>on</value>
+  </data>
+  <data name="Once" xml:space="preserve">
+    <value>once</value>
+  </data>
+  <data name="OneMiner" xml:space="preserve">
+    <value>1 miner</value>
+  </data>
+  <data name="OneSchedule" xml:space="preserve">
+    <value>1 schedule</value>
+  </data>
+  <data name="OneTimeCodeFor" xml:space="preserve">
+    <value>One-time code for {0}</value>
+    <comment>{0} = minerName</comment>
+  </data>
+  <data name="OneYear" xml:space="preserve">
+    <value>1 year</value>
+  </data>
+  <data name="OnForAtLeast10" xml:space="preserve">
+    <value>On {0} for at least 10 min. The primary pool may be down.</value>
+    <comment>{0} = info.ActivePoolHost</comment>
+  </data>
+  <data name="OnlineTemperatureHigh" xml:space="preserve">
+    <value>Online, temperature high</value>
+  </data>
+  <data name="OnlyOneDeviceShouldSwitch" xml:space="preserve">
+    <value>Only one device should switch, otherwise PC, Mac and phone work against each other. While asleep or after quitting MinerGuru, the PC does not switch.</value>
+  </data>
+  <data name="OnlyPossibleWithWindowsDeveloper" xml:space="preserve">
+    <value>Only possible with Windows Developer Mode: MinerGuru is not signed, and only then does Windows allow widgets from such an app. Turn it on under System › For developers.</value>
+  </data>
+  <data name="OpenAxeOSNerdOSInThe" xml:space="preserve">
+    <value>Open AxeOS / NerdOS in the browser</value>
+  </data>
+  <data name="OpenBrowser" xml:space="preserve">
+    <value>Open browser</value>
+  </data>
+  <data name="OpenDashboard" xml:space="preserve">
+    <value>Open dashboard</value>
+  </data>
+  <data name="OpenDetailsControl" xml:space="preserve">
+    <value>Open details &amp; control</value>
+  </data>
+  <data name="OpenInBrowser" xml:space="preserve">
+    <value>Open in browser</value>
+  </data>
+  <data name="OpenInExplorer" xml:space="preserve">
+    <value>Open in Explorer</value>
+  </data>
+  <data name="OpenSettings" xml:space="preserve">
+    <value>Open settings</value>
+  </data>
+  <data name="OpenSourceUnderTheMIT" xml:space="preserve">
+    <value>Open source under the MIT license and free to use. Use and changes to your hardware are at your own risk.</value>
+  </data>
+  <data name="OpenThePoolsPage" xml:space="preserve">
+    <value>Open the pools page</value>
+  </data>
+  <data name="OpenWebInterface" xml:space="preserve">
+    <value>Open web interface</value>
+  </data>
+  <data name="OpenWindowsSettingsForDevelopers" xml:space="preserve">
+    <value>Open Windows settings for developers</value>
+  </data>
+  <data name="OperatingTime" xml:space="preserve">
+    <value>Uptime</value>
+  </data>
+  <data name="OperatingTimePrefix" xml:space="preserve">
+    <value>Uptime </value>
+  </data>
+  <data name="OverclockingAtYourOwnRisk" xml:space="preserve">
+    <value>Overclocking at your own risk</value>
+  </data>
+  <data name="Overdue" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="OverdueByDays" xml:space="preserve">
+    <value>overdue by {0} days</value>
+    <comment>{0} = -days</comment>
+  </data>
+  <data name="Overheating" xml:space="preserve">
+    <value>Overheating</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Payout" xml:space="preserve">
+    <value>Payout</value>
+  </data>
+  <data name="PayoutAddress" xml:space="preserve">
+    <value>Payout address</value>
+  </data>
+  <data name="PayoutAddressWarnings" xml:space="preserve">
+    <value>{0} payout address warnings</value>
+    <comment>{0} = all.Count</comment>
+  </data>
+  <data name="PaysToAForeignAddress" xml:space="preserve">
+    <value>{0} pays to a foreign address</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="PerBlock" xml:space="preserve">
+    <value>Per Block</value>
+  </data>
+  <data name="PerDay" xml:space="preserve">
+    <value>Per Day</value>
+  </data>
+  <data name="PerHour" xml:space="preserve">
+    <value>Per Hour</value>
+  </data>
+  <data name="PerHourInText" xml:space="preserve">
+    <value>per hour</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="PerMonth" xml:space="preserve">
+    <value>Per Month</value>
+  </data>
+  <data name="PerTHS" xml:space="preserve">
+    <value>{0} per TH/s</value>
+    <comment>{0} = tariff.FormatPrice(month / totalTh)</comment>
+  </data>
+  <data name="PerWeek" xml:space="preserve">
+    <value>Per Week</value>
+  </data>
+  <data name="PerYear" xml:space="preserve">
+    <value>Per Year</value>
+  </data>
+  <data name="Planned" xml:space="preserve">
+    <value>Planned</value>
+  </data>
+  <data name="PlanTasksAndKeepTrack" xml:space="preserve">
+    <value>Plan tasks and keep track of what was done</value>
+  </data>
+  <data name="Polling" xml:space="preserve">
+    <value>Polling</value>
+  </data>
+  <data name="PollingInterval" xml:space="preserve">
+    <value>Polling interval</value>
+  </data>
+  <data name="PollingWarningsNotificationAreaData" xml:space="preserve">
+    <value>Polling, warnings, notification area, data</value>
+  </data>
+  <data name="PoolAccountOrTypingError" xml:space="preserve">
+    <value>Pool account or typing error</value>
+  </data>
+  <data name="PoolAddress" xml:space="preserve">
+    <value>Pool address</value>
+  </data>
+  <data name="PoolConfiguration" xml:space="preserve">
+    <value>Pool configuration</value>
+  </data>
+  <data name="PoolConfigurationSentToThe" xml:space="preserve">
+    <value>Pool configuration sent to {0} – the miner is restarting.</value>
+    <comment>{0} = miner.DisplayName</comment>
+  </data>
+  <data name="PoolConnectionsLatencies" xml:space="preserve">
+    <value>Pool Connections &amp; Latencies</value>
+  </data>
+  <data name="PoolDeleted" xml:space="preserve">
+    <value>Pool deleted</value>
+  </data>
+  <data name="PoolLatency" xml:space="preserve">
+    <value>Pool Latency</value>
+  </data>
+  <data name="PoolLatencyDualRTT" xml:space="preserve">
+    <value>Pool Latency (Dual RTT)</value>
+  </data>
+  <data name="PoolLatencyMs" xml:space="preserve">
+    <value>Pool latency (ms)</value>
+  </data>
+  <data name="PoolLatencyRTT" xml:space="preserve">
+    <value>Pool Latency (RTT)</value>
+  </data>
+  <data name="PoolLibrary" xml:space="preserve">
+    <value>Pool library</value>
+  </data>
+  <data name="PoolMode" xml:space="preserve">
+    <value>Pool mode</value>
+  </data>
+  <data name="PoolPassword" xml:space="preserve">
+    <value>Pool password</value>
+  </data>
+  <data name="Pools" xml:space="preserve">
+    <value>Pools</value>
+  </data>
+  <data name="PoolSlotCleared" xml:space="preserve">
+    <value>Pool slot cleared</value>
+  </data>
+  <data name="PoolSlots" xml:space="preserve">
+    <value>{0} pool slots</value>
+    <comment>{0} = AxeOsPool.SlotCount</comment>
+  </data>
+  <data name="PoolSplit" xml:space="preserve">
+    <value>Pool split</value>
+  </data>
+  <data name="PoolStratumConnection" xml:space="preserve">
+    <value>Pool &amp; stratum connection</value>
+  </data>
+  <data name="PoolTag" xml:space="preserve">
+    <value>Pool tag</value>
+  </data>
+  <data name="PoolUser" xml:space="preserve">
+    <value>Pool user</value>
+  </data>
+  <data name="Power" xml:space="preserve">
+    <value>Power</value>
+  </data>
+  <data name="PowerDraw" xml:space="preserve">
+    <value>Power Draw</value>
+  </data>
+  <data name="PowerDrawWatts" xml:space="preserve">
+    <value>Power draw (watts)</value>
+  </data>
+  <data name="PowerPage" xml:space="preserve">
+    <value>Power</value>
+  </data>
+  <data name="PriceNow" xml:space="preserve">
+    <value>Price now</value>
+  </data>
+  <data name="PricePerKWh" xml:space="preserve">
+    <value>Price per kWh</value>
+  </data>
+  <data name="Primary" xml:space="preserve">
+    <value>Primary</value>
+  </data>
+  <data name="PrimaryFallback" xml:space="preserve">
+    <value>Primary + fallback</value>
+  </data>
+  <data name="PrimaryPoolActive" xml:space="preserve">
+    <value>Primary pool active</value>
+  </data>
+  <data name="PrimaryPoolSlot" xml:space="preserve">
+    <value>Primary pool slot</value>
+  </data>
+  <data name="PrivacyMode" xml:space="preserve">
+    <value>Privacy mode</value>
+  </data>
+  <data name="ProbabilityOfFindingABlock" xml:space="preserve">
+    <value>Probability of finding a block with the current fleet hashrate</value>
+  </data>
+  <data name="Protocol" xml:space="preserve">
+    <value>Protocol</value>
+  </data>
+  <data name="PutThePoolIntoThe" xml:space="preserve">
+    <value>Put the pool into the drafts of all miners – nothing is sent until “Apply &amp; restart”</value>
+  </data>
+  <data name="QuickProfilesFor" xml:space="preserve">
+    <value>Quick profiles for {0}</value>
+    <comment>{0} = _miner.HardwareTitle</comment>
+  </data>
+  <data name="QuitMinerGuru" xml:space="preserve">
+    <value>Quit MinerGuru</value>
+  </data>
+  <data name="RawAPIDataApiSystem" xml:space="preserve">
+    <value>Raw API data (/api/system/info)</value>
+  </data>
+  <data name="RawJSON" xml:space="preserve">
+    <value>Raw JSON</value>
+  </data>
+  <data name="ReadFromMiners" xml:space="preserve">
+    <value>Read from miners</value>
+  </data>
+  <data name="ReadOnly" xml:space="preserve">
+    <value>Read-only</value>
+  </data>
+  <data name="ReadOnlyModeIsOn" xml:space="preserve">
+    <value>Read-only mode is on: MinerGuru changes nothing on the miner.</value>
+  </data>
+  <data name="ReasonGivenByTheMiner" xml:space="preserve">
+    <value>Reason given by the miner: {0}.</value>
+    <comment>{0} = text</comment>
+  </data>
+  <data name="Recipients" xml:space="preserve">
+    <value>Recipients</value>
+  </data>
+  <data name="RecordsStatesAlertsSwitchingAnd" xml:space="preserve">
+    <value>Records states, alerts, switching and measurements, only on this PC. Contains local IP addresses, but no passwords, wallet addresses or codes. Never sent automatically.</value>
+  </data>
+  <data name="RefreshAllMinersNow" xml:space="preserve">
+    <value>Refresh all miners now</value>
+  </data>
+  <data name="RefreshNow" xml:space="preserve">
+    <value>Refresh now</value>
+  </data>
+  <data name="Rejected" xml:space="preserve">
+    <value>{0} rejected · {1}</value>
+    <comment>{0} = rejected, {1} = DisplayFormat.Percent(rejectRate, 2)</comment>
+  </data>
+  <data name="RejectedShares" xml:space="preserve">
+    <value>Rejected shares</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="RemoveDisplayName" xml:space="preserve">
+    <value>Remove {0}?</value>
+    <comment>{0} = miner.DisplayName</comment>
+  </data>
+  <data name="RemoveFromMinerGuru" xml:space="preserve">
+    <value>Remove from MinerGuru</value>
+  </data>
+  <data name="RemoveMiner" xml:space="preserve">
+    <value>Remove miner</value>
+  </data>
+  <data name="Removing" xml:space="preserve">
+    <value>Removing …</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Rename …</value>
+  </data>
+  <data name="RenameMiner" xml:space="preserve">
+    <value>Rename miner</value>
+  </data>
+  <data name="RenewThermalPaste" xml:space="preserve">
+    <value>Renew thermal paste</value>
+  </data>
+  <data name="ReplaceTheFan" xml:space="preserve">
+    <value>Replace the fan</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="ReportedByThePool" xml:space="preserve">
+    <value>Reported by the pool</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="Restarted" xml:space="preserve">
+    <value>{0} restarted</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="RestartEvent" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="RestartingFailed" xml:space="preserve">
+    <value>Restarting {0} failed: {1}</value>
+    <comment>{0} = miner.DisplayName, {1} = e.Message</comment>
+  </data>
+  <data name="RestartMiner" xml:space="preserve">
+    <value>Restart miner</value>
+  </data>
+  <data name="RestartName" xml:space="preserve">
+    <value>Restart {0}?</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="RestartOfTriggered" xml:space="preserve">
+    <value>Restart of {0} triggered.</value>
+    <comment>{0} = miner.DisplayName</comment>
+  </data>
+  <data name="RestartWithoutShares" xml:space="preserve">
+    <value>Restart without shares</value>
+  </data>
+  <data name="ResultsAbovePoolDifficulty" xml:space="preserve">
+    <value>{0} results, {1} above pool difficulty</value>
+    <comment>{0} = _samples.Count, {1} = submitted</comment>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+  <data name="Reward" xml:space="preserve">
+    <value>Reward</value>
+  </data>
+  <data name="RewardRecipients" xml:space="preserve">
+    <value>Reward recipients</value>
+  </data>
+  <data name="RuleCountSchedules" xml:space="preserve">
+    <value>{0} schedules</value>
+    <comment>{0} = ruleCount</comment>
+  </data>
+  <data name="RunsPastMidnightIntoThe" xml:space="preserve">
+    <value>Runs past midnight into the next day.</value>
+  </data>
+  <data name="SameAsWindows" xml:space="preserve">
+    <value>Same as Windows</value>
+  </data>
+  <data name="SameTimeTwiceAppliesAll" xml:space="preserve">
+    <value>Same time twice: applies all day.</value>
+  </data>
+  <data name="SampledOnceAMinute" xml:space="preserve">
+    <value>Sampled once a minute</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveAsCSV" xml:space="preserve">
+    <value>Save as CSV</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>saved</value>
+  </data>
+  <data name="SaveEntry" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SavePoolsAndAssignThem" xml:space="preserve">
+    <value>Save pools and assign them to miners</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Scan</value>
+  </data>
+  <data name="ScanAutomaticallyAtStartupWhen" xml:space="preserve">
+    <value>Scan automatically at startup when no miners are configured</value>
+  </data>
+  <data name="ScanNetwork" xml:space="preserve">
+    <value>Scan network</value>
+  </data>
+  <data name="Scanning1254IPsChecked" xml:space="preserve">
+    <value>Scanning {0}.1–254… ({1} / {2} IPs checked)</value>
+    <comment>{0} = prefix, {1} = scanner.CompletedCount, {2} = scanner.TotalCount</comment>
+  </data>
+  <data name="ScanYourLocalNetworkOr" xml:space="preserve">
+    <value>Scan your local network or add a miner directly by its IP address.</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="ScheduleAPoolSwitch" xml:space="preserve">
+    <value>Schedule a pool switch</value>
+  </data>
+  <data name="ScheduleASwitch" xml:space="preserve">
+    <value>Schedule a switch</value>
+  </data>
+  <data name="ScheduledPoolSwitching" xml:space="preserve">
+    <value>Scheduled pool switching</value>
+  </data>
+  <data name="ScheduleOnOrOff" xml:space="preserve">
+    <value>Schedule on or off</value>
+  </data>
+  <data name="Schedules" xml:space="preserve">
+    <value>Schedules</value>
+  </data>
+  <data name="SchedulesOnlyRunOnThese" xml:space="preserve">
+    <value>Schedules only run on these miners with a valid session (up to 24 hours).</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Searching" xml:space="preserve">
+    <value>Searching…</value>
+  </data>
+  <data name="SearchTheLocalNetworkFor" xml:space="preserve">
+    <value>Search the local network for miners</value>
+  </data>
+  <data name="Security" xml:space="preserve">
+    <value>Security</value>
+  </data>
+  <data name="SegWitCommitmentNoPayout" xml:space="preserve">
+    <value>SegWit commitment, no payout</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SendAllChangedPoolAssignments" xml:space="preserve">
+    <value>Send all changed pool assignments; the miners restart afterwards</value>
+  </data>
+  <data name="Sender" xml:space="preserve">
+    <value>Sender</value>
+  </data>
+  <data name="SendFeedback" xml:space="preserve">
+    <value>Send feedback</value>
+  </data>
+  <data name="SendHostname" xml:space="preserve">
+    <value>Send hostname</value>
+  </data>
+  <data name="Sending" xml:space="preserve">
+    <value>Sending …</value>
+  </data>
+  <data name="SendMinersToNightMode" xml:space="preserve">
+    <value>Send miners to night mode or pause them during a tariff zone or at set times</value>
+  </data>
+  <data name="SendThePoolsToThe" xml:space="preserve">
+    <value>Send the pools to the miner; it restarts afterwards so they take effect</value>
+  </data>
+  <data name="SendTo" xml:space="preserve">
+    <value>Send to {0}?</value>
+    <comment>{0} = minerName</comment>
+  </data>
+  <data name="SeparateSeveralAddressesWithCommas" xml:space="preserve">
+    <value>Separate several addresses with commas. Alerts arrive in addition to the Windows notification.</value>
+  </data>
+  <data name="SessionBestAllTime" xml:space="preserve">
+    <value>Session best {0} · all-time {1}</value>
+    <comment>{0} = info.SessionBestDiffText, {1} = info.BestDiffFormatted</comment>
+  </data>
+  <data name="SetClockFanAndName" xml:space="preserve">
+    <value>Set clock, fan and name</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SettingsSentClockAndVoltage" xml:space="preserve">
+    <value>Settings sent. Clock and voltage only apply after the miner restarts.</value>
+  </data>
+  <data name="SettingUp" xml:space="preserve">
+    <value>Setting up …</value>
+  </data>
+  <data name="SetUp" xml:space="preserve">
+    <value>Set up</value>
+  </data>
+  <data name="Shares" xml:space="preserve">
+    <value>Shares</value>
+  </data>
+  <data name="ShareWarning" xml:space="preserve">
+    <value>Share warning</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show …</value>
+  </data>
+  <data name="ShowIPWalletAndMAC" xml:space="preserve">
+    <value>Show IP, wallet and MAC addresses again (Ctrl+Shift+H)</value>
+  </data>
+  <data name="ShowsFleetAndSoloChance" xml:space="preserve">
+    <value>Shows fleet and solo chance on the Windows widget board.</value>
+  </data>
+  <data name="Signals" xml:space="preserve">
+    <value>Signals:</value>
+  </data>
+  <data name="Slot" xml:space="preserve">
+    <value>Slot</value>
+  </data>
+  <data name="SlotTitleEmpty" xml:space="preserve">
+    <value>{0} (empty)</value>
+    <comment>{0} = Form.SlotTitle(i)</comment>
+  </data>
+  <data name="SoloChance" xml:space="preserve">
+    <value>Solo chance</value>
+  </data>
+  <data name="SoloOdds" xml:space="preserve">
+    <value>Solo odds</value>
+  </data>
+  <data name="StartLiveLog" xml:space="preserve">
+    <value>Start live log</value>
+  </data>
+  <data name="StartScan" xml:space="preserve">
+    <value>Start scan</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="StopScan" xml:space="preserve">
+    <value>Stop scan</value>
+  </data>
+  <data name="StratumHostURLWithoutStratum" xml:space="preserve">
+    <value>Stratum host / URL (without stratum+tcp://)</value>
+  </data>
+  <data name="SubnetPrefix" xml:space="preserve">
+    <value>Subnet prefix:</value>
+  </data>
+  <data name="SuggestedDifficulty" xml:space="preserve">
+    <value>Suggested difficulty</value>
+  </data>
+  <data name="SupportThisProject" xml:space="preserve">
+    <value>Support this project</value>
+  </data>
+  <data name="SV2Authentication" xml:space="preserve">
+    <value>SV2 authentication</value>
+  </data>
+  <data name="SV2AuthorityKey" xml:space="preserve">
+    <value>SV2 authority key</value>
+  </data>
+  <data name="SV2ChannelType" xml:space="preserve">
+    <value>SV2 channel type</value>
+  </data>
+  <data name="SwitchesOnceTheMinerIs" xml:space="preserve">
+    <value>Switches once the miner is online and the last switch was 15 minutes ago</value>
+  </data>
+  <data name="SwitchOnInSettings" xml:space="preserve">
+    <value>Switch on in settings</value>
+  </data>
+  <data name="SwitchOnOrOff" xml:space="preserve">
+    <value>Switch on or off</value>
+  </data>
+  <data name="SystemName" xml:space="preserve">
+    <value>System &amp; name</value>
+  </data>
+  <data name="TakesEffectAfterRestartingMinerGuru" xml:space="preserve">
+    <value>Takes effect after restarting MinerGuru.</value>
+  </data>
+  <data name="TargetMVActualMV" xml:space="preserve">
+    <value>Target: {0} mV · Actual: {1} mV</value>
+    <comment>{0} = info.CoreVoltageTargetMv, {1} = info.CoreVoltageActualMv</comment>
+  </data>
+  <data name="TargetTemperature" xml:space="preserve">
+    <value>Target temperature</value>
+  </data>
+  <data name="Tariff" xml:space="preserve">
+    <value>Tariff</value>
+  </data>
+  <data name="TariffSchedulesAndCosts" xml:space="preserve">
+    <value>Tariff, schedules and costs</value>
+  </data>
+  <data name="TariffZone" xml:space="preserve">
+    <value>Tariff zone</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="TemperatureWarningFrom" xml:space="preserve">
+    <value>Temperature warning from</value>
+  </data>
+  <data name="Template" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="TemplateMenu" xml:space="preserve">
+    <value>Template…</value>
+  </data>
+  <data name="TestLatency" xml:space="preserve">
+    <value>Test latency</value>
+  </data>
+  <data name="TestMail" xml:space="preserve">
+    <value>Test mail</value>
+  </data>
+  <data name="TestMailSent" xml:space="preserve">
+    <value>Test mail sent.</value>
+  </data>
+  <data name="TextFile" xml:space="preserve">
+    <value>Text file</value>
+  </data>
+  <data name="ThatCodeIsWrongWait" xml:space="preserve">
+    <value>That code is wrong. Wait for the next one and try again.</value>
+  </data>
+  <data name="TheCodeHas6Digits" xml:space="preserve">
+    <value>The code has 6 digits.</value>
+  </data>
+  <data name="TheCoinbasePaysTheAddress" xml:space="preserve">
+    <value>The coinbase pays the address in your pool user.</value>
+  </data>
+  <data name="TheCurrentBlockDoesNot" xml:space="preserve">
+    <value>The current block does not contain this miner's address.</value>
+  </data>
+  <data name="TheCurrentBlockPaysThis" xml:space="preserve">
+    <value>The current block pays this miner.</value>
+  </data>
+  <data name="TheFallbackSlotIsEmpty" xml:space="preserve">
+    <value>The fallback slot is empty. Choose another fallback slot or fill this one.</value>
+  </data>
+  <data name="TheFirstThreePartsOf" xml:space="preserve">
+    <value>The first three parts of the address, e.g. 192.168.1</value>
+  </data>
+  <data name="TheHistoryFillsUpWith" xml:space="preserve">
+    <value>The history fills up with every poll</value>
+  </data>
+  <data name="TheHistoryWasDamagedAnd" xml:space="preserve">
+    <value>The history was damaged and starts anew. The old file stays in the data folder.</value>
+  </data>
+  <data name="TheMailServerClosedThe" xml:space="preserve">
+    <value>The mail server closed the connection.</value>
+  </data>
+  <data name="TheMailServerDoesNot" xml:space="preserve">
+    <value>The mail server does not offer STARTTLS.</value>
+  </data>
+  <data name="TheMinerDemandsAValid" xml:space="preserve">
+    <value>The miner demands a valid one-time code.</value>
+  </data>
+  <data name="TheMinerGivesNoReason" xml:space="preserve">
+    <value>The miner gives no reason.</value>
+  </data>
+  <data name="TheMinerHasNotDecoded" xml:space="preserve">
+    <value>The miner has not decoded a job yet.</value>
+  </data>
+  <data name="TheMinerHasNotReported" xml:space="preserve">
+    <value>The miner has not reported any recipients yet.</value>
+  </data>
+  <data name="TheMinerHasThrottledItself" xml:space="preserve">
+    <value>The miner has throttled itself and stays that way until it restarts. Check the cooling first.</value>
+  </data>
+  <data name="TheMinerHostname" xml:space="preserve">
+    <value>The miner hostname</value>
+  </data>
+  <data name="TheMinerIsAnsweringAgain" xml:space="preserve">
+    <value>The miner is answering again.</value>
+  </data>
+  <data name="TheMinerIsUsingIts" xml:space="preserve">
+    <value>The miner is using its primary pool again.</value>
+  </data>
+  <data name="TheMinerKeepsRunningMinerGuru" xml:space="preserve">
+    <value>The miner keeps running, MinerGuru just stops showing it. Its history is lost.</value>
+  </data>
+  <data name="TheMinerRestartsAfterwards" xml:space="preserve">
+    <value>The miner restarts afterwards.</value>
+  </data>
+  <data name="TheMinerStopsMiningFor" xml:space="preserve">
+    <value>The miner stops mining for a moment.</value>
+  </data>
+  <data name="ThePasswordCouldNotBe" xml:space="preserve">
+    <value>The password could not be encrypted and was not saved. Sign in to Windows again and retry.</value>
+  </data>
+  <data name="ThePoolAddressIsIncomplete" xml:space="preserve">
+    <value>The pool address is incomplete.</value>
+  </data>
+  <data name="ThePoolClosedTheConnection" xml:space="preserve">
+    <value>The pool closed the connection.</value>
+  </data>
+  <data name="ThePoolRejectsTheUser" xml:space="preserve">
+    <value>The pool rejects the user: {0}</value>
+    <comment>{0} = detail</comment>
+  </data>
+  <data name="ThePoolSBlockTemplate" xml:space="preserve">
+    <value>The pool's block template does not contain the miner's address. Check the pool settings.</value>
+  </data>
+  <data name="ThePoolSentNoJob" xml:space="preserve">
+    <value>The pool sent no job.</value>
+  </data>
+  <data name="ThePoolSJobCould" xml:space="preserve">
+    <value>The pool's job could not be read.</value>
+  </data>
+  <data name="ThePoolSTemplateYour" xml:space="preserve">
+    <value>The pool's template your miner is working on right now. If it finds the block, the coinbase pays out as shown here. Only the pool knows the other transactions.</value>
+  </data>
+  <data name="ThePrimaryPoolHasBeen" xml:space="preserve">
+    <value>The primary pool has been reachable for 15 min, but the miner stays on the fallback pool. A restart brings it back.</value>
+  </data>
+  <data name="ThePrimaryPoolIsReachable" xml:space="preserve">
+    <value>The primary pool is reachable again, but the miner stayed on the fallback pool.</value>
+  </data>
+  <data name="ThePrimaryPoolNeedsA" xml:space="preserve">
+    <value>The primary pool needs a host.</value>
+  </data>
+  <data name="TheSettingsWereDamagedMinerGuru" xml:space="preserve">
+    <value>The settings were damaged, MinerGuru starts empty. The old file stays in the data folder.</value>
+  </data>
+  <data name="TheTemperatureIsBackTo" xml:space="preserve">
+    <value>The temperature is back to normal.</value>
+  </data>
+  <data name="TheTemplateThePoolIs" xml:space="preserve">
+    <value>The template the pool is building for your address right now. The miner does not report it, so MinerGuru asked the pool itself, without mining along. If your miner finds the block, the coinbase pays out as shown here.</value>
+  </data>
+  <data name="ThisAddressBelongsToThe" xml:space="preserve">
+    <value>This address belongs to {0}, the pool mines {1}. Payouts could be lost.</value>
+    <comment>{0} = found.Address.Symbol(), {1} = found.Pool.Symbol()</comment>
+  </data>
+  <data name="ThisDidNotComeFrom" xml:space="preserve">
+    <value>{0}: {1} → {2}. This did not come from MinerGuru.</value>
+    <comment>{0} = slot.Title, {1} = old, {2} = fresh</comment>
+  </data>
+  <data name="ThisIsNotAValid" xml:space="preserve">
+    <value>This is not a valid address.</value>
+  </data>
+  <data name="ThisMinerDoesNotReport" xml:space="preserve">
+    <value>This miner does not report which block it is working on. MinerGuru can ask the pool for the template itself and check whether your address is in it.</value>
+  </data>
+  <data name="ThisMinerIsAlreadyIn" xml:space="preserve">
+    <value>This miner is already in MinerGuru.</value>
+  </data>
+  <data name="ThisMinerNeedsAOne" xml:space="preserve">
+    <value>This miner needs a one-time code.</value>
+  </data>
+  <data name="ThisMinerProtectsItsSettings" xml:space="preserve">
+    <value>This miner protects its settings with a one-time code. Enter the 6-digit code from your authenticator app. The session lasts up to 24 hours.</value>
+  </data>
+  <data name="ThisMonth" xml:space="preserve">
+    <value>This month</value>
+  </data>
+  <data name="ThisPCDoesNotRun" xml:space="preserve">
+    <value>This PC does not run schedules (see Power), so the switches are on hold.</value>
+  </data>
+  <data name="ThisPCDoesNotRunSchedules" xml:space="preserve">
+    <value>This PC does not run schedules</value>
+  </data>
+  <data name="ThisPCRunsTheSchedules" xml:space="preserve">
+    <value>This PC runs the schedules</value>
+  </data>
+  <data name="ThisTestMailShowsThat" xml:space="preserve">
+    <value>This test mail shows that alerts from MinerGuru reach you.</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="TimedOut" xml:space="preserve">
+    <value>Timed out</value>
+  </data>
+  <data name="Timeframe" xml:space="preserve">
+    <value>Timeframe</value>
+  </data>
+  <data name="TimesWithoutAZoneCost" xml:space="preserve">
+    <value>Times without a zone cost the base price (grey in the week bar).</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="TodayInText" xml:space="preserve">
+    <value>today</value>
+  </data>
+  <data name="ToInText" xml:space="preserve">
+    <value>to</value>
+  </data>
+  <data name="TooManyWrongOneTime" xml:space="preserve">
+    <value>Too many wrong one-time codes: the miner blocks changes for 5 minutes.</value>
+  </data>
+  <data name="TotalHashrate" xml:space="preserve">
+    <value>Total hashrate</value>
+  </data>
+  <data name="ToYourAddress" xml:space="preserve">
+    <value>To your address</value>
+  </data>
+  <data name="TransactionsInTheBlock" xml:space="preserve">
+    <value>Transactions in the block: {0}</value>
+    <comment>{0} = range</comment>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="UnexpectedReplyFromTheMail" xml:space="preserve">
+    <value>Unexpected reply from the mail server.</value>
+  </data>
+  <data name="UnexpectedRestart" xml:space="preserve">
+    <value>Unexpected restart</value>
+  </data>
+  <data name="UnknownMiner" xml:space="preserve">
+    <value>Unknown miner</value>
+  </data>
+  <data name="Unreachable" xml:space="preserve">
+    <value>Unreachable</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>updated {0}</value>
+    <comment>{0} = DisplayFormat.Time(last)</comment>
+  </data>
+  <data name="UpdateSearching" xml:space="preserve">
+    <value>Checking …</value>
+  </data>
+  <data name="Uptime" xml:space="preserve">
+    <value>Uptime</value>
+  </data>
+  <data name="UptimeEnergyAndCostOf" xml:space="preserve">
+    <value>Uptime, energy and cost of the fleet</value>
+  </data>
+  <data name="UsageMiners" xml:space="preserve">
+    <value>{0} miners</value>
+    <comment>{0} = usage</comment>
+  </data>
+  <data name="UseCompressedAirOrA" xml:space="preserve">
+    <value>Use compressed air or a brush, and unplug the miner first.</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="UsesADefaultAddress" xml:space="preserve">
+    <value>{0} uses a default address</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="ValidAddressNoExpectedAddress" xml:space="preserve">
+    <value>Valid address, no expected address set</value>
+  </data>
+  <data name="VersionWindowsPreview" xml:space="preserve">
+    <value>Version {0} · Windows preview</value>
+    <comment>{0} = version?.ToString(3)</comment>
+  </data>
+  <data name="VoltageRegulatorVRC" xml:space="preserve">
+    <value>Voltage regulator (VR): {0} °C</value>
+    <comment>{0} = DisplayFormat.Decimal(vr, 1)</comment>
+  </data>
+  <data name="WalletAddressWorkerStratumUser" xml:space="preserve">
+    <value>Wallet address.worker (stratum user)</value>
+  </data>
+  <data name="WarmPlugsAndUndersizedPower" xml:space="preserve">
+    <value>Warm plugs and undersized power supplies are the most common fire hazard.</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Warnings" xml:space="preserve">
+    <value>Warnings</value>
+  </data>
+  <data name="WasNotRestarted" xml:space="preserve">
+    <value>{0} was not restarted</value>
+    <comment>{0} = miner.DisplayName</comment>
+  </data>
+  <data name="WasRestartedAutomatically" xml:space="preserve">
+    <value>{0} was restarted automatically</value>
+    <comment>{0} = name</comment>
+  </data>
+  <data name="Weekend" xml:space="preserve">
+    <value>Weekend</value>
+  </data>
+  <data name="WhatWasDone" xml:space="preserve">
+    <value>What was done?</value>
+  </data>
+  <data name="When" xml:space="preserve">
+    <value>When</value>
+  </data>
+  <data name="WidgetsOnTheWidgetBoard" xml:space="preserve">
+    <value>Widgets on the widget board</value>
+  </data>
+  <data name="WiFi" xml:space="preserve">
+    <value>Wi-Fi</value>
+  </data>
+  <data name="WillBeCleared" xml:space="preserve">
+    <value>Will be cleared: </value>
+  </data>
+  <data name="WindowsDoesNotAnswer" xml:space="preserve">
+    <value>Windows does not answer.</value>
+  </data>
+  <data name="WindowsRefused" xml:space="preserve">
+    <value>Windows refused: </value>
+  </data>
+  <data name="WithoutEncryptionPasswordAndMail" xml:space="preserve">
+    <value>Without encryption, password and mail cross the network in plain text. Only for a mail server on your own network.</value>
+  </data>
+  <data name="WithoutItTheMinerDoes" xml:space="preserve">
+    <value>Without it the miner does not report who gets the reward and does not check your address. You can switch it on in the miner's web interface, in the pool settings.</value>
+  </data>
+  <data name="WithPricesAndPauses" xml:space="preserve">
+    <value>with prices and pauses</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>years</value>
+  </data>
+  <data name="YearsShort" xml:space="preserve">
+    <value>yrs</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>Yesterday</value>
+  </data>
+  <data name="YourAddress" xml:space="preserve">
+    <value>Your address</value>
+  </data>
+  <data name="YourAddressIsInThe" xml:space="preserve">
+    <value>Your address is in the block</value>
+  </data>
+  <data name="YourAddressIsMissing" xml:space="preserve">
+    <value>Your address is missing</value>
+  </data>
+  <data name="YourOddsOfABlock" xml:space="preserve">
+    <value>Your odds of a block, for every coin</value>
+  </data>
+  <data name="YourOwnNameEmptyHostname" xml:space="preserve">
+    <value>Your own name (empty = hostname of the miner)</value>
+  </data>
+  <data name="YourPoolUserHoldsAn" xml:space="preserve">
+    <value>Your pool user holds an address, but no recipient in the block matches it. If your miner finds this block, the reward goes to others.</value>
+  </data>
+  <data name="YourPoolUserHoldsAnAccount" xml:space="preserve">
+    <value>Your pool user holds an account name, not an address. The pool then pays out itself; only its own address is in the block.</value>
+  </data>
+  <data name="ZeroDaysOneTimeTask" xml:space="preserve">
+    <value>0 days: a one-time task.</value>
+  </data>
+  <data name="ZoneDeleted" xml:space="preserve">
+    <value>Zone deleted</value>
+  </data>
+</root>

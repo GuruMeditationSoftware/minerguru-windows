@@ -112,7 +112,6 @@ public static class MinedCoinDetector
     /// <summary>Warning text for <see cref="Mismatch"/>, or <c>null</c>.</summary>
     public static string? MismatchWarning(string poolHost, string stratumUser) =>
         Mismatch(poolHost, stratumUser) is { } found
-            ? Lang.L($"Die Adresse gehört zu {found.Address.Symbol()}, der Pool schürft {found.Pool.Symbol()}. Auszahlungen könnten verloren gehen.",
-                     $"This address belongs to {found.Address.Symbol()}, the pool mines {found.Pool.Symbol()}. Payouts could be lost.")
+            ? string.Format(Strings.ThisAddressBelongsToThe, found.Address.Symbol(), found.Pool.Symbol())
             : null;
 }

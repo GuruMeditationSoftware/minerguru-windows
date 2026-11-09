@@ -1,7 +1,6 @@
 using System.Net.Sockets;
 using System.Text.Json;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
@@ -58,7 +57,7 @@ public sealed class PoolLibrary
         if (Find(id) is not { } original) return null;
         var copy = original.Copy();
         copy.Id = Guid.NewGuid();
-        copy.Name += L(" Kopie", " Copy");
+        copy.Name += Strings.Copy;
         Add(copy);
         return copy;
     }

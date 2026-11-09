@@ -5,7 +5,6 @@ using MinerGuru.Core.Services;
 using Windows.ApplicationModel;
 using Windows.Management.Deployment;
 
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Widgets;
 
@@ -37,10 +36,10 @@ internal static class WidgetPackage
         var text = template
             .Replace("{{ARGUMENTS}}", System.Security.SecurityElement.Escape(arguments))
             .Replace("{{LANGUAGE}}", Lang.English ? "en-us" : "de-de")
-            .Replace("{{FLEET}}", L("Flotte", "Fleet"))
-            .Replace("{{FLEET_DESCRIPTION}}", L("Hashrate, Leistung und Zustand deiner Miner", "Hashrate, power and state of your miners"))
-            .Replace("{{SOLO}}", L("Solo-Chance", "Solo chance"))
-            .Replace("{{SOLO_DESCRIPTION}}", L("Deine Chance auf einen Block, für jede Coin", "Your odds of a block, for every coin"));
+            .Replace("{{FLEET}}", Strings.Fleet)
+            .Replace("{{FLEET_DESCRIPTION}}", Strings.HashratePowerAndStateOf)
+            .Replace("{{SOLO}}", Strings.SoloChance)
+            .Replace("{{SOLO_DESCRIPTION}}", Strings.YourOddsOfABlock);
         // Windows registers a development package again only under another version: the last part follows the
         // manifest's content, so a new language or data folder counts as one (ForceUpdateFromAnyVersion allows lower).
         var hash = System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(text));
@@ -122,7 +121,7 @@ internal static class WidgetPackage
         catch (TimeoutException)
         {
             process.Kill();
-            throw new InvalidOperationException(L("Windows antwortet nicht.", "Windows does not answer."));
+            throw new InvalidOperationException(Strings.WindowsDoesNotAnswer);
         }
         if (process.ExitCode != 0) throw new InvalidOperationException(Clean(await output));
     }

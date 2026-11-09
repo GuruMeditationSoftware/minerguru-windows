@@ -1,4 +1,3 @@
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Models;
 
@@ -33,12 +32,12 @@ public static class PayoutCheck
 
     public static string Description(this PayoutVerdict verdict) => verdict switch
     {
-        PayoutVerdict.Expected => L("Entspricht deiner Soll-Adresse", "Matches your expected address"),
-        PayoutVerdict.Valid => L("Gültige Adresse, keine Soll-Adresse festgelegt", "Valid address, no expected address set"),
-        PayoutVerdict.Foreign => L("Weicht von deiner Soll-Adresse ab", "Differs from your expected address"),
-        PayoutVerdict.FactoryDefault => L("Standard-Adresse der Firmware: Ein Fund ginge nicht an dich", "Firmware default: a block found would not go to you"),
-        PayoutVerdict.Account => L("Konto bei einem Pool oder Tippfehler", "Pool account or typing error"),
-        _ => L("Nichts eingetragen", "Nothing entered"),
+        PayoutVerdict.Expected => Strings.MatchesYourExpectedAddress,
+        PayoutVerdict.Valid => Strings.ValidAddressNoExpectedAddress,
+        PayoutVerdict.Foreign => Strings.DiffersFromYourExpectedAddress,
+        PayoutVerdict.FactoryDefault => Strings.FirmwareDefaultABlockFound,
+        PayoutVerdict.Account => Strings.PoolAccountOrTypingError,
+        _ => Strings.NothingEntered,
     };
 
     /// <summary>The part of a Stratum user in front of the first dot.</summary>
@@ -70,7 +69,7 @@ public static class PayoutCheck
             return pools.Select(p => Slot($"pool{p.Id}", $"Pool {p.Id + 1}", p.StratumUrl, p.StratumUser)).OfType<PayoutSlot>().ToList();
         return new[]
         {
-            Slot("primary", L("Primär", "Primary"), info.StratumUrl, info.StratumUser),
+            Slot("primary", Strings.Primary, info.StratumUrl, info.StratumUser),
             Slot("fallback", "Fallback", info.FallbackStratumUrl, info.FallbackStratumUser),
         }.OfType<PayoutSlot>().ToList();
     }

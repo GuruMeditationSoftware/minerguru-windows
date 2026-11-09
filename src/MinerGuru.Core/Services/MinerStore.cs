@@ -1,7 +1,6 @@
 using System.Text.Json;
 using MinerGuru.Core.Models;
 using MinerGuru.Core.Widgets;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
@@ -434,7 +433,7 @@ public sealed class MinerStore
         if (result.Info == null)
         {
             miner.State = ConnectionState.Offline;
-            miner.OfflineReason = result.Error ?? L("Nicht erreichbar", "Unreachable");
+            miner.OfflineReason = result.Error ?? Strings.Unreachable;
             return false;
         }
         miner.PrimaryPoolReachable = result.PrimaryReachable;
@@ -471,10 +470,10 @@ public sealed class MinerStore
         }
         catch (MinerApiException e)
         {
-            Banner?.Invoke(L($"Neustart von {miner.DisplayName} fehlgeschlagen: {e.Message}", $"Restarting {miner.DisplayName} failed: {e.Message}"), true);
+            Banner?.Invoke(string.Format(Strings.RestartingFailed, miner.DisplayName, e.Message), true);
             return;
         }
-        Banner?.Invoke(L($"Neustart für {miner.DisplayName} ausgelöst.", $"Restart of {miner.DisplayName} triggered."), false);
+        Banner?.Invoke(string.Format(Strings.RestartOfTriggered, miner.DisplayName), false);
         miner.State = ConnectionState.Checking;
         Changed?.Invoke();
         await Task.Delay(TimeSpan.FromSeconds(4));
@@ -516,7 +515,7 @@ public sealed class MinerStore
         if (ConfirmWrite == null) return;
         var current = ChangeLog.Flatten(miner.RawJson ?? "{}") ?? [];
         var fields = ChangeLog.Changes(MinerApiClient.PayloadJson(payload), current);
-        fields.AddRange((clearing ?? []).Select(i => new ChangeField($"pools.{i}.stratumURL", null, L("(geleert)", "(cleared)"))));
+        fields.AddRange((clearing ?? []).Select(i => new ChangeField($"pools.{i}.stratumURL", null, Strings.Cleared)));
         if (!await ConfirmWrite(miner.DisplayName, fields, restarts)) throw new WriteDeclinedException();
     }
 
@@ -556,8 +555,7 @@ public sealed class MinerStore
         await WriteSettingsAsync(miner, form.Payload(miner.SupportsDualPool), interactive);
         foreach (var slot in form.SlotsToClear) await _api.DeletePoolSlotAsync(miner.IpAddress, slot);
         await _api.RestartAsync(miner.IpAddress);
-        Banner?.Invoke(L($"Pool-Konfiguration an {miner.DisplayName} übertragen – Miner startet neu.",
-                         $"Pool configuration sent to {miner.DisplayName} – the miner is restarting."), false);
+        Banner?.Invoke(string.Format(Strings.PoolConfigurationSentToThe, miner.DisplayName), false);
         miner.State = ConnectionState.Checking;
         Changed?.Invoke();
         await Task.Delay(TimeSpan.FromSeconds(5));

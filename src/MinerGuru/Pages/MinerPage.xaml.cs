@@ -6,7 +6,6 @@ using Microsoft.UI.Xaml.Navigation;
 using MinerGuru.Controls;
 using MinerGuru.Core;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Pages;
 
@@ -34,9 +33,9 @@ public sealed partial class MinerPage : Page, IHeaderPage
         };
         BoardHost.Child = _board;
         LedHost.Child = _led;
-        foreach (var (de, en, glyph) in KpiTitles)
+        foreach (var (title, glyph) in KpiTitles)
         {
-            var card = new MetricCard(L(de, en), glyph);
+            var card = new MetricCard(title, glyph);
             _kpis.Add(card);
             KpiGrid.Children.Add(card);
         }
@@ -74,17 +73,17 @@ public sealed partial class MinerPage : Page, IHeaderPage
         }
     }
 
-    private static readonly (string De, string En, string Glyph)[] KpiTitles =
+    private static (string Title, string Glyph)[] KpiTitles =>
     [
-        ("Live Hashrate", "Live Hashrate", ""),
-        ("ASIC Temperatur", "ASIC Temperature", ""),
-        ("Verbrauch", "Power Draw", ""),
-        ("Effizienz", "Efficiency", ""),
-        ("Kühlung & Lüfter", "Cooling & Fan", ""),
-        ("ASIC Takt & VCore", "ASIC Clock & VCore", ""),
-        ("Pool-Latenz (RTT)", "Pool Latency (RTT)", ""),
-        ("Best Diff (seit Neustart)", "Best Diff (since restart)", ""),
-        ("Shares", "Shares", ""),
+        (Strings.LiveHashrate, ""),
+        (Strings.ASICTemperature, ""),
+        (Strings.PowerDraw, ""),
+        (Strings.Efficiency, ""),
+        (Strings.CoolingFan, ""),
+        (Strings.ASICClockVCore, ""),
+        (Strings.PoolLatencyRTT, ""),
+        (Strings.BestDiffSinceRestartTitle, ""),
+        (Strings.Shares, ""),
     ];
 
     private void Update()
@@ -113,7 +112,7 @@ public sealed partial class MinerPage : Page, IHeaderPage
         if (info != null)
         {
             AddMeta("Uptime", MinerFormatting.FormatUptime(info.UptimeSeconds));
-            if (!string.IsNullOrEmpty(info.Ssid)) AddMeta(L("WLAN", "Wi-Fi"), Privacy.Ssid(info.Ssid) + (info.WifiRssi is { } rssi ? $" ({rssi} dBm)" : ""));
+            if (!string.IsNullOrEmpty(info.Ssid)) AddMeta(Strings.WiFi, Privacy.Ssid(info.Ssid) + (info.WifiRssi is { } rssi ? $" ({rssi} dBm)" : ""));
             if (!string.IsNullOrEmpty(info.FirmwareVersion)) AddMeta("Firmware", info.FirmwareVersion);
         }
         var refresh = new HyperlinkButton
@@ -122,16 +121,16 @@ public sealed partial class MinerPage : Page, IHeaderPage
             Foreground = Palette.TextSecondary,
             Content = RefreshLabel(),
         };
-        Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(refresh, L("Jetzt aktualisieren", "Refresh now"));
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(refresh, Strings.RefreshNow);
         refresh.Click += async (_, _) => await App.Store.RefreshMinerAsync(miner.Id);
         MetaRow.Children.Add(refresh);
 
         OfflineBar.IsOpen = miner.State == ConnectionState.Offline;
         if (OfflineBar.IsOpen)
         {
-            OfflineBar.Title = L("Nicht erreichbar", "Unreachable");
+            OfflineBar.Title = Strings.Unreachable;
             OfflineBar.Message = miner.LastSeenAt is { } seen
-                ? L($"{miner.OfflineReason} · zuletzt gesehen {DisplayFormat.Time(seen)}", $"{miner.OfflineReason} · last seen {DisplayFormat.Time(seen)}")
+                ? string.Format(Strings.LastSeen, miner.OfflineReason, DisplayFormat.Time(seen))
                 : miner.OfflineReason ?? "";
         }
         OnlinePart.Visibility = info != null ? Visibility.Visible : Visibility.Collapsed;
@@ -146,9 +145,9 @@ public sealed partial class MinerPage : Page, IHeaderPage
         _kpis[3].Set(info.EfficiencyJPerTh > 0 ? info.EfficiencyJPerTh.ToString("0.0", Inv) : "—", "J/TH", info.DailyEnergyText());
         _kpis[4].Set(info.FanPercentText(), "%", info.FanRpmText());
         _kpis[5].Set(info.FrequencyMhz.ToString(Inv), "MHz", info.CoreVoltageText());
-        _kpis[6].Title = info.IsDualPoolMining ? L("Pool-Latenz (Dual RTT)", "Pool Latency (Dual RTT)") : L("Pool-Latenz (RTT)", "Pool Latency (RTT)");
+        _kpis[6].Title = info.IsDualPoolMining ? Strings.PoolLatencyDualRTT : Strings.PoolLatencyRTT;
         _kpis[6].Set(latency is { } ms ? ms.ToString("0", Inv) : "—", latency != null ? "ms" : null, miner.PoolLatencyDetailText());
-        _kpis[7].Set(info.SessionBestDiffText, null, L($"Allzeit-Best: {info.BestDiffFormatted}", $"All-time best: {info.BestDiffFormatted}"));
+        _kpis[7].Set(info.SessionBestDiffText, null, string.Format(Strings.AllTimeBest, info.BestDiffFormatted));
         _kpis[8].Set(info.SharesAccepted.ToString(Inv), null, info.SharesText());
 
         Chart.SetPoints(miner.History.Select(s => (s.Timestamp, s.HashRateGhs)));
@@ -164,11 +163,11 @@ public sealed partial class MinerPage : Page, IHeaderPage
         PoolBadges.Children.Add(Badges.Latency(latency));
         FillRows(PoolRows,
         [
-            (L("Aktiv", "Active"), info.ActivePoolEndpoint),
-            (L("Primär", "Primary"), info.PrimaryPoolEndpoint),
+            (Strings.Active, info.ActivePoolEndpoint),
+            (Strings.Primary, info.PrimaryPoolEndpoint),
             ("Fallback", info.FallbackPoolEndpoint),
-            (L("Benutzer", "User"), Privacy.StratumUser(info.IsUsingFallbackStratum ? info.FallbackStratumUser : info.StratumUser)),
-            (L("Netz-Difficulty", "Network difficulty"), info.NetworkDifficulty is { } net ? MinerFormatting.FormatDifficulty(net) : "—"),
+            (Strings.User, Privacy.StratumUser(info.IsUsingFallbackStratum ? info.FallbackStratumUser : info.StratumUser)),
+            (Strings.NetworkDifficulty, info.NetworkDifficulty is { } net ? MinerFormatting.FormatDifficulty(net) : "—"),
         ]);
         FillRows(SystemRows,
         [
@@ -176,7 +175,7 @@ public sealed partial class MinerPage : Page, IHeaderPage
             ("ASIC", info.AsicCount > 1 ? $"{info.AsicCount}× {info.AsicModel}" : info.AsicModel),
             ("Board", info.BoardVersion ?? info.DeviceModel ?? "—"),
             ("MAC", Privacy.Mac(info.MacAddress ?? "—")),
-            (L("Freier Speicher", "Free heap"), info.FreeHeap is { } heap ? $"{DisplayFormat.Integer(heap / 1024)} KB" : "—"),
+            (Strings.FreeHeap, info.FreeHeap is { } heap ? $"{DisplayFormat.Integer(heap / 1024)} KB" : "—"),
         ]);
 
         Blocks.Update(miner);
@@ -210,7 +209,7 @@ public sealed partial class MinerPage : Page, IHeaderPage
     {
         var row = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 6 };
         row.Children.Add(new FontIcon { Glyph = "", FontSize = 11, Foreground = Palette.TextSecondary });
-        row.Children.Add(Palette.UiText(L("Jetzt aktualisieren", "Refresh now"), 11, Palette.TextSecondary));
+        row.Children.Add(Palette.UiText(Strings.RefreshNow, 11, Palette.TextSecondary));
         return row;
     }
 
@@ -286,10 +285,10 @@ public sealed partial class MinerPage : Page, IHeaderPage
         {
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-            Title = L($"{name} neu starten?", $"Restart {name}?"),
-            Content = L("Der Miner hört kurz auf zu schürfen.", "The miner stops mining for a moment."),
-            PrimaryButtonText = L("Neu starten", "Restart"),
-            CloseButtonText = L("Abbrechen", "Cancel"),
+            Title = string.Format(Strings.RestartName, name),
+            Content = Strings.TheMinerStopsMiningFor,
+            PrimaryButtonText = Strings.Restart,
+            CloseButtonText = Strings.Cancel,
             DefaultButton = ContentDialogButton.Close,
         };
         if (await dialog.ShowAsync() == ContentDialogResult.Primary) await App.Store.RestartMinerAsync(_miner.Id);
@@ -305,7 +304,7 @@ public sealed partial class MinerPage : Page, IHeaderPage
         var alerts = App.Store.Alerts;
         var muted = _miner != null && alerts.IsMuted(_miner.Id);
         MuteItem.Visibility = alerts.IsEnabled ? Visibility.Visible : Visibility.Collapsed;
-        MuteItem.Text = muted ? L("Benachrichtigungen an", "Notifications on") : L("Stummschalten", "Mute");
+        MuteItem.Text = muted ? Strings.NotificationsOn : Strings.Mute;
         MuteIcon.Glyph = muted ? "\uEA8F" : "\uE7ED";
     }
 
@@ -321,16 +320,16 @@ public sealed partial class MinerPage : Page, IHeaderPage
         {
             Text = _miner.CustomName ?? "",
             PlaceholderText = _miner.LatestInfo?.Hostname ?? _miner.IpAddress,
-            Header = L("Name in MinerGuru (leer: Hostname des Miners)", "Name in MinerGuru (empty: the miner's hostname)"),
+            Header = Strings.NameInMinerGuruEmptyThe,
         };
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
             RequestedTheme = ActualTheme,
-            Title = L("Miner umbenennen", "Rename miner"),
+            Title = Strings.RenameMiner,
             Content = box,
-            PrimaryButtonText = L("Speichern", "Save"),
-            CloseButtonText = L("Abbrechen", "Cancel"),
+            PrimaryButtonText = Strings.Save,
+            CloseButtonText = Strings.Cancel,
             DefaultButton = ContentDialogButton.Primary,
         };
         if (await dialog.ShowAsync() == ContentDialogResult.Primary) App.Store.RenameMiner(_miner.Id, box.Text);

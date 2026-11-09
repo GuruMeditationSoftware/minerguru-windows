@@ -1,6 +1,5 @@
 using System.Text.Json;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
@@ -11,13 +10,13 @@ public static class AlertKindText
 {
     public static string Title(this AlertKind kind) => kind switch
     {
-        AlertKind.Maintenance => L("Fällige Wartung", "Maintenance due"),
-        AlertKind.Overheat => L("Überhitzung", "Overheating"),
-        AlertKind.Flatline => L("Keine Shares mehr (Flatline)", "No more shares (flatline)"),
-        AlertKind.Fallback => L("Fallback-Pool aktiv", "Fallback pool active"),
-        AlertKind.Restart => L("Unerwarteter Neustart", "Unexpected restart"),
-        AlertKind.Payout => L("Auszahlungsadresse", "Payout address"),
-        _ => L("Miner offline / wieder online", "Miner offline / back online"),
+        AlertKind.Maintenance => Strings.MaintenanceDue,
+        AlertKind.Overheat => Strings.Overheating,
+        AlertKind.Flatline => Strings.NoMoreSharesFlatline,
+        AlertKind.Fallback => Strings.FallbackPoolActive,
+        AlertKind.Restart => Strings.UnexpectedRestart,
+        AlertKind.Payout => Strings.PayoutAddress,
+        _ => Strings.MinerOfflineBackOnline,
     };
 }
 
@@ -173,17 +172,17 @@ public sealed class AlertCenter
             if (all.Count == 1) return all[0];
             var title = group.Key switch
             {
-                (AlertKind.Maintenance, _) => L($"{all.Count} Wartungen sind fällig", $"{all.Count} maintenance tasks are due"),
-                (AlertKind.Overheat, false) => L($"{all.Count} Miner sind überhitzt", $"{all.Count} miners are overheating"),
-                (AlertKind.Overheat, true) => L($"{all.Count} Miner sind wieder kühl", $"{all.Count} miners have cooled down"),
-                (AlertKind.Flatline, false) => L($"{all.Count} Miner liefern keine Shares mehr", $"{all.Count} miners have stopped delivering shares"),
-                (AlertKind.Fallback, false) => L($"{all.Count} Miner laufen auf dem Fallback-Pool", $"{all.Count} miners are on the fallback pool"),
-                (AlertKind.Fallback, true) => L($"{all.Count} Miner sind zurück auf dem Primär-Pool", $"{all.Count} miners are back on the primary pool"),
-                (AlertKind.Restart, _) => L($"{all.Count} Miner sind neu gestartet", $"{all.Count} miners restarted"),
-                (AlertKind.Payout, _) => L($"{all.Count} Warnungen zur Auszahlungsadresse", $"{all.Count} payout address warnings"),
-                (AlertKind.Flatline, true) => L($"{all.Count} Miner liefern wieder Shares", $"{all.Count} miners are delivering shares again"),
-                (_, true) => L($"{all.Count} Miner sind wieder online", $"{all.Count} miners are back online"),
-                _ => L($"{all.Count} Miner sind offline", $"{all.Count} miners are offline"),
+                (AlertKind.Maintenance, _) => string.Format(Strings.MaintenanceTasksAreDue, all.Count),
+                (AlertKind.Overheat, false) => string.Format(Strings.MinersAreOverheating, all.Count),
+                (AlertKind.Overheat, true) => string.Format(Strings.MinersHaveCooledDown, all.Count),
+                (AlertKind.Flatline, false) => string.Format(Strings.MinersHaveStoppedDeliveringShares, all.Count),
+                (AlertKind.Fallback, false) => string.Format(Strings.MinersAreOnTheFallback, all.Count),
+                (AlertKind.Fallback, true) => string.Format(Strings.MinersAreBackOnThe, all.Count),
+                (AlertKind.Restart, _) => string.Format(Strings.MinersRestarted, all.Count),
+                (AlertKind.Payout, _) => string.Format(Strings.PayoutAddressWarnings, all.Count),
+                (AlertKind.Flatline, true) => string.Format(Strings.MinersAreDeliveringSharesAgain, all.Count),
+                (_, true) => string.Format(Strings.MinersAreBackOnline, all.Count),
+                _ => string.Format(Strings.MinersAreOffline, all.Count),
             };
             return new AlertEvent(all[0].Kind, Guid.Empty, title, string.Join(", ", all.Select(a => a.MinerName).Distinct()), group.Key.IsRecovery);
         }).Concat(alerts.Where(a => a.Alone)).ToList();
@@ -209,9 +208,8 @@ public sealed class AlertCenter
                     track.LastOfflineAlertAt = now;
                     var minutes = (int)down.TotalMinutes;
                     events.Add(new AlertEvent(AlertKind.Offline, miner.Id,
-                        L($"{miner.DisplayName} ist offline", $"{miner.DisplayName} is offline"),
-                        L($"Keine Antwort seit {minutes} min. Vielleicht ohne Strom, außer WLAN-Reichweite oder im Hotspot-Modus.",
-                          $"No answer for {minutes} min. It may have lost power, be out of Wi-Fi range or in hotspot mode."),
+                        string.Format(Strings.IsOffline, miner.DisplayName),
+                        string.Format(Strings.NoAnswerForMinIt, minutes),
                         false, miner.DisplayName));
                 }
             }
@@ -219,8 +217,8 @@ public sealed class AlertCenter
             {
                 if (track.OfflineAlerted)
                     events.Add(new AlertEvent(AlertKind.Offline, miner.Id,
-                        L($"{miner.DisplayName} ist wieder online", $"{miner.DisplayName} is back online"),
-                        L("Der Miner antwortet wieder.", "The miner is answering again."),
+                        string.Format(Strings.IsBackOnline, miner.DisplayName),
+                        Strings.TheMinerIsAnsweringAgain,
                         true, miner.DisplayName));
                 track.FailedPolls = 0;
                 track.FirstFailureAt = null;
@@ -265,8 +263,8 @@ public sealed class AlertCenter
     /// <summary>Read-only mode wins over the watchdog, but the user should know a restart was left out.</summary>
     private static AlertEvent SkippedRestartEvent(MinerDevice miner, MinerHealth.AutoRestartReason reason) =>
         new(RestartKind(reason), miner.Id,
-            L($"{miner.DisplayName} wurde nicht neu gestartet", $"{miner.DisplayName} was not restarted"),
-            L("Ein automatischer Neustart war fällig, aber „Nur lesen“ ist an.", "An automatic restart was due, but read-only mode is on."),
+            string.Format(Strings.WasNotRestarted, miner.DisplayName),
+            Strings.AnAutomaticRestartWasDue,
             false, miner.DisplayName, Alone: true);
 
     /// <summary>The result of a watchdog restart, as a message. Noted in the change log like any other write.</summary>
@@ -274,12 +272,12 @@ public sealed class AlertCenter
     {
         var name = miner.DisplayName;
         var why = reason == MinerHealth.AutoRestartReason.Flatline
-            ? L("Keine Shares mehr.", "No more shares.")
-            : L("Der Primär-Pool ist wieder erreichbar, der Miner blieb aber auf dem Fallback-Pool.", "The primary pool is reachable again, but the miner stayed on the fallback pool.");
+            ? Strings.NoMoreShares
+            : Strings.ThePrimaryPoolIsReachable;
         var kind = RestartKind(reason);
         return error == null
-            ? new AlertEvent(kind, miner.Id, L($"{name} wurde automatisch neu gestartet", $"{name} was restarted automatically"), why, false, name, Alone: true)
-            : new AlertEvent(kind, miner.Id, L($"{name} ließ sich nicht neu starten", $"{name} could not be restarted"), $"{why} {error}", false, name, Alone: true);
+            ? new AlertEvent(kind, miner.Id, string.Format(Strings.WasRestartedAutomatically, name), why, false, name, Alone: true)
+            : new AlertEvent(kind, miner.Id, string.Format(Strings.CouldNotBeRestarted, name), $"{why} {error}", false, name, Alone: true);
     }
 
     /// <summary>Default or foreign addresses, addresses changed outside MinerGuru and blocks that skip the miner.</summary>
@@ -302,8 +300,8 @@ public sealed class AlertCenter
                 if (ownChange) continue;
                 var (old, fresh) = (PayoutCheck.Shortened(previous), PayoutCheck.Shortened(slot.Address));
                 events.Add(new AlertEvent(AlertKind.Payout, miner.Id,
-                    L($"Adresse von {name} wurde geändert", $"Address of {name} was changed"),
-                    L($"{slot.Title}: {old} → {fresh}. Das kam nicht von MinerGuru.", $"{slot.Title}: {old} → {fresh}. This did not come from MinerGuru."),
+                    string.Format(Strings.AddressOfWasChanged, name),
+                    string.Format(Strings.ThisDidNotComeFrom, slot.Title, old, fresh),
                     false, name));
             }
             else if (slot.Verdict.NeedsAttention() && alerted.GetValueOrDefault(slot.Key) != slot.Address)
@@ -313,9 +311,9 @@ public sealed class AlertCenter
                 var address = PayoutCheck.Shortened(slot.Address);
                 events.Add(new AlertEvent(AlertKind.Payout, miner.Id,
                     slot.Verdict == PayoutVerdict.FactoryDefault
-                        ? L($"{name} nutzt eine Standard-Adresse", $"{name} uses a default address")
-                        : L($"{name} zahlt an eine fremde Adresse", $"{name} pays to a foreign address"),
-                    L($"{slot.Title}: {address}. Ein Fund ginge nicht an dich.", $"{slot.Title}: {address}. A block found would not go to you."),
+                        ? string.Format(Strings.UsesADefaultAddress, name)
+                        : string.Format(Strings.PaysToAForeignAddress, name),
+                    string.Format(Strings.ABlockFoundWouldNot, slot.Title, address),
                     false, name));
             }
         }
@@ -335,9 +333,8 @@ public sealed class AlertCenter
         {
             track.PayoutMissAlerted = true;
             events.Add(new AlertEvent(AlertKind.Payout, miner.Id,
-                L($"Block zahlt nicht an {name}", $"Block does not pay {name}"),
-                L("Die Block-Vorlage des Pools enthält die Adresse des Miners nicht. Prüfe die Pool-Einstellungen.",
-                  "The pool's block template does not contain the miner's address. Check the pool settings."),
+                string.Format(Strings.BlockDoesNotPay, name),
+                Strings.ThePoolSBlockTemplate,
                 false, name));
         }
         return events;
@@ -378,8 +375,8 @@ public sealed class AlertCenter
             {
                 health.OverheatAlerted = false;
                 events.Add(new AlertEvent(AlertKind.Overheat, miner.Id,
-                    L($"{name} ist wieder kühl", $"{name} has cooled down"),
-                    L("Die Temperatur ist wieder im normalen Bereich.", "The temperature is back to normal."),
+                    string.Format(Strings.HasCooledDown, name),
+                    Strings.TheTemperatureIsBackTo,
                     true, name));
             }
             else if (due)
@@ -388,12 +385,10 @@ public sealed class AlertCenter
                 health.LastOverheatAlertAt = now;
                 var (temp, vr, limit) = ((int)info.Temp, (int)(info.VrTemp ?? 0), (int)(info.OverheatTemp ?? 0));
                 events.Add(new AlertEvent(AlertKind.Overheat, miner.Id,
-                    L($"{name} ist überhitzt", $"{name} is overheating"),
+                    string.Format(Strings.IsOverheating, name),
                     info.OverheatMode
-                        ? L("Der Miner hat sich gedrosselt und bleibt so bis zum Neustart. Prüfe vorher die Kühlung.",
-                            "The miner has throttled itself and stays that way until it restarts. Check the cooling first.")
-                        : L($"ASIC {temp} °C, Spannungsregler {vr} °C, Grenze {limit} °C. Prüfe die Kühlung.",
-                            $"ASIC {temp} °C, voltage regulator {vr} °C, limit {limit} °C. Check the cooling."),
+                        ? Strings.TheMinerHasThrottledItself
+                        : string.Format(Strings.ASICCVoltageRegulatorC, temp, vr, limit),
                     false, name));
             }
         }
@@ -405,8 +400,8 @@ public sealed class AlertCenter
             {
                 health.FlatlineAlerted = false;
                 events.Add(new AlertEvent(AlertKind.Flatline, miner.Id,
-                    L($"{name} liefert wieder Shares", $"{name} is delivering shares again"),
-                    L("Es kommen wieder neue Shares an.", "New shares are arriving again."),
+                    string.Format(Strings.IsDeliveringSharesAgain, name),
+                    Strings.NewSharesAreArrivingAgain,
                     true, name));
             }
             else if (due)
@@ -415,9 +410,8 @@ public sealed class AlertCenter
                 health.LastFlatlineAlertAt = now;
                 var minutes = health.MinutesWithoutShares(now);
                 events.Add(new AlertEvent(AlertKind.Flatline, miner.Id,
-                    L($"{name} liefert keine Shares mehr", $"{name} has stopped delivering shares"),
-                    L($"Seit {minutes} min kein neuer Share, obwohl der Miner antwortet. Ein Neustart hilft meist.",
-                      $"No new share for {minutes} min although the miner responds. A restart usually helps."),
+                    string.Format(Strings.HasStoppedDeliveringShares, name),
+                    string.Format(Strings.NoNewShareForMin, minutes),
                     false, name));
             }
         }
@@ -429,8 +423,8 @@ public sealed class AlertCenter
             {
                 health.FallbackAlerted = false;
                 events.Add(new AlertEvent(AlertKind.Fallback, miner.Id,
-                    L($"{name} ist zurück auf dem Primär-Pool", $"{name} is back on the primary pool"),
-                    L("Der Miner nutzt wieder seinen Primär-Pool.", "The miner is using its primary pool again."),
+                    string.Format(Strings.IsBackOnThePrimary, name),
+                    Strings.TheMinerIsUsingIts,
                     true, name));
             }
             else if (due)
@@ -438,9 +432,8 @@ public sealed class AlertCenter
                 health.FallbackAlerted = true;
                 health.LastFallbackAlertAt = now;
                 events.Add(new AlertEvent(AlertKind.Fallback, miner.Id,
-                    L($"{name} läuft auf dem Fallback-Pool", $"{name} is on the fallback pool"),
-                    L($"Seit mindestens 10 min auf {info.ActivePoolHost}. Der Primär-Pool ist vielleicht gestört.",
-                      $"On {info.ActivePoolHost} for at least 10 min. The primary pool may be down."),
+                    string.Format(Strings.IsOnTheFallbackPool, name),
+                    string.Format(Strings.OnForAtLeast10, info.ActivePoolHost),
                     false, name));
             }
         }
@@ -449,9 +442,8 @@ public sealed class AlertCenter
         {
             health.StuckAlerted = true;
             events.Add(new AlertEvent(AlertKind.Fallback, miner.Id,
-                L($"{name} wechselt nicht zurück", $"{name} does not switch back"),
-                L("Der Primär-Pool ist seit 15 min erreichbar, der Miner bleibt aber auf dem Fallback-Pool. Ein Neustart holt ihn zurück.",
-                  "The primary pool has been reachable for 15 min, but the miner stays on the fallback pool. A restart brings it back."),
+                string.Format(Strings.DoesNotSwitchBack, name),
+                Strings.ThePrimaryPoolHasBeen,
                 false, name));
         }
         else if (!health.IsOnFallback)
@@ -462,11 +454,11 @@ public sealed class AlertCenter
         if (health.RestartedUnexpectedly)
         {
             var reason = info.ResetReason is { } text
-                ? L($"Grund laut Miner: {text}.", $"Reason given by the miner: {text}.")
-                : L("Der Miner nennt keinen Grund.", "The miner gives no reason.");
+                ? string.Format(Strings.ReasonGivenByTheMiner, text)
+                : Strings.TheMinerGivesNoReason;
             events.Add(new AlertEvent(AlertKind.Restart, miner.Id,
-                L($"{name} ist neu gestartet", $"{name} restarted"),
-                L($"MinerGuru hat das nicht ausgelöst. {reason}", $"MinerGuru did not trigger this. {reason}"),
+                string.Format(Strings.Restarted, name),
+                string.Format(Strings.MinerGuruDidNotTriggerThis, reason),
                 false, name));
         }
 

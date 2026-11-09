@@ -6,7 +6,6 @@ using Microsoft.UI.Xaml.Controls;
 using MinerGuru.Controls;
 using MinerGuru.Core.Models;
 using Windows.ApplicationModel.DataTransfer;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Dialogs;
 
@@ -19,9 +18,9 @@ public sealed partial class RawJsonDialog : ContentDialog
     {
         Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"];
         Resources["ContentDialogMaxWidth"] = 760.0;
-        Title = L("API-Rohdaten (/api/system/info)", "Raw API data (/api/system/info)");
-        CloseButtonText = L("Schließen", "Close");
-        PrimaryButtonText = L("JSON kopieren", "Copy JSON");
+        Title = Strings.RawAPIDataApiSystem;
+        CloseButtonText = Strings.Close;
+        PrimaryButtonText = Strings.CopyJSON;
 
         var json = Readable(miner.RawJson);
         var text = Palette.MonoText(json, 12, Palette.TextPrimary);
@@ -47,7 +46,7 @@ public sealed partial class RawJsonDialog : ContentDialog
             var package = new DataPackage();
             package.SetText(json);
             Clipboard.SetContent(package);
-            PrimaryButtonText = L("Kopiert", "Copied");
+            PrimaryButtonText = Strings.Copied;
         };
     }
 

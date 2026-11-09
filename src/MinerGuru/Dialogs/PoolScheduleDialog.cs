@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
 using MinerGuru.Controls;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Dialogs;
 
@@ -23,8 +22,8 @@ public sealed partial class PoolScheduleDialog : ContentDialog
         var ids = new HashSet<Guid>(rule.MinerIds);
         Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"];
         Resources["ContentDialogMaxWidth"] = 600.0;
-        PrimaryButtonText = L("Sichern", "Save");
-        CloseButtonText = L("Abbrechen", "Cancel");
+        PrimaryButtonText = Strings.SaveEntry;
+        CloseButtonText = Strings.Cancel;
         DefaultButton = ContentDialogButton.Primary;
 
         var poolBox = new ComboBox { HorizontalAlignment = HorizontalAlignment.Stretch };
@@ -36,10 +35,10 @@ public sealed partial class PoolScheduleDialog : ContentDialog
         var time = new TimePicker { ClockIdentifier = "24HourClock", MinuteIncrement = 5, Time = TimeSpan.FromMinutes(rule.Minute) };
 
         var form = new StackPanel { Width = 520, Spacing = 14 };
-        form.Children.Add(PageParts.Title(isNew ? L("Pool-Wechsel planen", "Schedule a pool switch") : L("Pool-Wechsel bearbeiten", "Edit pool switch")));
+        form.Children.Add(PageParts.Title(isNew ? Strings.ScheduleAPoolSwitch : Strings.EditPoolSwitch));
         form.Children.Add(PowerForm.Row("Pool", poolBox));
-        form.Children.Add(PowerForm.Row(L("Tage", "Days"), days));
-        form.Children.Add(PowerForm.Row(L("Uhrzeit", "Time"), time));
+        form.Children.Add(PowerForm.Row(Strings.Days, days));
+        form.Children.Add(PowerForm.Row(Strings.Time, time));
         form.Children.Add(PowerForm.Row("Miner", new MinerScopePicker(ids, miners)));
         Content = form;
         IsPrimaryButtonEnabled = _days.Count > 0;

@@ -1,6 +1,5 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -65,7 +64,7 @@ public sealed partial class MetricCard : Grid
         ToolTipService.SetToolTip(_subtitle, subtitle);
         _warning = warning;
         _warningIcon.Visibility = warning ? Visibility.Visible : Visibility.Collapsed;
-        ToolTipService.SetToolTip(_warningIcon, warning ? L("Warnung", "Warning") : null);
+        ToolTipService.SetToolTip(_warningIcon, warning ? Strings.Warning : null);
         Restyle();
     }
 

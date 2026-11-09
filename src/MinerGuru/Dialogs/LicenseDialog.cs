@@ -2,7 +2,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using MinerGuru.Controls;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Dialogs;
 
@@ -12,12 +11,10 @@ public sealed partial class LicenseDialog : ContentDialog
     public LicenseDialog()
     {
         Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"];
-        Title = L("Lizenz", "License");
-        CloseButtonText = L("Schließen", "Close");
+        Title = Strings.License;
+        CloseButtonText = Strings.Close;
         var form = new StackPanel { Width = 500, Spacing = 12 };
-        var hint = Palette.UiText(L(
-            "Open Source unter der MIT-Lizenz und kostenlos nutzbar. Nutzung und Änderungen an der Hardware auf eigenes Risiko.",
-            "Open source under the MIT license and free to use. Use and changes to your hardware are at your own risk."), 13, Palette.TextSecondary);
+        var hint = Palette.UiText(Strings.OpenSourceUnderTheMIT, 13, Palette.TextSecondary);
         hint.TextWrapping = TextWrapping.Wrap;
         form.Children.Add(hint);
         var text = string.Join("\n\n\n", new[] { "LICENSE.txt", "THIRD-PARTY-NOTICES.txt" }

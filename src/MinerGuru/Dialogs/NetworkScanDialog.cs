@@ -36,7 +36,7 @@ public sealed partial class NetworkScanDialog : ContentDialog
     {
         Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"];
         Resources["ContentDialogMaxWidth"] = 700.0;
-        CloseButtonText = L("Fertig", "Done");
+        CloseButtonText = Strings.Done;
 
         _prefix.Text = App.Store.ScanSubnetPrefix;
         _prefix.TextChanged += (_, _) =>
@@ -49,7 +49,7 @@ public sealed partial class NetworkScanDialog : ContentDialog
             if (Scanner.IsScanning) Scanner.Stop();
             else Scanner.Start();
         };
-        _addAll = new Button { Content = L("Alle neuen hinzufügen", "Add all new"), Style = (Style)Application.Current.Resources["SmallAccentButtonStyle"], HorizontalAlignment = HorizontalAlignment.Right };
+        _addAll = new Button { Content = Strings.AddAllNew, Style = (Style)Application.Current.Resources["SmallAccentButtonStyle"], HorizontalAlignment = HorizontalAlignment.Right };
         _addAll.Click += (_, _) => Scanner.AddAllDiscovered();
 
         Content = BuildContent();
@@ -82,10 +82,10 @@ public sealed partial class NetworkScanDialog : ContentDialog
         header.ColumnDefinitions.Add(new ColumnDefinition());
         header.Children.Add(new FontIcon { Glyph = "\uE701", FontSize = 18, Foreground = Palette.TextSecondary });
         var titles = new StackPanel { Spacing = 2 };
-        var title = Palette.UiText(L("Lokales Netzwerk nach Minern durchsuchen", "Search the local network for miners"), 15, Palette.TextPrimary);
+        var title = Palette.UiText(Strings.SearchTheLocalNetworkFor, 15, Palette.TextPrimary);
         title.FontWeight = FontWeights.Medium;
         titles.Children.Add(title);
-        var subtitle = Palette.UiText(L("Erkennt automatisch Bitaxe (Gamma 601, Supra, Ultra) & NerdQAxe++ über /api/system/info", "Finds Bitaxe (Gamma 601, Supra, Ultra) & NerdQAxe++ through /api/system/info"), 12, Palette.TextSecondary);
+        var subtitle = Palette.UiText(Strings.FindsBitaxeGamma601Supra, 12, Palette.TextSecondary);
         subtitle.TextWrapping = TextWrapping.Wrap;
         titles.Children.Add(subtitle);
         Grid.SetColumn(titles, 1);
@@ -99,12 +99,12 @@ public sealed partial class NetworkScanDialog : ContentDialog
         var subnet = new Grid { ColumnSpacing = 12 };
         foreach (var width in new[] { GridLength.Auto, GridLength.Auto, GridLength.Auto, new GridLength(1, GridUnitType.Star), GridLength.Auto })
             subnet.ColumnDefinitions.Add(new ColumnDefinition { Width = width });
-        var label = Palette.UiText(L("Subnetz-Präfix:", "Subnet prefix:"), 13, Palette.TextPrimary);
+        var label = Palette.UiText(Strings.SubnetPrefix, 13, Palette.TextPrimary);
         label.VerticalAlignment = VerticalAlignment.Center;
         subnet.Children.Add(label);
         Grid.SetColumn(_prefix, 1);
         subnet.Children.Add(_prefix);
-        var range = Palette.UiText(L(".1 bis .254", ".1 to .254"), 12, Palette.TextSecondary);
+        var range = Palette.UiText(Strings.HostRange1To254, 12, Palette.TextSecondary);
         range.VerticalAlignment = VerticalAlignment.Center;
         Grid.SetColumn(range, 2);
         subnet.Children.Add(range);
@@ -157,26 +157,26 @@ public sealed partial class NetworkScanDialog : ContentDialog
 
         _prefix.IsEnabled = !scanning;
         _startStop.Style = (Style)Application.Current.Resources[scanning ? "DefaultButtonStyle" : "AccentButtonStyle"];
-        _startStop.Content = scanning ? L("Scan abbrechen", "Stop scan") : L("Scan starten", "Start scan");
+        _startStop.Content = scanning ? Strings.StopScan : Strings.StartScan;
         _startStop.IsEnabled = scanning || NetworkScanner.IsValidPrefix(_prefix.Text);
 
         _progress.Visibility = scanning ? Visibility.Visible : Visibility.Collapsed;
         _bar.Maximum = Math.Max(1, scanner.TotalCount);
         _bar.Value = scanner.CompletedCount;
-        _progressText.Text = L($"Scanne {prefix}.1–254… ({scanner.CompletedCount} / {scanner.TotalCount} IPs geprüft)", $"Scanning {prefix}.1–254… ({scanner.CompletedCount} / {scanner.TotalCount} IPs checked)");
-        _foundText.Text = L($"{found.Count} Miner gefunden", $"{found.Count} miners found");
+        _progressText.Text = string.Format(Strings.Scanning1254IPsChecked, prefix, scanner.CompletedCount, scanner.TotalCount);
+        _foundText.Text = string.Format(Strings.MinersFound, found.Count);
 
-        _listTitle.Text = L($"Gefundene Miner im Netzwerk ({found.Count})", $"Miners found on the network ({found.Count})");
+        _listTitle.Text = string.Format(Strings.MinersFoundOnTheNetwork, found.Count);
         _addAll.Visibility = found.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
         _addAll.IsEnabled = found.Any(m => !store.IsAlreadyAdded(m.IpAddress));
 
         _empty.Visibility = found.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         _listScroll.Visibility = found.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
         _emptyIcon.Glyph = scanning ? "\uE701" : "\uE968";
-        _emptyTitle.Text = scanning ? L("Suche läuft…", "Searching…") : L("Noch keine Miner im Scan-Ergebnis", "No miners in the scan result yet");
+        _emptyTitle.Text = scanning ? Strings.Searching : Strings.NoMinersInTheScan;
         _emptyText.Text = scanning
-            ? L("Antwortende Bitaxe- und NerdQAxe++-Miner erscheinen sofort hier.", "Bitaxe and NerdQAxe++ miners that answer appear here right away.")
-            : L($"Klicke auf „Scan starten“, um das Subnetz {prefix}.1–254 zu durchsuchen.", $"Click \"Start scan\" to search the subnet {prefix}.1–254.");
+            ? Strings.BitaxeAndNerdQAxeMinersThat
+            : string.Format(Strings.ClickStartScanToSearch, prefix);
 
         var rows = string.Join('|', found.Select(m => $"{m.IpAddress} {store.IsAlreadyAdded(m.IpAddress)}"));
         if (rows == _renderedRows) return;
@@ -216,12 +216,12 @@ public sealed partial class NetworkScanDialog : ContentDialog
         {
             var added = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 6 };
             added.Children.Add(new FontIcon { Glyph = "\uE73E", FontSize = 12, Foreground = Palette.Good });
-            added.Children.Add(Palette.UiText(L("Bereits vorhanden", "Already added"), 12, Palette.Good));
+            added.Children.Add(Palette.UiText(Strings.AlreadyAdded, 12, Palette.Good));
             action = added;
         }
         else
         {
-            var add = new Button { Content = L("Hinzufügen", "Add"), Style = (Style)Application.Current.Resources["SmallAccentButtonStyle"] };
+            var add = new Button { Content = Strings.Add, Style = (Style)Application.Current.Resources["SmallAccentButtonStyle"] };
             add.Click += (_, _) => Scanner.Add(miner);
             action = add;
         }

@@ -9,7 +9,6 @@ using MinerGuru.Core;
 using MinerGuru.Core.Models;
 using MinerGuru.Dialogs;
 using MinerGuru.Pages;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru;
 
@@ -21,11 +20,11 @@ public interface IHeaderPage
 
 public sealed partial class MainWindow : Window
 {
-    private readonly SidebarNavRow _fleetRow = new(L("Flotte", "Fleet"), "");
+    private readonly SidebarNavRow _fleetRow = new(Strings.Fleet, "");
     private readonly SidebarNavRow _poolsRow = new("Pools", "");
-    private readonly SidebarNavRow _powerRow = new(L("Strom", "Power"), "");
-    private readonly SidebarNavRow _maintenanceRow = new(L("Wartung", "Maintenance"), "\uE90F");
-    private readonly SidebarNavRow _reportsRow = new(L("Berichte", "Reports"), "\uE9F9");
+    private readonly SidebarNavRow _powerRow = new(Strings.PowerPage, "");
+    private readonly SidebarNavRow _maintenanceRow = new(Strings.Maintenance, "\uE90F");
+    private readonly SidebarNavRow _reportsRow = new(Strings.Reports, "\uE9F9");
     /// <summary>The sidebar row of each miner, kept so a refresh only updates the texts.</summary>
     private readonly Dictionary<Guid, SidebarMinerRow> _minerRows = [];
     private readonly DispatcherTimer _bannerTimer = new() { Interval = TimeSpan.FromSeconds(4) };
@@ -68,9 +67,7 @@ public sealed partial class MainWindow : Window
         if (App.Store.History.DamagedBackup != null) ShowHistoryDamaged();
         if (App.Store.DamagedSettingsBackup != null)
         {
-            ShowBanner(L(
-                "Die Einstellungen waren beschädigt, MinerGuru startet leer. Die alte Datei liegt im Datenordner.",
-                "The settings were damaged, MinerGuru starts empty. The old file stays in the data folder."), true);
+            ShowBanner(Strings.TheSettingsWereDamagedMinerGuru, true);
             // Appears right at the start, when a short notice is easily missed.
             _bannerTimer.Stop();
         }
@@ -191,8 +188,8 @@ public sealed partial class MainWindow : Window
         var hidden = App.Store.HideSensitiveData;
         PrivacyIcon.Glyph = hidden ? "\uED1A" : "\uE7B3";
         var tip = hidden
-            ? L("IP-, Wallet- und MAC-Adressen wieder anzeigen (Strg+Umschalt+H)", "Show IP, wallet and MAC addresses again (Ctrl+Shift+H)")
-            : L("IP-, Wallet- und MAC-Adressen für Screenshots verschleiern (Strg+Umschalt+H)", "Hide IP, wallet and MAC addresses for screenshots (Ctrl+Shift+H)");
+            ? Strings.ShowIPWalletAndMAC
+            : Strings.HideIPWalletAndMAC;
         ToolTipService.SetToolTip(PrivacyButton, tip);
         AutomationProperties.SetName(PrivacyButton, tip);
     }
@@ -267,11 +264,11 @@ public sealed partial class MainWindow : Window
     private MenuFlyout MinerMenu(MinerDevice miner)
     {
         var menu = new MenuFlyout();
-        var browser = new MenuFlyoutItem { Text = L("Im Browser öffnen", "Open in browser"), Icon = new FontIcon { Glyph = "" } };
+        var browser = new MenuFlyoutItem { Text = Strings.OpenInBrowser, Icon = new FontIcon { Glyph = "" } };
         browser.Click += async (_, _) => await Windows.System.Launcher.LaunchUriAsync(new Uri($"http://{miner.IpAddress}"));
-        var refresh = new MenuFlyoutItem { Text = L("Jetzt aktualisieren", "Refresh now"), Icon = new FontIcon { Glyph = "" } };
+        var refresh = new MenuFlyoutItem { Text = Strings.RefreshNow, Icon = new FontIcon { Glyph = "" } };
         refresh.Click += async (_, _) => await App.Store.RefreshMinerAsync(miner.Id);
-        var remove = new MenuFlyoutItem { Text = L("Miner entfernen", "Remove miner"), Icon = new FontIcon { Glyph = "" } };
+        var remove = new MenuFlyoutItem { Text = Strings.RemoveMiner, Icon = new FontIcon { Glyph = "" } };
         remove.Click += async (_, _) => await ConfirmRemoveAsync(miner);
         menu.Items.Add(browser);
         menu.Items.Add(refresh);
@@ -295,7 +292,7 @@ public sealed partial class MainWindow : Window
         var dialog = new AddMinerDialog { XamlRoot = Content.XamlRoot, RequestedTheme = Root.ActualTheme };
         if (await dialog.ShowAsync() == ContentDialogResult.Primary && dialog.AddedMiner is { } miner)
         {
-            ShowBanner(L($"{miner.DisplayName} hinzugefügt.", $"{miner.DisplayName} added."), false);
+            ShowBanner(string.Format(Strings.Added, miner.DisplayName), false);
             ShowMiner(miner.Id);
         }
     }
@@ -309,11 +306,10 @@ public sealed partial class MainWindow : Window
         {
             XamlRoot = Content.XamlRoot,
             RequestedTheme = Root.ActualTheme,
-            Title = L($"{miner.DisplayName} entfernen?", $"Remove {miner.DisplayName}?"),
-            Content = L("Der Miner läuft weiter, MinerGuru zeigt ihn nur nicht mehr an. Der Verlauf geht verloren.",
-                        "The miner keeps running, MinerGuru just stops showing it. Its history is lost."),
-            PrimaryButtonText = L("Entfernen", "Remove"),
-            CloseButtonText = L("Abbrechen", "Cancel"),
+            Title = string.Format(Strings.RemoveDisplayName, miner.DisplayName),
+            Content = Strings.TheMinerKeepsRunningMinerGuru,
+            PrimaryButtonText = Strings.Remove,
+            CloseButtonText = Strings.Cancel,
             DefaultButton = ContentDialogButton.Close,
         };
         if (await dialog.ShowAsync() == ContentDialogResult.Primary) App.Store.RemoveMiner(miner.Id);
@@ -321,9 +317,7 @@ public sealed partial class MainWindow : Window
 
     private void ShowHistoryDamaged()
     {
-        ShowBanner(L(
-            "Der Verlauf war beschädigt und beginnt neu. Die alte Datei liegt im Datenordner.",
-            "The history was damaged and starts anew. The old file stays in the data folder."), true);
+        ShowBanner(Strings.TheHistoryWasDamagedAnd, true);
         // Appears right at the start, when a short notice is easily missed.
         _bannerTimer.Stop();
         _bannerTimer.Interval = TimeSpan.FromSeconds(30);

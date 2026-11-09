@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Shapes;
 using MinerGuru.Core.Models;
 using MinerGuru.Core.Services;
 using MinerGuru.Dialogs;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -23,10 +22,10 @@ public sealed partial class PoolSchedulesCard : UserControl
 
     public PoolSchedulesCard()
     {
-        _add = PageParts.TextButton("", L("Wechsel planen", "Schedule a switch"), Add);
+        _add = PageParts.TextButton("", Strings.ScheduleASwitch, Add);
         _add.HorizontalAlignment = HorizontalAlignment.Right;
         var header = new Grid();
-        var title = PageParts.Title(L("Geplanter Pool-Wechsel", "Scheduled pool switching"));
+        var title = PageParts.Title(Strings.ScheduledPoolSwitching);
         title.VerticalAlignment = VerticalAlignment.Center;
         header.Children.Add(title);
         header.Children.Add(_add);
@@ -69,11 +68,10 @@ public sealed partial class PoolSchedulesCard : UserControl
         _note.Foreground = Palette.TextSecondary;
         _error.Foreground = Palette.Bad;
         _note.Text = App.Store.Power.RunsSchedules
-            ? L("Stellt Miner zu festen Zeiten auf einen gespeicherten Pool um, zum Beispiel nachts und am Wochenende auf einen Solo-Pool. Der Miner startet dabei neu. Für den Rückweg eine zweite Regel anlegen.",
-                "Moves miners to a saved pool at set times, for example to a solo pool on nights and weekends. The miner restarts when it switches. Add a second rule for the way back.")
-            : L("Dieser PC führt keine Zeitpläne aus (siehe Strom), die Wechsel ruhen.", "This PC does not run schedules (see Power), so the switches are on hold.");
+            ? Strings.MovesMinersToASaved
+            : Strings.ThisPCDoesNotRun;
         _add.IsEnabled = App.Store.PoolLibrary.Pools.Count > 0;
-        _error.Text = Schedules.LastError is { } error ? L($"Letzter Wechsel fehlgeschlagen: {error}", $"Last switch failed: {error}") : "";
+        _error.Text = Schedules.LastError is { } error ? string.Format(Strings.LastPoolSwitchFailed, error) : "";
         _error.Visibility = Schedules.LastError != null ? Visibility.Visible : Visibility.Collapsed;
         _rows.Children.Clear();
         foreach (var rule in Schedules.Rules)
@@ -87,24 +85,24 @@ public sealed partial class PoolSchedulesCard : UserControl
     {
         var row = PageParts.Row(1, 4);
         var toggle = new ToggleSwitch { IsOn = rule.IsEnabled, OnContent = "", OffContent = "", MinWidth = 0, VerticalAlignment = VerticalAlignment.Center };
-        AutomationProperties.SetName(toggle, L("Wechsel ein oder aus", "Switch on or off"));
+        AutomationProperties.SetName(toggle, Strings.SwitchOnOrOff);
         toggle.Toggled += (_, _) => { if (toggle.IsOn != rule.IsEnabled) Schedules.SetEnabled(rule.Id, toggle.IsOn); };
         row.Children.Add(toggle);
 
         var text = new StackPanel { Spacing = 2, VerticalAlignment = VerticalAlignment.Center };
-        var pool = App.Store.PoolLibrary.Find(rule.PoolId)?.Name ?? L("Pool gelöscht", "Pool deleted");
+        var pool = App.Store.PoolLibrary.Find(rule.PoolId)?.Name ?? Strings.PoolDeleted;
         var time = $"{rule.Minute / 60:00}:{rule.Minute % 60:00}";
         var title = Palette.UiText($"{pool} · {WeekdayOrder.Summary(rule.Weekdays)} {time}", 13, rule.IsEnabled ? Palette.TextPrimary : Palette.TextTertiary);
         title.FontWeight = Microsoft.UI.Text.FontWeights.Medium;
         text.Children.Add(title);
         var miners = rule.MinerIds.Count == 0
-            ? L("Alle Miner", "All miners")
+            ? Strings.AllMiners
             : string.Join(", ", App.Store.Miners.Where(m => rule.MinerIds.Contains(m.Id)).Select(m => m.DisplayName)) is { Length: > 0 } names
-                ? names : L("Miner entfernt", "Miner removed");
+                ? names : Strings.MinerRemoved;
         text.Children.Add(Palette.MonoText(miners, 11, Palette.TextSecondary));
         row.Children.Add(text.At(1));
-        row.Children.Add(PageParts.IconButton("", L("Bearbeiten", "Edit"), () => _ = EditAsync(rule, isNew: false)).At(2));
-        row.Children.Add(PageParts.IconButton("", L("Wechsel löschen", "Delete switch"), () => Schedules.Remove(rule.Id)).At(3));
+        row.Children.Add(PageParts.IconButton("", Strings.Edit, () => _ = EditAsync(rule, isNew: false)).At(2));
+        row.Children.Add(PageParts.IconButton("", Strings.DeleteSwitch, () => Schedules.Remove(rule.Id)).At(3));
         return row;
     }
 

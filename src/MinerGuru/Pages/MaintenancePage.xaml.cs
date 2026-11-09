@@ -15,10 +15,10 @@ public sealed partial class MaintenancePage : Page, IHeaderPage
 {
     private static MaintenanceStore Maintenance => App.Store.Maintenance;
 
-    private readonly PowerFigure _overdue = new(L("Überfällig", "Overdue"));
-    private readonly PowerFigure _soon = new(L("In den nächsten 7 Tagen", "In the next 7 days"));
-    private readonly PowerFigure _planned = new(L("Geplant", "Planned"));
-    private readonly PowerFigure _done = new(L("Erledigt", "Done"));
+    private readonly PowerFigure _overdue = new(Strings.Overdue);
+    private readonly PowerFigure _soon = new(Strings.InTheNext7Days);
+    private readonly PowerFigure _planned = new(Strings.Planned);
+    private readonly PowerFigure _done = new(Strings.Completed);
     private readonly StackPanel _taskRows = new();
     private readonly StackPanel _recordRows = new();
 
@@ -28,7 +28,7 @@ public sealed partial class MaintenancePage : Page, IHeaderPage
         var figures = new AdaptiveGrid { MinColumnWidth = 180, Spacing = 12 };
         foreach (var figure in new[] { _overdue, _soon, _planned, _done }) figures.Children.Add(figure);
 
-        var add = new DropDownButton { Style = null, Content = L("Aufgabe hinzufügen", "Add task"), HorizontalAlignment = HorizontalAlignment.Right, Padding = new Thickness(10, 4, 8, 4) };
+        var add = new DropDownButton { Style = null, Content = Strings.AddTask, HorizontalAlignment = HorizontalAlignment.Right, Padding = new Thickness(10, 4, 8, 4) };
         var menu = new MenuFlyout();
         foreach (var kind in Enum.GetValues<MaintenanceKind>())
         {
@@ -38,7 +38,7 @@ public sealed partial class MaintenancePage : Page, IHeaderPage
         }
         add.Flyout = menu;
         var header = new Grid();
-        var title = PageParts.Title(L("Aufgaben", "Tasks"));
+        var title = PageParts.Title(Strings.Tasks);
         title.VerticalAlignment = VerticalAlignment.Center;
         header.Children.Add(title);
         header.Children.Add(add);
@@ -47,7 +47,7 @@ public sealed partial class MaintenancePage : Page, IHeaderPage
         tasks.Children.Add(_taskRows);
 
         var records = new StackPanel { Spacing = 8 };
-        records.Children.Add(PageParts.Title(L("Erledigt", "Done")));
+        records.Children.Add(PageParts.Title(Strings.Completed));
         records.Children.Add(_recordRows);
 
         var page = new StackPanel { Spacing = 16, MaxWidth = (double)Application.Current.Resources["PageMaxWidth"], Padding = (Thickness)Application.Current.Resources["PagePadding"] };
@@ -65,7 +65,7 @@ public sealed partial class MaintenancePage : Page, IHeaderPage
         ActualThemeChanged += (_, _) => Render();
     }
 
-    public (string Title, string Subtitle) Header => (L("Wartung", "Maintenance"), L("Aufgaben planen und festhalten, was erledigt ist", "Plan tasks and keep track of what was done"));
+    public (string Title, string Subtitle) Header => (Strings.Maintenance, Strings.PlanTasksAndKeepTrack);
 
     private void Render()
     {
@@ -83,7 +83,7 @@ public sealed partial class MaintenancePage : Page, IHeaderPage
             _taskRows.Children.Add(TaskRow(task, now));
         }
         if (tasks.Count == 0)
-            _taskRows.Children.Add(Palette.UiText(L("Noch keine Aufgaben. Vorlagen findest du unter „Aufgabe hinzufügen“.", "No tasks yet. You will find templates under \"Add task\"."), 13, Palette.TextSecondary));
+            _taskRows.Children.Add(Palette.UiText(Strings.NoTasksYetYouWill, 13, Palette.TextSecondary));
 
         _recordRows.Children.Clear();
         foreach (var record in Maintenance.Records)
@@ -92,7 +92,7 @@ public sealed partial class MaintenancePage : Page, IHeaderPage
             _recordRows.Children.Add(RecordRow(record));
         }
         if (Maintenance.Records.Count == 0)
-            _recordRows.Children.Add(Palette.UiText(L("Noch nichts erledigt.", "Nothing done yet."), 13, Palette.TextSecondary));
+            _recordRows.Children.Add(Palette.UiText(Strings.NothingDoneYet, 13, Palette.TextSecondary));
     }
 
     private Grid TaskRow(MaintenanceTask task, DateTime now)
@@ -109,20 +109,20 @@ public sealed partial class MaintenancePage : Page, IHeaderPage
         text.Children.Add(title);
         var when = days switch
         {
-            < 0 => L($"seit {-days} Tagen fällig", $"overdue by {-days} days"),
-            0 => L("heute fällig", "due today"),
-            _ => L($"in {days} Tagen", $"in {days} days"),
+            < 0 => string.Format(Strings.OverdueByDays, -days),
+            0 => Strings.DueToday,
+            _ => string.Format(Strings.InDays, days),
         };
-        var repeat = task.IntervalDays > 0 ? L($"alle {task.IntervalDays} Tage", $"every {task.IntervalDays} days") : L("einmalig", "once");
+        var repeat = task.IntervalDays > 0 ? string.Format(Strings.EveryIntervalDaysDays, task.IntervalDays) : Strings.Once;
         var detail = Palette.MonoText($"{when} · {repeat} · {MinersText(task.MinerIds)}", 11, Palette.TextSecondary);
         detail.TextTrimming = TextTrimming.CharacterEllipsis;
         text.Children.Add(detail);
         if (task.Notes.Length > 0) text.Children.Add(Palette.UiText(task.Notes, 12, Palette.TextSecondary));
         row.Children.Add(text.At(1));
 
-        row.Children.Add(PageParts.TextButton("", L("Erledigt", "Done"), () => _ = MarkDoneAsync(task)).At(2));
-        row.Children.Add(PageParts.IconButton("", L("Bearbeiten", "Edit"), () => _ = EditAsync(task, isNew: false)).At(3));
-        row.Children.Add(PageParts.IconButton("", L("Aufgabe löschen", "Delete task"), () => Maintenance.Remove(task.Id)).At(4));
+        row.Children.Add(PageParts.TextButton("", Strings.Completed, () => _ = MarkDoneAsync(task)).At(2));
+        row.Children.Add(PageParts.IconButton("", Strings.Edit, () => _ = EditAsync(task, isNew: false)).At(3));
+        row.Children.Add(PageParts.IconButton("", Strings.DeleteTask, () => Maintenance.Remove(task.Id)).At(4));
         return row;
     }
 
@@ -138,15 +138,15 @@ public sealed partial class MaintenancePage : Page, IHeaderPage
         text.Children.Add(Palette.MonoText(MinersText(record.MinerIds), 11, Palette.TextSecondary));
         if (record.Notes.Length > 0) text.Children.Add(Palette.UiText(record.Notes, 12, Palette.TextSecondary));
         row.Children.Add(text.At(1));
-        row.Children.Add(PageParts.IconButton("", L("Eintrag löschen", "Delete entry"), () => Maintenance.RemoveRecord(record.Id)).At(2));
+        row.Children.Add(PageParts.IconButton("", Strings.DeleteEntry, () => Maintenance.RemoveRecord(record.Id)).At(2));
         return row;
     }
 
     private static string MinersText(HashSet<Guid> ids)
     {
-        if (ids.Count == 0) return L("Alle Miner", "All miners");
+        if (ids.Count == 0) return Strings.AllMiners;
         var names = App.Store.Miners.Where(m => ids.Contains(m.Id)).Select(m => m.DisplayName).ToList();
-        return names.Count > 0 ? string.Join(", ", names) : L("Miner entfernt", "Miner removed");
+        return names.Count > 0 ? string.Join(", ", names) : Strings.MinerRemoved;
     }
 
     private async Task EditAsync(MaintenanceTask task, bool isNew)

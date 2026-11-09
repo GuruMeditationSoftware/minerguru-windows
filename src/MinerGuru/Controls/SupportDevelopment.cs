@@ -6,7 +6,6 @@ using Microsoft.UI.Xaml.Media.Imaging;
 using MinerGuru.Core.Models;
 using QRCoder;
 using Windows.ApplicationModel.DataTransfer;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -17,7 +16,7 @@ public sealed partial class SupportDevelopmentButton : HyperlinkButton
 
     public SupportDevelopmentButton()
     {
-        var text = Palette.UiText(L("Diese Entwicklung unterstützen", "Support this project"), 12, Palette.TextSecondary);
+        var text = Palette.UiText(Strings.SupportThisProject, 12, Palette.TextSecondary);
         var content = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 6 };
         _icon.Foreground = Palette.TextSecondary;
         content.Children.Add(_icon);
@@ -35,12 +34,10 @@ public sealed partial class SupportDevelopmentDialog : ContentDialog
     public SupportDevelopmentDialog()
     {
         Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"];
-        Title = L("Diese Entwicklung unterstützen", "Support this project");
-        CloseButtonText = L("Schließen", "Close");
+        Title = Strings.SupportThisProject;
+        CloseButtonText = Strings.Close;
         var form = new StackPanel { Width = 460, Spacing = 16 };
-        var intro = Palette.UiText(L(
-            "MinerGuru ist kostenlos und zeigt keine Werbung. Wenn dir die App hilft, freue ich mich über eine kleine Spende für die Weiterentwicklung.",
-            "MinerGuru is free and has no ads. If the app helps you, a small donation towards further development is very welcome."), 13, Palette.TextSecondary);
+        var intro = Palette.UiText(Strings.MinerGuruIsFreeAndHas, 13, Palette.TextSecondary);
         intro.TextWrapping = TextWrapping.Wrap;
         form.Children.Add(intro);
         var coins = new Grid { ColumnSpacing = 16 };
@@ -63,7 +60,7 @@ public sealed partial class SupportDevelopmentDialog : ContentDialog
         card.Children.Add(name);
         if (!coin.IsConfigured)
         {
-            card.Children.Add(Palette.UiText(L("Adresse noch nicht hinterlegt.", "Address not set yet."), 12, Palette.TextSecondary));
+            card.Children.Add(Palette.UiText(Strings.AddressNotSetYet, 12, Palette.TextSecondary));
             return card;
         }
         var image = new Image { Width = 180, Height = 180 };
@@ -74,13 +71,13 @@ public sealed partial class SupportDevelopmentDialog : ContentDialog
         address.TextWrapping = TextWrapping.Wrap;
         address.IsTextSelectionEnabled = true;
         card.Children.Add(address);
-        var copy = new Button { Content = L("Adresse kopieren", "Copy address"), Style = (Style)Application.Current.Resources["SmallButtonStyle"] };
+        var copy = new Button { Content = Strings.CopyAddress, Style = (Style)Application.Current.Resources["SmallButtonStyle"] };
         copy.Click += (_, _) =>
         {
             var package = new DataPackage();
             package.SetText(coin.Address);
             Clipboard.SetContent(package);
-            copy.Content = L("Kopiert", "Copied");
+            copy.Content = Strings.Copied;
         };
         card.Children.Add(copy);
         return card;

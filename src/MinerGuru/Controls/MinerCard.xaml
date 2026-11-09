@@ -16,24 +16,24 @@
         Tapped="Card_Tapped">
         <Border.ContextFlyout>
             <MenuFlyout>
-                <MenuFlyoutItem Click="Open_Click" Text="{local:T De='Details &amp; Steuerung öffnen', En='Open details &amp; control'}">
+                <MenuFlyoutItem Click="Open_Click" Text="{local:T Key=OpenDetailsControl}">
                     <MenuFlyoutItem.Icon>
                         <FontIcon Glyph="&#xEC4A;" />
                     </MenuFlyoutItem.Icon>
                 </MenuFlyoutItem>
-                <MenuFlyoutItem Click="Browser_Click" Text="{local:T De='AxeOS / NerdOS im Browser öffnen', En='Open AxeOS / NerdOS in the browser'}">
+                <MenuFlyoutItem Click="Browser_Click" Text="{local:T Key=OpenAxeOSNerdOSInThe}">
                     <MenuFlyoutItem.Icon>
                         <FontIcon Glyph="&#xE774;" />
                     </MenuFlyoutItem.Icon>
                 </MenuFlyoutItem>
                 <MenuFlyoutSeparator />
-                <MenuFlyoutItem Click="Restart_Click" Text="{local:T De='Miner neu starten', En='Restart miner'}">
+                <MenuFlyoutItem Click="Restart_Click" Text="{local:T Key=RestartMiner}">
                     <MenuFlyoutItem.Icon>
                         <FontIcon Glyph="&#xE777;" />
                     </MenuFlyoutItem.Icon>
                 </MenuFlyoutItem>
                 <MenuFlyoutSeparator />
-                <MenuFlyoutItem Click="Remove_Click" Text="{local:T De='Aus MinerGuru entfernen', En='Remove from MinerGuru'}">
+                <MenuFlyoutItem Click="Remove_Click" Text="{local:T Key=RemoveFromMinerGuru}">
                     <MenuFlyoutItem.Icon>
                         <FontIcon Glyph="&#xE74D;" />
                     </MenuFlyoutItem.Icon>

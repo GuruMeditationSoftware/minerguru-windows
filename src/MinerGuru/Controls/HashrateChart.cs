@@ -6,7 +6,6 @@ using Path = Microsoft.UI.Xaml.Shapes.Path;
 using MinerGuru.Core;
 using MinerGuru.Core.Models;
 using Windows.Foundation;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -29,7 +28,7 @@ public sealed partial class HashrateChart : Grid
             CornerRadius = new CornerRadius(8),
             Child = new TextBlock
             {
-                Text = L("Der Verlauf füllt sich mit jeder Abfrage", "The history fills up with every poll"),
+                Text = Strings.TheHistoryFillsUpWith,
                 FontSize = 12,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,

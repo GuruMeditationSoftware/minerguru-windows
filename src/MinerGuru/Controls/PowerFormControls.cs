@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -35,9 +34,9 @@ public sealed partial class WeekdayPicker : StackPanel
         Children.Add(toggles);
 
         var shortcuts = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 12 };
-        shortcuts.Children.Add(Shortcut(L("Täglich", "Daily"), WeekdayOrder.All));
+        shortcuts.Children.Add(Shortcut(Strings.Daily, WeekdayOrder.All));
         shortcuts.Children.Add(Shortcut(WeekdayOrder.Summary(WeekdayOrder.Workdays), WeekdayOrder.Workdays));
-        shortcuts.Children.Add(Shortcut(L("Wochenende", "Weekend"), WeekdayOrder.Weekend));
+        shortcuts.Children.Add(Shortcut(Strings.Weekend, WeekdayOrder.Weekend));
         Children.Add(shortcuts);
         Sync();
     }
@@ -74,10 +73,10 @@ public sealed partial class TimeWindowFields : StackPanel
         _window = window;
         Spacing = 4;
         var fields = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
-        fields.Children.Add(Caption(L("Von", "From")));
-        fields.Children.Add(Field(L("Von", "From"), window.StartMinute, minute => _window.StartMinute = minute));
-        fields.Children.Add(Caption(L("bis", "to")));
-        fields.Children.Add(Field(L("Bis", "To"), window.EndMinute, minute => _window.EndMinute = minute));
+        fields.Children.Add(Caption(Strings.From));
+        fields.Children.Add(Field(Strings.From, window.StartMinute, minute => _window.StartMinute = minute));
+        fields.Children.Add(Caption(Strings.ToInText));
+        fields.Children.Add(Field(Strings.To, window.EndMinute, minute => _window.EndMinute = minute));
         Children.Add(fields);
         Children.Add(_hint);
         Sync();
@@ -105,8 +104,8 @@ public sealed partial class TimeWindowFields : StackPanel
     }
 
     private void Sync() => _hint.Text = _window.IsWholeDay
-        ? L("Gleiche Zeit zweimal: gilt den ganzen Tag.", "Same time twice: applies all day.")
-        : _window.WrapsMidnight ? L("Läuft über Mitternacht in den nächsten Tag.", "Runs past midnight into the next day.") : " ";
+        ? Strings.SameTimeTwiceAppliesAll
+        : _window.WrapsMidnight ? Strings.RunsPastMidnightIntoThe : " ";
 }
 
 /// <summary>Label and control side by side, as the Mac's column form.</summary>

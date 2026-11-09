@@ -24,12 +24,12 @@
             <TextBlock
                 Margin="0,0,0,20"
                 Style="{StaticResource SectionTitleStyle}"
-                Text="{local:T De=Einstellungen, En=Settings}" />
+                Text="{local:T Key=Settings}" />
 
             <TextBlock
                 Margin="0,0,0,8"
                 Style="{StaticResource BodyStrongTextBlockStyle}"
-                Text="{local:T De=Allgemein, En=General}" />
+                Text="{local:T Key=General}" />
             <Border Style="{StaticResource SettingCardStyle}">
                 <Grid ColumnSpacing="16">
                     <Grid.ColumnDefinitions>
@@ -39,15 +39,15 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE774;" />
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="{local:T De='Sprache der Oberfläche', En='Interface language'}" />
+                        <TextBlock Text="{local:T Key=InterfaceLanguage}" />
                         <TextBlock
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                             Style="{StaticResource CaptionTextBlockStyle}"
-                            Text="{local:T De='Wird nach einem Neustart von MinerGuru aktiv.', En='Takes effect after restarting MinerGuru.'}" />
+                            Text="{local:T Key=TakesEffectAfterRestartingMinerGuru}" />
                     </StackPanel>
                     <ComboBox
                         x:Name="LanguageBox"
-                        AutomationProperties.Name="{local:T De='Sprache der Oberfläche', En='Interface language'}"
+                        AutomationProperties.Name="{local:T Key=InterfaceLanguage}"
                         Grid.Column="2"
                         SelectionChanged="LanguageBox_SelectionChanged" />
                 </Grid>
@@ -61,14 +61,14 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE7B3;" />
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="{local:T De=Privatmodus, En='Privacy mode'}" />
+                        <TextBlock Text="{local:T Key=PrivacyMode}" />
                         <TextBlock
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                             Style="{StaticResource CaptionTextBlockStyle}"
-                            Text="{local:T De='Verschleiert IP-, Wallet- und MAC-Adressen und den WLAN-Namen, etwa für Screenshots. Strg+Umschalt+H schaltet um.', En='Hides IP, wallet and MAC addresses and the Wi-Fi name, for example for screenshots. Ctrl+Shift+H toggles it.'}"
+                            Text="{local:T Key=HidesIPWalletAndMAC}"
                             TextWrapping="Wrap" />
                     </StackPanel>
-                    <ToggleSwitch AutomationProperties.Name="{local:T De=Privatmodus, En='Privacy mode'}"
+                    <ToggleSwitch AutomationProperties.Name="{local:T Key=PrivacyMode}"
                         x:Name="PrivacySwitch"
                         Grid.Column="2"
                         MinWidth="0"
@@ -81,7 +81,7 @@
             <TextBlock
                 Margin="0,20,0,8"
                 Style="{StaticResource BodyStrongTextBlockStyle}"
-                Text="{local:T De=Abfrage, En=Polling}" />
+                Text="{local:T Key=Polling}" />
             <Border Style="{StaticResource SettingCardStyle}">
                 <Grid ColumnSpacing="16">
                     <Grid.ColumnDefinitions>
@@ -91,13 +91,13 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE916;" />
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="{local:T De=Abfrageintervall, En='Polling interval'}" />
+                        <TextBlock Text="{local:T Key=PollingInterval}" />
                         <TextBlock
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                             Style="{StaticResource CaptionTextBlockStyle}"
-                            Text="{local:T De='Wie oft MinerGuru jeden Miner nach seinen Werten fragt', En='How often MinerGuru asks every miner for its figures'}" />
+                            Text="{local:T Key=HowOftenMinerGuruAsksEvery}" />
                     </StackPanel>
-                    <NumberBox AutomationProperties.Name="{local:T De=Abfrageintervall, En='Polling interval'}"
+                    <NumberBox AutomationProperties.Name="{local:T Key=PollingInterval}"
                         x:Name="IntervalBox"
                         Grid.Column="2"
                         Width="140"
@@ -111,7 +111,7 @@
             <TextBlock
                 Margin="0,20,0,8"
                 Style="{StaticResource BodyStrongTextBlockStyle}"
-                Text="{local:T De=Netzwerk-Scan, En='Network scan'}" />
+                Text="{local:T Key=NetworkScan}" />
             <Border Style="{StaticResource SettingCardStyle}">
                 <Grid ColumnSpacing="16">
                     <Grid.ColumnDefinitions>
@@ -121,13 +121,13 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE968;" />
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="{local:T De='Standard-Subnetz (/24)', En='Default subnet (/24)'}" />
+                        <TextBlock Text="{local:T Key=DefaultSubnet24}" />
                         <TextBlock
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                             Style="{StaticResource CaptionTextBlockStyle}"
-                            Text="{local:T De='Die ersten drei Teile der Adresse, z. B. 192.168.1', En='The first three parts of the address, e.g. 192.168.1'}" />
+                            Text="{local:T Key=TheFirstThreePartsOf}" />
                     </StackPanel>
-                    <TextBox AutomationProperties.Name="{local:T De='Standard-Subnetz (/24)', En='Default subnet (/24)'}"
+                    <TextBox AutomationProperties.Name="{local:T Key=DefaultSubnet24}"
                         x:Name="SubnetBox"
                         Grid.Column="2"
                         Width="140"
@@ -146,9 +146,9 @@
                     <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
-                        Text="{local:T De='Beim Start automatisch scannen, wenn keine Miner konfiguriert sind', En='Scan automatically at startup when no miners are configured'}"
+                        Text="{local:T Key=ScanAutomaticallyAtStartupWhen}"
                         TextWrapping="Wrap" />
-                    <ToggleSwitch AutomationProperties.Name="{local:T De='Beim Start automatisch scannen, wenn keine Miner konfiguriert sind', En='Scan automatically at startup when no miners are configured'}"
+                    <ToggleSwitch AutomationProperties.Name="{local:T Key=ScanAutomaticallyAtStartupWhen}"
                         x:Name="AutoScanSwitch"
                         Grid.Column="2"
                         MinWidth="0"
@@ -161,7 +161,7 @@
             <TextBlock
                 Margin="0,20,0,8"
                 Style="{StaticResource BodyStrongTextBlockStyle}"
-                Text="{local:T De=Blockansicht, En='Block view'}" />
+                Text="{local:T Key=BlockView}" />
             <Border Style="{StaticResource SettingCardStyle}">
                 <Grid ColumnSpacing="16">
                     <Grid.ColumnDefinitions>
@@ -171,19 +171,19 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon VerticalAlignment="Top" Glyph="&#xE7B8;" />
                     <StackPanel Grid.Column="1" Spacing="4">
-                        <TextBlock Text="{local:T De='Block-Vorlage selbst beim Pool abfragen', En='Ask the pool for the block template'}" />
+                        <TextBlock Text="{local:T Key=AskThePoolForThe}" />
                         <TextBlock
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                             Style="{StaticResource CaptionTextBlockStyle}"
-                            Text="{local:T De='Für Miner, die ihren Block nicht selbst melden (NerdOS, AxeOS vor 2.13). MinerGuru verbindet sich dazu von diesem PC aus kurz mit dem Pool des Miners, meldet sich mit dessen Adresse und dem Worker-Namen „minerguru“ an, liest den ersten Auftrag und trennt wieder. So siehst du Blockhöhe, Belohnung, Gebühren und Empfänger und ob deine Adresse dabei ist.', En='For miners that do not report their block themselves (NerdOS, AxeOS before 2.13). MinerGuru briefly connects from this PC to the pool of the miner, logs in with its address and the worker name “minerguru”, reads the first job and disconnects. You then see block height, reward, fees and recipients and whether your address is among them.'}"
+                            Text="{local:T Key=ForMinersThatDoNot}"
                             TextWrapping="Wrap" />
                         <TextBlock
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                             Style="{StaticResource CaptionTextBlockStyle}"
-                            Text="{local:T De='Es werden keine Shares eingereicht; bei 17 getesteten Solo-Pools erschien kein zusätzlicher Worker. Abgefragt wird nur bei offener Miner-Seite, höchstens alle 5 Minuten je Pool. Der Pool sieht die IP-Adresse deines Anschlusses, wie beim Miner auch.', En='No shares are submitted; on 17 tested solo pools no extra worker appeared. It only asks while the miner page is open, at most every 5 minutes per pool. The pool sees the IP address of your connection, just as it does for the miner.'}"
+                            Text="{local:T Key=NoSharesAreSubmittedOn}"
                             TextWrapping="Wrap" />
                     </StackPanel>
-                    <ToggleSwitch AutomationProperties.Name="{local:T De='Block-Vorlage selbst beim Pool abfragen', En='Ask the pool for the block template'}"
+                    <ToggleSwitch AutomationProperties.Name="{local:T Key=AskThePoolForThe}"
                         x:Name="StratumProbeSwitch"
                         Grid.Column="2"
                         MinWidth="0"
@@ -197,7 +197,7 @@
             <TextBlock
                 Margin="0,20,0,8"
                 Style="{StaticResource BodyStrongTextBlockStyle}"
-                Text="{local:T De=Warnungen, En=Warnings}" />
+                Text="{local:T Key=Warnings}" />
             <Border Style="{StaticResource SettingCardStyle}">
                 <Grid ColumnSpacing="16">
                     <Grid.ColumnDefinitions>
@@ -207,13 +207,13 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE9CA;" />
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="{local:T De='Temperaturwarnung ab', En='Temperature warning from'}" />
+                        <TextBlock Text="{local:T Key=TemperatureWarningFrom}" />
                         <TextBlock
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                             Style="{StaticResource CaptionTextBlockStyle}"
-                            Text="{local:T De='Miner über dieser ASIC-Temperatur werden orange markiert', En='Miners above this ASIC temperature are marked orange'}" />
+                            Text="{local:T Key=MinersAboveThisASICTemperature}" />
                     </StackPanel>
-                    <NumberBox AutomationProperties.Name="{local:T De='Temperaturwarnung ab', En='Temperature warning from'}"
+                    <NumberBox AutomationProperties.Name="{local:T Key=TemperatureWarningFrom}"
                         x:Name="TempBox"
                         Grid.Column="2"
                         Width="140"
@@ -233,14 +233,14 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xEA8F;" />
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="{local:T De='Bei Problemen benachrichtigen', En='Notify about problems'}" />
+                        <TextBlock Text="{local:T Key=NotifyAboutProblems}" />
                         <TextBlock
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                             Style="{StaticResource CaptionTextBlockStyle}"
-                            Text="{local:T De='Nur Alarme, keine Werbung. Läuft weiter, solange MinerGuru im Infobereich ist.', En='Alarms only, no advertising. Keeps running while MinerGuru is in the notification area.'}"
+                            Text="{local:T Key=AlarmsOnlyNoAdvertisingKeeps}"
                             TextWrapping="Wrap" />
                     </StackPanel>
-                    <ToggleSwitch AutomationProperties.Name="{local:T De='Bei Problemen benachrichtigen', En='Notify about problems'}"
+                    <ToggleSwitch AutomationProperties.Name="{local:T Key=NotifyAboutProblems}"
                         x:Name="AlertsSwitch"
                         Grid.Column="2"
                         MinWidth="0"
@@ -405,13 +405,13 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE715;" />
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="{local:T De='E-Mail-Warnungen', En='Email alerts'}" />
+                        <TextBlock Text="{local:T Key=EmailAlerts}" />
                         <TextBlock x:Name="EmailStatusText" Style="{StaticResource MonoCaptionStyle}" />
                     </StackPanel>
                     <Button
                         Grid.Column="2"
                         Click="EmailAlerts_Click"
-                        Content="{local:T De='Einrichten', En='Set up'}" />
+                        Content="{local:T Key=SetUp}" />
                 </Grid>
             </Border>
 
@@ -429,7 +429,7 @@
                         </Grid.ColumnDefinitions>
                         <FontIcon Glyph="&#xF246;" />
                         <StackPanel Grid.Column="1">
-                            <TextBlock x:Name="WidgetsTitle" Text="{local:T De='Widgets im Widget-Board', En='Widgets on the widget board'}" />
+                            <TextBlock x:Name="WidgetsTitle" Text="{local:T Key=WidgetsOnTheWidgetBoard}" />
                             <TextBlock
                                 x:Name="WidgetsHint"
                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
@@ -439,9 +439,9 @@
                                 x:Name="DeveloperSettingsLink"
                                 Margin="-12,0,0,0"
                                 Click="DeveloperSettings_Click"
-                                Content="{local:T De='Windows-Einstellungen für Entwickler öffnen', En='Open Windows settings for developers'}" />
+                                Content="{local:T Key=OpenWindowsSettingsForDevelopers}" />
                         </StackPanel>
-                        <ToggleSwitch AutomationProperties.Name="{local:T De='Widgets im Widget-Board', En='Widgets on the widget board'}"
+                        <ToggleSwitch AutomationProperties.Name="{local:T Key=WidgetsOnTheWidgetBoard}"
                             x:Name="WidgetsSwitch"
                             Grid.Column="2"
                             MinWidth="0"
@@ -455,7 +455,7 @@
             <TextBlock
                 Margin="0,20,0,8"
                 Style="{StaticResource BodyStrongTextBlockStyle}"
-                Text="{local:T De=Infobereich, En='Notification area'}" />
+                Text="{local:T Key=NotificationArea}" />
             <Border Style="{StaticResource SettingCardStyle}">
                 <Grid ColumnSpacing="16">
                     <Grid.ColumnDefinitions>
@@ -465,14 +465,14 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE8FC;" />
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="{local:T De='Beim Schließen im Infobereich weiterlaufen', En='Keep running in the notification area when closed'}" />
+                        <TextBlock Text="{local:T Key=KeepRunningInTheNotification}" />
                         <TextBlock
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                             Style="{StaticResource CaptionTextBlockStyle}"
-                            Text="{local:T De='Überwachung und Zeitpläne laufen weiter. Beenden lässt sich MinerGuru über das Symbol.', En='Monitoring and schedules keep running. Quit MinerGuru from its icon.'}"
+                            Text="{local:T Key=MonitoringAndSchedulesKeepRunning}"
                             TextWrapping="Wrap" />
                     </StackPanel>
-                    <ToggleSwitch AutomationProperties.Name="{local:T De='Beim Schließen im Infobereich weiterlaufen', En='Keep running in the notification area when closed'}"
+                    <ToggleSwitch AutomationProperties.Name="{local:T Key=KeepRunningInTheNotification}"
                         x:Name="KeepRunningSwitch"
                         Grid.Column="2"
                         MinWidth="0"
@@ -495,14 +495,14 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE896;" />
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="{local:T De='Täglich nach neuen Versionen suchen', En='Check for new versions daily'}" />
+                        <TextBlock Text="{local:T Key=CheckForNewVersionsDaily}" />
                         <TextBlock
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                             Style="{StaticResource CaptionTextBlockStyle}"
-                            Text="{local:T De='MinerGuru fragt dazu GitHub nach der neuesten Version. GitHub sieht dabei deine IP-Adresse und die App-Version. Installiert wird nichts automatisch.', En='MinerGuru asks GitHub for the latest version. GitHub sees your IP address and the app version. Nothing is installed automatically.'}"
+                            Text="{local:T Key=MinerGuruAsksGitHubForThe}"
                             TextWrapping="Wrap" />
                     </StackPanel>
-                    <ToggleSwitch AutomationProperties.Name="{local:T De='Täglich nach neuen Versionen suchen', En='Check for new versions daily'}"
+                    <ToggleSwitch AutomationProperties.Name="{local:T Key=CheckForNewVersionsDaily}"
                         x:Name="UpdateCheckSwitch"
                         Grid.Column="2"
                         MinWidth="0"
@@ -529,19 +529,19 @@
                         x:Name="UpdateDownloadLink"
                         Grid.Column="2"
                         Click="UpdateDownload_Click"
-                        Content="{local:T De='Zum Download', En='Go to download'}" />
+                        Content="{local:T Key=GoToDownload}" />
                     <Button
                         x:Name="UpdateCheckButton"
                         Grid.Column="3"
                         Click="UpdateCheckButton_Click"
-                        Content="{local:T De='Jetzt suchen', En='Check now'}" />
+                        Content="{local:T Key=CheckNow}" />
                 </Grid>
             </Border>
 
             <TextBlock
                 Margin="0,20,0,8"
                 Style="{StaticResource BodyStrongTextBlockStyle}"
-                Text="{local:T De=Daten, En=Data}" />
+                Text="{local:T Key=Data}" />
             <Border Style="{StaticResource SettingCardStyle}">
                 <Grid ColumnSpacing="16">
                     <Grid.ColumnDefinitions>
@@ -551,7 +551,7 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE8B7;" />
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="{local:T De=Datenordner, En='Data folder'}" />
+                        <TextBlock Text="{local:T Key=DataFolder}" />
                         <TextBlock
                             x:Name="DataFolderText"
                             Style="{StaticResource MonoCaptionStyle}"
@@ -560,7 +560,7 @@
                     <Button
                         Grid.Column="2"
                         Click="OpenFolder_Click"
-                        Content="{local:T De='Im Explorer öffnen', En='Open in Explorer'}" />
+                        Content="{local:T Key=OpenInExplorer}" />
                 </Grid>
             </Border>
             <Border Style="{StaticResource SettingCardStyle}">
@@ -572,24 +572,24 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE9D9;" />
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="{local:T De=Diagnose-Log, En='Diagnostic log'}" />
+                        <TextBlock Text="{local:T Key=DiagnosticLog}" />
                         <TextBlock
                             Style="{StaticResource CaptionTextBlockStyle}"
                             Opacity="0.7"
-                            Text="{local:T De='Hält Zustände, Warnungen, Schaltvorgänge und Messwerte fest, nur auf diesem PC. Enthält die lokalen IP-Adressen der Miner, aber keine Passwörter, Wallet-Adressen oder Codes. Wird nie automatisch gesendet.', En='Records states, alerts, switching and measurements, only on this PC. Contains local IP addresses, but no passwords, wallet addresses or codes. Never sent automatically.'}"
+                            Text="{local:T Key=RecordsStatesAlertsSwitchingAnd}"
                             TextWrapping="Wrap" />
                     </StackPanel>
                     <Button
                         Grid.Column="2"
                         Click="ExportLog_Click"
-                        Content="{local:T De='Exportieren …', En='Export …'}" />
+                        Content="{local:T Key=Export}" />
                 </Grid>
             </Border>
 
             <TextBlock
                 Margin="0,20,0,8"
                 Style="{StaticResource BodyStrongTextBlockStyle}"
-                Text="{local:T De=Soll-Adressen, En='Expected addresses'}" />
+                Text="{local:T Key=ExpectedAddresses}" />
             <Border Style="{StaticResource SettingCardStyle}">
                 <StackPanel Spacing="10">
                     <TextBox
@@ -611,12 +611,12 @@
                     <TextBlock
                         x:Name="AddressWarning"
                         Foreground="{ThemeResource SignalBadBrush}"
-                        Text="{local:T De='Das ist keine gültige Adresse.', En='This is not a valid address.'}"
+                        Text="{local:T Key=ThisIsNotAValid}"
                         Visibility="Collapsed" />
                     <TextBlock
                         Style="{StaticResource CaptionTextBlockStyle}"
                         Opacity="0.7"
-                        Text="{local:T De='MinerGuru warnt, wenn ein Miner an eine andere Adresse zahlt, und schreibt nie von selbst eine Adresse auf einen Miner.', En='MinerGuru warns when a miner pays to another address and never writes an address to a miner on its own.'}"
+                        Text="{local:T Key=MinerGuruWarnsWhenAMiner}"
                         TextWrapping="Wrap" />
                 </StackPanel>
             </Border>
@@ -624,7 +624,7 @@
             <TextBlock
                 Margin="0,20,0,8"
                 Style="{StaticResource BodyStrongTextBlockStyle}"
-                Text="{local:T De=Eingriffe, En=Interventions}" />
+                Text="{local:T Key=Interventions}" />
             <Border Style="{StaticResource SettingCardStyle}">
                 <Grid ColumnSpacing="16">
                     <Grid.ColumnDefinitions>
@@ -634,14 +634,14 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE72E;" />
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="{local:T De='Nur lesen', En='Read-only'}" />
+                        <TextBlock Text="{local:T Key=ReadOnly}" />
                         <TextBlock
                             Style="{StaticResource CaptionTextBlockStyle}"
                             Opacity="0.7"
-                            Text="{local:T De='Nichts an Minern ändern', En='Change nothing on miners'}"
+                            Text="{local:T Key=ChangeNothingOnMiners}"
                             TextWrapping="Wrap" />
                     </StackPanel>
-                    <ToggleSwitch AutomationProperties.Name="{local:T De='Nur lesen', En='Read-only'}"
+                    <ToggleSwitch AutomationProperties.Name="{local:T Key=ReadOnly}"
                         x:Name="ReadOnlySwitch"
                         Grid.Column="2"
                         MinWidth="0"
@@ -659,14 +659,14 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE72C;" />
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="{local:T De='Ohne Shares neu starten', En='Restart without shares'}" />
+                        <TextBlock Text="{local:T Key=RestartWithoutShares}" />
                         <TextBlock
                             Style="{StaticResource CaptionTextBlockStyle}"
                             Opacity="0.7"
-                            Text="{local:T De='Höchstens einmal pro Stunde je Miner, nie bei Überhitzung', En='At most once an hour per miner, never when overheating'}"
+                            Text="{local:T Key=AtMostOnceAnHour}"
                             TextWrapping="Wrap" />
                     </StackPanel>
-                    <ToggleSwitch AutomationProperties.Name="{local:T De='Ohne Shares neu starten', En='Restart without shares'}"
+                    <ToggleSwitch AutomationProperties.Name="{local:T Key=RestartWithoutShares}"
                         x:Name="RestartFlatlineSwitch"
                         Grid.Column="2"
                         MinWidth="0"
@@ -684,14 +684,14 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE72C;" />
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="{local:T De='Zum Primär-Pool zurückholen', En='Bring back to primary pool'}" />
+                        <TextBlock Text="{local:T Key=BringBackToPrimaryPool}" />
                         <TextBlock
                             Style="{StaticResource CaptionTextBlockStyle}"
                             Opacity="0.7"
-                            Text="{local:T De='Höchstens einmal pro Stunde je Miner, nie bei Überhitzung', En='At most once an hour per miner, never when overheating'}"
+                            Text="{local:T Key=AtMostOnceAnHour}"
                             TextWrapping="Wrap" />
                     </StackPanel>
-                    <ToggleSwitch AutomationProperties.Name="{local:T De='Zum Primär-Pool zurückholen', En='Bring back to primary pool'}"
+                    <ToggleSwitch AutomationProperties.Name="{local:T Key=BringBackToPrimaryPool}"
                         x:Name="RestartPrimarySwitch"
                         Grid.Column="2"
                         MinWidth="0"
@@ -708,18 +708,18 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <FontIcon Glyph="&#xE81C;" />
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{local:T De=Änderungsprotokoll, En='Change log'}" />
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{local:T Key=ChangeLog}" />
                     <Button
                         Grid.Column="2"
                         Click="ChangeLog_Click"
-                        Content="{local:T De='Anzeigen …', En='Show …'}" />
+                        Content="{local:T Key=Show}" />
                 </Grid>
             </Border>
 
             <TextBlock
                 Margin="0,20,0,8"
                 Style="{StaticResource BodyStrongTextBlockStyle}"
-                Text="{local:T De=Info, En=About}" />
+                Text="{local:T Key=About}" />
             <Border Style="{StaticResource SettingCardStyle}">
                 <Grid ColumnSpacing="16">
                     <Grid.ColumnDefinitions>
@@ -742,8 +742,8 @@
                 Orientation="Horizontal"
                 Spacing="4">
                 <controls:SupportDevelopmentButton />
-                <HyperlinkButton Click="Feedback_Click" Content="{local:T De='Feedback geben', En='Send feedback'}" FontSize="12" />
-                <HyperlinkButton Click="License_Click" Content="{local:T De=Lizenz, En=License}" FontSize="12" />
+                <HyperlinkButton Click="Feedback_Click" Content="{local:T Key=SendFeedback}" FontSize="12" />
+                <HyperlinkButton Click="License_Click" Content="{local:T Key=License}" FontSize="12" />
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml.Shapes;
 using MinerGuru.Controls;
 using MinerGuru.Core;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Pages;
 
@@ -40,9 +39,9 @@ public sealed partial class FleetPage : Page, IHeaderPage
         get
         {
             var store = App.Store;
-            return (L("Flotte", "Fleet"), store.Miners.Count == 0
-                ? L("Noch keine Miner", "No miners yet")
-                : L($"{store.OnlineCount} von {store.Miners.Count} Minern online", $"{store.OnlineCount} of {store.Miners.Count} miners online"));
+            return (Strings.Fleet, store.Miners.Count == 0
+                ? Strings.NoMinersYet
+                : string.Format(Strings.OfMinersOnline, store.OnlineCount, store.Miners.Count));
         }
     }
 
@@ -83,10 +82,10 @@ public sealed partial class FleetPage : Page, IHeaderPage
 
     // The strip under the chart: five figures with hairlines between them
 
-    private static readonly (string De, string En)[] FigureTitles =
+    private static string[] FigureTitles =>
     [
-        ("Leistung", "Power"), ("Effizienz", "Efficiency"), ("Shares", "Shares"),
-        ("Best Diff seit Neustart", "Best diff since restart"), ("Ø Pool-Latenz", "Ø Pool latency"),
+        Strings.Power, Strings.Efficiency, Strings.Shares,
+        Strings.BestDiffSinceRestart, Strings.AveragePoolLatency,
     ];
 
     private void BuildFigureStrip()
@@ -109,7 +108,7 @@ public sealed partial class FleetPage : Page, IHeaderPage
             valueRow.Children.Add(value);
             valueRow.Children.Add(unit);
             var detail = Palette.MonoText();
-            var title = new TextBlock { Text = L(FigureTitles[i].De, FigureTitles[i].En), Style = (Style)Application.Current.Resources["FigureLabelStyle"] };
+            var title = new TextBlock { Text = FigureTitles[i], Style = (Style)Application.Current.Resources["FigureLabelStyle"] };
             var column = new StackPanel { Spacing = 4 };
             column.Children.Add(title);
             column.Children.Add(valueRow);
@@ -141,7 +140,7 @@ public sealed partial class FleetPage : Page, IHeaderPage
     {
         var store = App.Store;
         var update = store.Updates.BannerVersion;
-        UpdateBar.Title = update == null ? "" : L($"MinerGuru {update} ist verfügbar", $"MinerGuru {update} is available");
+        UpdateBar.Title = update == null ? "" : string.Format(Strings.MinerGuruIsAvailable, update);
         UpdateBar.IsOpen = update != null;
         var hasMiners = store.Miners.Count > 0;
         EmptyState.Visibility = hasMiners ? Visibility.Collapsed : Visibility.Visible;
@@ -158,17 +157,17 @@ public sealed partial class FleetPage : Page, IHeaderPage
             return;
         }
 
-        var parts = new List<string> { L($"{store.OnlineCount} von {store.Miners.Count} online", $"{store.OnlineCount} of {store.Miners.Count} online") };
+        var parts = new List<string> { string.Format(Strings.OfOnline, store.OnlineCount, store.Miners.Count) };
         var offline = store.Miners.Count - store.OnlineCount;
         if (offline > 0) parts.Add($"{offline} offline");
-        if (store.LastGlobalRefresh is { } last) parts.Add(L($"aktualisiert {DisplayFormat.Time(last)}", $"updated {DisplayFormat.Time(last)}"));
+        if (store.LastGlobalRefresh is { } last) parts.Add(string.Format(Strings.Updated, DisplayFormat.Time(last)));
         MetaText.Text = string.Join(" · ", parts);
         UpdateSolo();
 
         var (value, unit) = MinerFormatting.SplitHashrate(store.TotalHashrateGhs);
         FleetRateValue.Text = value;
         FleetRateUnit.Text = unit;
-        FleetRateSub.Text = L($"{store.TotalHashrateGhs:0} GH/s · {store.OnlineCount} Miner aktiv", $"{store.TotalHashrateGhs:0} GH/s · {store.OnlineCount} miners active");
+        FleetRateSub.Text = string.Format(Strings.GHSMinersActive, store.TotalHashrateGhs, store.OnlineCount);
         FleetChart.SetPoints(store.FleetHistory.Select(s => (s.Timestamp, s.HashRateGhs)));
 
         // The three strongest online miners, the strongest in front
@@ -182,12 +181,12 @@ public sealed partial class FleetPage : Page, IHeaderPage
         var rejectRate = accepted + rejected > 0 ? rejected * 100.0 / (accepted + rejected) : 0;
         var latency = store.AveragePoolLatencyMs;
         SetFigure(0, DisplayFormat.Decimal(store.TotalPowerWatts, 1), "W",
-            L($"{DisplayFormat.Decimal(store.TotalPowerWatts * 24 / 1000, 2)} kWh pro Tag", $"{DisplayFormat.Decimal(store.TotalPowerWatts * 24 / 1000, 2)} kWh per day"));
-        SetFigure(1, store.FleetEfficiencyJPerTh > 0 ? DisplayFormat.Decimal(store.FleetEfficiencyJPerTh, 1) : "—", "J/TH", L("Energie pro Terahash", "Energy per terahash"));
+            string.Format(Strings.KWhPerDay, DisplayFormat.Decimal(store.TotalPowerWatts * 24 / 1000, 2)));
+        SetFigure(1, store.FleetEfficiencyJPerTh > 0 ? DisplayFormat.Decimal(store.FleetEfficiencyJPerTh, 1) : "—", "J/TH", Strings.EnergyPerTerahash);
         SetFigure(2, DisplayFormat.Integer(accepted), null,
-            L($"{rejected} abgelehnt · {DisplayFormat.Percent(rejectRate, 2)}", $"{rejected} rejected · {DisplayFormat.Percent(rejectRate, 2)}"));
+            string.Format(Strings.Rejected, rejected, DisplayFormat.Percent(rejectRate, 2)));
         SetFigure(3, store.BestSessionInfo?.SessionBestDiffText ?? "—", null,
-            L($"Allzeit {store.BestDiffInfo?.BestDiffFormatted ?? "—"}", $"All-time {store.BestDiffInfo?.BestDiffFormatted ?? "—"}"));
+            string.Format(Strings.AllTime, store.BestDiffInfo?.BestDiffFormatted ?? "—"));
         SetFigure(4, latency is { } ms ? DisplayFormat.Decimal(ms, 0) : "—", latency != null ? "ms" : null, LatencyRating.Evaluate(latency).Label());
 
         MinerCountText.Text = store.Miners.Count.ToString();

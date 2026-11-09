@@ -1,4 +1,3 @@
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Models;
 
@@ -72,7 +71,7 @@ public sealed class MinerDevice
         }
     }
 
-    public string HardwareTitle => LatestInfo?.DetectedHardwareTitle() ?? CachedHardwareModel ?? L("Unbekannter Miner", "Unknown miner");
+    public string HardwareTitle => LatestInfo?.DetectedHardwareTitle() ?? CachedHardwareModel ?? Strings.UnknownMiner;
 
     public bool IsNerdOs => LatestInfo?.Firmware() == MinerFirmware.NerdOs;
     public bool RequiresOtp => LatestInfo?.Otp == true;

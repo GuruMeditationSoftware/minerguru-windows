@@ -22,7 +22,7 @@ public static class WeekdayOrder
     /// <summary>„Mo–Fr“, „Sa, So“ or „täglich“ for a set of days.</summary>
     public static string Summary(IReadOnlySet<DayOfWeek> days)
     {
-        if (days.SetEquals(All)) return L("täglich", "daily");
+        if (days.SetEquals(All)) return Strings.DailyInText;
         if (days.SetEquals(Workdays)) return $"{ShortName(DayOfWeek.Monday)}–{ShortName(DayOfWeek.Friday)}";
         return string.Join(", ", MondayFirst.Where(days.Contains).Select(ShortName));
     }
@@ -67,7 +67,7 @@ public sealed class WeeklyWindow
     public bool Contains(DateTime date) => Contains(date.DayOfWeek, date.Hour * 60 + date.Minute);
 
     /// <summary>„22:00–06:00“.</summary>
-    public string TimeRangeText => IsWholeDay ? L("ganztags", "all day") : $"{Clock(StartMinute)}–{Clock(EndMinute)}";
+    public string TimeRangeText => IsWholeDay ? Strings.AllDay : $"{Clock(StartMinute)}–{Clock(EndMinute)}";
 
     public static string Clock(int minute) => $"{minute / 60 % 24:00}:{minute % 60:00}";
 }
@@ -191,7 +191,7 @@ public static class PowerActionText
 {
     public static string Title(this PowerAction action) => action switch
     {
-        PowerAction.NightMode => L("Nachtmodus", "Night mode"),
+        PowerAction.NightMode => Strings.NightMode,
         PowerAction.Pause => "Pause",
         _ => "Normal",
     };

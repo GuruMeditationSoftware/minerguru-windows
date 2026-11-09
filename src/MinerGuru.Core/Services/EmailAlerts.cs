@@ -2,7 +2,6 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
@@ -82,8 +81,8 @@ public sealed class EmailAlerts
 
     /// <summary>Throws what went wrong, for the test button.</summary>
     public Task SendTestAsync(EmailSettings settings, string? password) => SendAsync(settings, password ?? Unprotect(settings.ProtectedPassword ?? Settings.ProtectedPassword),
-        L("MinerGuru: Test-Mail", "MinerGuru: test mail"),
-        L("Diese Test-Mail zeigt: Warnungen von MinerGuru kommen bei dir an.", "This test mail shows that alerts from MinerGuru reach you."));
+        Strings.MinerGuruTestMail,
+        Strings.ThisTestMailShowsThat);
 
     /// <summary>A failed mail is logged, the alert itself stays delivered.</summary>
     public async Task DeliverAsync(IReadOnlyCollection<AlertEvent> events)

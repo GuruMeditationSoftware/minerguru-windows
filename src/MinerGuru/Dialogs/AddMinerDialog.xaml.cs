@@ -1,7 +1,6 @@
 using Microsoft.UI.Xaml.Controls;
 using MinerGuru.Core.Models;
 using MinerGuru.Core.Services;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Dialogs;
 
@@ -24,7 +23,7 @@ public sealed partial class AddMinerDialog : ContentDialog
         if (_failedAddress == null) return;
         _failedAddress = null;
         ResultBar.IsOpen = false;
-        PrimaryButtonText = L("Hinzufügen", "Add");
+        PrimaryButtonText = Strings.Add;
     }
 
     private async void Dialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -40,7 +39,7 @@ public sealed partial class AddMinerDialog : ContentDialog
         if (App.Store.IsAlreadyAdded(address) && string.IsNullOrWhiteSpace(name))
         {
             args.Cancel = true;
-            ShowResult(InfoBarSeverity.Informational, L("Diesen Miner gibt es schon in MinerGuru.", "This miner is already in MinerGuru."));
+            ShowResult(InfoBarSeverity.Informational, Strings.ThisMinerIsAlreadyIn);
             return;
         }
 
@@ -57,8 +56,8 @@ public sealed partial class AddMinerDialog : ContentDialog
         {
             args.Cancel = true;
             _failedAddress = address;
-            ShowResult(InfoBarSeverity.Warning, L($"Keine Antwort von {address}: {e.Message}", $"No answer from {address}: {e.Message}"));
-            PrimaryButtonText = L("Trotzdem hinzufügen", "Add anyway");
+            ShowResult(InfoBarSeverity.Warning, string.Format(Strings.NoAnswerFrom, address, e.Message));
+            PrimaryButtonText = Strings.AddAnyway;
         }
         finally
         {

@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -108,7 +107,7 @@ public sealed partial class WeekTariffBar : Grid
 
     private static string Label(PowerTariff tariff, TariffSegment segment)
     {
-        var name = tariff.Zones.FirstOrDefault(z => z.Id == segment.ZoneId)?.Name ?? L("Standardpreis", "Base price");
+        var name = tariff.Zones.FirstOrDefault(z => z.Id == segment.ZoneId)?.Name ?? Strings.BasePrice;
         return $"{name} {WeeklyWindow.Clock(segment.StartMinute)}–{WeeklyWindow.Clock(segment.EndMinute)}";
     }
 

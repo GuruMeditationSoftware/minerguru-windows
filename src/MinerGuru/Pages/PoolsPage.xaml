@@ -22,29 +22,29 @@
                 HorizontalAlignment="Right"
                 Orientation="Horizontal"
                 Spacing="8">
-                <Button AutomationProperties.Name="{local:T De='Alle auf den Minern konfigurierten Pools in die Bibliothek übernehmen', En='Add all pools configured on the miners to the library'}"
+                <Button AutomationProperties.Name="{local:T Key=AddAllPoolsConfiguredOn}"
                     Click="Import_Click"
                     Style="{StaticResource SmallButtonStyle}"
-                    ToolTipService.ToolTip="{local:T De='Alle auf den Minern konfigurierten Pools in die Bibliothek übernehmen', En='Add all pools configured on the miners to the library'}">
+                    ToolTipService.ToolTip="{local:T Key=AddAllPoolsConfiguredOn}">
                     <StackPanel Orientation="Horizontal" Spacing="6">
                         <FontIcon FontSize="12" Glyph="&#xE896;" />
-                        <TextBlock Text="{local:T De='Aus Minern auslesen', En='Read from miners'}" />
+                        <TextBlock Text="{local:T Key=ReadFromMiners}" />
                     </StackPanel>
                 </Button>
-                <Button AutomationProperties.Name="{local:T De='Neue Pool-Konfiguration anlegen', En='Create a new pool configuration'}"
+                <Button AutomationProperties.Name="{local:T Key=CreateANewPoolConfiguration}"
                     Click="New_Click"
                     Style="{StaticResource SmallButtonStyle}"
-                    ToolTipService.ToolTip="{local:T De='Neue Pool-Konfiguration anlegen', En='Create a new pool configuration'}">
+                    ToolTipService.ToolTip="{local:T Key=CreateANewPoolConfiguration}">
                     <StackPanel Orientation="Horizontal" Spacing="6">
                         <FontIcon FontSize="12" Glyph="&#xE710;" />
-                        <TextBlock Text="{local:T De='Neuer Pool', En='New pool'}" />
+                        <TextBlock Text="{local:T Key=NewPool}" />
                     </StackPanel>
                 </Button>
-                <Button AutomationProperties.Name="{local:T De='Alle geänderten Pool-Zuordnungen senden; die Miner starten danach neu', En='Send all changed pool assignments; the miners restart afterwards'}"
+                <Button AutomationProperties.Name="{local:T Key=SendAllChangedPoolAssignments}"
                     x:Name="ApplyAllButton"
                     Click="ApplyAll_Click"
                     Style="{StaticResource SmallAccentButtonStyle}"
-                    ToolTipService.ToolTip="{local:T De='Alle geänderten Pool-Zuordnungen senden; die Miner starten danach neu', En='Send all changed pool assignments; the miners restart afterwards'}">
+                    ToolTipService.ToolTip="{local:T Key=SendAllChangedPoolAssignments}">
                     <StackPanel Orientation="Horizontal" Spacing="6">
                         <FontIcon FontSize="12" Glyph="&#xE73E;" />
                         <TextBlock x:Name="ApplyAllText" />
@@ -66,7 +66,7 @@
                             FontSize="15"
                             FontWeight="Medium"
                             Foreground="{ThemeResource TextPrimaryBrush}"
-                            Text="{local:T De=Pool-Bibliothek, En='Pool library'}" />
+                            Text="{local:T Key=PoolLibrary}" />
                         <TextBlock
                             x:Name="LibraryCount"
                             VerticalAlignment="Center"
@@ -78,8 +78,7 @@
                         x:Name="LibraryEmpty"
                         FontSize="13"
                         Foreground="{ThemeResource TextSecondaryBrush}"
-                        Text="{local:T De='Noch keine Pools gespeichert. Lies die Pools deiner Miner aus oder lege einen neuen an.',
-                                       En='No pools saved yet. Read the pools from your miners or create a new one.'}"
+                        Text="{local:T Key=NoPoolsSavedYetRead}"
                         TextWrapping="Wrap" />
                     <StackPanel x:Name="LibraryRows" />
                 </StackPanel>
@@ -89,7 +88,7 @@
             <TextBlock
                 Margin="0,8,0,0"
                 Style="{StaticResource SectionTitleStyle}"
-                Text="{local:T De='Zuordnung zu Minern', En='Assignment to miners'}" />
+                Text="{local:T Key=AssignmentToMiners}" />
             <Border
                 x:Name="NoMiners"
                 Padding="32"
@@ -104,13 +103,12 @@
                         FontSize="15"
                         FontWeight="Medium"
                         Foreground="{ThemeResource TextPrimaryBrush}"
-                        Text="{local:T De='Keine Miner online', En='No miners online'}" />
+                        Text="{local:T Key=NoMinersOnline}" />
                     <TextBlock
                         HorizontalAlignment="Center"
                         FontSize="13"
                         Foreground="{ThemeResource TextSecondaryBrush}"
-                        Text="{local:T De='Sobald ein Miner Telemetrie liefert, kannst du hier seine Pool-Slots belegen.',
-                                       En='As soon as a miner reports telemetry, you can fill its pool slots here.'}"
+                        Text="{local:T Key=AsSoonAsAMiner}"
                         TextAlignment="Center"
                         TextWrapping="Wrap" />
                 </StackPanel>

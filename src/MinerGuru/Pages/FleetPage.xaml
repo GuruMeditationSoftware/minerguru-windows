@@ -20,7 +20,7 @@
                 IsOpen="False"
                 Severity="Informational">
                 <InfoBar.ActionButton>
-                    <Button Click="UpdateDownload_Click" Content="{local:T De='Zum Download', En='Go to download'}" />
+                    <Button Click="UpdateDownload_Click" Content="{local:T Key=GoToDownload}" />
                 </InfoBar.ActionButton>
             </InfoBar>
 
@@ -40,13 +40,12 @@
                     <TextBlock
                         HorizontalAlignment="Center"
                         Style="{StaticResource SectionTitleStyle}"
-                        Text="{local:T De='Noch keine Miner', En='No miners yet'}" />
+                        Text="{local:T Key=NoMinersYet}" />
                     <TextBlock
                         HorizontalAlignment="Center"
                         FontSize="13"
                         Foreground="{ThemeResource TextSecondaryBrush}"
-                        Text="{local:T De='Scanne dein lokales Netzwerk oder füge einen Miner direkt per IP-Adresse hinzu.',
-                                       En='Scan your local network or add a miner directly by its IP address.'}"
+                        Text="{local:T Key=ScanYourLocalNetworkOr}"
                         TextAlignment="Center"
                         TextWrapping="Wrap" />
                     <StackPanel
@@ -56,9 +55,9 @@
                         Spacing="8">
                         <Button
                             Click="Scan_Click"
-                            Content="{local:T De='Netzwerk scannen', En='Scan network'}"
+                            Content="{local:T Key=ScanNetwork}"
                             Style="{StaticResource AccentButtonStyle}" />
-                        <Button Click="Add_Click" Content="{local:T De='Miner hinzufügen', En='Add miner'}" />
+                        <Button Click="Add_Click" Content="{local:T Key=AddMiner}" />
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -71,11 +70,10 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Spacing="4">
-                        <TextBlock Style="{StaticResource SectionTitleStyle}" Text="{local:T De=Solo-Chancen, En='Solo odds'}" />
+                        <TextBlock Style="{StaticResource SectionTitleStyle}" Text="{local:T Key=SoloOdds}" />
                         <TextBlock
                             Style="{StaticResource FigureLabelStyle}"
-                            Text="{local:T De='Wahrscheinlichkeit, mit der aktuellen Flotten-Hashrate einen Block zu finden',
-                                           En='Probability of finding a block with the current fleet hashrate'}" />
+                            Text="{local:T Key=ProbabilityOfFindingABlock}" />
                     </StackPanel>
                     <DropDownButton
                         x:Name="TimeframeButton"
@@ -85,7 +83,7 @@
                         VerticalAlignment="Center"
                         CornerRadius="6"
                         FontSize="12"
-                        ToolTipService.ToolTip="{local:T De=Zeitraum, En=Timeframe}">
+                        ToolTipService.ToolTip="{local:T Key=Timeframe}">
                         <DropDownButton.Flyout>
                             <MenuFlyout x:Name="TimeframeMenu" Placement="BottomEdgeAlignedRight" />
                         </DropDownButton.Flyout>
@@ -105,7 +103,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Spacing="4">
-                        <TextBlock Style="{StaticResource SectionTitleStyle}" Text="{local:T De=Flotte, En=Fleet}" />
+                        <TextBlock Style="{StaticResource SectionTitleStyle}" Text="{local:T Key=Fleet}" />
                         <TextBlock x:Name="MetaText" Style="{StaticResource MonoCaptionStyle}" />
                     </StackPanel>
                     <StackPanel
@@ -113,19 +111,19 @@
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
                         Spacing="8">
-                        <Button AutomationProperties.Name="{local:T De='Lokales Netzwerk nach Minern durchsuchen', En='Search the local network for miners'}"
+                        <Button AutomationProperties.Name="{local:T Key=SearchTheLocalNetworkFor}"
                             Click="Scan_Click"
                             Style="{StaticResource SmallButtonStyle}"
-                            ToolTipService.ToolTip="{local:T De='Lokales Netzwerk nach Minern durchsuchen', En='Search the local network for miners'}">
+                            ToolTipService.ToolTip="{local:T Key=SearchTheLocalNetworkFor}">
                             <StackPanel Orientation="Horizontal" Spacing="6">
                                 <FontIcon FontSize="12" Glyph="&#xE701;" />
-                                <TextBlock Text="{local:T De='Netzwerk scannen', En='Scan network'}" />
+                                <TextBlock Text="{local:T Key=ScanNetwork}" />
                             </StackPanel>
                         </Button>
-                        <Button AutomationProperties.Name="{local:T De='IP hinzufügen', En='Add IP'}" Click="Add_Click" Style="{StaticResource SmallButtonStyle}">
+                        <Button AutomationProperties.Name="{local:T Key=AddIP}" Click="Add_Click" Style="{StaticResource SmallButtonStyle}">
                             <StackPanel Orientation="Horizontal" Spacing="6">
                                 <FontIcon FontSize="12" Glyph="&#xE710;" />
-                                <TextBlock Text="{local:T De='IP hinzufügen', En='Add IP'}" />
+                                <TextBlock Text="{local:T Key=AddIP}" />
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -140,7 +138,7 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Spacing="24">
                                 <StackPanel Spacing="4">
-                                    <TextBlock Style="{StaticResource FigureLabelStyle}" Text="{local:T De=Gesamt-Hashrate, En='Total hashrate'}" />
+                                    <TextBlock Style="{StaticResource FigureLabelStyle}" Text="{local:T Key=TotalHashrate}" />
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock
                                             x:Name="FleetRateValue"
@@ -200,14 +198,14 @@
                             FontSize="13"
                             FontWeight="Medium"
                             Foreground="{ThemeResource TextSecondaryBrush}"
-                            Text="{local:T De='Pool-Verbindungen &amp; Latenzen', En='Pool Connections &amp; Latencies'}" />
+                            Text="{local:T Key=PoolConnectionsLatencies}" />
                     </StackPanel>
                     <TextBlock
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         FontSize="12"
                         Foreground="{ThemeResource TextSecondaryBrush}"
-                        Text="{local:T De='Live-Vergleich aller Miner', En='Live comparison of all miners'}" />
+                        Text="{local:T Key=LiveComparisonOfAllMiners}" />
                 </Grid>
                 <controls:PoolOverviewTable x:Name="PoolTable" />
             </StackPanel>

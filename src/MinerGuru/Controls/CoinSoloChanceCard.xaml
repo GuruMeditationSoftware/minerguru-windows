@@ -52,7 +52,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Spacing="4">
-                    <TextBlock Style="{StaticResource FigureLabelStyle}" Text="{local:T De=Solo-Chance, En='Solo chance'}" />
+                    <TextBlock Style="{StaticResource FigureLabelStyle}" Text="{local:T Key=SoloChance}" />
                     <Viewbox
                         x:Name="OddsBox"
                         Height="40"
@@ -73,7 +73,7 @@
                     VerticalAlignment="Top"
                     Style="{StaticResource HairlineStyle}" />
                 <StackPanel Grid.Column="2" Spacing="4">
-                    <TextBlock Style="{StaticResource FigureLabelStyle}" Text="{local:T De=Block-Belohnung, En='Block reward'}" />
+                    <TextBlock Style="{StaticResource FigureLabelStyle}" Text="{local:T Key=BlockReward}" />
                     <StackPanel Margin="0,8,0,0" Orientation="Horizontal">
                         <TextBlock
                             x:Name="RewardValue"
@@ -89,7 +89,7 @@
                     <TextBlock
                         FontSize="11"
                         Foreground="{ThemeResource TextTertiaryBrush}"
-                        Text="{local:T De='ohne Transaktionsgebühren', En='excluding transaction fees'}"
+                        Text="{local:T Key=ExcludingTransactionFees}"
                         TextTrimming="CharacterEllipsis" />
                 </StackPanel>
             </Grid>

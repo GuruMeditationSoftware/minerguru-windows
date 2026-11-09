@@ -1,7 +1,6 @@
 using Microsoft.UI.Xaml.Controls;
 using MinerGuru.Core;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -26,16 +25,15 @@ public sealed partial class CoinSoloChanceCard : UserControl
 
         OddsText.Text = summary.FormattedOddsRatio(timeframe);
         PercentText.Text = summary.FormattedProbabilityPercent(timeframe);
-        BlockTimeText.Text = L($"Ø 1 Block alle {summary.ExpectedTimePerBlockFormatted}", $"Ø 1 block every {summary.ExpectedTimePerBlockFormatted}");
+        BlockTimeText.Text = string.Format(Strings.Average1BlockEvery, summary.ExpectedTimePerBlockFormatted);
 
         RewardValue.Text = DisplayFormat.DecimalUpTo(summary.Coin.BlockSubsidyCoins(), 3);
         RewardUnit.Text = summary.Coin.Symbol();
 
         MinersText.Text = summary.ContributingMinersText;
-        DifficultyText.Text = L($"Netz-Diff {MinerFormatting.FormatDifficulty(summary.NetworkDifficulty)}",
-                                $"Network diff {MinerFormatting.FormatDifficulty(summary.NetworkDifficulty)}");
+        DifficultyText.Text = string.Format(Strings.NetworkDiff, MinerFormatting.FormatDifficulty(summary.NetworkDifficulty));
         ToolTipService.SetToolTip(DifficultyText, summary.IsLiveDifficulty
-            ? L("Vom Pool gemeldet", "Reported by the pool")
-            : L("Schätzwert, bis der Pool die Netz-Difficulty meldet", "Estimate until the pool reports the network difficulty"));
+            ? Strings.ReportedByThePool
+            : Strings.EstimateUntilThePoolReports);
     }
 }

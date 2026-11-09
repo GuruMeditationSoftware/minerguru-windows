@@ -123,7 +123,7 @@ public sealed partial class TrayFlyoutWindow : Window
         }
         else
         {
-            _content.Children.Add(Palette.UiText(L("Noch keine Miner eingerichtet.", "No miners set up yet."), 12, Palette.TextSecondary));
+            _content.Children.Add(Palette.UiText(Strings.NoMinersSetUpYet, 12, Palette.TextSecondary));
         }
         _content.Children.Add(Line());
         _content.Children.Add(Actions());
@@ -159,8 +159,8 @@ public sealed partial class TrayFlyoutWindow : Window
         (string Label, string Value)[] figures =
         [
             ("Hashrate", MinerFormatting.FormatHashrate(store.TotalHashrateGhs)),
-            (L("Leistung", "Power"), $"{store.TotalPowerWatts.ToString("0.0", Culture)} W"),
-            (L("Ø Ping", "Ø Ping"), MinerFormatting.FormatLatency(store.AveragePoolLatencyMs)),
+            (Strings.Power, $"{store.TotalPowerWatts.ToString("0.0", Culture)} W"),
+            (Strings.AveragePing, MinerFormatting.FormatLatency(store.AveragePoolLatencyMs)),
             ("Best Diff", store.BestSessionInfo?.SessionBestDiffText ?? "—"),
         ];
         var row = new Grid { ColumnSpacing = 10 };
@@ -181,7 +181,7 @@ public sealed partial class TrayFlyoutWindow : Window
             row.Children.Add(line);
         }
         var box = new Border { Padding = new Thickness(12), Child = row, Style = (Style)Application.Current.Resources["InsetBorderStyle"] };
-        ToolTipService.SetToolTip(box, L("Best Diff: höchste Difficulty seit dem letzten Neustart der Miner", "Best diff: highest difficulty since the miners last restarted"));
+        ToolTipService.SetToolTip(box, Strings.BestDiffHighestDifficultySince);
         return box;
     }
 
@@ -254,7 +254,7 @@ public sealed partial class TrayFlyoutWindow : Window
         actions.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
         actions.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
-        var open = new Button { Content = L("Dashboard öffnen", "Open dashboard"), HorizontalAlignment = HorizontalAlignment.Stretch, Style = (Style)Application.Current.Resources["SmallAccentButtonStyle"] };
+        var open = new Button { Content = Strings.OpenDashboard, HorizontalAlignment = HorizontalAlignment.Stretch, Style = (Style)Application.Current.Resources["SmallAccentButtonStyle"] };
         open.Click += (_, _) =>
         {
             HidePanel();
@@ -263,15 +263,15 @@ public sealed partial class TrayFlyoutWindow : Window
         actions.Children.Add(open);
 
         var refresh = new Button { Content = new FontIcon { Glyph = "\uE72C", FontSize = 13 }, Style = (Style)Application.Current.Resources["SmallButtonStyle"] };
-        ToolTipService.SetToolTip(refresh, L("Jetzt aktualisieren", "Refresh now"));
-        AutomationProperties.SetName(refresh, L("Jetzt aktualisieren", "Refresh now"));
+        ToolTipService.SetToolTip(refresh, Strings.RefreshNow);
+        AutomationProperties.SetName(refresh, Strings.RefreshNow);
         refresh.Click += async (_, _) => await App.Store.RefreshAllAsync();
         Grid.SetColumn(refresh, 1);
         actions.Children.Add(refresh);
 
         var quit = new Button { Content = new FontIcon { Glyph = "\uE7E8", FontSize = 13 }, Style = (Style)Application.Current.Resources["SmallButtonStyle"] };
-        ToolTipService.SetToolTip(quit, L("MinerGuru beenden", "Quit MinerGuru"));
-        AutomationProperties.SetName(quit, L("MinerGuru beenden", "Quit MinerGuru"));
+        ToolTipService.SetToolTip(quit, Strings.QuitMinerGuru);
+        AutomationProperties.SetName(quit, Strings.QuitMinerGuru);
         quit.Click += (_, _) => App.Quit();
         Grid.SetColumn(quit, 2);
         actions.Children.Add(quit);

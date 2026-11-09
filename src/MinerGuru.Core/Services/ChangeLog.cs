@@ -1,7 +1,6 @@
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
@@ -153,18 +152,18 @@ public sealed class ChangeLog(string? folder = null)
 
     public static string ActionTitle(string action) => action switch
     {
-        "restart" => L("Neustart", "Restart"),
-        "pause" => L("Pausieren", "Pause"),
-        "resume" => L("Fortsetzen", "Resume"),
-        "clearSlot" => L("Pool-Slot geleert", "Pool slot cleared"),
-        _ => L("Einstellungen", "Settings"),
+        "restart" => Strings.RestartEvent,
+        "pause" => Strings.Pause,
+        "resume" => Strings.Resume,
+        "clearSlot" => Strings.PoolSlotCleared,
+        _ => Strings.Settings,
     };
 
     public static string SourceTitle(ChangeSource source) => source switch
     {
-        ChangeSource.Schedule => L("Zeitplan", "Schedule"),
-        ChangeSource.Watchdog => L("Automatik", "Automatic"),
-        _ => L("Von Hand", "Manual"),
+        ChangeSource.Schedule => Strings.Schedule,
+        ChangeSource.Watchdog => Strings.Automatic,
+        _ => Strings.ByHand,
     };
 
     /// <summary>Top-level values, and pool slots as <c>pools.&lt;id&gt;.&lt;field&gt;</c>, for comparing. Only <see cref="Changes"/> leaves this class.</summary>
@@ -240,34 +239,34 @@ public sealed class ChangeLog(string? folder = null)
         return prefix + name switch
         {
             "hostname" => "Hostname",
-            "frequency" => L("Frequenz", "Frequency"),
-            "coreVoltage" => L("Kernspannung", "Core voltage"),
-            "autofanspeed" => L("Lüfterautomatik", "Automatic fan"),
-            "fanspeed" or "manualFanSpeed" => L("Lüfter", "Fan"),
-            "stratumURL" => L("Pool-Adresse", "Pool address"),
+            "frequency" => Strings.Frequency,
+            "coreVoltage" => Strings.CoreVoltage,
+            "autofanspeed" => Strings.AutomaticFan,
+            "fanspeed" or "manualFanSpeed" => Strings.Fan,
+            "stratumURL" => Strings.PoolAddress,
             "stratumPort" => "Pool-Port",
-            "stratumUser" => L("Pool-Benutzer", "Pool user"),
-            "stratumPassword" => L("Pool-Passwort", "Pool password"),
-            "fallbackStratumURL" => L("Fallback-Adresse", "Fallback address"),
+            "stratumUser" => Strings.PoolUser,
+            "stratumPassword" => Strings.PoolPassword,
+            "fallbackStratumURL" => Strings.FallbackAddress,
             "fallbackStratumPort" => "Fallback-Port",
-            "fallbackStratumUser" => L("Fallback-Benutzer", "Fallback user"),
-            "fallbackStratumPassword" => L("Fallback-Passwort", "Fallback password"),
-            "overclockEnabled" => L("Eigene Taktwerte", "Custom clock values"),
-            "temptarget" or "pidTargetTemp" => L("Zieltemperatur", "Target temperature"),
-            "poolMode" => L("Pool-Modus", "Pool mode"),
-            "poolBalance" => L("Pool-Aufteilung", "Pool split"),
-            "primaryPoolIndex" => L("Primärer Pool-Platz", "Primary pool slot"),
-            "secondaryPoolIndex" => L("Fallback-Platz", "Fallback slot"),
-            "id" => L("Platz", "Slot"),
-            "stratumProtocol" => L("Protokoll", "Protocol"),
+            "fallbackStratumUser" => Strings.FallbackUser,
+            "fallbackStratumPassword" => Strings.FallbackPassword,
+            "overclockEnabled" => Strings.CustomClockValues,
+            "temptarget" or "pidTargetTemp" => Strings.TargetTemperature,
+            "poolMode" => Strings.PoolMode,
+            "poolBalance" => Strings.PoolSplit,
+            "primaryPoolIndex" => Strings.PrimaryPoolSlot,
+            "secondaryPoolIndex" => Strings.FallbackSlot,
+            "id" => Strings.Slot,
+            "stratumProtocol" => Strings.Protocol,
             "stratumTLS" => "TLS",
-            "stratumSuggestedDifficulty" => L("Vorgeschlagene Difficulty", "Suggested difficulty"),
+            "stratumSuggestedDifficulty" => Strings.SuggestedDifficulty,
             "stratumExtranonceSubscribe" => "Extranonce-Subscribe",
-            "stratumDecodeCoinbase" => L("Coinbase auswerten", "Decode coinbase"),
-            "stratumShareWarning" => L("Share-Warnung", "Share warning"),
-            "stratumV2ChannelType" => L("SV2-Kanaltyp", "SV2 channel type"),
-            "stratumV2AuthorityPubkey" => L("SV2-Authority-Key", "SV2 authority key"),
-            "stratumV2RequireAuth" => L("SV2-Authentifizierung", "SV2 authentication"),
+            "stratumDecodeCoinbase" => Strings.DecodeCoinbase,
+            "stratumShareWarning" => Strings.ShareWarning,
+            "stratumV2ChannelType" => Strings.SV2ChannelType,
+            "stratumV2AuthorityPubkey" => Strings.SV2AuthorityKey,
+            "stratumV2RequireAuth" => Strings.SV2Authentication,
             _ => name,
         };
     }
@@ -280,8 +279,8 @@ public sealed class ChangeLog(string? folder = null)
             case "overclockEnabled" or "autofanspeed" or "stratumExtranonceSubscribe" or "stratumDecodeCoinbase" or "stratumShareWarning" or "stratumV2RequireAuth":
                 return value switch
                 {
-                    "1" or "true" => L("an", "on"),
-                    "0" or "false" => L("aus", "off"),
+                    "1" or "true" => Strings.On,
+                    "0" or "false" => Strings.OffInText,
                     _ => value,
                 };
             case "poolMode":

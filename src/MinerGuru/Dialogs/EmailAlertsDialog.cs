@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
 using MinerGuru.Controls;
 using MinerGuru.Core.Services;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Dialogs;
 
@@ -20,11 +19,9 @@ public sealed partial class EmailAlertsDialog : ContentDialog
     private readonly PasswordBox _password = new();
     private readonly TextBox _sender = new() { PlaceholderText = "miner@example.com" };
     private readonly TextBox _recipients = new() { PlaceholderText = "ich@example.com, du@example.com" };
-    private readonly TextBlock _warning = PowerForm.Note(L(
-        "Ohne Verschlüsselung gehen Passwort und Mail im Klartext durchs Netz. Nur für einen Mailserver im eigenen Netz.",
-        "Without encryption, password and mail cross the network in plain text. Only for a mail server on your own network."));
+    private readonly TextBlock _warning = PowerForm.Note(Strings.WithoutEncryptionPasswordAndMail);
     private readonly TextBlock _status = PowerForm.Note("");
-    private readonly Button _test = new() { Content = L("Test-Mail", "Test mail") };
+    private readonly Button _test = new() { Content = Strings.TestMail };
     private bool _passwordTouched;
 
     public EmailAlertsDialog()
@@ -33,20 +30,20 @@ public sealed partial class EmailAlertsDialog : ContentDialog
         var settings = mail.Settings;
         Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"];
         Resources["ContentDialogMaxWidth"] = 600.0;
-        PrimaryButtonText = L("Sichern", "Save");
-        CloseButtonText = L("Abbrechen", "Cancel");
+        PrimaryButtonText = Strings.SaveEntry;
+        CloseButtonText = Strings.Cancel;
         DefaultButton = ContentDialogButton.Primary;
 
         _enabled.IsOn = settings.IsEnabled;
         _host.Text = settings.Host;
         _port.Value = settings.Port;
-        AutomationProperties.SetName(_security, L("Verschlüsselung", "Encryption"));
+        AutomationProperties.SetName(_security, Strings.Encryption);
         foreach (var security in Securities) _security.Items.Add(security.Title());
         _security.SelectedIndex = Array.IndexOf(Securities, settings.Security);
         _username.Text = settings.Username;
         _sender.Text = settings.Sender;
         _recipients.Text = settings.Recipients;
-        _password.PlaceholderText = mail.HasPassword ? L("gespeichert", "saved") : "";
+        _password.PlaceholderText = mail.HasPassword ? Strings.Saved : "";
         _password.PasswordChanged += (_, _) => _passwordTouched = true;
         _security.SelectionChanged += (_, _) =>
         {
@@ -59,18 +56,17 @@ public sealed partial class EmailAlertsDialog : ContentDialog
         _warning.Foreground = Palette.Warning;
 
         var form = new StackPanel { Width = 520, Spacing = 12 };
-        form.Children.Add(PageParts.Title(L("E-Mail-Warnungen", "Email alerts")));
-        form.Children.Add(PowerForm.Row(L("Aktiv", "Active"), _enabled));
+        form.Children.Add(PageParts.Title(Strings.EmailAlerts));
+        form.Children.Add(PowerForm.Row(Strings.Active, _enabled));
         form.Children.Add(PowerForm.Row("Server", _host));
-        form.Children.Add(PowerForm.Row(L("Sicherheit", "Security"), _security));
+        form.Children.Add(PowerForm.Row(Strings.Security, _security));
         form.Children.Add(PowerForm.Row("Port", _port));
         form.Children.Add(_warning);
-        form.Children.Add(PowerForm.Row(L("Benutzername", "Username"), _username));
-        form.Children.Add(PowerForm.Row(L("Passwort", "Password"), _password));
-        form.Children.Add(PowerForm.Row(L("Absender", "Sender"), _sender));
-        form.Children.Add(PowerForm.Row(L("Empfänger", "Recipients"), _recipients));
-        form.Children.Add(PowerForm.Note(L("Mehrere Adressen mit Komma trennen. Warnungen kommen zusätzlich zur Windows-Benachrichtigung.",
-            "Separate several addresses with commas. Alerts arrive in addition to the Windows notification.")));
+        form.Children.Add(PowerForm.Row(Strings.Username, _username));
+        form.Children.Add(PowerForm.Row(Strings.Password, _password));
+        form.Children.Add(PowerForm.Row(Strings.Sender, _sender));
+        form.Children.Add(PowerForm.Row(Strings.Recipients, _recipients));
+        form.Children.Add(PowerForm.Note(Strings.SeparateSeveralAddressesWithCommas));
         form.Children.Add(_test);
         form.Children.Add(_status);
         Content = new ScrollViewer { Content = form, MaxHeight = 560 };
@@ -81,8 +77,7 @@ public sealed partial class EmailAlertsDialog : ContentDialog
             if (mail.Save(Form(), NewPassword)) return;
             args.Cancel = true;
             _status.Foreground = Palette.Bad;
-            _status.Text = L("Das Passwort ließ sich nicht verschlüsseln und wurde nicht gesichert. Melde dich neu bei Windows an und versuche es erneut.",
-                "The password could not be encrypted and was not saved. Sign in to Windows again and retry.");
+            _status.Text = Strings.ThePasswordCouldNotBe;
         };
     }
 
@@ -110,16 +105,16 @@ public sealed partial class EmailAlertsDialog : ContentDialog
     {
         _test.IsEnabled = false;
         _status.Foreground = Palette.TextSecondary;
-        _status.Text = L("Sende …", "Sending …");
+        _status.Text = Strings.Sending;
         try
         {
             await App.Store.Email.SendTestAsync(Form(), NewPassword);
-            _status.Text = L("Test-Mail versendet.", "Test mail sent.");
+            _status.Text = Strings.TestMailSent;
         }
         catch (Exception e) when (e is IOException or System.Net.Sockets.SocketException or OperationCanceledException or System.Security.Authentication.AuthenticationException)
         {
             _status.Foreground = Palette.Bad;
-            _status.Text = e is OperationCanceledException or System.Net.Sockets.SocketException ? L("Mailserver nicht erreichbar.", "Mail server not reachable.") : e.Message;
+            _status.Text = e is OperationCanceledException or System.Net.Sockets.SocketException ? Strings.MailServerNotReachable : e.Message;
         }
         _test.IsEnabled = true;
     }

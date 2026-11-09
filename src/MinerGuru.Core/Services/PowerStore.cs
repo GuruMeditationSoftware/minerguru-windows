@@ -1,6 +1,5 @@
 using System.Text.Json;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
@@ -271,7 +270,7 @@ public sealed class PowerStore
     private void Commit()
     {
         try { File.WriteAllText(_path, JsonSerializer.Serialize(_stored, Options)); }
-        catch (IOException) { LastError = L("Strom-Einstellungen nicht speicherbar.", "Could not save the power settings."); }
+        catch (IOException) { LastError = Strings.CouldNotSaveThePower; }
         Changed?.Invoke();
     }
 }

@@ -26,7 +26,7 @@ public static class WidgetCards
     {
         var body = new JsonArray();
         if (snapshot == null || snapshot.Miners.Count == 0)
-            Empty(body, L("Keine Miner", "No miners"), L("In MinerGuru hinzufügen", "Add them in MinerGuru"));
+            Empty(body, Strings.NoMiners, Strings.AddThemInMinerGuru);
         else if (definition == SoloChance)
             Solo(body, size, snapshot, now);
         else
@@ -70,8 +70,8 @@ public static class WidgetCards
         }
         body.Add(Row(Column(figure, stretch: true), Column(Status(s, now), bottom: true)));
         var facts = Row(
-            Fact(L("Leistung", "Power"), s.TotalPowerW > 0 ? DisplayFormat.Integer((long)Math.Round(s.TotalPowerW)) + " W" : "–"),
-            Fact(L("Effizienz", "Efficiency"), s.EfficiencyJPerTh is { } e ? DisplayFormat.Decimal(e, 1) + " J/TH" : "–"),
+            Fact(Strings.Power, s.TotalPowerW > 0 ? DisplayFormat.Integer((long)Math.Round(s.TotalPowerW)) + " W" : "–"),
+            Fact(Strings.Efficiency, s.EfficiencyJPerTh is { } e ? DisplayFormat.Decimal(e, 1) + " J/TH" : "–"),
             Fact("Best Diff", s.BestDiff ?? "–"));
         if (size == "large")
         {
@@ -114,12 +114,12 @@ public static class WidgetCards
         var hot = s.Hot.ToList();
         var offline = s.Offline.ToList();
         var (look, text) =
-            hot.Count == 1 ? (Look.Hot, L($"{hot[0].Name} heiß", $"{hot[0].Name} hot")) :
-            hot.Count > 1 ? (Look.Hot, L($"{hot.Count} heiß", $"{hot.Count} hot")) :
+            hot.Count == 1 ? (Look.Hot, string.Format(Strings.Hot, hot[0].Name)) :
+            hot.Count > 1 ? (Look.Hot, string.Format(Strings.Hot, hot.Count)) :
             offline.Count == 1 ? (Look.Offline, $"{offline[0].Name} offline") :
             offline.Count > 1 ? (Look.Offline, $"{offline.Count} offline") :
             s.Online.Any() ? (Look.Online, $"{s.Online.Count()}/{s.Miners.Count} online") :
-            (Look.Checking, L("Prüfe …", "Checking …"));
+            (Look.Checking, Strings.Checking);
         return Row(
             Column(Text("●", color: Color(look), size: "Small")),
             Column(Text(text, size: "Small", subtle: look == Look.Online || look == Look.Checking), stretch: true));
@@ -132,7 +132,7 @@ public static class WidgetCards
         var stale = IsStale(s, now);
         if (s.SoloOdds.Count == 0)
         {
-            Empty(body, L("Keine Solo-Chance", "No solo chance"), L("Kein Miner online", "No miner online"));
+            Empty(body, Strings.NoSoloChance, Strings.NoMinerOnline);
             return;
         }
         // The widget's own header already says "Solo chance".
@@ -146,7 +146,7 @@ public static class WidgetCards
             if (one.BlockEvery is { Length: > 1 })
             {
                 if (size != "small") body.Add(Spacer());
-                body.Add(Text(L("Ø 1 Block alle ", "Avg. 1 block every ") + one.BlockEvery, size: "Small", subtle: true, spacing: "Small"));
+                body.Add(Text(Strings.Avg1BlockEvery + one.BlockEvery, size: "Small", subtle: true, spacing: "Small"));
             }
             return;
         }
@@ -195,7 +195,7 @@ public static class WidgetCards
 
     public static bool IsStale(WidgetSnapshot s, DateTime now) => now - s.Time > StaleAfter;
 
-    private static string AsOf(WidgetSnapshot s) => L("Stand ", "As of ") + s.Time.ToString("t", Culture);
+    private static string AsOf(WidgetSnapshot s) => Strings.AsOf + s.Time.ToString("t", Culture);
 
     private static void Empty(JsonArray body, string title, string hint)
     {

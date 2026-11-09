@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml.Media;
 using Windows.Graphics;
 using Windows.System;
 using MinerGuru.Controls;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Dialogs;
 
@@ -38,17 +37,16 @@ public sealed partial class OtpCodeWindow : Window
 
         var title = new TextBlock
         {
-            Text = L($"Einmalcode für {minerName}", $"One-time code for {minerName}"),
+            Text = string.Format(Strings.OneTimeCodeFor, minerName),
             FontSize = 18, FontWeight = Microsoft.UI.Text.FontWeights.SemiBold, TextWrapping = TextWrapping.Wrap,
         };
         var text = new TextBlock
         {
-            Text = problem ?? L("Dieser Miner schützt seine Einstellungen mit einem Einmalcode. Gib den 6-stelligen Code aus deiner Authenticator-App ein. Die Sitzung gilt bis zu 24 Stunden.",
-                                "This miner protects its settings with a one-time code. Enter the 6-digit code from your authenticator app. The session lasts up to 24 hours."),
+            Text = problem ?? Strings.ThisMinerProtectsItsSettings,
             TextWrapping = TextWrapping.Wrap,
         };
-        var cancel = PageParts.TextButton("\uE711", L("Abbrechen", "Cancel"), () => Finish(null));
-        var confirm = PageParts.TextButton("\uE73E", L("Bestätigen", "Confirm"), () => Finish(_code.Text), accent: true);
+        var cancel = PageParts.TextButton("\uE711", Strings.Cancel, () => Finish(null));
+        var confirm = PageParts.TextButton("\uE73E", Strings.Confirm, () => Finish(_code.Text), accent: true);
         var buttons = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8, HorizontalAlignment = HorizontalAlignment.Right };
         buttons.Children.Add(cancel);
         buttons.Children.Add(confirm);

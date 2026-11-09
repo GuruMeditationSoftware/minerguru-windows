@@ -7,7 +7,6 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
@@ -28,11 +27,11 @@ public sealed class StratumProbeException(StratumFailure failure, string? detail
 
     private static string Text(StratumFailure failure, string? detail) => failure switch
     {
-        StratumFailure.InvalidEndpoint => L("Pool-Adresse ist unvollständig.", "The pool address is incomplete."),
-        StratumFailure.ConnectionFailed => L($"Keine Verbindung zum Pool: {detail}", $"No connection to the pool: {detail}"),
-        StratumFailure.Rejected => L($"Der Pool lehnt den User ab: {detail}", $"The pool rejects the user: {detail}"),
-        StratumFailure.Timeout => L("Der Pool hat keinen Auftrag geschickt.", "The pool sent no job."),
-        _ => L("Der Pool hat die Verbindung getrennt.", "The pool closed the connection."),
+        StratumFailure.InvalidEndpoint => Strings.ThePoolAddressIsIncomplete,
+        StratumFailure.ConnectionFailed => string.Format(Strings.NoConnectionToThePool, detail),
+        StratumFailure.Rejected => string.Format(Strings.ThePoolRejectsTheUser, detail),
+        StratumFailure.Timeout => Strings.ThePoolSentNoJob,
+        _ => Strings.ThePoolClosedTheConnection,
     };
 }
 
@@ -87,7 +86,7 @@ public sealed class StratumProbeSession(string user, string userAgent, string pa
             case 2:
                 if (!IsTrue(message["result"]))
                 {
-                    _authorizeError = ErrorText(message["error"]) ?? L("ohne Begründung", "no reason given");
+                    _authorizeError = ErrorText(message["error"]) ?? Strings.NoReasonGiven;
                     throw new StratumProbeException(StratumFailure.Rejected, _authorizeError);
                 }
                 break;

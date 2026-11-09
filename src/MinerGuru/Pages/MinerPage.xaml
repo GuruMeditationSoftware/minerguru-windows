@@ -69,39 +69,39 @@
                             VerticalAlignment="Top"
                             Orientation="Horizontal"
                             Spacing="8">
-                            <Button AutomationProperties.Name="{local:T De='Takt, Lüfter und Name einstellen', En='Set clock, fan and name'}"
+                            <Button AutomationProperties.Name="{local:T Key=SetClockFanAndName}"
                                 Click="Control_Click"
                                 Style="{StaticResource SmallButtonStyle}"
-                                ToolTipService.ToolTip="{local:T De='Takt, Lüfter und Name einstellen', En='Set clock, fan and name'}">
+                                ToolTipService.ToolTip="{local:T Key=SetClockFanAndName}">
                                 <FontIcon FontSize="13" Glyph="&#xE9E9;" />
                             </Button>
-                            <Button AutomationProperties.Name="{local:T De=JSON-Rohdaten, En='Raw JSON'}"
+                            <Button AutomationProperties.Name="{local:T Key=RawJSON}"
                                 Click="Json_Click"
                                 Style="{StaticResource SmallButtonStyle}"
-                                ToolTipService.ToolTip="{local:T De=JSON-Rohdaten, En='Raw JSON'}">
+                                ToolTipService.ToolTip="{local:T Key=RawJSON}">
                                 <TextBlock
                                     FontFamily="{StaticResource MonoFont}"
                                     FontSize="12"
                                     Text="{}{ }" />
                             </Button>
-                            <Button AutomationProperties.Name="{local:T De='Browser öffnen', En='Open browser'}"
+                            <Button AutomationProperties.Name="{local:T Key=OpenBrowser}"
                                 Click="Browser_Click"
                                 Style="{StaticResource SmallButtonStyle}"
-                                ToolTipService.ToolTip="{local:T De='Browser öffnen', En='Open browser'}">
+                                ToolTipService.ToolTip="{local:T Key=OpenBrowser}">
                                 <FontIcon FontSize="13" Glyph="&#xE774;" />
                             </Button>
-                            <Button AutomationProperties.Name="{local:T De='Neu starten', En=Restart}"
+                            <Button AutomationProperties.Name="{local:T Key=Restart}"
                                 x:Name="RestartButton"
                                 Click="Restart_Click"
                                 Style="{StaticResource SmallButtonStyle}"
-                                ToolTipService.ToolTip="{local:T De='Neu starten', En=Restart}">
+                                ToolTipService.ToolTip="{local:T Key=Restart}">
                                 <FontIcon FontSize="13" Glyph="&#xE777;" />
                             </Button>
-                            <Button AutomationProperties.Name="{local:T De='Weitere Aktionen', En='More actions'}" Style="{StaticResource SmallButtonStyle}" ToolTipService.ToolTip="{local:T De='Weitere Aktionen', En='More actions'}">
+                            <Button AutomationProperties.Name="{local:T Key=MoreActions}" Style="{StaticResource SmallButtonStyle}" ToolTipService.ToolTip="{local:T Key=MoreActions}">
                                 <FontIcon FontSize="13" Glyph="&#xE712;" />
                                 <Button.Flyout>
                                     <MenuFlyout Opening="MoreMenu_Opening" Placement="BottomEdgeAlignedRight">
-                                        <MenuFlyoutItem Click="Rename_Click" Text="{local:T De='Umbenennen …', En='Rename …'}">
+                                        <MenuFlyoutItem Click="Rename_Click" Text="{local:T Key=Rename}">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xE8AC;" />
                                             </MenuFlyoutItem.Icon>
@@ -112,7 +112,7 @@
                                             </MenuFlyoutItem.Icon>
                                         </MenuFlyoutItem>
                                         <MenuFlyoutSeparator />
-                                        <MenuFlyoutItem Click="Remove_Click" Text="{local:T De='Aus MinerGuru entfernen', En='Remove from MinerGuru'}">
+                                        <MenuFlyoutItem Click="Remove_Click" Text="{local:T Key=RemoveFromMinerGuru}">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xE74D;" />
                                             </MenuFlyoutItem.Icon>
@@ -156,7 +156,7 @@
                                 FontSize="15"
                                 FontWeight="Medium"
                                 Foreground="{ThemeResource TextPrimaryBrush}"
-                                Text="{local:T De='Hashrate-Verlauf', En='Hashrate history'}" />
+                                Text="{local:T Key=HashrateHistory}" />
                             <controls:HashrateChart x:Name="Chart" Height="170" />
                         </StackPanel>
                     </Border>
@@ -169,7 +169,7 @@
                                 FontSize="15"
                                 FontWeight="Medium"
                                 Foreground="{ThemeResource TextPrimaryBrush}"
-                                Text="{local:T De='ASIC &amp; VR Temperatur (°C)', En='ASIC &amp; VR temperature (°C)'}" />
+                                Text="{local:T Key=ASICVRTemperatureC}" />
                             <controls:HashrateChart x:Name="TempChart" Height="170" />
                         </StackPanel>
                     </Border>
@@ -182,7 +182,7 @@
                                 FontSize="15"
                                 FontWeight="Medium"
                                 Foreground="{ThemeResource TextPrimaryBrush}"
-                                Text="{local:T De='Pool-Latenz (ms)', En='Pool latency (ms)'}" />
+                                Text="{local:T Key=PoolLatencyMs}" />
                             <controls:HashrateChart x:Name="LatencyChart" Height="170" />
                         </StackPanel>
                     </Border>
@@ -195,7 +195,7 @@
                                 FontSize="15"
                                 FontWeight="Medium"
                                 Foreground="{ThemeResource TextPrimaryBrush}"
-                                Text="{local:T De='Leistungsaufnahme (Watt)', En='Power draw (watts)'}" />
+                                Text="{local:T Key=PowerDrawWatts}" />
                             <controls:HashrateChart x:Name="PowerChart" Height="170" />
                         </StackPanel>
                     </Border>
@@ -213,7 +213,7 @@
                                     FontSize="15"
                                     FontWeight="Medium"
                                     Foreground="{ThemeResource TextPrimaryBrush}"
-                                    Text="{local:T De='Pool &amp; Stratum-Verbindung', En='Pool &amp; stratum connection'}" />
+                                    Text="{local:T Key=PoolStratumConnection}" />
                                 <StackPanel
                                     x:Name="PoolBadges"
                                     Orientation="Horizontal"
@@ -235,7 +235,7 @@
                                 FontSize="15"
                                 FontWeight="Medium"
                                 Foreground="{ThemeResource TextPrimaryBrush}"
-                                Text="{local:T De='Hardware &amp; System', En='Hardware &amp; system'}" />
+                                Text="{local:T Key=HardwareSystem}" />
                             <Rectangle Height="1" Style="{StaticResource HairlineStyle}" />
                             <Grid
                                 x:Name="SystemRows"

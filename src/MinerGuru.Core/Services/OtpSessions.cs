@@ -2,15 +2,14 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
 /// <summary>Instead of writing: the user gave no code, or a schedule has no session.</summary>
 public sealed class OtpException(string message) : MinerApiException(message)
 {
-    public static OtpException Cancelled() => new(L("Kein Einmalcode eingegeben, nichts geändert.", "No one-time code entered, nothing changed."));
-    public static OtpException CodeNeeded() => new(L("Dieser Miner braucht einen Einmalcode.", "This miner needs a one-time code."));
+    public static OtpException Cancelled() => new(Strings.NoOneTimeCodeEntered);
+    public static OtpException CodeNeeded() => new(Strings.ThisMinerNeedsAOne);
 }
 
 /// <summary>
@@ -81,7 +80,7 @@ public sealed class OtpSessions
             var code = (await Prompt(miner.DisplayName, problem))?.Trim() ?? throw OtpException.Cancelled();
             if (code.Length != 6 || !code.All(char.IsAsciiDigit))
             {
-                problem = L("Der Code hat 6 Ziffern.", "The code has 6 digits.");
+                problem = Strings.TheCodeHas6Digits;
                 continue;
             }
             try
@@ -97,8 +96,7 @@ public sealed class OtpSessions
             }
             catch (MinerApiException e) when (e.IsOtpWrongCode)
             {
-                problem = L("Der Code stimmt nicht. Warte auf den nächsten und versuche es noch einmal.",
-                            "That code is wrong. Wait for the next one and try again.");
+                problem = Strings.ThatCodeIsWrongWait;
             }
         }
     }

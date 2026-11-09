@@ -3,7 +3,6 @@ using MinerGuru.Controls;
 using MinerGuru.Core;
 using MinerGuru.Core.Models;
 using MinerGuru.Core.Services;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Dialogs;
 
@@ -19,8 +18,8 @@ public sealed partial class PoolConfigDialog : ContentDialog
     {
         InitializeComponent();
         _config = config;
-        TitleText.Text = isNew ? L("Neue Pool-Konfiguration", "New pool configuration") : L("Pool-Konfiguration bearbeiten", "Edit pool configuration");
-        PrimaryButtonText = isNew ? L("Anlegen", "Create") : L("Speichern", "Save");
+        TitleText.Text = isNew ? Strings.NewPoolConfiguration : Strings.EditPoolConfiguration;
+        PrimaryButtonText = isNew ? Strings.Create : Strings.Save;
         NameBox.Text = config.Name;
         HostBox.Text = config.Host;
         PortBox.Value = config.Port;

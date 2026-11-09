@@ -1,4 +1,3 @@
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Models;
 
@@ -20,30 +19,30 @@ public static class MaintenanceKindText
 
     public static string Title(this MaintenanceKind kind) => kind switch
     {
-        MaintenanceKind.Firmware => L("Firmware-Update prüfen", "Check for firmware update"),
-        MaintenanceKind.FanCleaning => L("Lüfter reinigen", "Clean the fan"),
-        MaintenanceKind.Dust => L("Kühlkörper entstauben", "Dust the heatsink"),
-        MaintenanceKind.ThermalPaste => L("Wärmeleitpaste erneuern", "Renew thermal paste"),
-        MaintenanceKind.FanReplacement => L("Lüfter tauschen", "Replace the fan"),
-        MaintenanceKind.Power => L("Netzteil und Stecker prüfen", "Check power supply and plugs"),
-        MaintenanceKind.Cabling => L("Standort und WLAN prüfen", "Check location and Wi-Fi"),
-        MaintenanceKind.Pools => L("Pool und Auszahlungsadresse prüfen", "Check pool and payout address"),
-        MaintenanceKind.Backup => L("Einstellungen sichern", "Back up settings"),
-        MaintenanceKind.Custom => L("Eigene Aufgabe", "Custom task"),
+        MaintenanceKind.Firmware => Strings.CheckForFirmwareUpdate,
+        MaintenanceKind.FanCleaning => Strings.CleanTheFan,
+        MaintenanceKind.Dust => Strings.DustTheHeatsink,
+        MaintenanceKind.ThermalPaste => Strings.RenewThermalPaste,
+        MaintenanceKind.FanReplacement => Strings.ReplaceTheFan,
+        MaintenanceKind.Power => Strings.CheckPowerSupplyAndPlugs,
+        MaintenanceKind.Cabling => Strings.CheckLocationAndWiFi,
+        MaintenanceKind.Pools => Strings.CheckPoolAndPayoutAddress,
+        MaintenanceKind.Backup => Strings.BackUpSettings,
+        MaintenanceKind.Custom => Strings.CustomTask,
         _ => "",
     };
 
     public static string Hint(this MaintenanceKind kind) => kind switch
     {
-        MaintenanceKind.Firmware => L("Neue Firmware bringt Fehlerbehebungen. Vor dem Update Einstellungen sichern.", "New firmware brings fixes. Back up your settings before updating."),
-        MaintenanceKind.FanCleaning => L("Staub am Lüfter kostet Drehzahl und treibt die Temperatur hoch. Nur im Stillstand reinigen.", "Dust on the fan costs speed and drives up the temperature. Clean it only when it has stopped."),
-        MaintenanceKind.Dust => L("Mit Druckluft oder Pinsel, Miner vorher vom Strom trennen.", "Use compressed air or a brush, and unplug the miner first."),
-        MaintenanceKind.ThermalPaste => L("Steigt die Temperatur bei gleichem Takt, ist die Paste oft trocken.", "If the temperature rises at the same frequency, the paste has often dried out."),
-        MaintenanceKind.FanReplacement => L("Lager nutzen sich ab. Laute oder langsame Lüfter rechtzeitig ersetzen.", "Bearings wear out. Replace loud or slow fans in good time."),
-        MaintenanceKind.Power => L("Warme Stecker und knappe Netzteile sind die häufigste Brandursache.", "Warm plugs and undersized power supplies are the most common fire hazard."),
-        MaintenanceKind.Cabling => L("Luftzufuhr, Umgebungstemperatur und WLAN-Empfang kontrollieren.", "Check airflow, room temperature and Wi-Fi reception."),
-        MaintenanceKind.Pools => L("Stimmen Pool und Adresse noch? Abgleich mit der Blockansicht.", "Are pool and address still right? Compare them with the block view."),
-        MaintenanceKind.Backup => L("Pools und Takt notieren oder exportieren, bevor etwas schiefgeht.", "Note down or export pools and frequency before something goes wrong."),
+        MaintenanceKind.Firmware => Strings.NewFirmwareBringsFixesBack,
+        MaintenanceKind.FanCleaning => Strings.DustOnTheFanCosts,
+        MaintenanceKind.Dust => Strings.UseCompressedAirOrA,
+        MaintenanceKind.ThermalPaste => Strings.IfTheTemperatureRisesAt,
+        MaintenanceKind.FanReplacement => Strings.BearingsWearOutReplaceLoud,
+        MaintenanceKind.Power => Strings.WarmPlugsAndUndersizedPower,
+        MaintenanceKind.Cabling => Strings.CheckAirflowRoomTemperatureAnd,
+        MaintenanceKind.Pools => Strings.ArePoolAndAddressStill,
+        MaintenanceKind.Backup => Strings.NoteDownOrExportPools,
         MaintenanceKind.Custom => "",
         _ => "",
     };

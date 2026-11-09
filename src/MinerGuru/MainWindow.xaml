@@ -110,28 +110,28 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal"
                     Spacing="4">
-                    <Button AutomationProperties.Name="{local:T De='Einstellungen öffnen', En='Open settings'}"
+                    <Button AutomationProperties.Name="{local:T Key=OpenSettings}"
                         Click="Settings_Click"
                         Style="{StaticResource BarButtonStyle}"
-                        ToolTipService.ToolTip="{local:T De='Einstellungen öffnen', En='Open settings'}">
+                        ToolTipService.ToolTip="{local:T Key=OpenSettings}">
                         <FontIcon FontSize="13" Glyph="&#xE713;" />
                     </Button>
-                    <Button AutomationProperties.Name="{local:T De='Miner per IP-Adresse hinzufügen', En='Add a miner by IP address'}"
+                    <Button AutomationProperties.Name="{local:T Key=AddAMinerByIP}"
                         Click="AddIp_Click"
                         Style="{StaticResource BarButtonStyle}"
-                        ToolTipService.ToolTip="{local:T De='Miner per IP-Adresse hinzufügen', En='Add a miner by IP address'}">
+                        ToolTipService.ToolTip="{local:T Key=AddAMinerByIP}">
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon FontSize="12" Glyph="&#xE710;" />
-                            <TextBlock Text="{local:T De='Per IP', En='By IP'}" />
+                            <TextBlock Text="{local:T Key=ByIP}" />
                         </StackPanel>
                     </Button>
-                    <Button AutomationProperties.Name="{local:T De='Lokales Netzwerk nach Minern durchsuchen', En='Search the local network for miners'}"
+                    <Button AutomationProperties.Name="{local:T Key=SearchTheLocalNetworkFor}"
                         Click="Scan_Click"
                         Style="{StaticResource BarButtonStyle}"
-                        ToolTipService.ToolTip="{local:T De='Lokales Netzwerk nach Minern durchsuchen', En='Search the local network for miners'}">
+                        ToolTipService.ToolTip="{local:T Key=SearchTheLocalNetworkFor}">
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon FontSize="12" Glyph="&#xE701;" />
-                            <TextBlock Text="{local:T De=Scannen, En=Scan}" />
+                            <TextBlock Text="{local:T Key=Scan}" />
                         </StackPanel>
                     </Button>
                 </StackPanel>
@@ -149,12 +149,12 @@
                         </Button.KeyboardAccelerators>
                         <FontIcon x:Name="PrivacyIcon" FontSize="13" />
                     </Button>
-                    <Button AutomationProperties.Name="{local:T De='Alle Miner jetzt aktualisieren', En='Refresh all miners now'}"
+                    <Button AutomationProperties.Name="{local:T Key=RefreshAllMinersNow}"
                         x:Name="RefreshAllButton"
                         VerticalAlignment="Center"
                         Click="RefreshAll_Click"
                         Style="{StaticResource BarButtonStyle}"
-                        ToolTipService.ToolTip="{local:T De='Alle Miner jetzt aktualisieren', En='Refresh all miners now'}">
+                        ToolTipService.ToolTip="{local:T Key=RefreshAllMinersNow}">
                         <FontIcon FontSize="13" Glyph="&#xE72C;" />
                     </Button>
                 </StackPanel>

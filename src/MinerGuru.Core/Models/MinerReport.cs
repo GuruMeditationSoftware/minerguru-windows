@@ -1,6 +1,5 @@
 using System.Globalization;
 using System.Text;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Models;
 
@@ -10,11 +9,11 @@ public static class ReportPeriodText
 {
     public static string Title(this ReportPeriod period) => period switch
     {
-        ReportPeriod.Yesterday => L("Gestern", "Yesterday"),
-        ReportPeriod.Last7Days => L("Letzte 7 Tage", "Last 7 days"),
-        ReportPeriod.Last30Days => L("Letzte 30 Tage", "Last 30 days"),
-        ReportPeriod.ThisMonth => L("Dieser Monat", "This month"),
-        _ => L("Letzter Monat", "Last month"),
+        ReportPeriod.Yesterday => Strings.Yesterday,
+        ReportPeriod.Last7Days => Strings.Last7Days,
+        ReportPeriod.Last30Days => Strings.Last30Days,
+        ReportPeriod.ThisMonth => Strings.ThisMonth,
+        _ => Strings.LastMonth,
     };
 
     public static (DateTime Start, DateTime End) Interval(this ReportPeriod period, DateTime now)

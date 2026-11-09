@@ -42,11 +42,11 @@ public sealed partial class PowerPage : Page, IHeaderPage
     /// <summary>Relative column widths of the cost table.</summary>
     private static readonly double[] CostColumns = [210, 210, 90, 100, 90, 90, 130];
 
-    private readonly PowerFigure _priceFigure = new(L("Preis jetzt", "Price now"));
-    private readonly PowerFigure _powerFigure = new(L("Leistung", "Power"));
-    private readonly PowerFigure _hourFigure = new(L("Kosten pro Stunde", "Cost per hour"));
-    private readonly PowerFigure _todayFigure = new(L("Heute", "Today"));
-    private readonly PowerFigure _monthFigure = new(L("30 Tage", "30 days"));
+    private readonly PowerFigure _priceFigure = new(Strings.PriceNow);
+    private readonly PowerFigure _powerFigure = new(Strings.Power);
+    private readonly PowerFigure _hourFigure = new(Strings.CostPerHour);
+    private readonly PowerFigure _todayFigure = new(Strings.Today);
+    private readonly PowerFigure _monthFigure = new(Strings.Days30);
     private readonly DispatcherTimer _clock = new() { Interval = TimeSpan.FromSeconds(30) };
     /// <summary>What the rows show; they are only rebuilt when it changes, so a poll leaves focus and tooltips alone.</summary>
     private string? _renderedRows;
@@ -87,7 +87,7 @@ public sealed partial class PowerPage : Page, IHeaderPage
 
     private static PowerStore Power => App.Store.Power;
 
-    public (string Title, string Subtitle) Header => (L("Strom", "Power"), L("Tarif, Zeitpläne und Kosten", "Tariff, schedules and costs"));
+    public (string Title, string Subtitle) Header => (Strings.PowerPage, Strings.TariffSchedulesAndCosts);
 
     private void SyncInputs()
     {
@@ -140,12 +140,12 @@ public sealed partial class PowerPage : Page, IHeaderPage
         var month = FleetCost(24 * 30, now);
         var totalTh = store.TotalHashrateGhs / 1000;
         _priceFigure.Update(tariff.FormatPrice(tariff.Price(now), 3),
-            zone != null ? $"{zone.Name} · {zone.Window.TimeRangeText}" : tariff.HasZones ? L("Standardpreis", "Base price") : L("Festpreis", "Fixed price"));
-        _powerFigure.Update($"{watts:0} W", L($"{store.OnlineMiners.Count()} Miner online", $"{store.OnlineMiners.Count()} miners online"));
-        _hourFigure.Update(tariff.FormatPrice(Power.CostPerHour(watts, now), 3), L("bei aktueller Leistung", "at current power"));
-        _todayFigure.Update(tariff.FormatPrice(today), L("0–24 Uhr, hochgerechnet", "0–24 h, projected"));
+            zone != null ? $"{zone.Name} · {zone.Window.TimeRangeText}" : tariff.HasZones ? Strings.BasePrice : Strings.FixedPrice);
+        _powerFigure.Update($"{watts:0} W", string.Format(Strings.MinersOnline, store.OnlineMiners.Count()));
+        _hourFigure.Update(tariff.FormatPrice(Power.CostPerHour(watts, now), 3), Strings.AtCurrentPower);
+        _todayFigure.Update(tariff.FormatPrice(today), Strings.Hours0To24Projected);
         _monthFigure.Update(tariff.FormatPrice(month),
-            totalTh > 0.01 ? L($"{tariff.FormatPrice(month / totalTh)} pro TH/s", $"{tariff.FormatPrice(month / totalTh)} per TH/s") : L("mit Preisen und Pausen", "with prices and pauses"));
+            totalTh > 0.01 ? string.Format(Strings.PerTHS, tariff.FormatPrice(month / totalTh)) : Strings.WithPricesAndPauses);
     }
 
     private static double FleetCost(double hours, DateTime start) => App.Store.OnlineMiners.Sum(m => Power.ProjectedCost(m, hours, start));
@@ -155,7 +155,7 @@ public sealed partial class PowerPage : Page, IHeaderPage
     private void RenderTariff(DateTime now)
     {
         var tariff = Power.Tariff;
-        BasePriceLabel.Text = tariff.HasZones ? L("Standardpreis pro kWh", "Base price per kWh") : L("Preis pro kWh", "Price per kWh");
+        BasePriceLabel.Text = tariff.HasZones ? Strings.BasePricePerKWh : Strings.PricePerKWh;
         AutomationProperties.SetName(BasePriceBox, BasePriceLabel.Text);
         NoZonesText.Visibility = tariff.HasZones ? Visibility.Collapsed : Visibility.Visible;
         ZoneRows.Visibility = tariff.HasZones ? Visibility.Visible : Visibility.Collapsed;
@@ -169,11 +169,9 @@ public sealed partial class PowerPage : Page, IHeaderPage
 
         TariffHints.Children.Clear();
         foreach (var (first, second) in tariff.OverlappingZones)
-            TariffHints.Children.Add(Hint(L(
-                $"„{first.Name}“ und „{second.Name}“ überschneiden sich. Dort gilt „{first.Name}“, weil sie weiter oben steht.",
-                $"\"{first.Name}\" and \"{second.Name}\" overlap. \"{first.Name}\" applies there because it is higher up."), "\uE7BA", Palette.Warning));
+            TariffHints.Children.Add(Hint(string.Format(Strings.AndOverlapAppliesThereBecause, first.Name, second.Name), "\uE7BA", Palette.Warning));
         if (tariff.HasGaps)
-            TariffHints.Children.Add(Hint(L("Zeiten ohne Zone kosten den Standardpreis (grau im Wochenbalken).", "Times without a zone cost the base price (grey in the week bar)."), "\uE946", Palette.TextSecondary));
+            TariffHints.Children.Add(Hint(Strings.TimesWithoutAZoneCost, "\uE946", Palette.TextSecondary));
         TariffHints.Visibility = TariffHints.Children.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
     }
 
@@ -189,7 +187,7 @@ public sealed partial class PowerPage : Page, IHeaderPage
         title.Children.Add(name);
         if (isNow)
         {
-            var nowLabel = Palette.UiText(L("jetzt", "now"), 11, Palette.Accent);
+            var nowLabel = Palette.UiText(Strings.Now, 11, Palette.Accent);
             nowLabel.FontWeight = FontWeights.Medium;
             nowLabel.VerticalAlignment = VerticalAlignment.Center;
             title.Children.Add(nowLabel);
@@ -208,21 +206,21 @@ public sealed partial class PowerPage : Page, IHeaderPage
         var ruleCount = Power.Rules.Count(r => r.Trigger.ZoneId == zone.Id);
         if (ruleCount > 0)
         {
-            var count = Palette.UiText(ruleCount == 1 ? L("1 Zeitplan", "1 schedule") : L($"{ruleCount} Zeitpläne", $"{ruleCount} schedules"), 11, Palette.TextSecondary);
+            var count = Palette.UiText(ruleCount == 1 ? Strings.OneSchedule : string.Format(Strings.RuleCountSchedules, ruleCount), 11, Palette.TextSecondary);
             count.VerticalAlignment = VerticalAlignment.Center;
             Grid.SetColumn(count, 3);
             row.Children.Add(count);
         }
 
-        AddIconButton(row, 4, "\uE70E", L("Nach oben: gewinnt bei Überschneidungen", "Move up: wins where zones overlap"), () => Power.MoveZoneUp(index), $"zone-up-{zone.Id}", enabled: index > 0);
-        AddIconButton(row, 5, "\uE70F", L("Bearbeiten", "Edit"), () => _ = EditZoneAsync(zone.Copy(), isNew: false));
-        AddIconButton(row, 6, "\uE74D", L("Zone löschen; Zeitpläne für diese Zone werden mit entfernt", "Delete zone; schedules for this zone are removed with it"), () => Power.RemoveZone(zone.Id));
+        AddIconButton(row, 4, "\uE70E", Strings.MoveUpWinsWhereZones, () => Power.MoveZoneUp(index), $"zone-up-{zone.Id}", enabled: index > 0);
+        AddIconButton(row, 5, "\uE70F", Strings.Edit, () => _ = EditZoneAsync(zone.Copy(), isNew: false));
+        AddIconButton(row, 6, "\uE74D", Strings.DeleteZoneSchedulesForThis, () => Power.RemoveZone(zone.Id));
         return row;
     }
 
     private void AddZone_Click(object sender, RoutedEventArgs e) => _ = EditZoneAsync(new TariffZone
     {
-        Name = L("Nacht", "Night"),
+        Name = Strings.Night,
         PricePerKwh = Power.BasePricePerKwh,
         Window = new WeeklyWindow(WeekdayOrder.All, 22 * 60, 6 * 60),
     }, isNew: true);
@@ -234,11 +232,11 @@ public sealed partial class PowerPage : Page, IHeaderPage
     }
 
     private void DayNightTemplate_Click(object sender, RoutedEventArgs e) => Power.AddZones(
-        new TariffZone { Name = L("Nacht", "Night"), PricePerKwh = Discounted, Window = new WeeklyWindow(WeekdayOrder.All, 22 * 60, 6 * 60) },
-        new TariffZone { Name = L("Tag", "Day"), PricePerKwh = Power.BasePricePerKwh, Window = new WeeklyWindow(WeekdayOrder.Workdays, 6 * 60, 22 * 60) });
+        new TariffZone { Name = Strings.Night, PricePerKwh = Discounted, Window = new WeeklyWindow(WeekdayOrder.All, 22 * 60, 6 * 60) },
+        new TariffZone { Name = Strings.Day, PricePerKwh = Power.BasePricePerKwh, Window = new WeeklyWindow(WeekdayOrder.Workdays, 6 * 60, 22 * 60) });
 
     private void WeekendTemplate_Click(object sender, RoutedEventArgs e) => Power.AddZones(
-        new TariffZone { Name = L("Wochenende", "Weekend"), PricePerKwh = Discounted, Window = new WeeklyWindow(WeekdayOrder.Weekend, 0, 0) });
+        new TariffZone { Name = Strings.Weekend, PricePerKwh = Discounted, Window = new WeeklyWindow(WeekdayOrder.Weekend, 0, 0) });
 
     private static double Discounted => Math.Round(Power.BasePricePerKwh * 0.8, 3);
 
@@ -274,7 +272,7 @@ public sealed partial class PowerPage : Page, IHeaderPage
         ScheduleError.Children.Clear();
         if (OtpWaitingNotice.Build() is { } notice) ScheduleError.Children.Add(notice);
         if (Power.LastError is { } error)
-            ScheduleError.Children.Add(Hint(L($"Letzte Schaltung fehlgeschlagen: {error}", $"Last switch failed: {error}"), "\uE7BA", Palette.Bad));
+            ScheduleError.Children.Add(Hint(string.Format(Strings.LastSwitchFailed, error), "\uE7BA", Palette.Bad));
         ScheduleError.Visibility = ScheduleError.Children.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
         _refocus = null;
     }
@@ -283,8 +281,8 @@ public sealed partial class PowerPage : Page, IHeaderPage
     {
         var row = RowGrid(2, 7);
         var toggle = Refocusing($"rule-on-{rule.Id}", new ToggleSwitch { IsOn = rule.IsEnabled, OnContent = "", OffContent = "", MinWidth = 0, VerticalAlignment = VerticalAlignment.Center });
-        ToolTipService.SetToolTip(toggle, L("Zeitplan ein oder aus", "Schedule on or off"));
-        AutomationProperties.SetName(toggle, L("Zeitplan ein oder aus", "Schedule on or off"));
+        ToolTipService.SetToolTip(toggle, Strings.ScheduleOnOrOff);
+        AutomationProperties.SetName(toggle, Strings.ScheduleOnOrOff);
         toggle.Toggled += (_, _) =>
         {
             _refocus = $"rule-on-{rule.Id}";
@@ -308,16 +306,16 @@ public sealed partial class PowerPage : Page, IHeaderPage
 
         if (rule.IsActive(now, Power.Tariff))
         {
-            var active = Palette.UiText(L("aktiv", "active"), 11, Palette.Accent);
+            var active = Palette.UiText(Strings.ActiveInText, 11, Palette.Accent);
             active.FontWeight = FontWeights.Medium;
             active.VerticalAlignment = VerticalAlignment.Center;
             Grid.SetColumn(active, 3);
             row.Children.Add(active);
         }
 
-        AddIconButton(row, 4, "\uE70E", L("Nach oben: gewinnt, wenn mehrere Zeitpläne gleichzeitig gelten", "Move up: wins when several schedules apply at once"), () => Power.MoveRuleUp(index), $"rule-up-{rule.Id}", enabled: index > 0);
-        AddIconButton(row, 5, "\uE70F", L("Bearbeiten", "Edit"), () => _ = EditRuleAsync(rule.Copy(), isNew: false));
-        AddIconButton(row, 6, "\uE74D", L("Zeitplan löschen", "Delete schedule"), () => Power.RemoveRule(rule.Id));
+        AddIconButton(row, 4, "\uE70E", Strings.MoveUpWinsWhenSeveral, () => Power.MoveRuleUp(index), $"rule-up-{rule.Id}", enabled: index > 0);
+        AddIconButton(row, 5, "\uE70F", Strings.Edit, () => _ = EditRuleAsync(rule.Copy(), isNew: false));
+        AddIconButton(row, 6, "\uE74D", Strings.DeleteSchedule, () => Power.RemoveRule(rule.Id));
         return row;
     }
 
@@ -338,14 +336,14 @@ public sealed partial class PowerPage : Page, IHeaderPage
     private static string TriggerText(ScheduleTrigger trigger)
     {
         if (trigger.ZoneId is { } id)
-            return Power.Zone(id) is { } zone ? L($"während „{zone.Name}“", $"during \"{zone.Name}\"") : L("Zone gelöscht", "Zone deleted");
+            return Power.Zone(id) is { } zone ? string.Format(Strings.During, zone.Name) : Strings.ZoneDeleted;
         return trigger.Window is { } window ? $"{WeekdayOrder.Summary(window.Weekdays)} {window.TimeRangeText}" : "";
     }
 
     private static string MinersText(ScheduleRule rule) => rule.MinerIds.Count == 0
-        ? L("Alle Miner", "All miners")
+        ? Strings.AllMiners
         : string.Join(", ", App.Store.Miners.Where(m => rule.MinerIds.Contains(m.Id)).Select(m => m.DisplayName)) is { Length: > 0 } names
-            ? names : L("Miner entfernt", "Miner removed");
+            ? names : Strings.MinerRemoved;
 
     private static string ActionGlyph(PowerAction action) => action switch
     {
@@ -406,8 +404,8 @@ public sealed partial class PowerPage : Page, IHeaderPage
     {
         string[] titles =
         [
-            "Miner", L("Zeitplan", "Schedule"), L("Leistung", "Power"), L("pro Stunde", "per hour"),
-            L("heute", "today"), L("30 Tage", "30 days"), L("30 Tage pro TH/s", "30 days per TH/s"),
+            "Miner", Strings.Schedule, Strings.Power, Strings.PerHourInText,
+            Strings.TodayInText, Strings.Days30, Strings.Days30PerTHs,
         ];
         var header = CostColumnsGrid();
         for (var i = 0; i < titles.Length; i++)
@@ -450,8 +448,8 @@ public sealed partial class PowerPage : Page, IHeaderPage
         {
             var next = Palette.UiText($"→ {planned.Title()}", 12, Palette.TextSecondary);
             ToolTipService.SetToolTip(next, Power.RunsSchedules
-                ? L("Wird umgeschaltet, sobald der Miner online ist und die letzte Schaltung 15 Minuten her ist", "Switches once the miner is online and the last switch was 15 minutes ago")
-                : L("Dieser PC führt keine Zeitpläne aus", "This PC does not run schedules"));
+                ? Strings.SwitchesOnceTheMinerIs
+                : Strings.ThisPCDoesNotRunSchedules);
             cell.Children.Add(next);
         }
         return cell;

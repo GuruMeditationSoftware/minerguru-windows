@@ -46,7 +46,7 @@ Development happens on the Mac; building, testing and running happen in a Window
 
 `MainWindow` has its own sidebar and a `Frame` that switches with `ContentFrame.Navigate(typeof(…Page))`. Every page needs a `.xaml` file: a code-only page makes `Frame.Navigate` crash without an error message.
 
-Strings are written as `L(de, en)` in code and as `{local:T De=…, En=…}` in XAML.
+Texts live in `src/MinerGuru.Core/Resources/Strings.resx` (English, the neutral language) and `Strings.de.resx` (German), in Core because models, alerts and widget cards build texts too. The build generates the class `MinerGuru.Strings` with one property per key, so code reads `Strings.Fleet` and a missing key is a compile error. Texts with values are composite formats: `string.Format(Strings.MinerAdded, name)`; the comment in `Strings.resx` names what `{0}`, `{1}` stand for. XAML uses the markup extension `{local:T Key=Fleet}`. `Lang.English` sets `Strings.Culture`; a language change in the settings takes effect after a restart. `LocalizationTests` check that both files have the same keys and placeholders and that every XAML key exists. Because the language is global, the tests do not run in parallel.
 
 ## Design
 

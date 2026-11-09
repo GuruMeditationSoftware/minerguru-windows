@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Media;
 using MinerGuru.Core;
 using MinerGuru.Core.Services;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -15,8 +14,8 @@ public sealed partial class LiveLogCard : UserControl
     private readonly TextBlock _lines = new() { FontSize = 11, TextWrapping = TextWrapping.Wrap, IsTextSelectionEnabled = true };
     private readonly ScrollViewer _scroll = new() { Height = 300, Padding = new Thickness(12) };
     private readonly Button _toggle = new();
-    private readonly Button _clear = new() { Content = L("Leeren", "Clear") };
-    private readonly TextBox _filter = new() { PlaceholderText = L("Suchen", "Search"), Width = 180 };
+    private readonly Button _clear = new() { Content = Strings.Clear };
+    private readonly TextBox _filter = new() { PlaceholderText = Strings.Search, Width = 180 };
     private readonly TextBlock _status = new() { FontSize = 11 };
     private MinerLogStream? _stream;
 
@@ -64,9 +63,9 @@ public sealed partial class LiveLogCard : UserControl
     private void Render()
     {
         if (_stream == null) return;
-        _toggle.Content = _stream.IsLive ? L("Stoppen", "Stop") : L("Live-Log starten", "Start live log");
+        _toggle.Content = _stream.IsLive ? Strings.Stop : Strings.StartLiveLog;
         _status.Foreground = _stream.Error != null ? Palette.Bad : Palette.TextTertiary;
-        _status.Text = _stream.Error ?? (_stream.IsLive ? L("Verbunden", "Connected") : L("Nicht verbunden", "Not connected"));
+        _status.Text = _stream.Error ?? (_stream.IsLive ? Strings.Connected : Strings.NotConnected);
 
         var filter = _filter.Text.Trim();
         var shown = _stream.Lines.Where(l => filter.Length == 0 || l.Text.Contains(filter, StringComparison.OrdinalIgnoreCase)).TakeLast(200).ToList();
@@ -74,7 +73,7 @@ public sealed partial class LiveLogCard : UserControl
         _lines.Inlines.Clear();
         if (shown.Count == 0)
         {
-            _lines.Inlines.Add(new Run { Text = _stream.Lines.Count == 0 ? L("Noch keine Zeilen. Starte den Live-Log.", "No lines yet. Start the live log.") : L("Keine Treffer.", "No matches."), Foreground = Palette.TextTertiary });
+            _lines.Inlines.Add(new Run { Text = _stream.Lines.Count == 0 ? Strings.NoLinesYetStartThe : Strings.NoMatches, Foreground = Palette.TextTertiary });
             return;
         }
         foreach (var line in shown)

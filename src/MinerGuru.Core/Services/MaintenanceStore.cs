@@ -1,6 +1,5 @@
 using System.Text.Json;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
@@ -87,8 +86,8 @@ public sealed class MaintenanceStore
             if (_stored.Reminded.TryGetValue(task.Id, out var last) && now - last < RemindAgain) continue;
             _stored.Reminded[task.Id] = now;
             var hint = task.Kind.Hint();
-            events.Add(new AlertEvent(AlertKind.Maintenance, Guid.Empty, L($"Wartung fällig: {task.Title}", $"Maintenance due: {task.Title}"),
-                hint.Length > 0 ? hint : L("Trag sie in MinerGuru als erledigt ein.", "Mark it as done in MinerGuru."), false, task.Title));
+            events.Add(new AlertEvent(AlertKind.Maintenance, Guid.Empty, string.Format(Strings.MaintenanceDueTitle, task.Title),
+                hint.Length > 0 ? hint : Strings.MarkItAsDoneIn, false, task.Title));
         }
         if (events.Count > 0) Persist(notify: false);
         return events;

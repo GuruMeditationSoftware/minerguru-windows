@@ -1,6 +1,5 @@
 using System.Text.Json.Nodes;
 using MinerGuru.Core.Services;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Models;
 
@@ -254,18 +253,17 @@ public sealed class PoolSettingsForm
     {
         get
         {
-            if (StratumHost.Clean(Primary.Host).Length == 0) return L("Der primäre Pool braucht einen Host.", "The primary pool needs a host.");
+            if (StratumHost.Clean(Primary.Host).Length == 0) return Strings.ThePrimaryPoolNeedsA;
             for (var i = 0; i < Slots.Count; i++)
             {
                 var slot = Slots[i];
                 if (!slot.HasContent) continue;
-                if (slot.Port is < 1 or > 65535) return L($"{SlotTitle(i)}: Ungültiger Port {slot.Port}.", $"{SlotTitle(i)}: Invalid port {slot.Port}.");
+                if (slot.Port is < 1 or > 65535) return string.Format(Strings.InvalidPort, SlotTitle(i), slot.Port);
                 if (Api == PoolApi.Slots && !slot.IsComplete)
-                    return L($"{SlotTitle(i)}: Host und Wallet/Stratum-User sind erforderlich.", $"{SlotTitle(i)}: Host and wallet/stratum user are required.");
+                    return string.Format(Strings.HostAndWalletStratumUser, SlotTitle(i));
             }
             if (Api == PoolApi.Slots && !Slots[SecondarySlot].HasContent && SecondarySlot != PrimarySlot && StoredSlots.Contains(SecondarySlot))
-                return L("Der Fallback-Slot ist leer. Wähle einen anderen Fallback-Slot oder belege ihn.",
-                         "The fallback slot is empty. Choose another fallback slot or fill this one.");
+                return Strings.TheFallbackSlotIsEmpty;
             return null;
         }
     }

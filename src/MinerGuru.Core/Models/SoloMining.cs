@@ -1,4 +1,3 @@
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Models;
 
@@ -9,12 +8,12 @@ public static class SoloChanceTimeframeExtensions
 {
     public static string Title(this SoloChanceTimeframe timeframe) => timeframe switch
     {
-        SoloChanceTimeframe.PerBlock => L("Pro Block", "Per Block"),
-        SoloChanceTimeframe.PerHour => L("Pro Stunde", "Per Hour"),
-        SoloChanceTimeframe.PerDay => L("Pro Tag", "Per Day"),
-        SoloChanceTimeframe.PerWeek => L("Pro Woche", "Per Week"),
-        SoloChanceTimeframe.PerMonth => L("Pro Monat", "Per Month"),
-        _ => L("Pro Jahr", "Per Year"),
+        SoloChanceTimeframe.PerBlock => Strings.PerBlock,
+        SoloChanceTimeframe.PerHour => Strings.PerHour,
+        SoloChanceTimeframe.PerDay => Strings.PerDay,
+        SoloChanceTimeframe.PerWeek => Strings.PerWeek,
+        SoloChanceTimeframe.PerMonth => Strings.PerMonth,
+        _ => Strings.PerYear,
     };
 
     /// <summary>Length in seconds; "per block" is the coin's target block time.</summary>
@@ -104,8 +103,8 @@ public sealed record FleetCoinMiningSummary(
         var p = Probability(timeframe);
         if (p <= 0) return "—";
         var oneIn = Math.Max(1, Math.Round(1 / p));
-        if (oneIn >= 1e9) return $"1 : {DisplayFormat.Decimal(oneIn / 1e9, 2)} {L("Mrd.", "B")}";
-        if (oneIn >= 1e7) return $"1 : {DisplayFormat.Decimal(oneIn / 1e6, 1)} {L("Mio.", "M")}";
+        if (oneIn >= 1e9) return $"1 : {DisplayFormat.Decimal(oneIn / 1e9, 2)} {Strings.BillionShort}";
+        if (oneIn >= 1e7) return $"1 : {DisplayFormat.Decimal(oneIn / 1e6, 1)} {Strings.MillionShort}";
         return $"1 : {DisplayFormat.Decimal(oneIn, 0)}";
     }
 
@@ -117,11 +116,11 @@ public sealed record FleetCoinMiningSummary(
             var perDay = ExpectedBlocksLambda(SoloChanceTimeframe.PerDay);
             if (perDay <= 0) return "—";
             var days = 1 / perDay;
-            if (days < 1) return $"~{DisplayFormat.Decimal(days * 24, 1)} {L("Std.", "h")}";
-            if (days < 60) return $"~{DisplayFormat.Decimal(days, 1)} {L("Tage", "days")}";
+            if (days < 1) return $"~{DisplayFormat.Decimal(days * 24, 1)} {Strings.HoursShort}";
+            if (days < 60) return $"~{DisplayFormat.Decimal(days, 1)} {Strings.DaysInText}";
             var years = days / 365.25;
-            if (years >= 1_000) return $"~{DisplayFormat.Decimal(Math.Round(years), 0)} {L("J.", "yrs")}";
-            return $"~{DisplayFormat.Decimal(years, 1)} {L("Jahre", "years")}";
+            if (years >= 1_000) return $"~{DisplayFormat.Decimal(Math.Round(years), 0)} {Strings.YearsShort}";
+            return $"~{DisplayFormat.Decimal(years, 1)} {Strings.Years}";
         }
     }
 

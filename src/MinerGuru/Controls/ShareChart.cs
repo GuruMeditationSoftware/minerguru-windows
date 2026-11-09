@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Shapes;
 using MinerGuru.Core;
 using MinerGuru.Core.Models;
 using MinerGuru.Core.Services;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -24,7 +23,7 @@ public sealed partial class ShareChart : UserControl
 
     public ShareChart()
     {
-        var title = Palette.UiText(L("Difficulty pro Share", "Difficulty per share"), 15, Palette.TextPrimary);
+        var title = Palette.UiText(Strings.DifficultyPerShare, 15, Palette.TextPrimary);
         title.FontWeight = Microsoft.UI.Text.FontWeights.Medium;
         var header = new Grid();
         header.Children.Add(title);
@@ -66,10 +65,10 @@ public sealed partial class ShareChart : UserControl
         _empty.Foreground = Palette.TextTertiary;
 
         var submitted = _samples.Count(s => s.IsSubmitted);
-        _source.Text = (_live ? L("Live-Log läuft", "Live log running") : L("Stichprobe einmal pro Minute", "Sampled once a minute"))
-            + " · " + L($"{_samples.Count} Ergebnisse, {submitted} über Pool-Difficulty", $"{_samples.Count} results, {submitted} above pool difficulty");
-        _best.Text = _samples.Count > 0 ? L("Bester: ", "Best: ") + MinerFormatting.FormatDifficulty(_samples.Max(s => s.Difficulty)) : "";
-        _empty.Text = _samples.Count > 0 ? "" : _sampling ? L("Sammle Shares …", "Collecting shares …") : L("Noch keine Shares", "No shares yet");
+        _source.Text = (_live ? Strings.LiveLogRunning : Strings.SampledOnceAMinute)
+            + " · " + string.Format(Strings.ResultsAbovePoolDifficulty, _samples.Count, submitted);
+        _best.Text = _samples.Count > 0 ? Strings.Best + MinerFormatting.FormatDifficulty(_samples.Max(s => s.Difficulty)) : "";
+        _empty.Text = _samples.Count > 0 ? "" : _sampling ? Strings.CollectingShares : Strings.NoSharesYet;
         var width = ActualWidth - 48 - 70;
         if (_samples.Count == 0 || width < 40) return;
 

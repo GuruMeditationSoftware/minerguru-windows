@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using MinerGuru.Core;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -54,7 +53,7 @@ public sealed partial class MinerCard : UserControl
             var offline = miner.State == ConnectionState.Offline;
             ConnectingRing.IsActive = !offline;
             ConnectingRing.Visibility = offline ? Visibility.Collapsed : Visibility.Visible;
-            OfflineTitle.Text = offline ? L("Nicht erreichbar", "Unreachable") : L($"Verbinde mit {miner.IpAddress}…", $"Connecting to {miner.IpAddress}…");
+            OfflineTitle.Text = offline ? Strings.Unreachable : string.Format(Strings.ConnectingTo, miner.IpAddress);
             OfflineTitle.Foreground = offline ? Palette.Bad : Palette.TextSecondary;
             OfflineTitle.FontSize = offline ? 13 : 12;
             OfflineReason.Text = offline ? miner.OfflineReason ?? "" : "";
@@ -66,18 +65,17 @@ public sealed partial class MinerCard : UserControl
         var (value, unit) = MinerFormatting.SplitHashrate(info.HashRate);
         RateValue.Text = value;
         RateUnit.Text = unit;
-        DiffText.Text = L($"Session-Best {info.SessionBestDiffText} · Allzeit {info.BestDiffFormatted}",
-                          $"Session best {info.SessionBestDiffText} · all-time {info.BestDiffFormatted}");
+        DiffText.Text = string.Format(Strings.SessionBestAllTime, info.SessionBestDiffText, info.BestDiffFormatted);
         Sparkline.SetPoints(miner.History.TakeLast(30).Select(s => (s.Timestamp, s.HashRateGhs)));
 
         SetSensor(0, "ASIC", $"{DisplayFormat.Decimal(info.Temp, 1)} °C", null, hot);
         if (info.VrTemp is { } vr) SetSensor(1, "VR", $"{DisplayFormat.Decimal(vr, 0)} °C", null, vr > 75);
-        else SetSensor(1, L("Takt", "Clock"), $"{info.FrequencyMhz} MHz", null);
-        SetSensor(2, L("Leistung", "Power"), $"{DisplayFormat.Decimal(info.Power, 1)} W", $"{DisplayFormat.Decimal(info.EfficiencyJPerTh, 1)} J/TH");
+        else SetSensor(1, Strings.Clock, $"{info.FrequencyMhz} MHz", null);
+        SetSensor(2, Strings.Power, $"{DisplayFormat.Decimal(info.Power, 1)} W", $"{DisplayFormat.Decimal(info.EfficiencyJPerTh, 1)} J/TH");
         if (info.HasSecondFan())
-            SetSensor(3, L("Lüfter", "Fan"), $"{DisplayFormat.Decimal(info.FanSpeedPercent, 0)} / {DisplayFormat.Decimal(info.Fan2SpeedPercent ?? info.FanSpeedPercent, 0)} %", $"{info.FanRpm}/{info.Fan2Rpm} RPM");
+            SetSensor(3, Strings.Fan, $"{DisplayFormat.Decimal(info.FanSpeedPercent, 0)} / {DisplayFormat.Decimal(info.Fan2SpeedPercent ?? info.FanSpeedPercent, 0)} %", $"{info.FanRpm}/{info.Fan2Rpm} RPM");
         else
-            SetSensor(3, L("Lüfter", "Fan"), $"{DisplayFormat.Decimal(info.FanSpeedPercent, 0)} %", info.FanRpm > 0 ? $"{info.FanRpm} RPM" : null);
+            SetSensor(3, Strings.Fan, $"{DisplayFormat.Decimal(info.FanSpeedPercent, 0)} %", info.FanRpm > 0 ? $"{info.FanRpm} RPM" : null);
 
         PoolText.Text = info.ActivePoolEndpoint;
         PoolModeHost.Child = Badges.PoolMode(info, compact: true);

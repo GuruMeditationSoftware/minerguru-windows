@@ -30,12 +30,12 @@ public sealed partial class LongTermHistoryCard : UserControl
         _rangeBox.SelectionChanged += (_, _) => _ = LoadAsync();
         _metricBox.SelectionChanged += (_, _) => Render();
 
-        var title = PageParts.Title(L("Langzeit-Verlauf", "Long-term history"));
+        var title = PageParts.Title(Strings.LongTermHistory);
         title.VerticalAlignment = VerticalAlignment.Center;
         var actions = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8, HorizontalAlignment = HorizontalAlignment.Right };
         actions.Children.Add(_metricBox);
         actions.Children.Add(_rangeBox);
-        actions.Children.Add(PageParts.TextButton("", L("Als CSV sichern", "Save as CSV"), () => _ = ExportAsync()));
+        actions.Children.Add(PageParts.TextButton("", Strings.SaveAsCSV, () => _ = ExportAsync()));
         var header = new Grid();
         header.Children.Add(title);
         header.Children.Add(actions);
@@ -82,22 +82,22 @@ public sealed partial class LongTermHistoryCard : UserControl
         var values = _points.Select(p => (p.Time, Value: metric.Value(p))).Where(v => v.Value != null).Select(v => (v.Time, v.Value!.Value)).ToList();
         _chart.ValueLabel = value => metric.Format(value);
         _chart.TimeLabel = Range == HistoryRange.Day ? null : time => time.ToString("d. MMM", Culture);
-        AutomationProperties.SetName(_rangeBox, L("Zeitraum", "Period"));
-        AutomationProperties.SetName(_metricBox, L("Messwert", "Metric"));
+        AutomationProperties.SetName(_rangeBox, Strings.Period);
+        AutomationProperties.SetName(_metricBox, Strings.Metric);
         _chart.GapStepSeconds = HistoryQuery.Step(Range.Span());
         _chart.SetPoints(values);
         _status.Text = "";
         if (values.Count == 0)
         {
             _figures.Text = "";
-            _status.Text = L("Noch keine Daten. MinerGuru zeichnet auf, solange es läuft.", "No data yet. MinerGuru records while it is running.");
+            _status.Text = Strings.NoDataYetMinerGuruRecords;
             return;
         }
         var online = _points.Sum(p => p.OnlineMinutes);
         var recorded = _points.Sum(p => p.RecordedMinutes);
         var uptime = recorded > 0 ? (double)online / recorded * 100 : 0;
         _figures.Text = $"Ø {metric.Format(values.Average(v => v.Value))}   Min {metric.Format(values.Min(v => v.Value))}   Max {metric.Format(values.Max(v => v.Value))}   "
-            + L("Betriebszeit ", "Uptime ") + uptime.ToString("0.0", Culture) + " %";
+            + Strings.OperatingTimePrefix + uptime.ToString("0.0", Culture) + " %";
     }
 
     private async Task ExportAsync()

@@ -6,7 +6,6 @@ using MinerGuru.Controls;
 using MinerGuru.Core.Models;
 using MinerGuru.Core.Services;
 using MinerGuru.Dialogs;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Pages;
 
@@ -40,7 +39,7 @@ public sealed partial class PoolsPage : Page, IHeaderPage
     }
 
     public (string Title, string Subtitle) Header =>
-        (L("Pool-Konfiguration", "Pool configuration"), L("Pools speichern und Minern zuordnen", "Save pools and assign them to miners"));
+        (Strings.PoolConfiguration, Strings.SavePoolsAndAssignThem);
 
     private static IEnumerable<PoolDraft> ConfigurableDrafts =>
         App.Store.Miners.Where(m => Drafts.ContainsKey(m.Id)).Select(m => Drafts[m.Id]);
@@ -112,7 +111,7 @@ public sealed partial class PoolsPage : Page, IHeaderPage
     private void UpdateToolbar()
     {
         var dirty = ConfigurableDrafts.Where(d => d.IsDirty).ToList();
-        ApplyAllText.Text = L($"Alle übernehmen ({dirty.Count})", $"Apply all ({dirty.Count})");
+        ApplyAllText.Text = string.Format(Strings.ApplyAll, dirty.Count);
         ApplyAllButton.IsEnabled = dirty.Count > 0 && dirty.All(d => d.Form.ValidationMessage == null && !d.IsApplying);
     }
 
@@ -181,7 +180,7 @@ public sealed partial class PoolsPage : Page, IHeaderPage
         {
             if (Library.Find(id) is not { } pool) continue;
             var usage = ConfigurableDrafts.Count(d => d.Baseline.Slots.Any(pool.Matches));
-            text.Text = usage == 0 ? "" : usage == 1 ? L("1 Miner", "1 miner") : L($"{usage} Miner", $"{usage} miners");
+            text.Text = usage == 0 ? "" : usage == 1 ? Strings.OneMiner : string.Format(Strings.UsageMiners, usage);
         }
     }
 
@@ -211,15 +210,15 @@ public sealed partial class PoolsPage : Page, IHeaderPage
         row.Children.Add(usage);
 
         var assignMenu = new MenuFlyout { Placement = Microsoft.UI.Xaml.Controls.Primitives.FlyoutPlacementMode.BottomEdgeAlignedRight };
-        var asPrimary = new MenuFlyoutItem { Text = L("Als Primär-Pool auf allen Minern", "As primary pool on all miners") };
+        var asPrimary = new MenuFlyoutItem { Text = Strings.AsPrimaryPoolOnAll };
         asPrimary.Click += (_, _) => AssignEverywhere(pool, asPrimary: true);
-        var asFallback = new MenuFlyoutItem { Text = L("Als Fallback / Pool 2 auf allen Minern", "As fallback / pool 2 on all miners") };
+        var asFallback = new MenuFlyoutItem { Text = Strings.AsFallbackPool2On };
         asFallback.Click += (_, _) => AssignEverywhere(pool, asPrimary: false);
         assignMenu.Items.Add(asPrimary);
         assignMenu.Items.Add(asFallback);
         var assign = new DropDownButton
         {
-            Content = L("Zuweisen", "Assign"),
+            Content = Strings.Assign,
             Flyout = assignMenu,
             FontSize = 12,
             MinHeight = 28,
@@ -227,18 +226,17 @@ public sealed partial class PoolsPage : Page, IHeaderPage
             CornerRadius = new CornerRadius(6),
             VerticalAlignment = VerticalAlignment.Center,
         };
-        AutomationProperties.SetName(assign, L($"{pool.Name} zuweisen", $"Assign {pool.Name}"));
-        ToolTipService.SetToolTip(assign, L("Pool in die Entwürfe aller Miner übernehmen – gesendet wird erst mit „Übernehmen & neu starten“",
-                                            "Put the pool into the drafts of all miners – nothing is sent until “Apply & restart”"));
+        AutomationProperties.SetName(assign, string.Format(Strings.AssignName, pool.Name));
+        ToolTipService.SetToolTip(assign, Strings.PutThePoolIntoThe);
         Grid.SetColumn(assign, 3);
         row.Children.Add(assign);
 
-        AddIconButton(row, 4, "", L("Bearbeiten", "Edit"), () => _ = EditAsync(pool.Copy(), isNew: false));
-        AddIconButton(row, 5, "", L("Duplizieren (z. B. für einen anderen Worker)", "Duplicate (e.g. for another worker)"), () =>
+        AddIconButton(row, 4, "", Strings.Edit, () => _ = EditAsync(pool.Copy(), isNew: false));
+        AddIconButton(row, 5, "", Strings.DuplicateEGForAnother, () =>
         {
             if (Library.Duplicate(pool.Id) is { } copy) _ = EditAsync(copy.Copy(), isNew: false);
         });
-        AddIconButton(row, 6, "", L("Aus der Bibliothek löschen", "Delete from library"), () => _ = ConfirmDeleteAsync(pool));
+        AddIconButton(row, 6, "", Strings.DeleteFromLibrary, () => _ = ConfirmDeleteAsync(pool));
         return row;
     }
 
@@ -272,8 +270,8 @@ public sealed partial class PoolsPage : Page, IHeaderPage
     {
         var added = Library.Import(App.Store.Miners);
         App.MainWindow.ShowBanner(added == 0
-            ? L("Keine neuen Pools gefunden.", "No new pools found.")
-            : L($"{added} Pool(s) in die Bibliothek übernommen.", $"Added {added} pool(s) to the library."), false);
+            ? Strings.NoNewPoolsFound
+            : string.Format(Strings.AddedPoolSToThe, added), false);
     }
 
     private void New_Click(object sender, RoutedEventArgs e) => _ = EditAsync(new PoolConfig(), isNew: true);
@@ -292,11 +290,10 @@ public sealed partial class PoolsPage : Page, IHeaderPage
         {
             XamlRoot = XamlRoot,
             RequestedTheme = ActualTheme,
-            Title = L("Pool-Konfiguration löschen?", "Delete pool configuration?"),
-            Content = L($"„{pool.Name}“ wird nur aus der Bibliothek entfernt. Die Miner behalten ihre aktuelle Konfiguration.",
-                        $"“{pool.Name}” is only removed from the library. The miners keep their current configuration."),
-            PrimaryButtonText = L("Löschen", "Delete"),
-            CloseButtonText = L("Abbrechen", "Cancel"),
+            Title = Strings.DeletePoolConfiguration,
+            Content = string.Format(Strings.IsOnlyRemovedFromThe, pool.Name),
+            PrimaryButtonText = Strings.Delete,
+            CloseButtonText = Strings.Cancel,
             DefaultButton = ContentDialogButton.Close,
         };
         if (await dialog.ShowAsync() == ContentDialogResult.Primary) Library.Remove(pool.Id);

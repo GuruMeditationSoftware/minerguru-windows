@@ -5,7 +5,22 @@
     <RootNamespace>MinerGuru.Core</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!-- The texts in Resources/Strings.resx are English; German comes from the satellite assembly of Strings.de.resx. -->
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
+  <ItemGroup>
+    <!-- UI texts. The build generates the class MinerGuru.Strings with one property per key (Strings.Fleet),
+         so a missing key is a compile error. -->
+    <EmbeddedResource Update="Resources\Strings.resx">
+      <Generator>MSBuild:Compile</Generator>
+      <StronglyTypedFileName>$(IntermediateOutputPath)Strings.Designer.cs</StronglyTypedFileName>
+      <StronglyTypedLanguage>CSharp</StronglyTypedLanguage>
+      <StronglyTypedNamespace>MinerGuru</StronglyTypedNamespace>
+      <StronglyTypedClassName>Strings</StronglyTypedClassName>
+      <StronglyTypedManifestPrefix>MinerGuru.Core.Resources</StronglyTypedManifestPrefix>
+      <PublicClass>true</PublicClass>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.0" />
     <!-- Newer native SQLite than Microsoft.Data.Sqlite brings along. -->

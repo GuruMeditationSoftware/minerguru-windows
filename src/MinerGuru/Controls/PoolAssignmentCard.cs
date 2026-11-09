@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Shapes;
 using MinerGuru.Core;
 using MinerGuru.Core.Models;
 using MinerGuru.Core.Services;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -109,8 +108,8 @@ public sealed partial class PoolAssignmentCard : Grid
         var name = Palette.UiText(miner.DisplayName, 15);
         name.FontWeight = Microsoft.UI.Text.FontWeights.Medium;
         var detail = Form.Api == PoolApi.Slots
-            ? L($"{AxeOsPool.SlotCount} Pool-Slots", $"{AxeOsPool.SlotCount} pool slots")
-            : miner.SupportsDualPool ? L("Failover oder Dual-Pool", "Failover or dual pool") : L("Primär + Fallback", "Primary + fallback");
+            ? string.Format(Strings.PoolSlots, AxeOsPool.SlotCount)
+            : miner.SupportsDualPool ? Strings.FailoverOrDualPool : Strings.PrimaryFallback;
         var names = new StackPanel { Spacing = 2 };
         names.Children.Add(name);
         names.Children.Add(Palette.UiText($"{MinerGuru.Core.Privacy.Ip(miner.IpAddress)} • {detail}", 12, Palette.TextSecondary));
@@ -212,8 +211,8 @@ public sealed partial class PoolAssignmentCard : Grid
                 Content = new FontIcon { Glyph = "", FontSize = 12 },
                 Style = (Style)Application.Current.Resources["BarButtonStyle"],
             };
-            ToolTipService.SetToolTip(save, L("Diesen Pool in die Bibliothek übernehmen", "Add this pool to the library"));
-            AutomationProperties.SetName(save, L("Diesen Pool in die Bibliothek übernehmen", "Add this pool to the library"));
+            ToolTipService.SetToolTip(save, Strings.AddThisPoolToThe);
+            AutomationProperties.SetName(save, Strings.AddThisPoolToThe);
             save.Click += (_, _) => SaveToLibraryRequested?.Invoke(Form.Slots[index]);
             Grid.SetColumn(save, 4);
             row.Children.Add(save);
@@ -227,13 +226,13 @@ public sealed partial class PoolAssignmentCard : Grid
         var picker = Input($"slot{index}", new ComboBox { HorizontalAlignment = HorizontalAlignment.Stretch, FontSize = 12, MinHeight = 28, Padding = new Thickness(10, 3, 0, 4) });
         AutomationProperties.SetName(picker, Form.SlotTitle(index));
         var choices = new List<PoolConfig?> { null };
-        picker.Items.Add(L("— leer —", "— empty —"));
+        picker.Items.Add(Strings.Empty);
         var match = _library.Matching(endpoint);
         var unsaved = endpoint.HasContent && match == null;
         if (unsaved)
         {
             choices.Add(null);
-            picker.Items.Add(L($"{StratumHost.Clean(endpoint.Host)}:{endpoint.Port} (nicht in Bibliothek)", $"{StratumHost.Clean(endpoint.Host)}:{endpoint.Port} (not in library)"));
+            picker.Items.Add(string.Format(Strings.NotInLibrary, StratumHost.Clean(endpoint.Host), endpoint.Port));
         }
         foreach (var pool in _library.Pools)
         {
@@ -270,14 +269,14 @@ public sealed partial class PoolAssignmentCard : Grid
 
     private string SlotLabel(int index) =>
         Form.Api == PoolApi.Slots ? Form.SlotTitle(index)
-        : index == 0 ? (IsDual ? "Pool 1" : L("Primär", "Primary"))
+        : index == 0 ? (IsDual ? "Pool 1" : Strings.Primary)
         : (IsDual ? "Pool 2" : "Fallback");
 
     private StackPanel? RoleBadge(int index)
     {
         if (Form.Api == PoolApi.Slots)
         {
-            if (index == Form.PrimarySlot) return Role(L("Primär", "Primary"), Palette.Good);
+            if (index == Form.PrimarySlot) return Role(Strings.Primary, Palette.Good);
             if (index == Form.SecondarySlot) return Role("Fallback", Palette.Warning);
             if (Form.Slots[index].HasContent) return Role("Reserve", Palette.TextSecondary);
             return null;
@@ -299,7 +298,7 @@ public sealed partial class PoolAssignmentCard : Grid
         var grid = new Grid { ColumnSpacing = 12 };
         grid.ColumnDefinitions.Add(new ColumnDefinition());
         grid.ColumnDefinitions.Add(new ColumnDefinition());
-        var primary = RolePicker(L("Primär", "Primary"), Form.PrimarySlot, i => Form.PrimarySlot = i);
+        var primary = RolePicker(Strings.Primary, Form.PrimarySlot, i => Form.PrimarySlot = i);
         var fallback = RolePicker("Fallback", Form.SecondarySlot, i => Form.SecondarySlot = i);
         Grid.SetColumn(fallback, 1);
         grid.Children.Add(primary);
@@ -316,7 +315,7 @@ public sealed partial class PoolAssignmentCard : Grid
             var slot = Form.Slots[i];
             picker.Items.Add(slot.HasContent
                 ? $"{Form.SlotTitle(i)}: {_library.Matching(slot)?.Name ?? StratumHost.Clean(slot.Host)}"
-                : L($"{Form.SlotTitle(i)} (leer)", $"{Form.SlotTitle(i)} (empty)"));
+                : string.Format(Strings.SlotTitleEmpty, Form.SlotTitle(i)));
         }
         picker.SelectedIndex = choices.IndexOf(current);
         picker.SelectionChanged += (_, _) =>
@@ -341,14 +340,14 @@ public sealed partial class PoolAssignmentCard : Grid
         bar.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
         if (Form.SlotsToClear.Count > 0)
         {
-            var clearing = Palette.UiText(L("Wird geleert: ", "Will be cleared: ") + string.Join(", ", Form.SlotsToClear.Select(Form.SlotTitle)), 11, Palette.TextSecondary);
+            var clearing = Palette.UiText(Strings.WillBeCleared + string.Join(", ", Form.SlotsToClear.Select(Form.SlotTitle)), 11, Palette.TextSecondary);
             clearing.VerticalAlignment = VerticalAlignment.Center;
             bar.Children.Add(clearing);
         }
 
         var reset = new Button
         {
-            Content = L("Zurücksetzen", "Reset"),
+            Content = Strings.Reset,
             Style = (Style)Application.Current.Resources["SmallButtonStyle"],
             IsEnabled = _draft.IsDirty && !_draft.IsApplying,
         };
@@ -358,16 +357,15 @@ public sealed partial class PoolAssignmentCard : Grid
 
         var applyContent = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 6 };
         if (_draft.IsApplying) applyContent.Children.Add(new ProgressRing { IsActive = true, Width = 12, Height = 12 });
-        applyContent.Children.Add(new TextBlock { Text = L("Übernehmen & neu starten", "Apply & restart") });
+        applyContent.Children.Add(new TextBlock { Text = Strings.ApplyRestart });
         var apply = new Button
         {
             Content = applyContent,
             Style = (Style)Application.Current.Resources["SmallAccentButtonStyle"],
             IsEnabled = _draft.IsDirty && !_draft.IsApplying && Form.ValidationMessage == null && _draft.Miner.IsOnline,
         };
-        ToolTipService.SetToolTip(apply, L("Pools an den Miner senden; der Miner startet danach neu, damit sie aktiv werden",
-                                           "Send the pools to the miner; it restarts afterwards so they take effect"));
-        AutomationProperties.SetName(apply, L("Übernehmen & neu starten", "Apply & restart"));
+        ToolTipService.SetToolTip(apply, Strings.SendThePoolsToThe);
+        AutomationProperties.SetName(apply, Strings.ApplyRestart);
         apply.Click += async (_, _) => { if (ApplyRequested != null) await ApplyRequested.Invoke(); };
         Grid.SetColumn(apply, 2);
         bar.Children.Add(apply);

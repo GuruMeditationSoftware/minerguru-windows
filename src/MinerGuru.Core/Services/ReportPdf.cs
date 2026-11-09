@@ -11,8 +11,8 @@ public static class ReportPdf
     private const double PageWidth = 595, PageHeight = 842, Margin = 42;
     private static readonly (string Title, double Width)[] Columns =
     [
-        (L("Miner", "Miner"), 118), (L("Betrieb", "Uptime"), 50), ("Hashrate", 74), (L("Energie", "Energy"), 62),
-        (L("Kosten", "Cost"), 58), ("J/TH", 42), (L("Ø °C", "Avg °C"), 42), (L("Max °C", "Max °C"), 42),
+        (Strings.Miner, 118), (Strings.Uptime, 50), ("Hashrate", 74), (Strings.Energy, 62),
+        (Strings.Cost, 58), ("J/TH", 42), (Strings.AvgC, 42), (Strings.MaxC, 42),
     ];
 
     private sealed class Canvas
@@ -43,7 +43,7 @@ public static class ReportPdf
     {
         var page = new Canvas();
         var dates = string.Create(Culture, $"{report.Start:d} – {report.End.AddSeconds(-1):d}");
-        page.Text(Margin, page.Y - 18, L("MinerGuru-Bericht", "MinerGuru report"), 18, bold: true);
+        page.Text(Margin, page.Y - 18, Strings.MinerGuruReport, 18, bold: true);
         page.Y -= 36;
         page.Text(Margin, page.Y, dates, 10, gray: 0.35);
         page.Y -= 26;
@@ -61,7 +61,7 @@ public static class ReportPdf
 
         if (report.Daily.Count > 1) DailyChart(page, report);
 
-        Heading(page, L("Miner", "Miners"));
+        Heading(page, Strings.Miners);
         TableHeader(page);
         foreach (var row in report.Rows)
         {
@@ -88,7 +88,7 @@ public static class ReportPdf
         {
             page.Y -= 10;
             page.Need(50);
-            Heading(page, L("Erledigte Wartung", "Maintenance done"));
+            Heading(page, Strings.MaintenanceDone);
             foreach (var record in report.Maintenance)
             {
                 page.Need(15);
@@ -103,19 +103,19 @@ public static class ReportPdf
     /// <summary>The figures at the top of the report, also shown on the reports page.</summary>
     public static List<(string Label, string Value)> Figures(MinerReport report, PowerTariff tariff) =>
     [
-        (L("Ø Hashrate", "Avg hashrate"), report.AverageHashRateGhs is { } hashRate ? HistoryMetric.Hashrate.Format(hashRate) : "—"),
-        (L("Betriebszeit", "Uptime"), Number(report.UptimePercent, "0.0", " %")),
-        (L("Energie", "Energy"), Number(report.TotalEnergyKwh, "0.00", " kWh")),
-        (L("Stromkosten", "Energy cost"), tariff.FormatPrice(report.TotalCost)),
-        (L("Ø Effizienz", "Avg efficiency"), Number(report.EfficiencyJPerTh, "0.0", " J/TH")),
-        (L("Höchste Temperatur", "Highest temperature"), Number(report.MaxTempC, "0.0", " °C")),
-        (L("Angenommene Shares", "Accepted shares"), report.SharesAccepted.ToString("N0", Culture)),
-        (L("Abgelehnte Shares", "Rejected shares"), report.SharesRejected.ToString("N0", Culture)),
+        (Strings.AvgHashrate, report.AverageHashRateGhs is { } hashRate ? HistoryMetric.Hashrate.Format(hashRate) : "—"),
+        (Strings.OperatingTime, Number(report.UptimePercent, "0.0", " %")),
+        (Strings.Energy, Number(report.TotalEnergyKwh, "0.00", " kWh")),
+        (Strings.EnergyCost, tariff.FormatPrice(report.TotalCost)),
+        (Strings.AvgEfficiency, Number(report.EfficiencyJPerTh, "0.0", " J/TH")),
+        (Strings.HighestTemperature, Number(report.MaxTempC, "0.0", " °C")),
+        (Strings.AcceptedShares, report.SharesAccepted.ToString("N0", Culture)),
+        (Strings.RejectedShares, report.SharesRejected.ToString("N0", Culture)),
     ];
 
     private static void DailyChart(Canvas page, MinerReport report)
     {
-        Heading(page, L("Hashrate der Flotte pro Tag", "Fleet hashrate per day"));
+        Heading(page, Strings.FleetHashratePerDay);
         const double Height = 70, Width = PageWidth - 2 * Margin;
         page.Need(Height + 26);
         var top = report.Daily.Max(d => d.HashRateGhs);

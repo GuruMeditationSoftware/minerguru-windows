@@ -1,7 +1,6 @@
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Text;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
@@ -28,7 +27,7 @@ public static class SmtpSecurityText
     {
         SmtpSecurity.StartTls => "STARTTLS",
         SmtpSecurity.Tls => "SSL/TLS",
-        _ => L("Keine", "None"),
+        _ => Strings.None,
     };
 }
 
@@ -89,7 +88,7 @@ public sealed class SmtpDialogue(SmtpMessage message, string username, string pa
                 Expect(code, 250, text);
                 if (!useStartTls) return Authenticate();
                 if (!text.Contains("STARTTLS", StringComparison.OrdinalIgnoreCase))
-                    throw new SmtpException(L("Der Mailserver bietet kein STARTTLS an.", "The mail server does not offer STARTTLS."));
+                    throw new SmtpException(Strings.TheMailServerDoesNot);
                 _step = Step.StartTls;
                 return new SmtpAction.Send("STARTTLS");
             case Step.StartTls:
@@ -147,7 +146,7 @@ public sealed class SmtpDialogue(SmtpMessage message, string username, string pa
 
     private static void Expect(int code, int wanted, string text)
     {
-        if (code != wanted) throw new SmtpException(L($"Mailserver: {text}", $"Mail server: {text}"));
+        if (code != wanted) throw new SmtpException(string.Format(Strings.MailServer, text));
     }
 
     /// <summary>Lines that start with a dot get a second one, so they do not end the message.</summary>
@@ -210,10 +209,10 @@ public static class SmtpClient
         while (true)
         {
             var line = await reader.ReadLineAsync(token)
-                ?? throw new SmtpException(L("Der Mailserver hat die Verbindung getrennt.", "The mail server closed the connection."));
+                ?? throw new SmtpException(Strings.TheMailServerClosedThe);
             text.AppendLine(line);
             if (line.Length < 3 || !int.TryParse(line[..3], out var code))
-                throw new SmtpException(L("Unerwartete Antwort vom Mailserver.", "Unexpected reply from the mail server."));
+                throw new SmtpException(Strings.UnexpectedReplyFromTheMail);
             if (line.Length == 3 || line[3] != '-') return (code, text.ToString().Trim());
         }
     }

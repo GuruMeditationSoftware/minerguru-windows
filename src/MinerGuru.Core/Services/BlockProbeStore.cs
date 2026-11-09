@@ -1,5 +1,4 @@
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Services;
 
@@ -75,7 +74,7 @@ public sealed class BlockProbeStore
         {
             var job = await _fetch(target);
             block = BlockTemplateSummary.From(job, target.Coin, target.User, DateTime.Now);
-            if (block == null) error = L("Der Auftrag des Pools ließ sich nicht lesen.", "The pool's job could not be read.");
+            if (block == null) error = Strings.ThePoolSJobCould;
         }
         catch (StratumProbeException e)
         {

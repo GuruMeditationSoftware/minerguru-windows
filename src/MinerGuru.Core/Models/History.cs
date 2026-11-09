@@ -55,20 +55,20 @@ public static class HistoryText
 
     public static string Title(this HistoryRange range) => range switch
     {
-        HistoryRange.Day => L("24 Std.", "24 hrs"),
-        HistoryRange.Week => L("7 Tage", "7 days"),
-        HistoryRange.Month => L("30 Tage", "30 days"),
-        HistoryRange.Quarter => L("90 Tage", "90 days"),
-        _ => L("1 Jahr", "1 year"),
+        HistoryRange.Day => Strings.Hours24,
+        HistoryRange.Week => Strings.Days7,
+        HistoryRange.Month => Strings.Days30,
+        HistoryRange.Quarter => Strings.Days90,
+        _ => Strings.OneYear,
     };
 
     public static string Title(this HistoryMetric metric) => metric switch
     {
         HistoryMetric.Hashrate => "Hashrate",
-        HistoryMetric.Temperature => L("Temperatur", "Temperature"),
-        HistoryMetric.Efficiency => L("Effizienz", "Efficiency"),
-        HistoryMetric.Power => L("Leistung", "Power"),
-        _ => L("Fehlerquote", "Error rate"),
+        HistoryMetric.Temperature => Strings.Temperature,
+        HistoryMetric.Efficiency => Strings.Efficiency,
+        HistoryMetric.Power => Strings.Power,
+        _ => Strings.ErrorRate,
     };
 
     public static double? Value(this HistoryMetric metric, HistoryPoint point) => metric switch

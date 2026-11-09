@@ -76,7 +76,7 @@ public sealed partial class MinerLogStream(string host) : IDisposable
             {
                 await ReceiveAsync(keepLines: true, token);
                 token.ThrowIfCancellationRequested();
-                Error = Lang.L("Verbindung zum Miner unterbrochen. Neuer Versuch läuft …", "Connection to the miner lost. Trying again …");
+                Error = Strings.ConnectionToTheMinerLost;
                 Changed?.Invoke();
                 await Task.Delay(ReconnectDelay, token);
             }

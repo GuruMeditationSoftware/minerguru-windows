@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml.Controls;
 using MinerGuru.Controls;
 using MinerGuru.Core.Models;
 using MinerGuru.Core.Services;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Dialogs;
 
@@ -15,9 +14,9 @@ public sealed partial class MinerControlDialog : ContentDialog
     private readonly InfoBar _status = new() { IsOpen = false, IsClosable = true };
     private readonly NumberBox _frequency = new() { SmallChange = 25, LargeChange = 25, SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline, Width = 170 };
     private readonly NumberBox _voltage = new() { SmallChange = 10, LargeChange = 10, SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline, Width = 170 };
-    private readonly ToggleSwitch _autoFan = new() { Header = L("Automatische Temperaturregelung (Auto-Fan)", "Automatic temperature control (auto fan)") };
-    private readonly Slider _fan = new() { Minimum = 20, Maximum = 100, StepFrequency = 5, Header = L("Manuelle Lüfterdrehzahl", "Manual fan speed") };
-    private readonly TextBox _alias = new() { PlaceholderText = L("Eigenen Namen vergeben (leer = Hostname vom Miner)", "Your own name (empty = hostname of the miner)") };
+    private readonly ToggleSwitch _autoFan = new() { Header = Strings.AutomaticTemperatureControlAutoFan };
+    private readonly Slider _fan = new() { Minimum = 20, Maximum = 100, StepFrequency = 5, Header = Strings.ManualFanSpeed };
+    private readonly TextBox _alias = new() { PlaceholderText = Strings.YourOwnNameEmptyHostname };
     private readonly TextBox _hostname = new() { PlaceholderText = "bitaxe", FontFamily = Palette.Mono };
 
     public MinerControlDialog(MinerDevice miner)
@@ -25,8 +24,8 @@ public sealed partial class MinerControlDialog : ContentDialog
         _miner = miner;
         Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"];
         Resources["ContentDialogMaxWidth"] = 640.0;
-        Title = L($"Miner-Einstellungen: {miner.DisplayName}", $"Miner settings: {miner.DisplayName}");
-        CloseButtonText = L("Schließen", "Close");
+        Title = string.Format(Strings.MinerSettings, miner.DisplayName);
+        CloseButtonText = Strings.Close;
 
         // Clock and voltage go out with every fan change: the range holds the miner's values, so they go out unchanged.
         (_frequency.Minimum, _frequency.Maximum) = miner.FrequencyRange;
@@ -44,8 +43,8 @@ public sealed partial class MinerControlDialog : ContentDialog
         _autoFan.Toggled += (_, _) => _fan.Visibility = _autoFan.IsOn ? Visibility.Collapsed : Visibility.Visible;
 
         var pivot = new Pivot();
-        pivot.Items.Add(new PivotItem { Header = L("Takt & Lüfter", "Clock & fan"), Content = Scroll(PerformanceTab()) });
-        pivot.Items.Add(new PivotItem { Header = L("System & Name", "System & name"), Content = Scroll(SystemTab()) });
+        pivot.Items.Add(new PivotItem { Header = Strings.ClockFan, Content = Scroll(PerformanceTab()) });
+        pivot.Items.Add(new PivotItem { Header = Strings.SystemName, Content = Scroll(SystemTab()) });
 
         var content = new StackPanel { Spacing = 8, Width = 560 };
         content.Children.Add(_status);
@@ -76,14 +75,13 @@ public sealed partial class MinerControlDialog : ContentDialog
             IsOpen = true,
             IsClosable = false,
             Severity = InfoBarSeverity.Warning,
-            Title = L("Übertakten auf eigenes Risiko", "Overclocking at your own risk"),
-            Message = L("Höherer Takt und höhere Spannung erzeugen mehr Hitze und können Chip, Spannungsregler und Netzteil dauerhaft beschädigen. Die Garantie kann erlöschen.",
-                "Higher clock and voltage produce more heat and can permanently damage the chip, the voltage regulator and the power supply. The warranty may be void."),
+            Title = Strings.OverclockingAtYourOwnRisk,
+            Message = Strings.HigherClockAndVoltageProduce,
         });
 
         if (_miner.RecommendedPresets.Count > 0)
         {
-            tab.Children.Add(Heading(L($"Schnell-Profile für {_miner.HardwareTitle}", $"Quick profiles for {_miner.HardwareTitle}")));
+            tab.Children.Add(Heading(string.Format(Strings.QuickProfilesFor, _miner.HardwareTitle)));
             foreach (var preset in _miner.RecommendedPresets)
             {
                 var row = new Grid();
@@ -107,15 +105,15 @@ public sealed partial class MinerControlDialog : ContentDialog
             }
         }
 
-        tab.Children.Add(Heading(L("Manuelle Feinabstimmung (ASIC-Takt & Kernspannung)", "Manual tuning (ASIC clock & core voltage)")));
-        tab.Children.Add(Row(L("Frequenz (MHz)", "Frequency (MHz)"), _frequency));
+        tab.Children.Add(Heading(Strings.ManualTuningASICClockCore));
+        tab.Children.Add(Row(Strings.FrequencyMHz, _frequency));
         tab.Children.Add(Row("Core Voltage (mV)", _voltage));
 
-        tab.Children.Add(Heading(L("Lüftersteuerung", "Fan control")));
+        tab.Children.Add(Heading(Strings.FanControl));
         tab.Children.Add(_autoFan);
         tab.Children.Add(_fan);
 
-        var apply = new Button { Content = L("Takt & Lüfter auf Miner anwenden", "Apply clock & fan to the miner"), Style = (Style)Application.Current.Resources["AccentButtonStyle"], HorizontalAlignment = HorizontalAlignment.Right };
+        var apply = new Button { Content = Strings.ApplyClockFanToThe, Style = (Style)Application.Current.Resources["AccentButtonStyle"], HorizontalAlignment = HorizontalAlignment.Right };
         apply.Click += async (_, _) => await SendAsync(new MinerSystemUpdatePayload
         {
             Frequency = (int)_frequency.Value,
@@ -123,9 +121,9 @@ public sealed partial class MinerControlDialog : ContentDialog
             OverclockEnabled = 1,
             AutoFanSpeed = _autoFan.IsOn ? Math.Max(1, _miner.LatestInfo?.AutoFanModeRaw ?? 1) : 0,
             FanSpeed = _autoFan.IsOn ? null : (int)_fan.Value,
-        }, L("Einstellungen übertragen. Takt und Spannung gelten erst nach einem Neustart des Miners.", "Settings sent. Clock and voltage only apply after the miner restarts."));
+        }, Strings.SettingsSentClockAndVoltage);
         // An emptied box holds NaN, which would reach the miner as 0.
-        var missing = Palette.UiText(L("Frequenz und Kernspannung brauchen einen Wert.", "Frequency and core voltage need a value."), 12, Palette.Warning);
+        var missing = Palette.UiText(Strings.FrequencyAndCoreVoltageNeed, 12, Palette.Warning);
         void CheckValues()
         {
             var complete = !double.IsNaN(_frequency.Value) && !double.IsNaN(_voltage.Value);
@@ -144,26 +142,26 @@ public sealed partial class MinerControlDialog : ContentDialog
     {
         var tab = new StackPanel { Spacing = 14 };
 
-        tab.Children.Add(Heading(L("Anzeigename in MinerGuru", "Display name in MinerGuru")));
-        var saveAlias = new Button { Content = L("Speichern", "Save"), Style = (Style)Application.Current.Resources["AccentButtonStyle"] };
+        tab.Children.Add(Heading(Strings.DisplayNameInMinerGuru));
+        var saveAlias = new Button { Content = Strings.Save, Style = (Style)Application.Current.Resources["AccentButtonStyle"] };
         saveAlias.Click += (_, _) =>
         {
             App.Store.RenameMiner(_miner.Id, _alias.Text);
-            Show(L("Anzeigename gespeichert.", "Display name saved."), InfoBarSeverity.Success);
+            Show(Strings.DisplayNameSaved, InfoBarSeverity.Success);
         };
         tab.Children.Add(FieldRow(_alias, saveAlias));
 
-        tab.Children.Add(Heading(L("Miner-Hostname im Netzwerk", "Miner hostname on the network")));
-        var saveHost = new Button { Content = L("Hostname übertragen", "Send hostname") };
+        tab.Children.Add(Heading(Strings.MinerHostnameOnTheNetwork));
+        var saveHost = new Button { Content = Strings.SendHostname };
         saveHost.Click += async (_, _) =>
         {
             if (!string.IsNullOrWhiteSpace(_hostname.Text))
-                await SendAsync(new MinerSystemUpdatePayload { Hostname = _hostname.Text.Trim() }, L("Hostname übertragen.", "Hostname sent."));
+                await SendAsync(new MinerSystemUpdatePayload { Hostname = _hostname.Text.Trim() }, Strings.HostnameSent);
         };
         tab.Children.Add(FieldRow(_hostname, saveHost));
 
-        tab.Children.Add(Heading(L("Pools", "Pools")));
-        var pools = new Button { Content = L("Zur Pools-Seite", "Open the pools page") };
+        tab.Children.Add(Heading(Strings.Pools));
+        var pools = new Button { Content = Strings.OpenThePoolsPage };
         pools.Click += (_, _) =>
         {
             Hide();

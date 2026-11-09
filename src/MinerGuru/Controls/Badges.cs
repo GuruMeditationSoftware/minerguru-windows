@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Shapes;
 using MinerGuru.Core;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -66,11 +65,11 @@ public static class Badges
         else if (info.IsUsingFallbackStratum)
         {
             row.Children.Add(Dot(Palette.Warning));
-            row.Children.Add(Palette.UiText(compact ? "Fallback" : L("Fallback-Pool aktiv", "Fallback pool active"), 11, Palette.TextSecondary));
+            row.Children.Add(Palette.UiText(compact ? "Fallback" : Strings.FallbackPoolActive, 11, Palette.TextSecondary));
         }
         else
         {
-            row.Children.Add(Palette.UiText(compact ? L("Primär", "Primary") : L("Primärer Pool aktiv", "Primary pool active"), 11, Palette.TextTertiary));
+            row.Children.Add(Palette.UiText(compact ? Strings.Primary : Strings.PrimaryPoolActive, 11, Palette.TextTertiary));
         }
         return row;
     }

@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -63,8 +62,8 @@ public sealed partial class StatusBlock : Canvas
         ToolTipService.SetToolTip(this, look switch
         {
             Look.Online => "Online",
-            Look.Hot => L("Online, Temperatur hoch", "Online, temperature high"),
-            Look.Checking => L("Verbindung wird geprüft", "Checking the connection"),
+            Look.Hot => Strings.OnlineTemperatureHigh,
+            Look.Checking => Strings.CheckingTheConnection,
             _ => offlineReason is { } reason ? $"Offline: {reason}" : "Offline",
         });
     }

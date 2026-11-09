@@ -1,6 +1,5 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -16,8 +15,7 @@ internal static class OtpWaitingNotice
         var waiting = App.Store.MinersAwaitingOtp;
         if (waiting.Count == 0) return null;
         var panel = new StackPanel { Spacing = 6 };
-        var note = Palette.UiText(L("Zeitpläne laufen auf diesen Minern nur mit gültiger Sitzung (bis zu 24 Stunden).",
-                                    "Schedules only run on these miners with a valid session (up to 24 hours)."), 12, Palette.TextSecondary);
+        var note = Palette.UiText(Strings.SchedulesOnlyRunOnThese, 12, Palette.TextSecondary);
         note.TextWrapping = TextWrapping.Wrap;
         panel.Children.Add(note);
         foreach (var miner in waiting)
@@ -26,7 +24,7 @@ internal static class OtpWaitingNotice
             var name = Palette.UiText(miner.DisplayName, 13, Palette.TextPrimary);
             name.VerticalAlignment = VerticalAlignment.Center;
             row.Children.Add(name);
-            var button = PageParts.TextButton("\uE72E", L("Code eingeben", "Enter code"), () => _ = App.Store.EnterOtpCodeAsync(miner));
+            var button = PageParts.TextButton("\uE72E", Strings.EnterCode, () => _ = App.Store.EnterOtpCodeAsync(miner));
             button.HorizontalAlignment = HorizontalAlignment.Right;
             row.Children.Add(button);
             panel.Children.Add(row);

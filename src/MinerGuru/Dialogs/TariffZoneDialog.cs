@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using MinerGuru.Controls;
 using MinerGuru.Core.Models;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Dialogs;
 
@@ -23,11 +22,11 @@ public sealed partial class TariffZoneDialog : ContentDialog
         _zone = zone;
         Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"];
         Resources["ContentDialogMaxWidth"] = 600.0;
-        PrimaryButtonText = L("Sichern", "Save");
-        CloseButtonText = L("Abbrechen", "Cancel");
+        PrimaryButtonText = Strings.SaveEntry;
+        CloseButtonText = Strings.Cancel;
         DefaultButton = ContentDialogButton.Primary;
 
-        _name = new TextBox { Text = zone.Name, PlaceholderText = L("z. B. Nacht", "e.g. Night") };
+        _name = new TextBox { Text = zone.Name, PlaceholderText = Strings.EGNight };
         _name.TextChanged += (_, _) => Validate();
         _price = new TextBox { Text = PowerTariff.PriceText(zone.PricePerKwh), Width = 90, TextAlignment = TextAlignment.Right };
         _price.TextChanged += (_, _) => Validate();
@@ -40,13 +39,13 @@ public sealed partial class TariffZoneDialog : ContentDialog
         days.Changed += Validate;
 
         var form = new StackPanel { Width = 520, Spacing = 14 };
-        var title = Palette.UiText(isNew ? L("Neue Tarifzone", "New tariff zone") : L("Tarifzone bearbeiten", "Edit tariff zone"), 15, Palette.TextPrimary);
+        var title = Palette.UiText(isNew ? Strings.NewTariffZone : Strings.EditTariffZone, 15, Palette.TextPrimary);
         title.FontWeight = FontWeights.Medium;
         form.Children.Add(title);
         form.Children.Add(PowerForm.Row("Name", _name));
-        form.Children.Add(PowerForm.Row(L("Preis pro kWh", "Price per kWh"), priceRow));
-        form.Children.Add(PowerForm.Row(L("Tage", "Days"), days));
-        form.Children.Add(PowerForm.Row(L("Uhrzeit", "Time"), new TimeWindowFields(zone.Window)));
+        form.Children.Add(PowerForm.Row(Strings.PricePerKWh, priceRow));
+        form.Children.Add(PowerForm.Row(Strings.Days, days));
+        form.Children.Add(PowerForm.Row(Strings.Time, new TimeWindowFields(zone.Window)));
         Content = form;
         PrimaryButtonClick += (_, _) =>
         {

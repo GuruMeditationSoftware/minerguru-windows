@@ -59,7 +59,7 @@ text{fill:#f2f2f3}.m{fill:#a1a1a6}.c,.c text{fill:#d1d1d6}.z{fill:#8e8e93}
 <rect class="raised" x="234" y="344" width="184" height="46" rx="8"/><text class="t" x="246" y="363">Dialogs</text><text class="c" x="246" y="380">Dialogs/</text>
 <rect class="raised" x="428" y="344" width="184" height="46" rx="8"/><text class="t" x="440" y="363">Building blocks</text><text class="c" x="440" y="380">Controls/</text>
 <rect class="raised" x="622" y="344" width="184" height="46" rx="8"/><text class="t" x="634" y="363">Notifications</text><text class="c" x="634" y="380">WindowsNotifier</text>
-<rect class="raised" x="816" y="344" width="184" height="46" rx="8"/><text class="t" x="828" y="363">Strings de and en</text><text class="c" x="828" y="380">{local:T De=…, En=…}</text>
+<rect class="raised" x="816" y="344" width="184" height="46" rx="8"/><text class="t" x="828" y="363">Texts in XAML</text><text class="c" x="828" y="380">{local:T Key=…}</text>
 <path class="ln" d="M412 406V428" marker-end="url(#ah)"/>
 
 <!-- Core project -->
@@ -73,6 +73,7 @@ text{fill:#f2f2f3}.m{fill:#a1a1a6}.c,.c text{fill:#d1d1d6}.z{fill:#8e8e93}
 <g class="c">
 <rect class="raised" x="40" y="558" width="200" height="24" rx="6"/><text x="52" y="574.5">Widgets/WidgetSnapshot</text>
 <rect class="raised" x="40" y="588" width="200" height="24" rx="6"/><text x="52" y="604.5">Widgets/WidgetCards</text>
+<rect class="raised" x="40" y="618" width="200" height="24" rx="6"/><text x="52" y="634.5">Resources/Strings.resx</text>
 </g>
 <g class="c" text-anchor="middle">
 <rect class="hot" x="256" y="464" width="170" height="24" rx="6"/><text x="341" y="480.5">MinerApiClient</text>

@@ -1,5 +1,4 @@
 using System.Globalization;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Core.Models;
 
@@ -19,11 +18,11 @@ public static class LatencyRating
 
     public static string Label(this LatencyQuality quality) => quality switch
     {
-        LatencyQuality.Excellent => L("Exzellent", "Excellent"),
-        LatencyQuality.Good => L("Gut", "Good"),
-        LatencyQuality.Fair => L("Mittel", "Fair"),
-        LatencyQuality.Poor => L("Hoch", "High"),
-        _ => L("Keine Daten", "No data"),
+        LatencyQuality.Excellent => Strings.Excellent,
+        LatencyQuality.Good => Strings.Good,
+        LatencyQuality.Fair => Strings.Fair,
+        LatencyQuality.Poor => Strings.High,
+        _ => Strings.NoData,
     };
 }
 
@@ -44,7 +43,7 @@ public static class MinerDisplayText
 
     /// <summary><c>PID Auto</c> (NerdQAxe), <c>Auto</c> or <c>Manuell</c>.</summary>
     public static string FanModeLabel(this MinerSystemInfo info) =>
-        info.AutoFanModeRaw == 2 ? "PID Auto" : info.AutoFanSpeed ? L("Auto-Modus", "Auto mode") : L("Manuell", "Manual");
+        info.AutoFanModeRaw == 2 ? "PID Auto" : info.AutoFanSpeed ? Strings.AutoMode : Strings.Manual;
 
     public static string FanPercentText(this MinerSystemInfo info) =>
         info.HasSecondFan() && info.Fan2SpeedPercent is { } fan2
@@ -56,8 +55,8 @@ public static class MinerDisplayText
 
     public static string CoolingText(this MinerSystemInfo info, double warningThresholdC) =>
         info.VrTemp is { } vr
-            ? L($"Spannungsregler (VR): {DisplayFormat.Decimal(vr, 1)} °C", $"Voltage regulator (VR): {DisplayFormat.Decimal(vr, 1)} °C")
-            : info.Temp >= warningThresholdC ? L("Kühlstatus: Erhöht", "Cooling: elevated") : L("Kühlstatus: Optimal", "Cooling: optimal");
+            ? string.Format(Strings.VoltageRegulatorVRC, DisplayFormat.Decimal(vr, 1))
+            : info.Temp >= warningThresholdC ? Strings.CoolingElevated : Strings.CoolingOptimal;
 
     public static string PowerDetailText(this MinerSystemInfo info) =>
         string.Create(Inv, $"{info.VoltageVolts:0.00} V · {info.CurrentAmps:0.00} A");
@@ -66,7 +65,7 @@ public static class MinerDisplayText
         string.Create(Inv, $"~{info.Power * 24 / 1000:0.00} kWh / 24h");
 
     public static string CoreVoltageText(this MinerSystemInfo info) =>
-        L($"Ziel: {info.CoreVoltageTargetMv} mV · Ist: {info.CoreVoltageActualMv} mV", $"Target: {info.CoreVoltageTargetMv} mV · Actual: {info.CoreVoltageActualMv} mV");
+        string.Format(Strings.TargetMVActualMV, info.CoreVoltageTargetMv, info.CoreVoltageActualMv);
 
     public static string SharesText(this MinerSystemInfo info) =>
         string.Create(Inv, $"Shares: {info.SharesAccepted} ok / {info.SharesRejected} rej ({info.ShareRejectionRatePercent:0.00}%)");

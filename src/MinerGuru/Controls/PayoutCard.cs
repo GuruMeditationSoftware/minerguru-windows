@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Shapes;
 using MinerGuru.Core;
 using MinerGuru.Core.Models;
 using MinerGuru.Core.Services;
-using static MinerGuru.Core.Lang;
 
 namespace MinerGuru.Controls;
 
@@ -19,7 +18,7 @@ public sealed partial class PayoutCard : UserControl
     public PayoutCard()
     {
         var panel = new StackPanel { Spacing = 12 };
-        panel.Children.Add(PageParts.Title(L("Auszahlung", "Payout")));
+        panel.Children.Add(PageParts.Title(Strings.Payout));
         panel.Children.Add(_rows);
         Content = PageParts.Card(panel);
     }
@@ -35,8 +34,8 @@ public sealed partial class PayoutCard : UserControl
         foreach (var slot in slots) _rows.Children.Add(Row(miner, slot));
         var status = info.CoinbasePayoutStatus switch
         {
-            "verified" => L("Der aktuelle Block zahlt an diesen Miner.", "The current block pays this miner."),
-            "not_found" => L("Der aktuelle Block enthält die Adresse dieses Miners nicht.", "The current block does not contain this miner's address."),
+            "verified" => Strings.TheCurrentBlockPaysThis,
+            "not_found" => Strings.TheCurrentBlockDoesNot,
             _ => null,
         };
         if (status != null) _rows.Children.Add(Palette.UiText(status, 12, Palette.TextSecondary));
@@ -62,7 +61,7 @@ public sealed partial class PayoutCard : UserControl
         var offerable = slot.Verdict.NeedsAttention() || slot.Verdict == PayoutVerdict.Account;
         if (offerable && App.Store.Alerts.ExpectedAddresses.TryGetValue(slot.Coin.Symbol(), out var target))
         {
-            var button = PageParts.TextButton("", L("Soll-Adresse eintragen", "Enter expected address"), () => _ = ApplyAsync(miner, slot, target));
+            var button = PageParts.TextButton("", Strings.EnterExpectedAddress, () => _ = ApplyAsync(miner, slot, target));
             Grid.SetColumn(button, 2);
             row.Children.Add(button);
         }

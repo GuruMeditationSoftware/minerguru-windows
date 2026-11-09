@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 798" width="1040" height="798" role="img" aria-labelledby="t d">
-<title id="t">MinerGuru Windows: Aufbau</title>
-<desc id="d">Eine exe mit drei Rollen: normaler Start der WinUI-App, Widget-Dienst mit dem Argument -widgetprovider und Weiterreichen bei Start mit Paketidentität. Darunter das WinUI-Projekt MinerGuru, das Projekt MinerGuru.Core ohne WinUI mit Store, Diensten und Modellen, die xUnit-Tests und der Datenordner.</desc>
+<title id="t">MinerGuru Windows: structure</title>
+<desc id="d">One exe with three roles: normal start of the WinUI app, widget service with the argument -widgetprovider, and handing over when started with package identity. Below, the WinUI project MinerGuru, the project MinerGuru.Core without WinUI with store, services and models, the xUnit tests and the data folder.</desc>
 <style>
 text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Helvetica,Arial,sans-serif;fill:#1d1d1f}
 .h{font-size:19px;font-weight:650}.b{font-size:14px;font-weight:600}.t{font-size:13px;font-weight:600}.m{font-size:12.5px;fill:#6e6e73}
@@ -21,55 +21,55 @@ text{fill:#f2f2f3}.m{fill:#a1a1a6}.c,.c text{fill:#d1d1d6}.z{fill:#8e8e93}
 <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="aa" d="M0,1 L10,5 L0,9 z"/></marker>
 </defs>
 <rect class="bg" x="0.5" y="0.5" width="1039" height="797" rx="16"/>
-<text class="h" x="32" y="46">Windows-App: Aufbau</text>
-<text class="m" x="32" y="70">Eine exe mit drei Rollen und zwei Projekte: die Oberfläche in MinerGuru, alles Testbare in MinerGuru.Core.</text>
+<text class="h" x="32" y="46">Windows app: structure</text>
+<text class="m" x="32" y="70">One exe with three roles and two projects: the UI in MinerGuru, everything testable in MinerGuru.Core.</text>
 
 <!-- Entry: Program.Main -->
 <rect class="card" x="24" y="100" width="992" height="134" rx="12"/>
-<text class="z" x="40" y="121">MinerGuru.exe · Program.Main entscheidet beim Start</text>
+<text class="z" x="40" y="121">MinerGuru.exe · Program.Main decides at startup</text>
 <path class="ln dash" d="M845 146V134H195V144" marker-end="url(#ah)"/>
 <rect class="pill" x="418" y="125" width="204" height="18" rx="9"/>
-<text class="m" x="520" y="138" text-anchor="middle">über explorer.exe, ohne Paket</text>
+<text class="m" x="520" y="138" text-anchor="middle">through explorer.exe, without package</text>
 
 <rect class="raised" x="40" y="146" width="310" height="72" rx="9"/>
-<text class="t" x="56" y="168">Normaler Start</text>
-<text class="m" x="56" y="189">Einzelinstanz: Ein zweiter Start holt</text>
-<text class="m" x="56" y="207">das laufende Fenster nach vorn.</text>
+<text class="t" x="56" y="168">Normal start</text>
+<text class="m" x="56" y="189">Single instance: a second start brings</text>
+<text class="m" x="56" y="207">the running window to the front.</text>
 <rect class="hot" x="365" y="146" width="310" height="72" rx="9"/>
-<text class="t" x="381" y="168">Mit <tspan class="c">-widgetprovider</tspan></text>
-<text class="m" x="381" y="189">Windows startet den Widget-Dienst:</text>
-<text class="m" x="381" y="207">liest snapshot.json, fragt sonst selbst</text>
+<text class="t" x="381" y="168">With <tspan class="c">-widgetprovider</tspan></text>
+<text class="m" x="381" y="189">Windows starts the widget service:</text>
+<text class="m" x="381" y="207">reads snapshot.json, otherwise polls itself</text>
 <rect class="raised" x="690" y="146" width="310" height="72" rx="9"/>
-<text class="t" x="706" y="168">Mit Paketidentität</text>
-<text class="m" x="706" y="189">Tipp aufs Widget (minerguru://open)</text>
-<text class="m" x="706" y="207">reicht nur an die normale App weiter.</text>
+<text class="t" x="706" y="168">With package identity</text>
+<text class="m" x="706" y="189">Tap on a widget (minerguru://open)</text>
+<text class="m" x="706" y="207">only hands over to the normal app.</text>
 
 <path class="ln" d="M132 218V288" marker-end="url(#ah)"/>
 <path class="la" d="M520 218V288" marker-end="url(#aa)"/>
 
 <!-- WinUI project -->
 <rect class="card" x="24" y="258" width="992" height="148" rx="12"/>
-<text class="z" x="1000" y="279" text-anchor="end">MinerGuru · WinUI 3, Windows App SDK, unpackaged und self-contained</text>
+<text class="z" x="1000" y="279" text-anchor="end">MinerGuru · WinUI 3, Windows App SDK, unpackaged and self-contained</text>
 <rect class="raised" x="40" y="290" width="184" height="46" rx="8"/><text class="t" x="52" y="309">App</text><text class="c" x="52" y="326">App.xaml.cs</text>
-<rect class="raised" x="234" y="290" width="184" height="46" rx="8"/><text class="t" x="246" y="309">Hauptfenster</text><text class="c" x="246" y="326">MainWindow</text>
-<rect class="hot" x="428" y="290" width="184" height="46" rx="8"/><text class="t" x="440" y="309">Widget-Dienst (COM)</text><text class="c" x="440" y="326">WidgetService</text>
-<rect class="raised" x="622" y="290" width="184" height="46" rx="8"/><text class="t" x="634" y="309">Widget-Paket</text><text class="c" x="634" y="326">WidgetPackage</text>
-<rect class="raised" x="816" y="290" width="184" height="46" rx="8"/><text class="t" x="828" y="309">Infobereich</text><text class="c" x="828" y="326">TrayIcon</text>
-<rect class="raised" x="40" y="344" width="184" height="46" rx="8"/><text class="t" x="52" y="363">Seiten</text><text class="c" x="52" y="380">Pages/</text>
-<rect class="raised" x="234" y="344" width="184" height="46" rx="8"/><text class="t" x="246" y="363">Dialoge</text><text class="c" x="246" y="380">Dialogs/</text>
-<rect class="raised" x="428" y="344" width="184" height="46" rx="8"/><text class="t" x="440" y="363">Bausteine</text><text class="c" x="440" y="380">Controls/</text>
-<rect class="raised" x="622" y="344" width="184" height="46" rx="8"/><text class="t" x="634" y="363">Mitteilungen</text><text class="c" x="634" y="380">WindowsNotifier</text>
-<rect class="raised" x="816" y="344" width="184" height="46" rx="8"/><text class="t" x="828" y="363">Texte de und en</text><text class="c" x="828" y="380">{local:T De=…, En=…}</text>
+<rect class="raised" x="234" y="290" width="184" height="46" rx="8"/><text class="t" x="246" y="309">Main window</text><text class="c" x="246" y="326">MainWindow</text>
+<rect class="hot" x="428" y="290" width="184" height="46" rx="8"/><text class="t" x="440" y="309">Widget service (COM)</text><text class="c" x="440" y="326">WidgetService</text>
+<rect class="raised" x="622" y="290" width="184" height="46" rx="8"/><text class="t" x="634" y="309">Widget package</text><text class="c" x="634" y="326">WidgetPackage</text>
+<rect class="raised" x="816" y="290" width="184" height="46" rx="8"/><text class="t" x="828" y="309">Notification area</text><text class="c" x="828" y="326">TrayIcon</text>
+<rect class="raised" x="40" y="344" width="184" height="46" rx="8"/><text class="t" x="52" y="363">Pages</text><text class="c" x="52" y="380">Pages/</text>
+<rect class="raised" x="234" y="344" width="184" height="46" rx="8"/><text class="t" x="246" y="363">Dialogs</text><text class="c" x="246" y="380">Dialogs/</text>
+<rect class="raised" x="428" y="344" width="184" height="46" rx="8"/><text class="t" x="440" y="363">Building blocks</text><text class="c" x="440" y="380">Controls/</text>
+<rect class="raised" x="622" y="344" width="184" height="46" rx="8"/><text class="t" x="634" y="363">Notifications</text><text class="c" x="634" y="380">WindowsNotifier</text>
+<rect class="raised" x="816" y="344" width="184" height="46" rx="8"/><text class="t" x="828" y="363">Strings de and en</text><text class="c" x="828" y="380">{local:T De=…, En=…}</text>
 <path class="ln" d="M412 406V428" marker-end="url(#ah)"/>
 
 <!-- Core project -->
 <rect class="card" x="24" y="430" width="776" height="224" rx="12"/>
-<text class="z" x="784" y="451" text-anchor="end">MinerGuru.Core · net10.0, ohne WinUI</text>
+<text class="z" x="784" y="451" text-anchor="end">MinerGuru.Core · net10.0, without WinUI</text>
 <rect class="hot" x="40" y="464" width="200" height="86" rx="10"/>
 <text class="b" x="56" y="488">MinerStore</text>
-<text class="m" x="56" y="510">Miner, Abfragerunde,</text>
-<text class="m" x="56" y="528">Schreibweg; Ereignis</text>
-<text class="m" x="56" y="545"><tspan class="c">Changed</tspan> für die UI</text>
+<text class="m" x="56" y="510">Miners, poll cycle,</text>
+<text class="m" x="56" y="528">write path; event</text>
+<text class="m" x="56" y="545"><tspan class="c">Changed</tspan> for the UI</text>
 <g class="c">
 <rect class="raised" x="40" y="558" width="200" height="24" rx="6"/><text x="52" y="574.5">Widgets/WidgetSnapshot</text>
 <rect class="raised" x="40" y="588" width="200" height="24" rx="6"/><text x="52" y="604.5">Widgets/WidgetCards</text>
@@ -100,16 +100,16 @@ text{fill:#f2f2f3}.m{fill:#a1a1a6}.c,.c text{fill:#d1d1d6}.z{fill:#8e8e93}
 <rect class="card" x="824" y="430" width="192" height="224" rx="12"/>
 <text class="b" x="840" y="456">Tests</text>
 <text class="c" x="840" y="476">MinerGuru.Core.Tests</text>
-<text class="m" x="840" y="500">xUnit, ohne Fenster</text>
-<text class="m" x="840" y="520">Fixtures: Varianten</text>
-<text class="m" x="840" y="538">und Stratum-Mitschnitte</text>
-<text class="m" x="840" y="566">läuft in der VM:</text>
+<text class="m" x="840" y="500">xUnit, without a window</text>
+<text class="m" x="840" y="520">Fixtures: variants</text>
+<text class="m" x="840" y="538">and Stratum captures</text>
+<text class="m" x="840" y="566">runs in the VM:</text>
 <text class="c" x="840" y="586">scripts/vm.sh test</text>
 <path class="ln" d="M824 540H802" marker-end="url(#ah)"/>
 
 <!-- Data folder -->
 <rect class="card" x="24" y="678" width="992" height="96" rx="12"/>
-<text class="z" x="40" y="699">Datenordner · %LOCALAPPDATA%\MinerGuru\ (MINERGURU_DATA_DIR überschreibt ihn)</text>
+<text class="z" x="40" y="699">Data folder · %LOCALAPPDATA%\MinerGuru\ (MINERGURU_DATA_DIR overrides it)</text>
 <g class="c">
 <rect class="raised" x="40" y="710" width="107" height="24" rx="6"/><text x="48" y="726.5">settings.json</text>
 <rect class="raised" x="155" y="710" width="86" height="24" rx="6"/><text x="163" y="726.5">pools.json</text>
@@ -125,5 +125,5 @@ text{fill:#f2f2f3}.m{fill:#a1a1a6}.c,.c text{fill:#d1d1d6}.z{fill:#8e8e93}
 <rect class="raised" x="465" y="740" width="79" height="24" rx="6"/><text x="473" y="756.5">crash.log</text>
 <rect class="hot" x="552" y="740" width="163" height="24" rx="6"/><text x="560" y="756.5">widgets\snapshot.json</text>
 </g>
-<text class="m" x="731" y="757">SMTP-Passwort und OTP per DPAPI</text>
+<text class="m" x="731" y="757">SMTP password and OTP with DPAPI</text>
 </svg>

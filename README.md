@@ -111,7 +111,7 @@ The app is then in `src\MinerGuru\bin\x64\Debug\net10.0-windows10.0.26100.0\win-
 
 To test without hardware, start the simulated miners from the [Mac repository](https://github.com/GuruMeditationSoftware/minerguru) (`python3 MockMiners/mock_miner.py --host 0.0.0.0`) and add them by that computer's address, from port 48001.
 
-Developer documentation, in German: [docs/ARCHITEKTUR.md](docs/ARCHITEKTUR.md). What all three apps share is in [GRUNDLAGEN.md](https://github.com/GuruMeditationSoftware/minerguru/blob/main/docs/GRUNDLAGEN.md) of the Mac repository.
+Developer documentation: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). What all three apps share is in [FUNDAMENTALS.md](https://github.com/GuruMeditationSoftware/minerguru/blob/main/docs/FUNDAMENTALS.md) of the Mac repository.
 
 ## Support the project
 

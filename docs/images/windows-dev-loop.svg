@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 616" width="1040" height="616" role="img" aria-labelledby="t d">
+<title id="t">MinerGuru Windows: Entwickeln vom Mac aus</title>
+<desc id="d">Der Code liegt auf dem Mac. scripts/vm.sh kopiert ihn per scp in die Windows-VM, baut, testet und startet dort per ssh. Die App in der VM fragt die Mock-Miner auf dem Mac ab, Screenshots und Installer kommen per scp zurück.</desc>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Helvetica,Arial,sans-serif;fill:#1d1d1f}
+.h{font-size:19px;font-weight:650}.b{font-size:14px;font-weight:600}.m{font-size:12.5px;fill:#6e6e73}
+.c,.c text{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:12px;fill:#3a3a3c}
+.z{font-size:12.5px;font-weight:600;fill:#8a8a8e}
+.bg{fill:#fafafa;stroke:#e4e4e7}.card{fill:#fff;stroke:#d4d4d9}.raised{fill:#f1f1f3;stroke:#d9d9de}
+.hot{fill:#fdf3e6;stroke:#e0923a}
+.ln{fill:none;stroke:#8e8e93;stroke-width:1.5}.la{fill:none;stroke:#d9780a;stroke-width:1.8}
+.ah{fill:#8e8e93}.aa{fill:#d9780a}
+@media (prefers-color-scheme:dark){
+text{fill:#f2f2f3}.m{fill:#a1a1a6}.c,.c text{fill:#d1d1d6}.z{fill:#8e8e93}
+.bg{fill:#141415;stroke:#2c2c2f}.card{fill:#1c1c1e;stroke:#3a3a3e}.raised{fill:#242426;stroke:#38383c}
+.hot{fill:#2d2114;stroke:#b8762c}
+.ln{stroke:#7c7c82}.ah{fill:#7c7c82}.la{stroke:#f0a03c}.aa{fill:#f0a03c}}
+</style>
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah" d="M0,1 L10,5 L0,9 z"/></marker>
+<marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="aa" d="M0,1 L10,5 L0,9 z"/></marker>
+</defs>
+<rect class="bg" x="0.5" y="0.5" width="1039" height="615" rx="16"/>
+<text class="h" x="32" y="46">Entwickeln vom Mac aus</text>
+<text class="m" x="32" y="70">Der Code bleibt auf dem Mac. scripts/vm.sh kopiert ihn in die Windows-VM, baut und startet dort und holt Bilder zurück.</text>
+
+<!-- Mac -->
+<rect class="card" x="24" y="100" width="360" height="300" rx="12"/>
+<text class="b" x="40" y="126">Mac</text>
+<text class="m" x="40" y="146">Quelle, Git, Mock-Miner</text>
+<rect class="raised" x="40" y="162" width="328" height="50" rx="8"/>
+<text class="c" x="52" y="182">MinerGuru_Windows/</text><text class="m" x="52" y="201">Arbeitskopie, die einzige Quelle</text>
+<rect class="raised" x="40" y="220" width="328" height="50" rx="8"/>
+<text class="c" x="52" y="240">scripts/vm.sh</text><text class="m" x="52" y="259">sync, build, test, run, shot, act, stop</text>
+<rect class="hot" x="40" y="278" width="328" height="50" rx="8"/>
+<text class="c" x="52" y="298">MinerGuru/MockMiners/mock_miner.py</text><text class="m" x="52" y="317">mit --host 0.0.0.0, Ports ab 48001</text>
+<rect class="raised" x="40" y="336" width="328" height="50" rx="8"/>
+<text class="c" x="52" y="356">/tmp/minerguru-vm.png</text><text class="m" x="52" y="375">Screenshot zum Ansehen</text>
+
+<!-- Arrows -->
+<path class="la" d="M368 187H654" marker-end="url(#aa)"/>
+<text class="m" x="520" y="180" text-anchor="middle">sync: Quelle als tar per scp</text>
+<path class="ln" d="M368 245H654" marker-end="url(#ah)"/>
+<text class="m" x="520" y="238" text-anchor="middle">build, test, run per ssh</text>
+<path class="la" d="M672 303H370" marker-end="url(#aa)"/>
+<text class="m" x="520" y="296" text-anchor="middle">Mock-Miner unter 192.168.64.1</text>
+<path class="ln" d="M672 361H370" marker-end="url(#ah)"/>
+<text class="m" x="520" y="354" text-anchor="middle">Screenshot und Installer per scp</text>
+
+<!-- VM -->
+<rect class="card" x="656" y="100" width="360" height="300" rx="12"/>
+<text class="b" x="672" y="126">Windows-VM</text>
+<text class="m" x="672" y="146">UTM, Windows 11 ARM, OpenSSH, .NET SDK</text>
+<rect class="raised" x="672" y="162" width="328" height="50" rx="8"/>
+<text class="c" x="684" y="182">src\MinerGuru_Windows</text><text class="m" x="684" y="201">Kopie, bei jedem Befehl erneuert</text>
+<rect class="raised" x="672" y="220" width="328" height="50" rx="8"/>
+<text class="c" x="684" y="240">dotnet build · dotnet test</text><text class="m" x="684" y="259">ARM64 und Debug; xUnit-Tests</text>
+<rect class="hot" x="672" y="278" width="328" height="50" rx="8"/>
+<text class="c" x="684" y="298">schtasks /it</text><text class="m" x="684" y="317">startet die App sichtbar, nicht in Session 0</text>
+<rect class="raised" x="672" y="336" width="328" height="50" rx="8"/>
+<text class="c" x="684" y="356">shot.ps1 · release.ps1</text><text class="m" x="684" y="375">Bilder und Eingaben; Inno Setup 6</text>
+
+<!-- Commands -->
+<rect class="card" x="24" y="424" width="992" height="140" rx="12"/>
+<text class="z" x="40" y="447">Befehle, aus dem Repo-Ordner aufgerufen</text>
+<g class="c">
+<text x="40" y="476">vm.sh sync</text><text x="40" y="500">vm.sh build</text><text x="40" y="524">vm.sh test</text><text x="40" y="548">vm.sh run --mocks</text>
+<text x="530" y="476">vm.sh shot bild.png 3</text><text x="530" y="500">vm.sh act bild.png 'click x y'</text><text x="530" y="524">vm.sh stop</text><text x="530" y="548">scripts/release.sh</text>
+</g>
+<text class="m" x="200" y="476">nur kopieren</text>
+<text class="m" x="200" y="500">kopieren und bauen</text>
+<text class="m" x="200" y="524">Core-Tests ausführen</text>
+<text class="m" x="200" y="548">bauen, mit Mock-Minern starten</text>
+<text class="m" x="770" y="476">Fensterbild nach 3 Mausrad-Rasten</text>
+<text class="m" x="770" y="500">Eingaben, danach ein Bild</text>
+<text class="m" x="770" y="524">App beenden</text>
+<text class="m" x="770" y="548">Installer x64 und ARM64 nach dist/</text>
+
+<text class="m" x="32" y="594">Schwarzes Fenster in der VM heißt meist: Die Anzeige schläft. Eine Eingabe über vm.sh act weckt sie.</text>
+</svg>

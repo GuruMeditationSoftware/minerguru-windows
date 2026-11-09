@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- A miner on the fleet page, as the Mac's MinerSummaryCard: board, identity, hashrate with sparkline, sensors, pool line. -->
+<UserControl
+    x:Class="MinerGuru.Controls.MinerCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MinerGuru.Controls"
+    xmlns:local="using:MinerGuru">
+
+    <Border
+        x:Name="Card"
+        Padding="20"
+        PointerEntered="Card_PointerEntered"
+        PointerExited="Card_PointerExited"
+        Style="{StaticResource CardBorderStyle}"
+        Tapped="Card_Tapped">
+        <Border.ContextFlyout>
+            <MenuFlyout>
+                <MenuFlyoutItem Click="Open_Click" Text="{local:T De='Details &amp; Steuerung öffnen', En='Open details &amp; control'}">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xEC4A;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutItem Click="Browser_Click" Text="{local:T De='AxeOS / NerdOS im Browser öffnen', En='Open AxeOS / NerdOS in the browser'}">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE774;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutSeparator />
+                <MenuFlyoutItem Click="Restart_Click" Text="{local:T De='Miner neu starten', En='Restart miner'}">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE777;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutSeparator />
+                <MenuFlyoutItem Click="Remove_Click" Text="{local:T De='Aus MinerGuru entfernen', En='Remove from MinerGuru'}">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE74D;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+            </MenuFlyout>
+        </Border.ContextFlyout>
+
+        <StackPanel Spacing="16">
+            <!--  Board and identity  -->
+            <Grid ColumnSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border x:Name="BoardHost" VerticalAlignment="Top" />
+                <StackPanel Grid.Column="1" Spacing="4">
+                    <TextBlock
+                        x:Name="NameText"
+                        FontSize="15"
+                        FontWeight="Medium"
+                        Foreground="{ThemeResource TextPrimaryBrush}"
+                        TextTrimming="CharacterEllipsis" />
+                    <TextBlock
+                        x:Name="HardwareText"
+                        FontSize="12"
+                        Foreground="{ThemeResource TextSecondaryBrush}"
+                        TextTrimming="CharacterEllipsis" />
+                    <TextBlock x:Name="AddressText" Style="{StaticResource MonoCaptionStyle}" />
+                </StackPanel>
+            </Grid>
+
+            <StackPanel x:Name="OnlinePart" Spacing="16">
+                <!--  Hashrate  -->
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="112" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Spacing="4">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Style="{StaticResource FigureLabelStyle}"
+                                Text="Hashrate" />
+                            <Border x:Name="CoinHost" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                x:Name="RateValue"
+                                FontSize="28"
+                                Style="{StaticResource FigureValueStyle}" />
+                            <TextBlock
+                                x:Name="RateUnit"
+                                Margin="4,0,0,4"
+                                VerticalAlignment="Bottom"
+                                FontSize="13"
+                                Foreground="{ThemeResource TextSecondaryBrush}" />
+                        </StackPanel>
+                        <TextBlock x:Name="DiffText" Style="{StaticResource MonoCaptionStyle}" />
+                    </StackPanel>
+                    <controls:HashrateChart
+                        x:Name="Sparkline"
+                        Grid.Column="1"
+                        Height="36"
+                        VerticalAlignment="Bottom"
+                        ShowArea="False"
+                        ShowAxis="False"
+                        ShowPlaceholder="False" />
+                </Grid>
+
+                <Rectangle Height="1" Style="{StaticResource HairlineStyle}" />
+
+                <!--  Sensors  -->
+                <Grid x:Name="SensorGrid" ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+
+                <!--  Pool line  -->
+                <Border
+                    Height="32"
+                    Padding="12,0"
+                    Style="{StaticResource InsetBorderStyle}">
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            x:Name="PoolText"
+                            VerticalAlignment="Center"
+                            Foreground="{ThemeResource TextSecondaryBrush}"
+                            Style="{StaticResource MonoCaptionStyle}" />
+                        <Border
+                            x:Name="PoolModeHost"
+                            Grid.Column="1"
+                            VerticalAlignment="Center" />
+                        <Border
+                            x:Name="LatencyHost"
+                            Grid.Column="3"
+                            VerticalAlignment="Center" />
+                    </Grid>
+                </Border>
+            </StackPanel>
+
+            <!--  Not reachable or still connecting  -->
+            <StackPanel
+                x:Name="OfflinePart"
+                Height="80"
+                Orientation="Horizontal"
+                Spacing="8">
+                <ProgressRing
+                    x:Name="ConnectingRing"
+                    Width="16"
+                    Height="16"
+                    VerticalAlignment="Center" />
+                <StackPanel VerticalAlignment="Center" Spacing="4">
+                    <TextBlock x:Name="OfflineTitle" FontSize="13" />
+                    <TextBlock x:Name="OfflineReason" Style="{StaticResource MonoCaptionStyle}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

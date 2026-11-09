@@ -1,0 +1,819 @@
+[
+  {
+    "file": "2miners-bch.jsonl",
+    "pool": "solo-bch.2miners.com",
+    "port": 4040,
+    "tls": false,
+    "coin": "BCH",
+    "user": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.minerguru",
+    "authorized": false,
+    "authorizeError": [
+      20,
+      "Invalid address",
+      null
+    ],
+    "extranonce1": null,
+    "extranonce2Size": null
+  },
+  {
+    "file": "atlaspool-btc.jsonl",
+    "pool": "solo.atlaspool.io",
+    "port": 4333,
+    "tls": true,
+    "coin": "BTC",
+    "user": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "77e5006b",
+    "extranonce2Size": 8,
+    "height": 974390,
+    "tags": [
+      "AtlasPool/FRA"
+    ],
+    "merkleBranches": 12,
+    "versionHex": "20000000",
+    "totalSats": 316918834,
+    "testAddressSats": 312165052,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 312165052,
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 4753782,
+        "address": "bc1q4mtk3hsnlfhh8475krdnf4hec86ue43eckywft",
+        "paysTestAddress": false,
+        "scriptPubKey": "0014aed768de13fa6f73d7d4b0db34d6f9c1f5ccd639"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a24aa21a9edccbd62e60c3c019a3aafd90cdc3b3c2f2a259b4072752d2c2abb12b2bd937e05"
+      }
+    ]
+  },
+  {
+    "file": "braiins-btc.jsonl",
+    "pool": "solo.stratum.braiins.com",
+    "port": 3333,
+    "tls": false,
+    "coin": "BTC",
+    "user": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "8bc3ee6a",
+    "extranonce2Size": 8,
+    "height": 974390,
+    "tags": [
+      "ckpool",
+      "/braiinssolo/"
+    ],
+    "merkleBranches": 12,
+    "versionHex": "20000000",
+    "totalSats": 317818492,
+    "testAddressSats": 316229400,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 316229400,
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 1589092,
+        "address": "bc1q28kkr5hk4gnqe3evma6runjrd2pvqyp8fpwfzu",
+        "paysTestAddress": false,
+        "scriptPubKey": "001451ed61d2f6aa260cc72cdf743e4e436a82c01027"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a24aa21a9eda669e0ce8a840860557b6698943e7a661a9b63ae48ca51e3608ca6bdf3fc9310"
+      }
+    ]
+  },
+  {
+    "file": "ckpool-eu-btc.jsonl",
+    "pool": "eusolo.ckpool.org",
+    "port": 3333,
+    "tls": false,
+    "coin": "BTC",
+    "user": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "15aa206b",
+    "extranonce2Size": 8,
+    "height": 974390,
+    "tags": [
+      "ckpool",
+      "eu/solo.ckpool.org/"
+    ],
+    "merkleBranches": 12,
+    "versionHex": "20000000",
+    "totalSats": 316669201,
+    "testAddressSats": 310335817,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 310335817,
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 6333384,
+        "address": "bc1q28kkr5hk4gnqe3evma6runjrd2pvqyp8fpwfzu",
+        "paysTestAddress": false,
+        "scriptPubKey": "001451ed61d2f6aa260cc72cdf743e4e436a82c01027"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a24aa21a9ed56c38b13bc66feccb102924d755019abe8d7f78fbb1080561bd8e281a4c53d08"
+      }
+    ]
+  },
+  {
+    "file": "ckpool-us-btc.jsonl",
+    "pool": "solo.ckpool.org",
+    "port": 3333,
+    "tls": false,
+    "coin": "BTC",
+    "user": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "22c2ce6b",
+    "extranonce2Size": 8,
+    "height": 974390,
+    "tags": [
+      "ckpool",
+      "uw/solo.ckpool.org/"
+    ],
+    "merkleBranches": 12,
+    "versionHex": "20000000",
+    "totalSats": 316239979,
+    "testAddressSats": 309915180,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 309915180,
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 6324799,
+        "address": "bc1q28kkr5hk4gnqe3evma6runjrd2pvqyp8fpwfzu",
+        "paysTestAddress": false,
+        "scriptPubKey": "001451ed61d2f6aa260cc72cdf743e4e436a82c01027"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a24aa21a9eda18394fc8c2bd2bc0818e67033ca7f0a259acc8c45bcba247fdedb1807904440"
+      }
+    ]
+  },
+  {
+    "file": "kryptex-bsv.jsonl",
+    "pool": "bsv.kryptex.network",
+    "port": 7047,
+    "tls": false,
+    "coin": "BSV",
+    "user": "solo:1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "00003985d7d3",
+    "extranonce2Size": 6,
+    "height": 973903,
+    "tags": [
+      "j/pool.kryptex.com/"
+    ],
+    "merkleBranches": 4,
+    "versionHex": "20000000",
+    "totalSats": 312505410,
+    "testAddressSats": 0,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 312505410,
+        "address": "198fZubHNnhsdENHbktQLw96eDMnhZ4xXM",
+        "paysTestAddress": false,
+        "scriptPubKey": "76a91459341cc701a9cd31fa629e0b7d8fb1fbcf00b67788ac"
+      }
+    ]
+  },
+  {
+    "file": "nerdminers-btc.jsonl",
+    "pool": "pool.nerdminers.org",
+    "port": 3333,
+    "tls": false,
+    "coin": "BTC",
+    "user": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": null,
+    "extranonce2Size": null,
+    "extranonceGapBytes": 12,
+    "height": 974390,
+    "tags": [
+      "ckpool",
+      "/pool.nerdminers.org/"
+    ],
+    "merkleBranches": 12,
+    "versionHex": "20000000",
+    "totalSats": 317088732,
+    "testAddressSats": 317088732,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 317088732,
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a24aa21a9edc9709b3bd3250592d3cac6e471def749cff999b1b0aacdb789d7a2d6e969da05"
+      }
+    ]
+  },
+  {
+    "file": "ocean-btc.jsonl",
+    "pool": "mine.ocean.xyz",
+    "port": 3334,
+    "tls": false,
+    "coin": "BTC",
+    "user": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "b28cf042",
+    "extranonce2Size": 8,
+    "height": 974390,
+    "tags": [
+      "< OCEAN.XYZ >",
+      "00OCL2"
+    ],
+    "merkleBranches": 12,
+    "versionHex": "20000000",
+    "totalSats": 317200257,
+    "testAddressSats": 0,
+    "outputs": [
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a144f434231d41d81256a0000001b0000002bf6acb5"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 8166184,
+        "address": "bc1q7ur9nh720up3syvhnmgtl7s885lnvffn8nkjry",
+        "paysTestAddress": false,
+        "scriptPubKey": "0014f70659dfca7f031811979ed0bffa073d3f362533"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a0edab0b28cf0420000000000000000"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 93998072,
+        "address": "bc1qzk8vs4p3skr75nskpqyh4f9l0z3hmqd2u4tvpu",
+        "paysTestAddress": false,
+        "scriptPubKey": "0014158ec854318587ea4e1608097aa4bf78a37d81aa"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 48784954,
+        "address": "bc1q2824ekxc6ewypfpzv64h69frnx9dx6rsgek6ec",
+        "paysTestAddress": false,
+        "scriptPubKey": "001451d55cd8d8d65c40a42266ab7d1523998ad36870"
+      },
+      {
+        "type": "p2sh",
+        "value": 23882504,
+        "address": "375oBHuaSbTbv9QEbCZPFC2wynZeFpQMGB",
+        "paysTestAddress": false,
+        "scriptPubKey": "a9143b278e73b969eb5abeb8e50d556207f8fd7bfb3f87"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 23629485,
+        "address": "bc1qztuue9qkmj48zhwxww6rzqm3caz7xtg7kudnv2",
+        "paysTestAddress": false,
+        "scriptPubKey": "001412f9cc9416dcaa715dc673b4310371c745e32d1e"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 15295072,
+        "address": "bc1qpqjh2zlwplafa6x5s0fgjr2vcqclhmeslpfcax",
+        "paysTestAddress": false,
+        "scriptPubKey": "00140825750bee0ffa9ee8d483d2890d4cc031fbef30"
+      },
+      {
+        "type": "p2wsh",
+        "value": 10252780,
+        "address": "bc1qp7rr6lwc0lesf7gku7e6tlj987stesavjlpemlrl3zj720zgm9gsxvyerj",
+        "paysTestAddress": false,
+        "scriptPubKey": "00200f863d7dd87ff304f916e7b3a5fe453fa0bcc3ac97c39dfc7f88a5e53c48d951"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 7529560,
+        "address": "bc1q0a52shtqy27fmk4k6deauhz6qsu6q7x6n72jgp",
+        "paysTestAddress": false,
+        "scriptPubKey": "00147f68a85d6022bc9ddab6d373de5c5a0439a078da"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 6903494,
+        "address": "bc1q7fkekg66yly2ynaew7t9gdvt8cut0p0drzf2q4",
+        "paysTestAddress": false,
+        "scriptPubKey": "0014f26d9b235a27c8a24fb9779654358b3e38b785ed"
+      },
+      {
+        "type": "p2wsh",
+        "value": 6204604,
+        "address": "bc1qzfrtdupxf29vqxpxmxqctpg8wlcma2n780sp4jcr7457ypv25mtq34f9cm",
+        "paysTestAddress": false,
+        "scriptPubKey": "00201246b6f0264a8ac01826d98185850777f1beaa7e3be01acb03f569e2058aa6d6"
+      },
+      {
+        "type": "p2wsh",
+        "value": 5798421,
+        "address": "bc1q42yed7flsh90kdzq0wu2mqjvah8rd6gfj67vhnu32gawedvjt39qqv5pcz",
+        "paysTestAddress": false,
+        "scriptPubKey": "0020aa8996f93f85cafb34407bb8ad824cedce36e90996bccbcf91523aecb5925c4a"
+      },
+      {
+        "type": "p2pkh",
+        "value": 5342376,
+        "address": "1KYRyWnFokPiAoTLRWEMLNRQ2sd3PxS5dd",
+        "paysTestAddress": false,
+        "scriptPubKey": "76a914cb6401a88373692d31148a1b8548ed09f58055d088ac"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 5317759,
+        "address": "bc1q2vp7faz6rftal2y03fuq9hkm4st6tseenahy90",
+        "paysTestAddress": false,
+        "scriptPubKey": "00145303e4f45a1a57dfa88f8a7802dedbac17a5c339"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 4853272,
+        "address": "bc1qsqt3nkn463248wrkxk629xj2vlldxd3c53d0jq",
+        "paysTestAddress": false,
+        "scriptPubKey": "0014801719da75d45553b87635b4a29a4a67fed33638"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 4658605,
+        "address": "bc1q3efjjcxpz0yxztasw0m7gcvtdca5hzll8k2vtd",
+        "paysTestAddress": false,
+        "scriptPubKey": "00148e532960c113c8612fb073f7e4618b6e3b4b8bff"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 4636845,
+        "address": "bc1qfnlf63932nhxquz8d0swajdh8lmlnhdag5vldx",
+        "paysTestAddress": false,
+        "scriptPubKey": "00144cfe9d44b154ee6070476be0eec9b73ff7f9ddbd"
+      },
+      {
+        "type": "p2sh",
+        "value": 41946270,
+        "address": "37dvwZZoT3D7RXpTCpN2yKzMmNs2i2Fd1n",
+        "paysTestAddress": false,
+        "scriptPubKey": "a914413b5901fe4e591c95405fd446b5b002da575bf087"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a24aa21a9edea4314e660aba3e0f1057541eedea5c979d00f71ee582aab84cf1f24ab845c61"
+      }
+    ]
+  },
+  {
+    "file": "publicpool-btc.jsonl",
+    "pool": "public-pool.io",
+    "port": 21496,
+    "tls": false,
+    "coin": "BTC",
+    "user": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "0eec0c28",
+    "extranonce2Size": 8,
+    "height": 974390,
+    "tags": [
+      "Public-Pool"
+    ],
+    "merkleBranches": 12,
+    "versionHex": "20000000",
+    "totalSats": 316959935,
+    "testAddressSats": 316959935,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 316959935,
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a24aa21a9eda54cd2ca20a43669e17d285785fd7eb6001dddf3d31448a4e93a92bf91d7c42e"
+      }
+    ]
+  },
+  {
+    "file": "solopooleu-bch.jsonl",
+    "pool": "bch.solopool.eu",
+    "port": 3333,
+    "tls": false,
+    "coin": "BCH",
+    "user": "qp3wjpa3tjlj042z2wv7hahsldgwhwy0rq9sywjpyy.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "4637706a",
+    "extranonce2Size": 8,
+    "height": 975772,
+    "tags": [
+      "/solopool.eu/"
+    ],
+    "merkleBranches": 9,
+    "versionHex": "20000000",
+    "totalSats": 313842611,
+    "testAddressSats": 310704184,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 3138427,
+        "address": "1LV7aLL38aiS5vPR6z1fDoFcNRJEV7fRGr",
+        "paysTestAddress": false,
+        "scriptPubKey": "76a914d5bb866de49195704ede2d781dadaa832322b4ac88ac"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a144637706a0000000000000000218c65d7bc54accc"
+      },
+      {
+        "type": "p2pkh",
+        "value": 310704184,
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+      }
+    ]
+  },
+  {
+    "file": "solopooleu-btc.jsonl",
+    "pool": "btc.solopool.eu",
+    "port": 3337,
+    "tls": false,
+    "coin": "BTC",
+    "user": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "00002221",
+    "extranonce2Size": 4,
+    "height": 974390,
+    "tags": [
+      "/solopool.eu/,"
+    ],
+    "merkleBranches": 12,
+    "versionHex": "20000000",
+    "totalSats": 316697859,
+    "testAddressSats": 313530881,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 313530881,
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 3166978,
+        "address": "bc1qzwk6p7hs66jjt974gnpk9x77tzml0rx5pawl6g",
+        "paysTestAddress": false,
+        "scriptPubKey": "001413ada0faf0d6a52597d544c3629bde58b7f78cd4"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a24aa21a9ed7dae92c170e540ab016087d7530f548aee2901c099655e165bba93a0771238e8"
+      }
+    ]
+  },
+  {
+    "file": "solopooleu-dgb.jsonl",
+    "pool": "dgb.solopool.eu",
+    "port": 3335,
+    "tls": false,
+    "coin": "DGB",
+    "user": "DRNiw2k4iFuHGS2fF1wMahounXo6H9iGbh.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "aa16706a",
+    "extranonce2Size": 8,
+    "height": 24498634,
+    "tags": [
+      "ckpool",
+      "/solopool.eu/"
+    ],
+    "merkleBranches": 0,
+    "versionHex": "20000202",
+    "totalSats": 24793026605,
+    "testAddressSats": 24545096339,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 24545096339,
+        "address": "DRNiw2k4iFuHGS2fF1wMahounXo6H9iGbh",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a914ddf64d5df1d7277270e2d58632bb3466d0b16bd588ac"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 247930266,
+        "address": "dgb1qdxxrkdx4m9r7hlqa6smwzwawfen56nndrnze36",
+        "paysTestAddress": false,
+        "scriptPubKey": "0014698c3b34d5d947ebfc1dd436e13bae4e674d4e6d"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a24aa21a9ede2f61c3f71d1defd3fa999dfa36953755c690689799962b48bebd836974e8cf9"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6abf01034c5a05418002900171580900070c00000000000006e0e96a00000000069f13449c74a859914972c0945c15ed7250b58a05ca3645b663c318ce5ca8710ce6b4c6e430e8177a59b37773e3d7bd5e4a25859d45d710dad20df36fa8fe1a"
+      }
+    ]
+  },
+  {
+    "file": "solopooleu-xec.jsonl",
+    "pool": "xec.solopool.eu",
+    "port": 3339,
+    "tls": false,
+    "coin": "XEC",
+    "user": "ecash:qp3wjpa3tjlj042z2wv7hahsldgwhwy0rquas9fmzn.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "ab8dd06a",
+    "extranonce2Size": 8,
+    "height": 973928,
+    "tags": [
+      "ckpool",
+      "/solopool.eu/"
+    ],
+    "merkleBranches": 4,
+    "versionHex": "20000000",
+    "totalSats": 312505983,
+    "testAddressSats": 179440937,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 179440937,
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+      },
+      {
+        "type": "p2pkh",
+        "value": 1812534,
+        "address": "1LV7aLL38aiS5vPR6z1fDoFcNRJEV7fRGr",
+        "paysTestAddress": false,
+        "scriptPubKey": "76a914d5bb866de49195704ede2d781dadaa832322b4ac88ac"
+      },
+      {
+        "type": "p2sh",
+        "value": 100001914,
+        "address": "3LyFQTKbPwXtgrsGpMbbEECY7ViBeFbonU",
+        "paysTestAddress": false,
+        "scriptPubKey": "a914d37c4c809fe9840e7bfa77b86bd47163f6fb6c6087"
+      },
+      {
+        "type": "p2pkh",
+        "value": 31250598,
+        "address": "19kvttVMGK1kwrMGXNZ6X2SPohRqtRoq8e",
+        "paysTestAddress": false,
+        "scriptPubKey": "76a914600fe1afb15029166355501cb7887426b0055ca188ac"
+      }
+    ]
+  },
+  {
+    "file": "solopoolorg-bch.jsonl",
+    "pool": "eu2.solopool.org",
+    "port": 8002,
+    "tls": false,
+    "coin": "BCH",
+    "user": "qp3wjpa3tjlj042z2wv7hahsldgwhwy0rq9sywjpyy.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "dd8d1950ea75",
+    "extranonce2Size": 8,
+    "height": 975772,
+    "tags": [
+      "solopool.org"
+    ],
+    "merkleBranches": 9,
+    "versionHex": "20000000",
+    "totalSats": 313842611,
+    "testAddressSats": 307565759,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 307565759,
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+      },
+      {
+        "type": "p2pkh",
+        "value": 6276852,
+        "address": "13PdRXVH7Bx24BwVEGPP5V98DGHYWf2cMV",
+        "paysTestAddress": false,
+        "scriptPubKey": "76a9141a37ce97495f19f67c782f09913523c22737e1ab88ac"
+      }
+    ]
+  },
+  {
+    "file": "solopoolorg-btc.jsonl",
+    "pool": "eu3.solopool.org",
+    "port": 8005,
+    "tls": false,
+    "coin": "BTC",
+    "user": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "faf01c8c234e",
+    "extranonce2Size": 8,
+    "height": 974390,
+    "tags": [
+      "solopool.org"
+    ],
+    "merkleBranches": 12,
+    "versionHex": "20000000",
+    "totalSats": 316690757,
+    "testAddressSats": 310356942,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 310356942,
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+      },
+      {
+        "type": "p2pkh",
+        "value": 6333815,
+        "address": "15QpodLt8uWuSpKS5iErV3wzu89HXdfUNc",
+        "paysTestAddress": false,
+        "scriptPubKey": "76a9143061f99633ba3fcf63de874be06518ad9517059a88ac"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a24aa21a9ed914c3df0dc0c011b2ac44afa896158319b2410426b4f88762c9b2d2386934571"
+      }
+    ]
+  },
+  {
+    "file": "solopoolorg-dgb.jsonl",
+    "pool": "eu2.solopool.org",
+    "port": 8004,
+    "tls": false,
+    "coin": "DGB",
+    "user": "DRNiw2k4iFuHGS2fF1wMahounXo6H9iGbh.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "eac3ccc1e527",
+    "extranonce2Size": 8,
+    "height": 24498631,
+    "tags": [
+      "solopool.org"
+    ],
+    "merkleBranches": 0,
+    "versionHex": "20000202",
+    "totalSats": 24793026605,
+    "testAddressSats": 24297166073,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 24297166073,
+        "address": "DRNiw2k4iFuHGS2fF1wMahounXo6H9iGbh",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a914ddf64d5df1d7277270e2d58632bb3466d0b16bd588ac"
+      },
+      {
+        "type": "p2wpkh",
+        "value": 495860532,
+        "address": "dgb1q2lr3qkaz8uvcp5k6xe8lpdxy9k4egx3w4f2tsw",
+        "paysTestAddress": false,
+        "scriptPubKey": "001457c7105ba23f1980d2da364ff0b4c42dab941a2e"
+      },
+      {
+        "type": "op_return",
+        "value": 0,
+        "address": null,
+        "paysTestAddress": false,
+        "scriptPubKey": "6a24aa21a9ede2f61c3f71d1defd3fa999dfa36953755c690689799962b48bebd836974e8cf9"
+      }
+    ]
+  },
+  {
+    "file": "solopoolorg-xec.jsonl",
+    "pool": "eu2.solopool.org",
+    "port": 8001,
+    "tls": false,
+    "coin": "XEC",
+    "user": "qp3wjpa3tjlj042z2wv7hahsldgwhwy0rquas9fmzn.minerguru",
+    "authorized": true,
+    "authorizeError": null,
+    "extranonce1": "af9c7edd3a82",
+    "extranonce2Size": 8,
+    "height": 973928,
+    "tags": [
+      "solopool.org"
+    ],
+    "merkleBranches": 4,
+    "versionHex": "20000000",
+    "totalSats": 312505983,
+    "testAddressSats": 177628402,
+    "outputs": [
+      {
+        "type": "p2pkh",
+        "value": 177628402,
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+        "paysTestAddress": true,
+        "scriptPubKey": "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+      },
+      {
+        "type": "p2pkh",
+        "value": 3625069,
+        "address": "17bxHXudQvXVXgJB2MnZyRim3fPUVutoog",
+        "paysTestAddress": false,
+        "scriptPubKey": "76a914486d0c0abebe0b7c774b0a37547b20c78a10fda388ac"
+      },
+      {
+        "type": "p2sh",
+        "value": 100001914,
+        "address": "3LyFQTKbPwXtgrsGpMbbEECY7ViBeFbonU",
+        "paysTestAddress": false,
+        "scriptPubKey": "a914d37c4c809fe9840e7bfa77b86bd47163f6fb6c6087"
+      },
+      {
+        "type": "p2pkh",
+        "value": 31250598,
+        "address": "19kvttVMGK1kwrMGXNZ6X2SPohRqtRoq8e",
+        "paysTestAddress": false,
+        "scriptPubKey": "76a914600fe1afb15029166355501cb7887426b0055ca188ac"
+      }
+    ]
+  }
+]

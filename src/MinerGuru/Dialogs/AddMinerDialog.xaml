@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Add a miner by address: checks the connection first, and still allows adding one that is off right now. -->
+<ContentDialog
+    x:Class="MinerGuru.Dialogs.AddMinerDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MinerGuru"
+    Title="{local:T De='Miner hinzufügen', En='Add miner'}"
+    CloseButtonText="{local:T De=Abbrechen, En=Cancel}"
+    DefaultButton="Primary"
+    PrimaryButtonClick="Dialog_PrimaryButtonClick"
+    PrimaryButtonText="{local:T De=Hinzufügen, En=Add}"
+    Style="{StaticResource DefaultContentDialogStyle}">
+
+    <StackPanel Width="420" Spacing="16">
+        <TextBox
+            x:Name="AddressBox"
+            Header="{local:T De='IP-Adresse oder Hostname', En='IP address or hostname'}"
+            PlaceholderText="192.168.1.50"
+            TextChanged="AddressBox_TextChanged" />
+        <TextBox
+            x:Name="NameBox"
+            Header="{local:T De='Name (optional)', En='Name (optional)'}"
+            PlaceholderText="{local:T De='Hostname des Miners', En='The miner hostname'}" />
+        <InfoBar
+            x:Name="ResultBar"
+            IsClosable="False"
+            IsOpen="False" />
+        <ProgressBar
+            x:Name="Progress"
+            IsIndeterminate="True"
+            Visibility="Collapsed" />
+    </StackPanel>
+</ContentDialog>

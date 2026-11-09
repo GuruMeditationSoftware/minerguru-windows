@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Written next to MinerGuru.exe when the widgets are switched on (WidgetPackage), with {{…}} filled in the app's
+     language, and registered as a loose development package. Publisher CN=MinerGuru: unsigned, Developer Mode only. -->
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+  xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+  xmlns:desktop6="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap uap3 uap10 com desktop6 rescap">
+  <Identity Name="MinerGuru.Widgets" Publisher="CN=MinerGuru" Version="{{VERSION}}" ProcessorArchitecture="neutral" />
+  <Properties>
+    <DisplayName>MinerGuru</DisplayName>
+    <PublisherDisplayName>MinerGuru</PublisherDisplayName>
+    <Logo>Widgets\Assets\StoreLogo.png</Logo>
+    <!-- The widget service writes the app's data folder, not a per-package copy of it. -->
+    <desktop6:FileSystemWriteVirtualization>disabled</desktop6:FileSystemWriteVirtualization>
+    <desktop6:RegistryWriteVirtualization>disabled</desktop6:RegistryWriteVirtualization>
+  </Properties>
+  <Resources>
+    <Resource Language="{{LANGUAGE}}" />
+  </Resources>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.22000.0" MaxVersionTested="10.0.26100.0" />
+  </Dependencies>
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+    <rescap:Capability Name="unvirtualizedResources" />
+  </Capabilities>
+  <Applications>
+    <Application Id="Widgets" Executable="MinerGuru.exe" uap10:TrustLevel="mediumIL" uap10:RuntimeBehavior="win32App">
+      <uap:VisualElements DisplayName="MinerGuru" Description="MinerGuru Widgets" BackgroundColor="transparent"
+        Square150x150Logo="Widgets\Assets\Square150.png" Square44x44Logo="Widgets\Assets\Square44.png" AppListEntry="none" />
+      <Extensions>
+        <!-- A tap on a widget opens minerguru://open. Declared here, the board opens an app of the widget's own
+             package without asking; Program hands the start on to the normal MinerGuru. -->
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="minerguru">
+            <uap:DisplayName>MinerGuru</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
+        <com:Extension Category="windows.comServer">
+          <com:ComServer>
+            <com:ExeServer Executable="MinerGuru.exe" Arguments="{{ARGUMENTS}}" DisplayName="MinerGuru Widgets">
+              <com:Class Id="5EE96375-2213-4F19-96F0-447483026F91" DisplayName="MinerGuru Widgets" />
+            </com:ExeServer>
+          </com:ComServer>
+        </com:Extension>
+        <uap3:Extension Category="windows.appExtension">
+          <uap3:AppExtension Name="com.microsoft.windows.widgets" DisplayName="MinerGuru" Id="MinerGuru" PublicFolder="Widgets">
+            <uap3:Properties>
+              <WidgetProvider>
+                <ProviderIcons>
+                  <Icon Path="Widgets\Assets\Provider.png" />
+                </ProviderIcons>
+                <Activation>
+                  <CreateInstance ClassId="5EE96375-2213-4F19-96F0-447483026F91" />
+                </Activation>
+                <Definitions>
+                  <Definition Id="Fleet" DisplayName="{{FLEET}}" Description="{{FLEET_DESCRIPTION}}" AllowMultiple="false">
+                    <Capabilities>
+                      <Capability><Size Name="small" /></Capability>
+                      <Capability><Size Name="medium" /></Capability>
+                      <Capability><Size Name="large" /></Capability>
+                    </Capabilities>
+                    <ThemeResources>
+                      <Icons><Icon Path="Widgets\Assets\Provider.png" /></Icons>
+                      <Screenshots><Screenshot Path="Widgets\Assets\FleetScreenshot.png" DisplayAltText="{{FLEET}}" /></Screenshots>
+                      <DarkMode />
+                      <LightMode />
+                    </ThemeResources>
+                  </Definition>
+                  <Definition Id="Solo" DisplayName="{{SOLO}}" Description="{{SOLO_DESCRIPTION}}" AllowMultiple="false">
+                    <Capabilities>
+                      <Capability><Size Name="small" /></Capability>
+                      <Capability><Size Name="medium" /></Capability>
+                    </Capabilities>
+                    <ThemeResources>
+                      <Icons><Icon Path="Widgets\Assets\Provider.png" /></Icons>
+                      <Screenshots><Screenshot Path="Widgets\Assets\SoloScreenshot.png" DisplayAltText="{{SOLO}}" /></Screenshots>
+                      <DarkMode />
+                      <LightMode />
+                    </ThemeResources>
+                  </Definition>
+                </Definitions>
+              </WidgetProvider>
+            </uap3:Properties>
+          </uap3:AppExtension>
+        </uap3:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+</Package>

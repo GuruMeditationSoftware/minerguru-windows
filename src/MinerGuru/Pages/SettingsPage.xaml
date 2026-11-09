@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Settings in the Windows settings style: one card per setting, the control on the right. -->
+<Page
+    x:Class="MinerGuru.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MinerGuru.Controls"
+    xmlns:local="using:MinerGuru"
+    Background="Transparent">
+
+    <Page.Resources>
+        <Style x:Key="SettingCardStyle" TargetType="Border" BasedOn="{StaticResource CardBorderStyle}">
+            <Setter Property="Padding" Value="16,14" />
+            <Setter Property="CornerRadius" Value="{StaticResource ControlCornerRadius}" />
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer>
+        <StackPanel
+            MaxWidth="1000"
+            Padding="{StaticResource PagePadding}"
+            HorizontalAlignment="Stretch"
+            Spacing="4">
+            <TextBlock
+                Margin="0,0,0,20"
+                Style="{StaticResource SectionTitleStyle}"
+                Text="{local:T De=Einstellungen, En=Settings}" />
+
+            <TextBlock
+                Margin="0,0,0,8"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="{local:T De=Allgemein, En=General}" />
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE774;" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{local:T De='Sprache der Oberfläche', En='Interface language'}" />
+                        <TextBlock
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Text="{local:T De='Wird nach einem Neustart von MinerGuru aktiv.', En='Takes effect after restarting MinerGuru.'}" />
+                    </StackPanel>
+                    <ComboBox
+                        x:Name="LanguageBox"
+                        AutomationProperties.Name="{local:T De='Sprache der Oberfläche', En='Interface language'}"
+                        Grid.Column="2"
+                        SelectionChanged="LanguageBox_SelectionChanged" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE7B3;" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{local:T De=Privatmodus, En='Privacy mode'}" />
+                        <TextBlock
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Text="{local:T De='Verschleiert IP-, Wallet- und MAC-Adressen und den WLAN-Namen, etwa für Screenshots. Strg+Umschalt+H schaltet um.', En='Hides IP, wallet and MAC addresses and the Wi-Fi name, for example for screenshots. Ctrl+Shift+H toggles it.'}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                    <ToggleSwitch AutomationProperties.Name="{local:T De=Privatmodus, En='Privacy mode'}"
+                        x:Name="PrivacySwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="PrivacySwitch_Toggled" />
+                </Grid>
+            </Border>
+
+            <TextBlock
+                Margin="0,20,0,8"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="{local:T De=Abfrage, En=Polling}" />
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE916;" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{local:T De=Abfrageintervall, En='Polling interval'}" />
+                        <TextBlock
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Text="{local:T De='Wie oft MinerGuru jeden Miner nach seinen Werten fragt', En='How often MinerGuru asks every miner for its figures'}" />
+                    </StackPanel>
+                    <NumberBox AutomationProperties.Name="{local:T De=Abfrageintervall, En='Polling interval'}"
+                        x:Name="IntervalBox"
+                        Grid.Column="2"
+                        Width="140"
+                        Maximum="300"
+                        Minimum="2"
+                        SpinButtonPlacementMode="Inline"
+                        ValueChanged="IntervalBox_ValueChanged" />
+                </Grid>
+            </Border>
+
+            <TextBlock
+                Margin="0,20,0,8"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="{local:T De=Netzwerk-Scan, En='Network scan'}" />
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE968;" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{local:T De='Standard-Subnetz (/24)', En='Default subnet (/24)'}" />
+                        <TextBlock
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Text="{local:T De='Die ersten drei Teile der Adresse, z. B. 192.168.1', En='The first three parts of the address, e.g. 192.168.1'}" />
+                    </StackPanel>
+                    <TextBox AutomationProperties.Name="{local:T De='Standard-Subnetz (/24)', En='Default subnet (/24)'}"
+                        x:Name="SubnetBox"
+                        Grid.Column="2"
+                        Width="140"
+                        FontFamily="{StaticResource MonoFont}"
+                        LostFocus="SubnetBox_LostFocus" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE701;" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Text="{local:T De='Beim Start automatisch scannen, wenn keine Miner konfiguriert sind', En='Scan automatically at startup when no miners are configured'}"
+                        TextWrapping="Wrap" />
+                    <ToggleSwitch AutomationProperties.Name="{local:T De='Beim Start automatisch scannen, wenn keine Miner konfiguriert sind', En='Scan automatically at startup when no miners are configured'}"
+                        x:Name="AutoScanSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="AutoScanSwitch_Toggled" />
+                </Grid>
+            </Border>
+
+            <TextBlock
+                Margin="0,20,0,8"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="{local:T De=Blockansicht, En='Block view'}" />
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon VerticalAlignment="Top" Glyph="&#xE7B8;" />
+                    <StackPanel Grid.Column="1" Spacing="4">
+                        <TextBlock Text="{local:T De='Block-Vorlage selbst beim Pool abfragen', En='Ask the pool for the block template'}" />
+                        <TextBlock
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Text="{local:T De='Für Miner, die ihren Block nicht selbst melden (NerdOS, AxeOS vor 2.13). MinerGuru verbindet sich dazu von diesem PC aus kurz mit dem Pool des Miners, meldet sich mit dessen Adresse und dem Worker-Namen „minerguru“ an, liest den ersten Auftrag und trennt wieder. So siehst du Blockhöhe, Belohnung, Gebühren und Empfänger und ob deine Adresse dabei ist.', En='For miners that do not report their block themselves (NerdOS, AxeOS before 2.13). MinerGuru briefly connects from this PC to the pool of the miner, logs in with its address and the worker name “minerguru”, reads the first job and disconnects. You then see block height, reward, fees and recipients and whether your address is among them.'}"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Text="{local:T De='Es werden keine Shares eingereicht; bei 17 getesteten Solo-Pools erschien kein zusätzlicher Worker. Abgefragt wird nur bei offener Miner-Seite, höchstens alle 5 Minuten je Pool. Der Pool sieht die IP-Adresse deines Anschlusses, wie beim Miner auch.', En='No shares are submitted; on 17 tested solo pools no extra worker appeared. It only asks while the miner page is open, at most every 5 minutes per pool. The pool sees the IP address of your connection, just as it does for the miner.'}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                    <ToggleSwitch AutomationProperties.Name="{local:T De='Block-Vorlage selbst beim Pool abfragen', En='Ask the pool for the block template'}"
+                        x:Name="StratumProbeSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        VerticalAlignment="Top"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="StratumProbeSwitch_Toggled" />
+                </Grid>
+            </Border>
+
+            <TextBlock
+                Margin="0,20,0,8"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="{local:T De=Warnungen, En=Warnings}" />
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE9CA;" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{local:T De='Temperaturwarnung ab', En='Temperature warning from'}" />
+                        <TextBlock
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Text="{local:T De='Miner über dieser ASIC-Temperatur werden orange markiert', En='Miners above this ASIC temperature are marked orange'}" />
+                    </StackPanel>
+                    <NumberBox AutomationProperties.Name="{local:T De='Temperaturwarnung ab', En='Temperature warning from'}"
+                        x:Name="TempBox"
+                        Grid.Column="2"
+                        Width="140"
+                        Maximum="95"
+                        Minimum="40"
+                        SpinButtonPlacementMode="Inline"
+                        ValueChanged="TempBox_ValueChanged" />
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xEA8F;" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{local:T De='Bei Problemen benachrichtigen', En='Notify about problems'}" />
+                        <TextBlock
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Text="{local:T De='Nur Alarme, keine Werbung. Läuft weiter, solange MinerGuru im Infobereich ist.', En='Alarms only, no advertising. Keeps running while MinerGuru is in the notification area.'}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                    <ToggleSwitch AutomationProperties.Name="{local:T De='Bei Problemen benachrichtigen', En='Notify about problems'}"
+                        x:Name="AlertsSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="AlertsSwitch_Toggled" />
+                </Grid>
+            </Border>
+            <Border x:Name="OfflineAlertCard" Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE968;" />
+                    <TextBlock
+                        x:Name="OfflineAlertText"
+                        Grid.Column="1"
+                        VerticalAlignment="Center" />
+                    <ToggleSwitch
+                        x:Name="OfflineAlertSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="OfflineAlertSwitch_Toggled" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE90F;" />
+                    <TextBlock
+                        x:Name="MaintenanceAlertText"
+                        Grid.Column="1"
+                        VerticalAlignment="Center" />
+                    <ToggleSwitch
+                        x:Name="MaintenanceAlertSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="MaintenanceAlertSwitch_Toggled" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE7BA;" />
+                    <TextBlock
+                        x:Name="OverheatAlertText"
+                        Grid.Column="1"
+                        VerticalAlignment="Center" />
+                    <ToggleSwitch
+                        x:Name="OverheatAlertSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="OverheatAlertSwitch_Toggled" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE9D9;" />
+                    <TextBlock
+                        x:Name="FlatlineAlertText"
+                        Grid.Column="1"
+                        VerticalAlignment="Center" />
+                    <ToggleSwitch
+                        x:Name="FlatlineAlertSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="FlatlineAlertSwitch_Toggled" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE8AB;" />
+                    <TextBlock
+                        x:Name="FallbackAlertText"
+                        Grid.Column="1"
+                        VerticalAlignment="Center" />
+                    <ToggleSwitch
+                        x:Name="FallbackAlertSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="FallbackAlertSwitch_Toggled" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE777;" />
+                    <TextBlock
+                        x:Name="RestartAlertText"
+                        Grid.Column="1"
+                        VerticalAlignment="Center" />
+                    <ToggleSwitch
+                        x:Name="RestartAlertSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="RestartAlertSwitch_Toggled" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE8C7;" />
+                    <TextBlock
+                        x:Name="PayoutAlertText"
+                        Grid.Column="1"
+                        VerticalAlignment="Center" />
+                    <ToggleSwitch
+                        x:Name="PayoutAlertSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="PayoutAlertSwitch_Toggled" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE715;" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{local:T De='E-Mail-Warnungen', En='Email alerts'}" />
+                        <TextBlock x:Name="EmailStatusText" Style="{StaticResource MonoCaptionStyle}" />
+                    </StackPanel>
+                    <Button
+                        Grid.Column="2"
+                        Click="EmailAlerts_Click"
+                        Content="{local:T De='Einrichten', En='Set up'}" />
+                </Grid>
+            </Border>
+
+            <StackPanel x:Name="WidgetsSection">
+                <TextBlock
+                    Margin="0,20,0,8"
+                    Style="{StaticResource BodyStrongTextBlockStyle}"
+                    Text="Widgets" />
+                <Border Style="{StaticResource SettingCardStyle}">
+                    <Grid ColumnSpacing="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <FontIcon Glyph="&#xF246;" />
+                        <StackPanel Grid.Column="1">
+                            <TextBlock x:Name="WidgetsTitle" Text="{local:T De='Widgets im Widget-Board', En='Widgets on the widget board'}" />
+                            <TextBlock
+                                x:Name="WidgetsHint"
+                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                TextWrapping="Wrap" />
+                            <HyperlinkButton
+                                x:Name="DeveloperSettingsLink"
+                                Margin="-12,0,0,0"
+                                Click="DeveloperSettings_Click"
+                                Content="{local:T De='Windows-Einstellungen für Entwickler öffnen', En='Open Windows settings for developers'}" />
+                        </StackPanel>
+                        <ToggleSwitch AutomationProperties.Name="{local:T De='Widgets im Widget-Board', En='Widgets on the widget board'}"
+                            x:Name="WidgetsSwitch"
+                            Grid.Column="2"
+                            MinWidth="0"
+                            OffContent=""
+                            OnContent=""
+                            Toggled="WidgetsSwitch_Toggled" />
+                    </Grid>
+                </Border>
+            </StackPanel>
+
+            <TextBlock
+                Margin="0,20,0,8"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="{local:T De=Infobereich, En='Notification area'}" />
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE8FC;" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{local:T De='Beim Schließen im Infobereich weiterlaufen', En='Keep running in the notification area when closed'}" />
+                        <TextBlock
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Text="{local:T De='Überwachung und Zeitpläne laufen weiter. Beenden lässt sich MinerGuru über das Symbol.', En='Monitoring and schedules keep running. Quit MinerGuru from its icon.'}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                    <ToggleSwitch AutomationProperties.Name="{local:T De='Beim Schließen im Infobereich weiterlaufen', En='Keep running in the notification area when closed'}"
+                        x:Name="KeepRunningSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="KeepRunningSwitch_Toggled" />
+                </Grid>
+            </Border>
+
+            <TextBlock
+                Margin="0,20,0,8"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="Updates" />
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE896;" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{local:T De='Täglich nach neuen Versionen suchen', En='Check for new versions daily'}" />
+                        <TextBlock
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Text="{local:T De='MinerGuru fragt dazu GitHub nach der neuesten Version. GitHub sieht dabei deine IP-Adresse und die App-Version. Installiert wird nichts automatisch.', En='MinerGuru asks GitHub for the latest version. GitHub sees your IP address and the app version. Nothing is installed automatically.'}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                    <ToggleSwitch AutomationProperties.Name="{local:T De='Täglich nach neuen Versionen suchen', En='Check for new versions daily'}"
+                        x:Name="UpdateCheckSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="UpdateCheckSwitch_Toggled" />
+                </Grid>
+            </Border>
+            <Border Margin="0,4,0,0" Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE72C;" />
+                    <TextBlock
+                        x:Name="UpdateStatusText"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap" />
+                    <HyperlinkButton
+                        x:Name="UpdateDownloadLink"
+                        Grid.Column="2"
+                        Click="UpdateDownload_Click"
+                        Content="{local:T De='Zum Download', En='Go to download'}" />
+                    <Button
+                        x:Name="UpdateCheckButton"
+                        Grid.Column="3"
+                        Click="UpdateCheckButton_Click"
+                        Content="{local:T De='Jetzt suchen', En='Check now'}" />
+                </Grid>
+            </Border>
+
+            <TextBlock
+                Margin="0,20,0,8"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="{local:T De=Daten, En=Data}" />
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE8B7;" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{local:T De=Datenordner, En='Data folder'}" />
+                        <TextBlock
+                            x:Name="DataFolderText"
+                            Style="{StaticResource MonoCaptionStyle}"
+                            TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+                    <Button
+                        Grid.Column="2"
+                        Click="OpenFolder_Click"
+                        Content="{local:T De='Im Explorer öffnen', En='Open in Explorer'}" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE9D9;" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{local:T De=Diagnose-Log, En='Diagnostic log'}" />
+                        <TextBlock
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Opacity="0.7"
+                            Text="{local:T De='Hält Zustände, Warnungen, Schaltvorgänge und Messwerte fest, nur auf diesem PC. Enthält die lokalen IP-Adressen der Miner, aber keine Passwörter, Wallet-Adressen oder Codes. Wird nie automatisch gesendet.', En='Records states, alerts, switching and measurements, only on this PC. Contains local IP addresses, but no passwords, wallet addresses or codes. Never sent automatically.'}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                    <Button
+                        Grid.Column="2"
+                        Click="ExportLog_Click"
+                        Content="{local:T De='Exportieren …', En='Export …'}" />
+                </Grid>
+            </Border>
+
+            <TextBlock
+                Margin="0,20,0,8"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="{local:T De=Soll-Adressen, En='Expected addresses'}" />
+            <Border Style="{StaticResource SettingCardStyle}">
+                <StackPanel Spacing="10">
+                    <TextBox
+                        x:Name="BtcAddressBox"
+                        Header="Bitcoin"
+                        LostFocus="AddressBox_LostFocus" />
+                    <TextBox
+                        x:Name="BchAddressBox"
+                        Header="Bitcoin Cash"
+                        LostFocus="AddressBox_LostFocus" />
+                    <TextBox
+                        x:Name="DgbAddressBox"
+                        Header="DigiByte"
+                        LostFocus="AddressBox_LostFocus" />
+                    <TextBox
+                        x:Name="XecAddressBox"
+                        Header="eCash"
+                        LostFocus="AddressBox_LostFocus" />
+                    <TextBlock
+                        x:Name="AddressWarning"
+                        Foreground="{ThemeResource SignalBadBrush}"
+                        Text="{local:T De='Das ist keine gültige Adresse.', En='This is not a valid address.'}"
+                        Visibility="Collapsed" />
+                    <TextBlock
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Opacity="0.7"
+                        Text="{local:T De='MinerGuru warnt, wenn ein Miner an eine andere Adresse zahlt, und schreibt nie von selbst eine Adresse auf einen Miner.', En='MinerGuru warns when a miner pays to another address and never writes an address to a miner on its own.'}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <TextBlock
+                Margin="0,20,0,8"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="{local:T De=Eingriffe, En=Interventions}" />
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE72E;" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{local:T De='Nur lesen', En='Read-only'}" />
+                        <TextBlock
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Opacity="0.7"
+                            Text="{local:T De='Nichts an Minern ändern', En='Change nothing on miners'}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                    <ToggleSwitch AutomationProperties.Name="{local:T De='Nur lesen', En='Read-only'}"
+                        x:Name="ReadOnlySwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="ReadOnlySwitch_Toggled" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE72C;" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{local:T De='Ohne Shares neu starten', En='Restart without shares'}" />
+                        <TextBlock
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Opacity="0.7"
+                            Text="{local:T De='Höchstens einmal pro Stunde je Miner, nie bei Überhitzung', En='At most once an hour per miner, never when overheating'}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                    <ToggleSwitch AutomationProperties.Name="{local:T De='Ohne Shares neu starten', En='Restart without shares'}"
+                        x:Name="RestartFlatlineSwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="RestartFlatlineSwitch_Toggled" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE72C;" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{local:T De='Zum Primär-Pool zurückholen', En='Bring back to primary pool'}" />
+                        <TextBlock
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Opacity="0.7"
+                            Text="{local:T De='Höchstens einmal pro Stunde je Miner, nie bei Überhitzung', En='At most once an hour per miner, never when overheating'}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                    <ToggleSwitch AutomationProperties.Name="{local:T De='Zum Primär-Pool zurückholen', En='Bring back to primary pool'}"
+                        x:Name="RestartPrimarySwitch"
+                        Grid.Column="2"
+                        MinWidth="0"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="RestartPrimarySwitch_Toggled" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE81C;" />
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{local:T De=Änderungsprotokoll, En='Change log'}" />
+                    <Button
+                        Grid.Column="2"
+                        Click="ChangeLog_Click"
+                        Content="{local:T De='Anzeigen …', En='Show …'}" />
+                </Grid>
+            </Border>
+
+            <TextBlock
+                Margin="0,20,0,8"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="{local:T De=Info, En=About}" />
+            <Border Style="{StaticResource SettingCardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Width="32"
+                        Height="32"
+                        Source="ms-appx:///Assets/AppIcon.ico" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="MinerGuru" />
+                        <TextBlock x:Name="VersionText" Style="{StaticResource MonoCaptionStyle}" />
+                        <TextBlock Style="{StaticResource MonoCaptionStyle}" Text="Made by GuruMeditation" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <StackPanel
+                Margin="0,8,0,0"
+                Orientation="Horizontal"
+                Spacing="4">
+                <controls:SupportDevelopmentButton />
+                <HyperlinkButton Click="Feedback_Click" Content="{local:T De='Feedback geben', En='Send feedback'}" FontSize="12" />
+                <HyperlinkButton Click="License_Click" Content="{local:T De=Lizenz, En=License}" FontSize="12" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

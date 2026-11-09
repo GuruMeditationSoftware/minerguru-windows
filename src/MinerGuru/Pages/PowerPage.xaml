@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Power, as the Mac's PowerView: the figures, the own tariff with zones and week bar, the schedules
+    that switch the miners, and the costs per miner. Rows are built in code.
+-->
+<Page
+    x:Class="MinerGuru.Pages.PowerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MinerGuru.Controls"
+    xmlns:local="using:MinerGuru"
+    Background="Transparent">
+
+    <ScrollViewer>
+        <StackPanel
+            MaxWidth="{StaticResource PageMaxWidth}"
+            Padding="{StaticResource PagePadding}"
+            Spacing="16">
+
+            <controls:AdaptiveGrid
+                x:Name="FigureGrid"
+                MinColumnWidth="170"
+                Spacing="16" />
+
+            <!--  Tariff  -->
+            <Border Padding="16" Style="{StaticResource CardBorderStyle}">
+                <StackPanel Spacing="16">
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon
+                                FontSize="15"
+                                Foreground="{ThemeResource TextSecondaryBrush}"
+                                Glyph="&#xE945;" />
+                            <TextBlock
+                                FontSize="15"
+                                FontWeight="Medium"
+                                Foreground="{ThemeResource TextPrimaryBrush}"
+                                Text="{local:T De='Tarif', En='Tariff'}" />
+                        </StackPanel>
+                        <DropDownButton
+                            Grid.Column="1"
+                            MinHeight="28"
+                            Padding="10,4"
+                            Content="{local:T De='Vorlage', En='Template'}"
+                            CornerRadius="6"
+                            FontSize="12"
+                            ToolTipService.ToolTip="{local:T De='Typische Zonen anlegen und danach die Preise anpassen', En='Create typical zones, then adjust the prices'}">
+                            <DropDownButton.Flyout>
+                                <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                    <MenuFlyoutItem Click="DayNightTemplate_Click" Text="{local:T De='Nacht und Tag (HT/NT)', En='Night and day (peak/off-peak)'}" />
+                                    <MenuFlyoutItem Click="WeekendTemplate_Click" Text="{local:T De='Wochenende günstiger', En='Cheaper weekend'}" />
+                                </MenuFlyout>
+                            </DropDownButton.Flyout>
+                        </DropDownButton>
+                        <Button AutomationProperties.Name="{local:T De='Zeitzone mit eigenem Preis anlegen, z. B. Nachtstrom', En='Create a time zone with its own price, e.g. night rate'}"
+                            Grid.Column="2"
+                            Click="AddZone_Click"
+                            Style="{StaticResource SmallButtonStyle}"
+                            ToolTipService.ToolTip="{local:T De='Zeitzone mit eigenem Preis anlegen, z. B. Nachtstrom', En='Create a time zone with its own price, e.g. night rate'}">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon FontSize="12" Glyph="&#xE710;" />
+                                <TextBlock Text="{local:T De='Zone hinzufügen', En='Add zone'}" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" Spacing="20">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Foreground="{ThemeResource TextSecondaryBrush}"
+                                Text="{local:T De='Währung', En='Currency'}" />
+                            <TextBox
+                                x:Name="CurrencyBox"
+                                AutomationProperties.Name="{local:T De='Währung', En='Currency'}"
+                                Width="72"
+                                CharacterCasing="Upper"
+                                LostFocus="CurrencyBox_LostFocus"
+                                MaxLength="3"
+                                TextChanged="CurrencyBox_TextChanged" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock
+                                x:Name="BasePriceLabel"
+                                VerticalAlignment="Center"
+                                Foreground="{ThemeResource TextSecondaryBrush}" />
+                            <TextBox
+                                x:Name="BasePriceBox"
+                                Width="90"
+                                LostFocus="BasePriceBox_LostFocus"
+                                TextAlignment="Right"
+                                TextChanged="BasePriceBox_TextChanged" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="ZoneRows" />
+                    <TextBlock
+                        x:Name="NoZonesText"
+                        Foreground="{ThemeResource TextSecondaryBrush}"
+                        Text="{local:T De='Ein Festpreis gilt rund um die Uhr. Mit Zonen bekommen Nacht, Wochenende oder Spitzenzeiten eigene Preise, und Zeitpläne können sich danach richten.', En='A fixed price applies around the clock. With zones, nights, weekends or peak hours get their own prices, and schedules can follow them.'}"
+                        TextWrapping="Wrap" />
+
+                    <controls:WeekTariffBar x:Name="WeekBar" />
+                    <StackPanel x:Name="TariffHints" Spacing="4" />
+                </StackPanel>
+            </Border>
+
+            <!--  Schedules  -->
+            <Border Padding="16" Style="{StaticResource CardBorderStyle}">
+                <StackPanel Spacing="14">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon
+                                FontSize="15"
+                                Foreground="{ThemeResource TextSecondaryBrush}"
+                                Glyph="&#xE787;" />
+                            <TextBlock
+                                FontSize="15"
+                                FontWeight="Medium"
+                                Foreground="{ThemeResource TextPrimaryBrush}"
+                                Text="{local:T De='Zeitpläne', En='Schedules'}" />
+                        </StackPanel>
+                        <Button AutomationProperties.Name="{local:T De='Miner zu einer Tarifzone oder Uhrzeit in den Nachtmodus schicken oder pausieren', En='Send miners to night mode or pause them during a tariff zone or at set times'}"
+                            x:Name="AddRuleButton"
+                            HorizontalAlignment="Right"
+                            Click="AddRule_Click"
+                            Style="{StaticResource SmallButtonStyle}"
+                            ToolTipService.ToolTip="{local:T De='Miner zu einer Tarifzone oder Uhrzeit in den Nachtmodus schicken oder pausieren', En='Send miners to night mode or pause them during a tariff zone or at set times'}">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon FontSize="12" Glyph="&#xE710;" />
+                                <TextBlock Text="{local:T De='Zeitplan hinzufügen', En='Add schedule'}" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <StackPanel x:Name="RuleRows" />
+                    <TextBlock
+                        x:Name="NoRulesText"
+                        Foreground="{ThemeResource TextSecondaryBrush}"
+                        Text="{local:T De='Noch keine Zeitpläne. Ein Zeitplan schaltet Miner während einer Tarifzone oder zu festen Uhrzeiten in den Nachtmodus oder pausiert sie; danach kehren sie zu ihren eigenen Einstellungen zurück.', En='No schedules yet. A schedule sends miners to night mode or pauses them during a tariff zone or at set times; afterwards they return to their own settings.'}"
+                        TextWrapping="Wrap" />
+
+                    <Rectangle Height="1" Style="{StaticResource HairlineStyle}" />
+
+                    <controls:AdaptiveGrid MinColumnWidth="380" Spacing="24">
+                        <StackPanel Spacing="4">
+                            <CheckBox
+                                x:Name="RunsSchedulesBox"
+                                Click="RunsSchedulesBox_Click"
+                                Content="{local:T De='Dieser PC führt die Zeitpläne aus', En='This PC runs the schedules'}" />
+                            <TextBlock
+                                FontSize="12"
+                                Foreground="{ThemeResource TextSecondaryBrush}"
+                                Text="{local:T De='Nur ein Gerät sollte schalten, sonst arbeiten PC, Mac und Handy gegeneinander. Im Ruhezustand oder nach dem Beenden von MinerGuru schaltet der PC nicht.', En='Only one device should switch, otherwise PC, Mac and phone work against each other. While asleep or after quitting MinerGuru, the PC does not switch.'}"
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel Spacing="4">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock VerticalAlignment="Center" Text="{local:T De='Lüfter im Nachtmodus (%)', En='Night mode fan (%)'}" />
+                                <NumberBox
+                                    x:Name="NightFanBox"
+                                    AutomationProperties.Name="{local:T De='Lüfter im Nachtmodus in Prozent', En='Fan in night mode, percent'}"
+                                    LargeChange="5"
+                                    Maximum="100"
+                                    Minimum="20"
+                                    SmallChange="5"
+                                    SpinButtonPlacementMode="Inline"
+                                    ValueChanged="NightFanBox_ValueChanged" />
+                            </StackPanel>
+                            <TextBlock
+                                FontSize="12"
+                                Foreground="{ThemeResource TextSecondaryBrush}"
+                                Text="{local:T De='Der Nachtmodus senkt den Takt auf Eco und hält den Lüfter fest. Pause gibt es ab AxeOS 2.15; ältere AxeOS und NerdOS gehen stattdessen in den Nachtmodus.', En='Night mode lowers the clock to Eco and fixes the fan speed. Pause needs AxeOS 2.15; older AxeOS and NerdOS go to night mode instead.'}"
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                    </controls:AdaptiveGrid>
+
+                    <StackPanel x:Name="ScheduleError" />
+                </StackPanel>
+            </Border>
+
+            <!--  Costs per miner  -->
+            <Border Padding="16" Style="{StaticResource CardBorderStyle}">
+                <StackPanel Spacing="10">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <FontIcon
+                            FontSize="15"
+                            Foreground="{ThemeResource TextSecondaryBrush}"
+                            Glyph="&#xE950;" />
+                        <TextBlock
+                            FontSize="15"
+                            FontWeight="Medium"
+                            Foreground="{ThemeResource TextPrimaryBrush}"
+                            Text="{local:T De='Kosten je Miner', En='Cost per miner'}" />
+                    </StackPanel>
+                    <TextBlock
+                        x:Name="NoMinersText"
+                        Foreground="{ThemeResource TextSecondaryBrush}"
+                        Text="{local:T De='Noch keine Miner. Füge Miner hinzu, um ihren Verbrauch und ihre Kosten zu sehen.', En='No miners yet. Add miners to see their consumption and costs.'}"
+                        TextWrapping="Wrap" />
+                    <StackPanel x:Name="CostTable" Spacing="8" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

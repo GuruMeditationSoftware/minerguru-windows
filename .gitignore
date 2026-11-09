@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+AppPackages/
+BundleArtifacts/
+dist/
+TestResults/
+.DS_Store

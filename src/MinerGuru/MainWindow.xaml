@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Main window laid out like the Mac app: sidebar with the mark, sections and one row per miner, a bar at
+    its bottom; on the right the page with its title and subtitle in the title bar. Caption buttons stay Windows.
+-->
+<Window
+    x:Class="MinerGuru.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MinerGuru"
+    Title="MinerGuru">
+
+    <Grid x:Name="Root" Background="{ThemeResource PageBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Sidebar surface behind the logo and the rows  -->
+        <Border
+            Grid.RowSpan="2"
+            Background="{ThemeResource SidebarBrush}"
+            BorderBrush="{ThemeResource HairlineBrush}"
+            BorderThickness="0,0,1,0" />
+
+        <!--  Title bar: the whole strip drags the window  -->
+        <Border
+            x:Name="DragRegion"
+            Grid.ColumnSpan="2"
+            Background="Transparent" />
+        <StackPanel
+            Margin="20,0,0,0"
+            VerticalAlignment="Center"
+            IsHitTestVisible="False"
+            Orientation="Horizontal"
+            Spacing="10">
+            <Border x:Name="MarkHost" VerticalAlignment="Center" />
+            <TextBlock
+                FontFamily="{StaticResource FigureFont}"
+                FontSize="17"
+                FontWeight="Medium"
+                Foreground="{ThemeResource TextPrimaryBrush}"
+                Text="MinerGuru" />
+        </StackPanel>
+        <StackPanel
+            Grid.Column="1"
+            Margin="20,0,160,0"
+            VerticalAlignment="Center"
+            IsHitTestVisible="False"
+            Spacing="1">
+            <TextBlock
+                x:Name="PageTitle"
+                FontSize="13"
+                FontWeight="SemiBold"
+                Foreground="{ThemeResource TextPrimaryBrush}"
+                TextTrimming="CharacterEllipsis" />
+            <TextBlock
+                x:Name="PageSubtitle"
+                FontSize="11"
+                Foreground="{ThemeResource TextSecondaryBrush}"
+                TextTrimming="CharacterEllipsis" />
+        </StackPanel>
+
+        <!--  Sidebar  -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Padding="12,0,12,16">
+                    <Rectangle
+                        Height="1"
+                        Margin="-12,8,-12,12"
+                        Style="{StaticResource HairlineStyle}" />
+                    <StackPanel x:Name="SectionRows" Spacing="2" />
+                    <Rectangle
+                        x:Name="MinersDivider"
+                        Height="1"
+                        Margin="-12,20,-12,20"
+                        Style="{StaticResource HairlineStyle}" />
+                    <Grid x:Name="MinersHeader" Margin="8,0,8,8">
+                        <TextBlock Style="{StaticResource MonoCaptionStyle}" Text="Miner" />
+                        <TextBlock
+                            x:Name="MinerCountText"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource MonoCaptionStyle}" />
+                    </Grid>
+                    <StackPanel x:Name="MinerRows" Spacing="2" />
+                </StackPanel>
+            </ScrollViewer>
+
+            <!--  Bottom bar  -->
+            <Grid
+                Grid.Row="1"
+                Height="44"
+                Padding="12,0"
+                BorderBrush="{ThemeResource HairlineBrush}"
+                BorderThickness="0,1,0,0">
+                <Grid.Resources>
+                    <!--  Disabled bar buttons stay flat, like the Mac's borderless ones  -->
+                    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="Transparent" />
+                    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="Transparent" />
+                </Grid.Resources>
+                <StackPanel
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="4">
+                    <Button AutomationProperties.Name="{local:T De='Einstellungen öffnen', En='Open settings'}"
+                        Click="Settings_Click"
+                        Style="{StaticResource BarButtonStyle}"
+                        ToolTipService.ToolTip="{local:T De='Einstellungen öffnen', En='Open settings'}">
+                        <FontIcon FontSize="13" Glyph="&#xE713;" />
+                    </Button>
+                    <Button AutomationProperties.Name="{local:T De='Miner per IP-Adresse hinzufügen', En='Add a miner by IP address'}"
+                        Click="AddIp_Click"
+                        Style="{StaticResource BarButtonStyle}"
+                        ToolTipService.ToolTip="{local:T De='Miner per IP-Adresse hinzufügen', En='Add a miner by IP address'}">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon FontSize="12" Glyph="&#xE710;" />
+                            <TextBlock Text="{local:T De='Per IP', En='By IP'}" />
+                        </StackPanel>
+                    </Button>
+                    <Button AutomationProperties.Name="{local:T De='Lokales Netzwerk nach Minern durchsuchen', En='Search the local network for miners'}"
+                        Click="Scan_Click"
+                        Style="{StaticResource BarButtonStyle}"
+                        ToolTipService.ToolTip="{local:T De='Lokales Netzwerk nach Minern durchsuchen', En='Search the local network for miners'}">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon FontSize="12" Glyph="&#xE701;" />
+                            <TextBlock Text="{local:T De=Scannen, En=Scan}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    Spacing="2">
+                    <Button
+                        x:Name="PrivacyButton"
+                        VerticalAlignment="Center"
+                        Click="Privacy_Click"
+                        Style="{StaticResource BarButtonStyle}">
+                        <Button.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="H" Modifiers="Control,Shift" />
+                        </Button.KeyboardAccelerators>
+                        <FontIcon x:Name="PrivacyIcon" FontSize="13" />
+                    </Button>
+                    <Button AutomationProperties.Name="{local:T De='Alle Miner jetzt aktualisieren', En='Refresh all miners now'}"
+                        x:Name="RefreshAllButton"
+                        VerticalAlignment="Center"
+                        Click="RefreshAll_Click"
+                        Style="{StaticResource BarButtonStyle}"
+                        ToolTipService.ToolTip="{local:T De='Alle Miner jetzt aktualisieren', En='Refresh all miners now'}">
+                        <FontIcon FontSize="13" Glyph="&#xE72C;" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!--  Page  -->
+        <Frame
+            x:Name="ContentFrame"
+            Grid.Row="1"
+            Grid.Column="1" />
+
+        <!--  Status banner, as on the Mac: a raised pill at the bottom  -->
+        <Border
+            x:Name="Banner"
+            Grid.Row="1"
+            Grid.Column="1"
+            Height="36"
+            Margin="0,0,0,20"
+            Padding="16,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Background="{ThemeResource RaisedBrush}"
+            BorderBrush="{ThemeResource HairlineBrush}"
+            BorderThickness="1"
+            CornerRadius="10"
+            Visibility="Collapsed">
+            <StackPanel
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="8">
+                <FontIcon x:Name="BannerIcon" FontSize="13" />
+                <TextBlock
+                    x:Name="BannerText"
+                    FontSize="13"
+                    Foreground="{ThemeResource TextPrimaryBrush}" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

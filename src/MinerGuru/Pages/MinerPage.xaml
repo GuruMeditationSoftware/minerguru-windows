@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- One miner, as the Mac's MinerDetailView: header card with the board, nine key figures, history, pool and system, raw API data. -->
+<Page
+    x:Class="MinerGuru.Pages.MinerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MinerGuru.Controls"
+    xmlns:local="using:MinerGuru"
+    Background="Transparent">
+
+    <ScrollViewer>
+        <StackPanel
+            MaxWidth="{StaticResource PageMaxWidth}"
+            Padding="{StaticResource PagePadding}"
+            Spacing="16">
+
+            <!--  Header card  -->
+            <Border
+                Padding="24"
+                CornerRadius="16"
+                Style="{StaticResource CardBorderStyle}">
+                <StackPanel Spacing="20">
+                    <Grid ColumnSpacing="24" RowSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Border
+                            x:Name="BoardHost"
+                            Margin="0,4"
+                            VerticalAlignment="Top" />
+                        <StackPanel Grid.Column="1" Spacing="8">
+                            <StackPanel Spacing="4">
+                                <StackPanel Orientation="Horizontal" Spacing="12">
+                                    <TextBlock
+                                        x:Name="NameText"
+                                        FontFamily="{StaticResource FigureFont}"
+                                        FontSize="22"
+                                        FontWeight="Medium"
+                                        Foreground="{ThemeResource TextPrimaryBrush}"
+                                        TextTrimming="CharacterEllipsis" />
+                                    <Border x:Name="LedHost" VerticalAlignment="Center" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <TextBlock
+                                        x:Name="HardwareText"
+                                        FontSize="12"
+                                        Foreground="{ThemeResource TextSecondaryBrush}" />
+                                    <TextBlock
+                                        x:Name="AsicText"
+                                        VerticalAlignment="Center"
+                                        Style="{StaticResource MonoCaptionStyle}" />
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel
+                                x:Name="BadgeRow"
+                                Margin="0,4,0,0"
+                                Orientation="Horizontal"
+                                Spacing="16" />
+                        </StackPanel>
+                        <StackPanel
+                            x:Name="HeaderActions"
+                            Grid.Column="2"
+                            VerticalAlignment="Top"
+                            Orientation="Horizontal"
+                            Spacing="8">
+                            <Button AutomationProperties.Name="{local:T De='Takt, Lüfter und Name einstellen', En='Set clock, fan and name'}"
+                                Click="Control_Click"
+                                Style="{StaticResource SmallButtonStyle}"
+                                ToolTipService.ToolTip="{local:T De='Takt, Lüfter und Name einstellen', En='Set clock, fan and name'}">
+                                <FontIcon FontSize="13" Glyph="&#xE9E9;" />
+                            </Button>
+                            <Button AutomationProperties.Name="{local:T De=JSON-Rohdaten, En='Raw JSON'}"
+                                Click="Json_Click"
+                                Style="{StaticResource SmallButtonStyle}"
+                                ToolTipService.ToolTip="{local:T De=JSON-Rohdaten, En='Raw JSON'}">
+                                <TextBlock
+                                    FontFamily="{StaticResource MonoFont}"
+                                    FontSize="12"
+                                    Text="{}{ }" />
+                            </Button>
+                            <Button AutomationProperties.Name="{local:T De='Browser öffnen', En='Open browser'}"
+                                Click="Browser_Click"
+                                Style="{StaticResource SmallButtonStyle}"
+                                ToolTipService.ToolTip="{local:T De='Browser öffnen', En='Open browser'}">
+                                <FontIcon FontSize="13" Glyph="&#xE774;" />
+                            </Button>
+                            <Button AutomationProperties.Name="{local:T De='Neu starten', En=Restart}"
+                                x:Name="RestartButton"
+                                Click="Restart_Click"
+                                Style="{StaticResource SmallButtonStyle}"
+                                ToolTipService.ToolTip="{local:T De='Neu starten', En=Restart}">
+                                <FontIcon FontSize="13" Glyph="&#xE777;" />
+                            </Button>
+                            <Button AutomationProperties.Name="{local:T De='Weitere Aktionen', En='More actions'}" Style="{StaticResource SmallButtonStyle}" ToolTipService.ToolTip="{local:T De='Weitere Aktionen', En='More actions'}">
+                                <FontIcon FontSize="13" Glyph="&#xE712;" />
+                                <Button.Flyout>
+                                    <MenuFlyout Opening="MoreMenu_Opening" Placement="BottomEdgeAlignedRight">
+                                        <MenuFlyoutItem Click="Rename_Click" Text="{local:T De='Umbenennen …', En='Rename …'}">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon Glyph="&#xE8AC;" />
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+                                        <MenuFlyoutItem x:Name="MuteItem" Click="Mute_Click">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon x:Name="MuteIcon" />
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+                                        <MenuFlyoutSeparator />
+                                        <MenuFlyoutItem Click="Remove_Click" Text="{local:T De='Aus MinerGuru entfernen', En='Remove from MinerGuru'}">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon Glyph="&#xE74D;" />
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+                                    </MenuFlyout>
+                                </Button.Flyout>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <Rectangle Height="1" Style="{StaticResource HairlineStyle}" />
+
+                    <!--  Metadata strip  -->
+                    <StackPanel
+                        x:Name="MetaRow"
+                        Orientation="Horizontal"
+                        Spacing="24" />
+                </StackPanel>
+            </Border>
+
+            <InfoBar
+                x:Name="OfflineBar"
+                IsClosable="False"
+                Severity="Warning" />
+
+            <StackPanel x:Name="OnlinePart" Spacing="16">
+                <!--  Key figures, filled in code  -->
+                <controls:AdaptiveGrid
+                    x:Name="KpiGrid"
+                    MinColumnWidth="260"
+                    Spacing="16" />
+
+                <!--  History  -->
+                <controls:AdaptiveGrid MinColumnWidth="420" Spacing="16">
+                    <Border
+                        Padding="24"
+                        CornerRadius="16"
+                        Style="{StaticResource CardBorderStyle}">
+                        <StackPanel Spacing="16">
+                            <TextBlock
+                                FontSize="15"
+                                FontWeight="Medium"
+                                Foreground="{ThemeResource TextPrimaryBrush}"
+                                Text="{local:T De='Hashrate-Verlauf', En='Hashrate history'}" />
+                            <controls:HashrateChart x:Name="Chart" Height="170" />
+                        </StackPanel>
+                    </Border>
+                    <Border
+                        Padding="24"
+                        CornerRadius="16"
+                        Style="{StaticResource CardBorderStyle}">
+                        <StackPanel Spacing="16">
+                            <TextBlock
+                                FontSize="15"
+                                FontWeight="Medium"
+                                Foreground="{ThemeResource TextPrimaryBrush}"
+                                Text="{local:T De='ASIC &amp; VR Temperatur (°C)', En='ASIC &amp; VR temperature (°C)'}" />
+                            <controls:HashrateChart x:Name="TempChart" Height="170" />
+                        </StackPanel>
+                    </Border>
+                    <Border
+                        Padding="24"
+                        CornerRadius="16"
+                        Style="{StaticResource CardBorderStyle}">
+                        <StackPanel Spacing="16">
+                            <TextBlock
+                                FontSize="15"
+                                FontWeight="Medium"
+                                Foreground="{ThemeResource TextPrimaryBrush}"
+                                Text="{local:T De='Pool-Latenz (ms)', En='Pool latency (ms)'}" />
+                            <controls:HashrateChart x:Name="LatencyChart" Height="170" />
+                        </StackPanel>
+                    </Border>
+                    <Border
+                        Padding="24"
+                        CornerRadius="16"
+                        Style="{StaticResource CardBorderStyle}">
+                        <StackPanel Spacing="16">
+                            <TextBlock
+                                FontSize="15"
+                                FontWeight="Medium"
+                                Foreground="{ThemeResource TextPrimaryBrush}"
+                                Text="{local:T De='Leistungsaufnahme (Watt)', En='Power draw (watts)'}" />
+                            <controls:HashrateChart x:Name="PowerChart" Height="170" />
+                        </StackPanel>
+                    </Border>
+                </controls:AdaptiveGrid>
+
+                <!--  Pool and system  -->
+                <controls:AdaptiveGrid MinColumnWidth="380" Spacing="16">
+                    <Border
+                        Padding="24"
+                        CornerRadius="16"
+                        Style="{StaticResource CardBorderStyle}">
+                        <StackPanel Spacing="14">
+                            <StackPanel Spacing="4">
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="Medium"
+                                    Foreground="{ThemeResource TextPrimaryBrush}"
+                                    Text="{local:T De='Pool &amp; Stratum-Verbindung', En='Pool &amp; stratum connection'}" />
+                                <StackPanel
+                                    x:Name="PoolBadges"
+                                    Orientation="Horizontal"
+                                    Spacing="12" />
+                            </StackPanel>
+                            <Rectangle Height="1" Style="{StaticResource HairlineStyle}" />
+                            <Grid
+                                x:Name="PoolRows"
+                                ColumnSpacing="16"
+                                RowSpacing="8" />
+                        </StackPanel>
+                    </Border>
+                    <Border
+                        Padding="24"
+                        CornerRadius="16"
+                        Style="{StaticResource CardBorderStyle}">
+                        <StackPanel Spacing="14">
+                            <TextBlock
+                                FontSize="15"
+                                FontWeight="Medium"
+                                Foreground="{ThemeResource TextPrimaryBrush}"
+                                Text="{local:T De='Hardware &amp; System', En='Hardware &amp; system'}" />
+                            <Rectangle Height="1" Style="{StaticResource HairlineStyle}" />
+                            <Grid
+                                x:Name="SystemRows"
+                                ColumnSpacing="16"
+                                RowSpacing="8" />
+                        </StackPanel>
+                    </Border>
+                </controls:AdaptiveGrid>
+
+                <controls:PayoutCard x:Name="Payout" />
+                <controls:BlockSection x:Name="Blocks" />
+                <controls:ShareChart x:Name="Shares" />
+                <controls:LongTermHistoryCard x:Name="LongTerm" />
+                <controls:LiveLogCard x:Name="LiveLog" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -32,8 +32,9 @@ ArchitecturesInstallIn64BitMode={#Arch == "arm64" ? "arm64" : "x64compatible"}
 CloseApplications=no
 
 [Languages]
-Name: "de"; MessagesFile: "compiler:Languages\German.isl"
+; The first entry is the fallback when the Windows language is neither English nor German.
 Name: "en"; MessagesFile: "compiler:Default.isl"
+Name: "de"; MessagesFile: "compiler:Languages\German.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; Flags: unchecked
